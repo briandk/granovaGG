@@ -1,0 +1,39 @@
+Package: granova
+Version: 1.4
+Date: 2010-07-27
+Title: Graphical Analysis of Variance
+Author: Robert M. Pruzek <RMPruzek@yahoo.com> and James E. Helmreich
+        <James.Helmreich@Marist.edu>
+Maintainer: James E. Helmreich <James.Helmreich@Marist.edu>
+Depends: R (>= 2.5.0), car
+Suggests: mgcv, rgl, tcltk, DAAG, MASS
+Description: This small collection of functions provides distinctive
+        graphics for display of anova results. The two principal
+        functions are granova.1w (a graphic for one way anova) and
+        granova.2w (a corresponding graphic for two way anova). These
+        functions were written to display data for any number of
+        groups, regardless of their sizes (however, very large data
+        sets or numbers of groups are likely to be problematic). For
+        these two functions a specialized approach is used to construct
+        data-based contrast vectors with respect to which anova data
+        are displayed. The result is that the graphics use straight
+        lines, and flat surfaces, to help ensure clear interpretations
+        while being faithful to the standard effect tests in anova; the
+        graphic results are complementary to standard summary tables
+        for these two basic kinds of analysis of variance. Two
+        additional functions are granova.ds (for comparing two
+        dependent samples of data), and granova.contr (which provides
+        graphic displays for a priori contrasts). All functions provide
+        relevant numerical results to supplement the graphic displays
+        of anova data. The graphics based on these functions are aimed
+        at students and non-statistician analysts; but they can be
+        generally helpful for identifying outliers, clusters, trends or
+        the role of non-linear transformations of data. In the case of
+        granova.1w and granova.ds especially, several arguments have
+        been provided to facilitate construction of graphics that
+        accommodate diverse features of data, and their corresponding
+        display requirements.
+License: GPL (>= 2)
+Packaged: 2010-07-28 16:48:17 UTC; ilfautetre
+Repository: CRAN
+Date/Publication: 2010-07-29 09:13:48
