@@ -16,6 +16,16 @@ offset  <- (max(extrema) - min(extrema)) / 10
 bounds  <- c(min(extrema) - 5*offset, max(extrema) + offset)
 
 # Creating point shadows
+pointshadow <- function(x) {
+  shadow <- x - offset/2
+  return(shadow)
+}
+
+xshadow <- sapply(dd$xvals, pointshadow)
+yshadow <- sapply(dd$yvals, pointshadow)
+
+dd <- data.frame(dd, xshadow, yshadow)
+str(dd)
 
 # Plotting the standard granova plot
 granova.ds(pair65,
