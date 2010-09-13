@@ -44,7 +44,7 @@ granova.ds(pair65,
 p <- ggplot(aes(x = xvals, y = yvals), 
               data = dd)
               
-p <- p + geom_point() + xlim(bounds) + ylim(bounds)
+p <- p + geom_point(size = I(3)) + xlim(bounds) + ylim(bounds)
 
 # Adding the y=x line
 p <- p + geom_abline(slope = 1, intercept = 0)
@@ -78,7 +78,7 @@ p <- p + geom_abline(intercept = mean(dd$yvals) - mean(dd$xvals),
                      linetype  = 2)
                      
 # Plotting point shadows
-p <- p + geom_point(data = ddshadow, color = "blue")
+p <- p + geom_point(data = ddshadow, color = "blue", size = I(3))
 
 # Plotting the Confidence Interval                  
 
