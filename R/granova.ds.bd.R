@@ -14,8 +14,8 @@ str(dd)
 extrema <- c(range(dd$xvals), range(dd$yvals))
 offset  <- (max(extrema) - min(extrema)) / 10
 bounds  <- c(min(extrema) - 5*offset, max(extrema) + offset)
-bounds
 
+# Creating point shadows
 
 # Plotting the standard granova plot
 granova.ds(pair65,
