@@ -43,19 +43,21 @@ p <- p + geom_abline(intercept = 2*(min(dd$yvals) - offset),
 # Adding group mean lines
 p <- p + geom_hline(yintercept = mean(dd$yvals), 
                     colour     = "red",
-                    alpha      = 1/4)
+                    alpha      = 1/3,
+                    linetype   = 3)
                     
 p <- p + geom_vline(xintercept = mean(dd$xvals), 
                     colour     = "red",
-                    alpha      = 1/4) 
+                    alpha      = 1/3,
+                    linetype   = 3) 
 
 # Adding the treatment effect line
 p <- p + geom_abline(intercept = mean(dd$yvals) - mean(dd$xvals),
                      slope     = 1,
                      color     = "red",
-                     alpha     = 1/2,
-                     size      = I(2))
-
+                     alpha     = 1,
+                     linetype  = 2)
+                     
 # Removing the gridlines and background
 p +
   opts(panel.grid.major = theme_blank()) +  
