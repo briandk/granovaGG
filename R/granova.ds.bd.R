@@ -37,5 +37,18 @@ p <- p + coord_equal()
 p <- p + geom_rug()
 
 # Adding a perpendicular cross-section
-p + geom_abline(intercept = 2*(min(dd$yvals) - offset), 
+p <- p + geom_abline(intercept = 2*(min(dd$yvals) - offset), 
                 slope     = -1)
+                
+# Adding mean indicators
+p <- p + geom_hline(yintercept = mean(dd$yvals), 
+                    colour     = "red",
+                    alpha      = 1/3) 
+                    
+p <- p + geom_vline(xintercept = mean(dd$xvals), 
+                    colour     = "red",
+                    alpha      = 1/3) 
+
+# Removing the gridlines and background
+p 
+                                    
