@@ -34,21 +34,32 @@ p <- p + geom_abline(slope = 1, intercept = 0)
 p <- p + coord_equal()
 
 # Adding a rugplot
-p <- p + geom_rug()
+p <- p + geom_rug(alpha = I(1/3))
 
 # Adding a perpendicular cross-section
 p <- p + geom_abline(intercept = 2*(min(dd$yvals) - offset), 
-                slope     = -1)
+                     slope     = -1)
                 
-# Adding mean indicators
+# Adding group mean lines
 p <- p + geom_hline(yintercept = mean(dd$yvals), 
                     colour     = "red",
-                    alpha      = 1/3) 
+                    alpha      = 1/4)
                     
 p <- p + geom_vline(xintercept = mean(dd$xvals), 
                     colour     = "red",
-                    alpha      = 1/3) 
+                    alpha      = 1/4) 
+
+# Adding the treatment effect line
+p <- p + geom_abline(intercept = mean(dd$yvals) - mean(dd$xvals),
+                     slope     = 1,
+                     color     = "red",
+                     alpha     = 1/2,
+                     size      = I(2))
 
 # Removing the gridlines and background
-p 
+p +
+  opts(panel.grid.major = theme_blank()) +  
+  opts(panel.grid.minor = theme_blank()) +
+  opts(panel.background = theme_blank()) + 
+  opts(axis.line = theme_segment())
                                     
