@@ -19,7 +19,6 @@ ttest<-t.test(dd$xvals, dd$yvals,
 ttest
 cint <- (ttest$conf.int)
 
-
 # Setting the graphicalbounds
 extrema <- c(range(dd$xvals), range(dd$yvals))
 offset  <- (max(extrema) - min(extrema)) / 10
