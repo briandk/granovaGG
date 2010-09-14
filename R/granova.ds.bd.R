@@ -24,7 +24,7 @@ extrema <- c(range(dd$xvals), range(dd$yvals))
 offset  <- (max(extrema) - min(extrema)) / 10
 bounds  <- c(min(extrema) - 5*offset, max(extrema) + offset)
 (perpendicularIntercept <- 2*(min(dd$yvals)) - offset)
-shadowOffset <- offset/4
+shadowOffset <- offset/6
 
 # Computing the Confidence Interval shadow               
 
@@ -41,8 +41,10 @@ cyend
 # Computing point shadows
 
 xshadow <- (((dd$xvals - dd$yvals) + perpendicularIntercept) /2) + shadowOffset
-yshadow <- -(xshadow) + perpendicularIntercept + shadowOffset
+yshadow <- (xshadow) + (dd$yvals - dd$xvals)
 
+xshadow
+yshadow
 # I have to name the resultant dataframe variables as "xvals" and "yvals" so
 # that the subsequent geom_point(data = ddshadow) can inherit the dd dataframe
 # column names and plot correctly (Wickham, ggplot2 book, p. 63)
