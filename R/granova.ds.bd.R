@@ -11,32 +11,44 @@ dd <- data.frame(xvals = pair65$heated, yvals = pair65$ambient)
 str(dd)
 
 # Computing Some Statistics
-ttest<-t.test(dd$xvals, dd$yvals, 
-              paired     = TRUE,
-              conf.level = 0.95)
+
+ttest <- t.test(dd$yvals, dd$xvals, 
+                 paired     = TRUE,
+                 conf.level = 0.95)
 
 
-ttest
-cint <- (ttest$conf.int)
+cint               <- ttest$conf.int
+confidenceInterval <- (range(ttest$conf.int))
+confidenceInterval <- diff(confidenceInterval)
+confidenceInterval
+treatmentEffect    <- ttest$estimate
 
 # Setting the graphicalbounds
-extrema <- c(range(dd$xvals), range(dd$yvals))
-offset  <- (max(extrema) - min(extrema)) / 10
-bounds  <- c(min(extrema) - 5*offset, max(extrema) + offset)
+extrema  <- c(range(dd$xvals), range(dd$yvals))
+offset   <- (max(extrema) - min(extrema)) / 10
+bounds   <- c(min(extrema) - 5*offset, max(extrema) + offset)
 (perpendicularIntercept <- 2*(min(dd$yvals)) - offset)
 shadowOffset <- offset/6
 
 # Computing the Confidence Interval shadow               
 
-cxstart    = perpendicularIntercept/2 + cint[1]/sqrt(2)
-cystart    = perpendicularIntercept/2 - cint[1]/sqrt(2)
-cxend      = perpendicularIntercept/2 + cint[2]/sqrt(2)
-cyend      = perpendicularIntercept/2 - cint[2]/sqrt(2)
 
+
+cxstart    = ((perpendicularIntercept - treatmentEffect) / 2) -
+             (confidenceInterval / 2)/sqrt(2)
+
+cystart    = ((perpendicularIntercept + treatmentEffect) / 2) +
+             (confidenceInterval / 2)/sqrt(2)
+
+cxend      = ((perpendicularIntercept - treatmentEffect) / 2) + 10 +
+             (confidenceInterval / 2)/sqrt(2)
+             
+cyend      = ((perpendicularIntercept + treatmentEffect) / 2) - 10 -
+             (confidenceInterval / 2)/sqrt(2)
+             
 cxstart
 cystart
-cxend  
-cyend  
+
 
 # Computing point shadows
 
@@ -69,7 +81,7 @@ p <- p + geom_abline(slope = 1, intercept = 0)
 p <- p + coord_equal()
 
 # Adding a rugplot
-p <- p + geom_rug(alpha = I(1/3))
+p <- p + geom_rug(alpha = I(2/3))
 
 # Adding a perpendicular cross-section
 p <- p + geom_abline(intercept = perpendicularIntercept, 
@@ -78,16 +90,16 @@ p <- p + geom_abline(intercept = perpendicularIntercept,
 # Adding group mean lines
 p <- p + geom_hline(yintercept = mean(dd$yvals), 
                     colour     = "red",
-                    alpha      = 1/3,
+                    alpha      = 1/2,
                     linetype   = 3)
                     
 p <- p + geom_vline(xintercept = mean(dd$xvals), 
                     colour     = "red",
-                    alpha      = 1/3,
+                    alpha      = 1/2,
                     linetype   = 3) 
 
 # Adding the treatment effect line
-p <- p + geom_abline(intercept = mean(dd$yvals) - mean(dd$xvals),
+p <- p + geom_abline(intercept = treatmentEffect,
                      slope     = 1,
                      color     = "red",
                      alpha     = 1,
@@ -96,26 +108,60 @@ p <- p + geom_abline(intercept = mean(dd$yvals) - mean(dd$xvals),
 # Plotting point shadows
 p <- p + geom_point(
            data  = ddshadow, 
-           color = "steelblue", 
+           color = "black", 
            size  = I(3),
-           alpha = I(1/2) 
+           alpha = I(1/3) 
         )
 
 # Plotting the 95% Confidence band
 p <- p + geom_segment(
            aes(
-                x    = cxstart - offset/6,
-                y    = cystart - offset/6,
-                xend = cxend   - offset/6,
-                yend = cyend   - offset/6,
+                x    = cxstart, 
+                y    = cystart, 
+                xend = cxend,   
+                yend = cyend   
                 
-           ), size  = I(2),
+           ), size  = I(1),
               color = "darkgreen",
               alpha = I(1)
          )
      
+# Plotting a red test line
+p <- p + geom_segment(
+          aes(
+               x    = perpendicularIntercept / 2, 
+               y    = perpendicularIntercept / 2, 
+               xend = (perpendicularIntercept / 2) + 10,   
+               yend = (perpendicularIntercept / 2) - 10   
+
+          ), size  = I(1),
+             color = "red",
+             alpha = I(1)
+        )
+        
+# Plotting a test point to verify the treatment effect
+ddeffect <- data.frame(
+  xvals = ((perpendicularIntercept - treatmentEffect) / 2), 
+  yvals = ((treatmentEffect + perpendicularIntercept) / 2)
+)
+
+
+zeropoint  <- c(perpendicularIntercept/2, perpendicularIntercept/2)
+lowerbound <- c( - (cint[2]) / sqrt(2), (cint[2]) / sqrt(2))
+upperbound <- c( - (cint[1]) / sqrt(2), (cint[1]) / sqrt(2))
+ddeffect   <- rbind(ddeffect, zeropoint, (zeropoint + lowerbound), (zeropoint + upperbound))
+
+
+
+zeropoint 
+lowerbound
+ddeffect  
+p <- p + geom_point(data = ddeffect)
+
          
-p + opts(title = "Dependent Sample Scatterplot for pair65 data")  
+p <- p + opts(title = "Dependent Sample Scatterplot for pair65 data")  
+
+p
 # Removing the gridlines and background
 p +
   opts(panel.grid.major = theme_blank()) +  
