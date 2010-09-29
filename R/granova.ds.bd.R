@@ -28,6 +28,10 @@ confidenceInterval  <- diff(confidenceInterval)
 confidenceInterval
 meanTreatmentEffect <- ttest$estimate
 
+lm1 <- lm(yvals ~ xvals, data = dd)
+summary(lm1)
+meanTreatmentEffect
+
 # Setting the graphicalbounds
 extrema  <- c(range(dd$xvals), range(dd$yvals))
 offset   <- (max(extrema) - min(extrema)) / 10
