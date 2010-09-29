@@ -7,7 +7,10 @@ library(DAAG)
 data(pair65)
 str(pair65)
 
-dd <- data.frame(xvals = pair65$heated, yvals = pair65$ambient)
+dd <- data.frame(
+  xvals  = pair65$heated, 
+  yvals  = pair65$ambient,
+  effect = pair65$heated - pair65$ambient)
 str(dd)
 
 # Computing Some Statistics
@@ -32,7 +35,7 @@ shadowOffset <- offset/6
 
 # Computing the Confidence Interval shadow               
 
-
+geom_vline
 
 cxstart    = ((perpendicularIntercept - treatmentEffect) / 2) -
              (confidenceInterval / 2)/sqrt(2)
