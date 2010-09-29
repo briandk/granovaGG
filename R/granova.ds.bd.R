@@ -15,16 +15,18 @@ str(dd)
 
 # Computing Some Statistics
 
+effectQuantiles <- quantile(dd$effect, probs = c(0, 0.025, 0.5, 0.975, 1))
+
 ttest <- t.test(dd$yvals, dd$xvals, 
                  paired     = TRUE,
                  conf.level = 0.95)
 
 
-cint               <- ttest$conf.int
-confidenceInterval <- (range(ttest$conf.int))
-confidenceInterval <- diff(confidenceInterval)
+cint                <- ttest$conf.int
+confidenceInterval  <- (range(ttest$conf.int))
+confidenceInterval  <- diff(confidenceInterval)
 confidenceInterval
-treatmentEffect    <- ttest$estimate
+meanTreatmentEffect <- ttest$estimate
 
 # Setting the graphicalbounds
 extrema  <- c(range(dd$xvals), range(dd$yvals))
@@ -37,16 +39,16 @@ shadowOffset <- offset/6
 
 geom_vline
 
-cxstart    = ((perpendicularIntercept - treatmentEffect) / 2) -
+cxstart    = ((perpendicularIntercept - meanTreatmentEffect) / 2) -
              (confidenceInterval / 2)/sqrt(2)
 
-cystart    = ((perpendicularIntercept + treatmentEffect) / 2) +
+cystart    = ((perpendicularIntercept + meanTreatmentEffect) / 2) +
              (confidenceInterval / 2)/sqrt(2)
 
-cxend      = ((perpendicularIntercept - treatmentEffect) / 2) + 10 +
+cxend      = ((perpendicularIntercept - meanTreatmentEffect) / 2) + 10 +
              (confidenceInterval / 2)/sqrt(2)
              
-cyend      = ((perpendicularIntercept + treatmentEffect) / 2) - 10 -
+cyend      = ((perpendicularIntercept + meanTreatmentEffect) / 2) - 10 -
              (confidenceInterval / 2)/sqrt(2)
              
 cxstart
@@ -102,7 +104,7 @@ p <- p + geom_vline(xintercept = mean(dd$xvals),
                     linetype   = 3) 
 
 # Adding the treatment effect line
-p <- p + geom_abline(intercept = treatmentEffect,
+p <- p + geom_abline(intercept = meanTreatmentEffect,
                      slope     = 1,
                      color     = "red",
                      alpha     = 1,
@@ -144,8 +146,8 @@ p <- p + geom_segment(
         
 # Plotting a test point to verify the treatment effect
 ddeffect <- data.frame(
-  xvals = ((perpendicularIntercept - treatmentEffect) / 2), 
-  yvals = ((treatmentEffect + perpendicularIntercept) / 2)
+  xvals = ((perpendicularIntercept - meanTreatmentEffect) / 2), 
+  yvals = ((meanTreatmentEffect + perpendicularIntercept) / 2)
 )
 
 
