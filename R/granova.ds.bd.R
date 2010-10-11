@@ -51,7 +51,7 @@ ddshadow
 granova.ds(pair65,
   main = "Dependent sample assessment plot for pair65 data, n = 9")
   
-# Trying to get the same plot in ggplot2
+## Trying to get the same plot in ggplot2
 p <- ggplot(aes(x = xvals, y = yvals), 
               data = dd)
               
@@ -88,25 +88,28 @@ p <- p + geom_abline(intercept = meanTreatmentEffect,
                      alpha     = 1,
                      linetype  = 2)
                      
-# Adding the 95% Confidence Upper Limit Line
-p <- p + geom_abline(intercept = upperTreatmentEffect,
-                     slope     = 1,
-                     color     = "blue",
-                     alpha     = 1,
-                     linetype  = 2)
-# Adding the 95% Confidence Lower Limit Line
-p <- p + geom_abline(intercept = lowerTreatmentEffect,
-                     slope     = 1,
-                     color     = "green",
-                     alpha     = 1,
-                     linetype  = 2)
 # Plotting point shadows
 p <- p + geom_point(
            data  = ddshadow, 
            color = "black", 
            size  = I(3),
-           alpha = I(1/3) 
-        )
+           alpha = I(1/2) 
+         )
+
+# Plotting the point trails
+p <- p + geom_segment(
+           aes(
+             x = dd$xvals,
+             y = dd$yvals,
+             xend = ddshadow$xvals,
+             yend = ddshadow$yvals           
+           
+           ), size     = I(1),
+              color    = "black",
+              linetype = 3,
+              alpha    = I(1/4), 
+         )
+
 
 # Plotting the 95% Confidence band
 p <- p + geom_segment(
@@ -120,9 +123,10 @@ p <- p + geom_segment(
              yend = ((perpendicularIntercept + upperTreatmentEffect) / 2) 
                      - shadowOffset
                 
-           ), size  = I(1),
+           ), size  = I(2),
               color = "darkgreen",
-              alpha = I(1)
+              alpha = I(1),
+             
          )
      
 p
