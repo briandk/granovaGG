@@ -111,29 +111,20 @@ p <- p + geom_point(
 # Plotting the 95% Confidence band
 p <- p + geom_segment(
            aes(
-                x    = 0,
-                y    = 0,
-                xend = 0,
-                yend = 0
+             x    = ((perpendicularIntercept - lowerTreatmentEffect) / 2) 
+                     - shadowOffset,
+             y    = ((perpendicularIntercept + lowerTreatmentEffect) / 2) 
+                     - shadowOffset,
+             xend = ((perpendicularIntercept - upperTreatmentEffect) / 2) 
+                     - shadowOffset,
+             yend = ((perpendicularIntercept + upperTreatmentEffect) / 2) 
+                     - shadowOffset
                 
            ), size  = I(1),
               color = "darkgreen",
               alpha = I(1)
          )
      
-# Plotting a red test line
-p <- p + geom_segment(
-          aes(
-               x    = perpendicularIntercept / 2, 
-               y    = perpendicularIntercept / 2, 
-               xend = (perpendicularIntercept / 2) + 10,   
-               yend = (perpendicularIntercept / 2) - 10   
-
-          ), size  = I(1),
-             color = "red",
-             alpha = I(1)
-        )
-        
 p
 
 # Removing the gridlines and background
