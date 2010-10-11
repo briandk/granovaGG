@@ -9,12 +9,13 @@ str(pair65)
 
 # Defining the Function
 
-granova.ds.bd <- function(data = pair65) {
-
+# granova.ds.bd <- function(dataframe = pair65) {
+  data <- pair65
   dd <- data.frame(
-    xvals  = data$heated, 
-    yvals  = data$ambient,
-    effect = data$heated - data$ambient)
+          xvals  = data[ , 1], 
+          yvals  = data[ , 2],
+          effect = (data[ , 1]  - data[ , 2])
+        )  
   str(dd)
 
   # Computing Some Statistics
@@ -142,7 +143,6 @@ granova.ds.bd <- function(data = pair65) {
     opts(panel.background = theme_blank()) + 
     opts(axis.line = theme_segment()) +
     opts(title = "Dependent Sample Scatterplot for pair65 data")  
-
-}  
-                                    
-granova.ds.bd
+  
+# }  
+                                  
