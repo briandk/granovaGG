@@ -9,12 +9,12 @@ str(pair65)
 
 # Defining the Function
 
-# granova.ds.bd <- function(dataframe = pair65) {
+# granova.ds.bd <- function(data = NULL) {
   data <- pair65
   dd <- data.frame(
           xvals  = data[ , 1], 
           yvals  = data[ , 2],
-          effect = (data[ , 1]  - data[ , 2])
+          effect = (data[ , 2]  - data[ , 1])
         )  
   str(dd)
 
@@ -22,22 +22,18 @@ str(pair65)
   effectQuantiles <- quantile(dd$effect, probs = c(0, 0.025, 0.5, 0.975, 1))
 
   dsttest <- t.test(dd$yvals, dd$xvals, 
-                   paired     = TRUE,
-                   conf.level = 0.95)
+                     paired     = TRUE,
+                     conf.level = 0.95)
 
-  (meanTreatmentEffect  <- dsttest$estimate)
-  (upperTreatmentEffect <- dsttest$conf.int[1])
-  (lowerTreatmentEffect <- dsttest$conf.int[2])
+  meanTreatmentEffect  <- dsttest$estimate
+  upperTreatmentEffect <- dsttest$conf.int[1]
+  lowerTreatmentEffect <- dsttest$conf.int[2]
 
-  lm1 <- lm(yvals ~ xvals, data = dd)
-  summary(lm1)
-  meanTreatmentEffect
-
-  # Setting the graphicalbounds
+  # Setting the graphical bounds
   extrema  <- c(range(dd$xvals), range(dd$yvals))
   offset   <- (max(extrema) - min(extrema)) / 10
   bounds   <- c(min(extrema) - 5*offset, max(extrema) + offset)
-  (perpendicularIntercept <- 2*(min(dd$yvals)) - offset)
+  perpendicularIntercept <- 2*(min(dd$yvals)) - offset
   shadowOffset <- offset/6
 
   # Computing point shadows
@@ -144,5 +140,7 @@ str(pair65)
     opts(axis.line = theme_segment()) +
     opts(title = "Dependent Sample Scatterplot for pair65 data")  
   
-# }  
+# }
+
+# granova.ds.bd(pair65)  
                                   
