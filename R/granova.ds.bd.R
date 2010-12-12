@@ -48,7 +48,7 @@ granova.ds.bd <- function(data = pair65) {
   # granova.ds(pair65, main = "Dependent sample assessment plot for pair65 data, n = 9")
   
   ## Trying to get the same plot in ggplot2
-  p <- ggplot(aes(x = xvals, y = yvals), 
+  p <- ggplot(aes_string(x = "xvals", y = "yvals"), 
                 data = dd)
               
   p <- p + geom_point(size = I(3)) + xlim(bounds) + ylim(bounds)
@@ -82,7 +82,7 @@ granova.ds.bd <- function(data = pair65) {
            ) 
   # Adding the 95% Confidence band
   p <- p + geom_segment(
-            aes(
+            aes_string(
               x    = ((perpendicularIntercept - lowerTreatmentEffect) / 2) 
                       - shadowOffset,
               y    = ((perpendicularIntercept + lowerTreatmentEffect) / 2) 
@@ -117,7 +117,7 @@ granova.ds.bd <- function(data = pair65) {
 
   # Adding the point trails
   p <- p + geom_segment(
-             aes(
+             aes_string(
                x = dd$xvals,
                y = dd$yvals,
                xend = ddshadow$xvals,
@@ -131,18 +131,17 @@ granova.ds.bd <- function(data = pair65) {
            )
 
   ## Plotting the dependent sample scatterplot
-  p
-
+  print(p)
+  
   # Removing the gridlines and background
-  p +
+  p <- p +
     opts(panel.grid.major = theme_blank()) +  
     opts(panel.grid.minor = theme_blank()) +
     opts(panel.background = theme_blank()) + 
     opts(axis.line = theme_segment()) +
     opts(title = "Dependent Sample Scatterplot for pair65 data")  
 
-  
+  print(p)
 }
 
-granova.ds.bd(pair65)  
-                                  
+granova.ds.bd(pair65)                                  
