@@ -143,5 +143,3 @@ granova.ds.bd <- function(data = pair65) {
 
   print(p)
 }
-
-granova.ds.bd(pair65)                                  
