@@ -1,7 +1,7 @@
 # Required Libraries
 library(ggplot2)
 library(granova)
-library(DAAG)
+library(DAAG) # contains the pair65 data
 
 # Loading in the data
 data(pair65)
@@ -9,8 +9,7 @@ str(pair65)
 
 # Defining the Function
 
-# granova.ds.bd <- function(data = NULL) {
-  data <- pair65
+granova.ds.bd <- function(data = pair65) {
   dd <- data.frame(
           xvals  = data[ , 1], 
           yvals  = data[ , 2],
@@ -40,17 +39,13 @@ str(pair65)
   xshadow <- (((dd$xvals - dd$yvals) + perpendicularIntercept) /2) + shadowOffset
   yshadow <- (xshadow) + (dd$yvals - dd$xvals)
 
-  xshadow
-  yshadow
   # I have to name the resultant dataframe variables as "xvals" and "yvals" so
   # that the subsequent geom_point(data = ddshadow) can inherit the dd dataframe
   # column names and plot correctly (Wickham, ggplot2 book, p. 63)
   ddshadow <- data.frame(xvals = xshadow, yvals = yshadow)
-  ddshadow
 
   # Plotting the standard granova plot
-  granova.ds(pair65,
-    main = "Dependent sample assessment plot for pair65 data, n = 9")
+  # granova.ds(pair65, main = "Dependent sample assessment plot for pair65 data, n = 9")
   
   ## Trying to get the same plot in ggplot2
   p <- ggplot(aes(x = xvals, y = yvals), 
@@ -72,24 +67,47 @@ str(pair65)
                        slope     = -1)
                 
   # Adding group mean lines
-  p <- p + geom_hline(yintercept = mean(dd$yvals), 
+  p <- p + geom_hline(
+                      yintercept = mean(dd$yvals), 
                       colour     = "red",
                       alpha      = 1/2,
-                      linetype   = 3)
+                      linetype   = 3
+           )
                     
-  p <- p + geom_vline(xintercept = mean(dd$xvals), 
+  p <- p + geom_vline(
+                      xintercept = mean(dd$xvals), 
                       colour     = "red",
                       alpha      = 1/2,
-                      linetype   = 3) 
+                      linetype   = 3
+           ) 
+  # Adding the 95% Confidence band
+  p <- p + geom_segment(
+            aes(
+              x    = ((perpendicularIntercept - lowerTreatmentEffect) / 2) 
+                      - shadowOffset,
+              y    = ((perpendicularIntercept + lowerTreatmentEffect) / 2) 
+                      - shadowOffset,
+              xend = ((perpendicularIntercept - upperTreatmentEffect) / 2) 
+                      - shadowOffset,
+              yend = ((perpendicularIntercept + upperTreatmentEffect) / 2) 
+                      - shadowOffset
+
+            ), size  = I(2),
+               color = "darkgreen",
+               alpha = I(1),
+
+          )
 
   # Adding the treatment effect line
-  p <- p + geom_abline(intercept = meanTreatmentEffect,
+  p <- p + geom_abline(
+                       intercept = meanTreatmentEffect,
                        slope     = 1,
                        color     = "red",
                        alpha     = 1,
-                       linetype  = 2)
+                       linetype  = 2
+           )
                      
-  # Plotting point shadows
+  # Adding point shadows
   p <- p + geom_point(
              data  = ddshadow, 
              color = "black", 
@@ -97,7 +115,7 @@ str(pair65)
              alpha = I(1/2) 
            )
 
-  # Plotting the point trails
+  # Adding the point trails
   p <- p + geom_segment(
              aes(
                x = dd$xvals,
@@ -105,31 +123,14 @@ str(pair65)
                xend = ddshadow$xvals,
                yend = ddshadow$yvals           
            
-             ), size     = I(1),
-                color    = "black",
-                linetype = 3,
-                alpha    = I(1/4), 
+             ), 
+             size     = I(1),
+             color    = "black",
+             linetype = 3,
+             alpha    = I(1/4), 
            )
 
-
-  # Plotting the 95% Confidence band
-  p <- p + geom_segment(
-             aes(
-               x    = ((perpendicularIntercept - lowerTreatmentEffect) / 2) 
-                       - shadowOffset,
-               y    = ((perpendicularIntercept + lowerTreatmentEffect) / 2) 
-                       - shadowOffset,
-               xend = ((perpendicularIntercept - upperTreatmentEffect) / 2) 
-                       - shadowOffset,
-               yend = ((perpendicularIntercept + upperTreatmentEffect) / 2) 
-                       - shadowOffset
-                
-             ), size  = I(2),
-                color = "darkgreen",
-                alpha = I(1),
-             
-           )
-     
+  ## Plotting the dependent sample scatterplot
   p
 
   # Removing the gridlines and background
@@ -139,8 +140,9 @@ str(pair65)
     opts(panel.background = theme_blank()) + 
     opts(axis.line = theme_segment()) +
     opts(title = "Dependent Sample Scatterplot for pair65 data")  
-  
-# }
 
-# granova.ds.bd(pair65)  
+  
+}
+
+granova.ds.bd(pair65)  
                                   
