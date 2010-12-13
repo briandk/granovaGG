@@ -1,6 +1,5 @@
 # Required Libraries
 library(ggplot2)
-library(granova)
 library(DAAG) # contains the pair65 data
 
 # Loading in the data
@@ -44,7 +43,6 @@ granova.ds.bd <- function(
   upperGraphicalBound <- max(extrema) + (0.5 * southwestPlotOffsetFactor * squareDataRange)
   
   graphicalBounds <- c(lowerGraphicalBound, upperGraphicalBound)
-  bounds   <- c(min(extrema) - 5*offset, max(extrema) + offset)
   perpendicularYIntercept <- (2*mean(dd$yvals) - (.3 * mean(dd$yvals)))
 
   perpendicularIntercept <- 2*(min(dd$yvals)) - offset
@@ -164,7 +162,8 @@ granova.ds.bd <- function(
     opts(axis.line = theme_segment()) +
     opts(title = "Dependent Sample Scatterplot for pair65 data")  
 
-  print(p)
+  print(summary(p))
+  return(p)
 }
 
 
