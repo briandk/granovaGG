@@ -59,8 +59,10 @@ xr <- range(x)
 yr <- range(y)
 min.xy <- min(xr[1], yr[1])
 max.xy <- max(xr[2], yr[2])
-lwb <- min.xy - 1.2 * ne * (max.xy - min.xy)
-upb <- max.xy + .5 * sw * (max.xy - min.xy)
+(lwb <- min.xy - 1.2 * ne * (max.xy - min.xy))
+(upb <- max.xy + .5 * sw * (max.xy - min.xy))
+
+print(lwb, upb)
 
 #Weighted mean difference; standard deviation of strata estimates
 mn.diff <- mean(d)
@@ -153,3 +155,6 @@ if(ident){
 
 return(Summary)
 }
+
+library(DAAG)
+pair65

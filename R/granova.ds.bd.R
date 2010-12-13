@@ -9,7 +9,12 @@ str(pair65)
 
 # Defining the Function
 
-granova.ds.bd <- function(data = pair65) {
+granova.ds.bd <- function(
+                   data = pair65, 
+                   southwestPlotOffsetFactor = 0.4,
+                   northeastPlotOffsetFactor = 0.5
+                 ) 
+  {
   dd <- data.frame(
           xvals  = data[ , 1], 
           yvals  = data[ , 2],
@@ -29,9 +34,19 @@ granova.ds.bd <- function(data = pair65) {
   lowerTreatmentEffect <- dsttest$conf.int[2]
 
   # Setting the graphical bounds
-  extrema  <- c(range(dd$xvals), range(dd$yvals))
+  aggregateDataRange <- c(range(dd$xvals), range(dd$yvals))
+  extrema  <- c(max(aggregateDataRange), min(aggregateDataRange))
+    
   offset   <- (max(extrema) - min(extrema)) / 10
+  squareDataRange <- max(extrema) - min(extrema)
+  
+  lowerGraphicalBound <- min(extrema) - (1.2 * northeastPlotOffsetFactor * squareDataRange)
+  upperGraphicalBound <- max(extrema) + (0.5 * southwestPlotOffsetFactor * squareDataRange)
+  
+  graphicalBounds <- c(lowerGraphicalBound, upperGraphicalBound)
   bounds   <- c(min(extrema) - 5*offset, max(extrema) + offset)
+  perpendicularYIntercept <- (2*mean(dd$yvals) - (.3 * mean(dd$yvals)))
+
   perpendicularIntercept <- 2*(min(dd$yvals)) - offset
   shadowOffset <- offset/6
 
@@ -51,7 +66,7 @@ granova.ds.bd <- function(data = pair65) {
   p <- ggplot(aes_string(x = "xvals", y = "yvals"), 
                 data = dd)
               
-  p <- p + geom_point(size = I(3)) + xlim(bounds) + ylim(bounds)
+  p <- p + geom_point(size = I(3)) + xlim(graphicalBounds) + ylim(graphicalBounds)
 
   # Adding the y=x line
   p <- p + geom_abline(slope = 1, intercept = 0)
@@ -63,9 +78,17 @@ granova.ds.bd <- function(data = pair65) {
   p <- p + geom_rug(alpha = I(2/3))
 
   # Adding a perpendicular cross-section
-  p <- p + geom_abline(intercept = perpendicularIntercept, 
-                       slope     = -1)
-                
+  print(graphicalBounds)
+  p <- p + geom_segment(
+               aes_string(
+                 x    =  min(graphicalBounds),
+                 y    =  mean(graphicalBounds),
+                 xend =  mean(graphicalBounds),
+                 yend =  min(graphicalBounds)
+               )
+           )   
+  
+
   # Adding group mean lines
   p <- p + geom_hline(
                       yintercept = mean(dd$yvals), 
@@ -143,3 +166,5 @@ granova.ds.bd <- function(data = pair65) {
 
   print(p)
 }
+
+
