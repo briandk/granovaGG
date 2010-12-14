@@ -83,11 +83,9 @@ granova.ds.bd <- function(
            
   # Deliberate re-adding the same perpendicular crossbow as a full line
   p <- p + geom_abline(
-              aes_string(
                 intercept = mean(graphicalBounds) + min(graphicalBounds),
-                alpha     = I("1/2"),
+                alpha     = I(1/2),
                 slope     = -1                
-              ),
            )
   
 
