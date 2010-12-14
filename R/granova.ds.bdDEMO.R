@@ -8,14 +8,13 @@ y <- rnorm(mean = 45, n = 25)
 testFrame1 <- data.frame(xvals = x, yvals = y)
 
 print(granova.ds.bd(testFrame1))
-# granova.ds(testFrame1)
 
 x <- rnorm(mean = 534, n = 25)
 y <- rnorm(mean = 517, n = 25)
 
 testFrame2 <- data.frame(xvals = x, yvals = y)
 
-# print(granova.ds.bd(testFrame2))
-# print(granova.ds.bd(pair65))
+print(granova.ds.bd(testFrame2))
+print(granova.ds.bd(pair65))
 
 dev.off()

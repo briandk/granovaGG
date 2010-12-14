@@ -46,7 +46,7 @@ granova.ds.bd <- function(
   crossbowIntercept <- mean(graphicalBounds) + min(graphicalBounds)
   shadowOffset <- offset/6
 
-  # Computing point shadows
+  ## Computing point shadows
   xshadow <- (((dd$xvals - dd$yvals) + crossbowIntercept) /2) + shadowOffset
   yshadow <- (xshadow) + (dd$yvals - dd$xvals)
 
@@ -54,6 +54,14 @@ granova.ds.bd <- function(
   # that the subsequent geom_point(data = ddshadow) can inherit the dd dataframe
   # column names and plot correctly (Wickham, ggplot2 book, p. 63)
   ddshadow <- data.frame(xvals = xshadow, yvals = yshadow)
+  
+  ## Computing Point Trails
+  ddtrails <- data.frame(
+                xTrailStart = dd$xvals,
+                yTrailStart = dd$yvals,
+                xTrailEnd   = xshadow,
+                yTrailEnd   = yshadow
+              )
   
   ## Trying to get the same plot in ggplot2
   p <- ggplot(aes_string(x = "xvals", y = "yvals"), 
@@ -129,18 +137,18 @@ granova.ds.bd <- function(
 
   # Adding the point trails
   p <- p + geom_segment(
-             aes_string(
-               x = dd$xvals,
-               y = dd$yvals,
-               xend = ddshadow$xvals,
-               yend = ddshadow$yvals           
-           
-             ), 
+             aes(
+               x        = xTrailStart,
+               y        = yTrailStart,
+               xend     = xTrailEnd,
+               yend     = yTrailEnd,
+             ),
+             data     = ddtrails,
              size     = I(1),
              color    = "black",
              linetype = 3,
-             alpha    = I(1/4), 
-           )
+             alpha    = I(1/4)              
+           ) 
   
   # Removing the gridlines and background
   p <- p +
@@ -152,5 +160,3 @@ granova.ds.bd <- function(
 
   return(p)
 }
-
-
