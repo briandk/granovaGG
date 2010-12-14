@@ -76,7 +76,18 @@ granova.ds.bd <- function(
   p <- p + coord_equal()
 
   # Adding a rugplot
-  p <- p + geom_rug(alpha = I(2/3))  
+  p <- p + geom_rug(alpha = I(2/3))
+  
+  # Adding mean marks
+  p <- p + geom_rug(
+             aes(
+               x = mean(xvals),
+               y = mean(yvals) 
+             ),
+             data  = dd,
+             color = "red",
+             size  = I(3/2)
+           )  
            
   # Adding the perpendicular crossbow
   p <- p + geom_abline(
@@ -87,19 +98,19 @@ granova.ds.bd <- function(
   
 
   # Adding group mean lines
-  p <- p + geom_hline(
-                      yintercept = mean(dd$yvals), 
-                      colour     = "red",
-                      alpha      = 1/2,
-                      linetype   = 3
-           )
-                    
-  p <- p + geom_vline(
-                      xintercept = mean(dd$xvals), 
-                      colour     = "red",
-                      alpha      = 1/2,
-                      linetype   = 3
-           ) 
+  # p <- p + geom_hline(
+  #                     yintercept = mean(dd$yvals), 
+  #                     colour     = "red",
+  #                     alpha      = 1/2,
+  #                     linetype   = 3
+  #          )
+  #                   
+  # p <- p + geom_vline(
+  #                     xintercept = mean(dd$xvals), 
+  #                     colour     = "red",
+  #                     alpha      = 1/2,
+  #                     linetype   = 3
+  #          ) 
   # Adding the 95% Confidence band
   p <- p + geom_segment(
             aes_string(
