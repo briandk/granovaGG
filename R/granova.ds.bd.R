@@ -68,17 +68,7 @@ granova.ds.bd <- function(
   p <- p + coord_equal()
 
   # Adding a rugplot
-  p <- p + geom_rug(alpha = I(2/3))
-
-  # Adding a perpendicular crossbow as a line segment
-  p <- p + geom_segment(
-               aes_string(
-                 x    =  min(graphicalBounds),
-                 y    =  mean(graphicalBounds),
-                 xend =  mean(graphicalBounds),
-                 yend =  min(graphicalBounds)
-               )
-           )   
+  p <- p + geom_rug(alpha = I(2/3))  
            
   # Deliberate re-adding the same perpendicular crossbow as a full line
   p <- p + geom_abline(
