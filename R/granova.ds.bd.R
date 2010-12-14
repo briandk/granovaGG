@@ -9,9 +9,11 @@ str(pair65)
 # Defining the Function
 
 granova.ds.bd <- function(
-                   data = pair65, 
+                   data                      = pair65, 
                    southwestPlotOffsetFactor = 0.4,
-                   northeastPlotOffsetFactor = 0.5
+                   northeastPlotOffsetFactor = 0.5,
+                   title                   = "Dependent Sample Scatterplot",
+                   conf.level                = 0.95
                  ) 
                  {
   dd <- data.frame(
@@ -20,35 +22,32 @@ granova.ds.bd <- function(
           effect = (data[ , 2]  - data[ , 1])
         )  
 
-  # Computing Some Statistics
+  # Computing Statistics for the Confidence Band
   effectQuantiles <- quantile(dd$effect, probs = c(0, 0.025, 0.5, 0.975, 1))
 
   dsttest <- t.test(dd$yvals, dd$xvals, 
                      paired     = TRUE,
-                     conf.level = 0.95)
+                     conf.level = conf.level)
 
   meanTreatmentEffect  <- dsttest$estimate
   upperTreatmentEffect <- dsttest$conf.int[1]
   lowerTreatmentEffect <- dsttest$conf.int[2]
 
   # Setting the graphical bounds
-  aggregateDataRange <- c(range(dd$xvals), range(dd$yvals))
-  extrema  <- c(max(aggregateDataRange), min(aggregateDataRange))
-    
-  offset   <- (max(extrema) - min(extrema)) / 10
-  squareDataRange <- max(extrema) - min(extrema)
+  aggregateDataRange  <- c(range(dd$xvals), range(dd$yvals))
+  extrema             <- c(max(aggregateDataRange), min(aggregateDataRange))    
+  squareDataRange     <- max(extrema) - min(extrema)
   
   lowerGraphicalBound <- min(extrema) - (1.2 * northeastPlotOffsetFactor * squareDataRange)
   upperGraphicalBound <- max(extrema) + (0.5 * southwestPlotOffsetFactor * squareDataRange)
-  
-  graphicalBounds <- c(lowerGraphicalBound, upperGraphicalBound)
+  graphicalBounds     <- c(lowerGraphicalBound, upperGraphicalBound)
 
-  crossbowIntercept <- mean(graphicalBounds) + min(graphicalBounds)
-  shadowOffset <- offset/6
+  crossbowIntercept   <- mean(graphicalBounds) + min(graphicalBounds)
+  shadowOffset        <- squareDataRange / 60
 
   ## Computing point shadows
-  xshadow <- (((dd$xvals - dd$yvals) + crossbowIntercept) /2) + shadowOffset
-  yshadow <- (xshadow) + (dd$yvals - dd$xvals)
+  xshadow <- ((-dd$effect + crossbowIntercept) / 2) + shadowOffset
+  yshadow <- (xshadow) + (dd$effect)
 
   # I have to name the resultant dataframe variables as "xvals" and "yvals" so
   # that the subsequent geom_point(data = ddshadow) can inherit the dd dataframe
@@ -102,7 +101,7 @@ granova.ds.bd <- function(
              data  = dd,
              color = "red",
              size  = I(3/2),
-             alpha = I(1/2)
+             alpha = I(2/3)
            )  
            
   # Adding the perpendicular crossbow
@@ -174,7 +173,7 @@ granova.ds.bd <- function(
     opts(panel.grid.minor = theme_blank()) +
     opts(panel.background = theme_blank()) + 
     opts(axis.line = theme_segment()) +
-    opts(title = "Dependent Sample Scatterplot for pair65 data")  
+    opts(title = paste(title)) 
 
   return(p)
 }

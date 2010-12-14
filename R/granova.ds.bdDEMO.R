@@ -14,7 +14,7 @@ y <- rnorm(mean = 517, n = 25, sd = 20)
 
 testFrame2 <- data.frame(xvals = x, yvals = y)
 
-print(granova.ds.bd(testFrame2))
+print(granova.ds.bd(testFrame2, conf.level = 0.68, title = "awesomeSauce"))
 # print(granova.ds.bd(pair65))
 
 dev.off()
