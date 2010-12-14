@@ -1,0 +1,9 @@
+y = mx + b
+y = m(x - x1) + y1
+
+y1 = min(graphicalBounds)
+x1 = mean(graphicalBounds)
+
+y = -1(x - (mean(graphicalBounds))) + (min(graphicalBounds))
+y = (mean(graphicalBounds)) -x + (min(graphicalBounds))
+y = -x + (mean(graphicalBounds)) + (min(graphicalBounds))

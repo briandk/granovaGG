@@ -1,7 +1,7 @@
 # Custom functions
 source("granova.ds.bd.R")
 
-pdf("testPlots7.pdf", onefile = TRUE)
+# pdf("testPlots8.pdf", onefile = TRUE)
 x <- rnorm(mean = 42, n = 25)
 y <- rnorm(mean = 45, n = 25)
 
