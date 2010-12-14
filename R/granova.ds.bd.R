@@ -63,10 +63,22 @@ granova.ds.bd <- function(
                 yTrailEnd   = yshadow
               )
   
-  ## Trying to get the same plot in ggplot2
+  # Setting up the ggplot object
   p <- ggplot(aes_string(x = "xvals", y = "yvals"), 
                 data = dd)
-              
+  
+  # Adding the treatment effect line
+  p <- p + geom_abline(
+                       intercept = meanTreatmentEffect,
+                       slope     = 1,
+                       color     = "red",
+                       alpha     = I(1/2),
+                       size      = I(1),
+                       title     = "main effect"
+           )
+
+  
+  # Plotting the raw data
   p <- p + geom_point(size = I(3)) + xlim(graphicalBounds) + ylim(graphicalBounds)
 
   # Adding the y=x line
@@ -76,7 +88,10 @@ granova.ds.bd <- function(
   p <- p + coord_equal()
 
   # Adding a rugplot
-  p <- p + geom_rug(alpha = I(2/3))
+  p <- p + geom_rug(
+             alpha = I(2/3),
+             color = "steelblue"
+           )
   
   # Adding mean marks
   p <- p + geom_rug(
@@ -86,7 +101,8 @@ granova.ds.bd <- function(
              ),
              data  = dd,
              color = "red",
-             size  = I(3/2)
+             size  = I(3/2),
+             alpha = I(1/2)
            )  
            
   # Adding the perpendicular crossbow
@@ -125,25 +141,16 @@ granova.ds.bd <- function(
 
             ), size  = I(2),
                color = "darkgreen",
-               alpha = I(1)
+               alpha = I(2/3)
 
           )
-
-  # Adding the treatment effect line
-  p <- p + geom_abline(
-                       intercept = meanTreatmentEffect,
-                       slope     = 1,
-                       color     = "red",
-                       alpha     = 1,
-                       linetype  = 2
-           )
                      
   # Adding point shadows
   p <- p + geom_point(
              data  = ddshadow, 
              color = "black", 
              size  = I(3),
-             alpha = I(1/2) 
+             alpha = I(1/4) 
            )
 
   # Adding the point trails
@@ -155,10 +162,10 @@ granova.ds.bd <- function(
                yend     = yTrailEnd
              ),
              data     = ddtrails,
-             size     = I(1),
+             size     = I(1/3),
              color    = "black",
-             linetype = 3,
-             alpha    = I(1/4)              
+             linetype = 1,
+             alpha    = I(1/6)              
            ) 
   
   # Removing the gridlines and background
