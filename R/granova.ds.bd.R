@@ -78,7 +78,7 @@ granova.ds.bd <- function(
   # Adding a rugplot
   p <- p + geom_rug(alpha = I(2/3))  
            
-  # Deliberate re-adding the same perpendicular crossbow as a full line
+  # Adding the perpendicular crossbow
   p <- p + geom_abline(
                 intercept = crossbowIntercept,
                 alpha     = I(1/2),
@@ -114,7 +114,7 @@ granova.ds.bd <- function(
 
             ), size  = I(2),
                color = "darkgreen",
-               alpha = I(1),
+               alpha = I(1)
 
           )
 
@@ -141,7 +141,7 @@ granova.ds.bd <- function(
                x        = xTrailStart,
                y        = yTrailStart,
                xend     = xTrailEnd,
-               yend     = yTrailEnd,
+               yend     = yTrailEnd
              ),
              data     = ddtrails,
              size     = I(1),
