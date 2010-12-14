@@ -13,13 +13,12 @@ granova.ds.bd <- function(
                    southwestPlotOffsetFactor = 0.4,
                    northeastPlotOffsetFactor = 0.5
                  ) 
-  {
+                 {
   dd <- data.frame(
           xvals  = data[ , 1], 
           yvals  = data[ , 2],
           effect = (data[ , 2]  - data[ , 1])
         )  
-  str(dd)
 
   # Computing Some Statistics
   effectQuantiles <- quantile(dd$effect, probs = c(0, 0.025, 0.5, 0.975, 1))
@@ -56,9 +55,6 @@ granova.ds.bd <- function(
   # that the subsequent geom_point(data = ddshadow) can inherit the dd dataframe
   # column names and plot correctly (Wickham, ggplot2 book, p. 63)
   ddshadow <- data.frame(xvals = xshadow, yvals = yshadow)
-
-  # Plotting the standard granova plot
-  # granova.ds(pair65, main = "Dependent sample assessment plot for pair65 data, n = 9")
   
   ## Trying to get the same plot in ggplot2
   p <- ggplot(aes_string(x = "xvals", y = "yvals"), 
@@ -76,7 +72,6 @@ granova.ds.bd <- function(
   p <- p + geom_rug(alpha = I(2/3))
 
   # Adding a perpendicular crossbow as a line segment
-  print(graphicalBounds)
   p <- p + geom_segment(
                aes_string(
                  x    =  min(graphicalBounds),
@@ -91,11 +86,8 @@ granova.ds.bd <- function(
               aes_string(
                 intercept = mean(graphicalBounds) + min(graphicalBounds),
                 alpha     = I("1/2"),
-                slope     = -1
-                
+                slope     = -1                
               ),
-
-              )
            )
   
 
@@ -162,9 +154,6 @@ granova.ds.bd <- function(
              linetype = 3,
              alpha    = I(1/4), 
            )
-
-  ## Plotting the dependent sample scatterplot
-  print(p)
   
   # Removing the gridlines and background
   p <- p +
@@ -174,7 +163,6 @@ granova.ds.bd <- function(
     opts(axis.line = theme_segment()) +
     opts(title = "Dependent Sample Scatterplot for pair65 data")  
 
-  print(summary(p))
   return(p)
 }
 
