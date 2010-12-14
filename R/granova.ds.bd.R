@@ -42,13 +42,12 @@ granova.ds.bd <- function(
   upperGraphicalBound <- max(extrema) + (0.5 * southwestPlotOffsetFactor * squareDataRange)
   
   graphicalBounds <- c(lowerGraphicalBound, upperGraphicalBound)
-  perpendicularYIntercept <- (2*mean(dd$yvals) - (.3 * mean(dd$yvals)))
 
-  perpendicularIntercept <- 2*(min(dd$yvals)) - offset
+  crossbowIntercept <- mean(graphicalBounds) + min(graphicalBounds)
   shadowOffset <- offset/6
 
   # Computing point shadows
-  xshadow <- (((dd$xvals - dd$yvals) + perpendicularIntercept) /2) + shadowOffset
+  xshadow <- (((dd$xvals - dd$yvals) + crossbowIntercept) /2) + shadowOffset
   yshadow <- (xshadow) + (dd$yvals - dd$xvals)
 
   # I have to name the resultant dataframe variables as "xvals" and "yvals" so
@@ -83,7 +82,7 @@ granova.ds.bd <- function(
            
   # Deliberate re-adding the same perpendicular crossbow as a full line
   p <- p + geom_abline(
-                intercept = mean(graphicalBounds) + min(graphicalBounds),
+                intercept = crossbowIntercept,
                 alpha     = I(1/2),
                 slope     = -1                
            )
@@ -106,13 +105,13 @@ granova.ds.bd <- function(
   # Adding the 95% Confidence band
   p <- p + geom_segment(
             aes_string(
-              x    = ((perpendicularIntercept - lowerTreatmentEffect) / 2) 
+              x    = ((crossbowIntercept - lowerTreatmentEffect) / 2) 
                       - shadowOffset,
-              y    = ((perpendicularIntercept + lowerTreatmentEffect) / 2) 
+              y    = ((crossbowIntercept + lowerTreatmentEffect) / 2) 
                       - shadowOffset,
-              xend = ((perpendicularIntercept - upperTreatmentEffect) / 2) 
+              xend = ((crossbowIntercept - upperTreatmentEffect) / 2) 
                       - shadowOffset,
-              yend = ((perpendicularIntercept + upperTreatmentEffect) / 2) 
+              yend = ((crossbowIntercept + upperTreatmentEffect) / 2) 
                       - shadowOffset
 
             ), size  = I(2),
