@@ -112,23 +112,7 @@ granova.ds.bd <- function(
               ),
               alpha     = I(1/2)
             )
-              
-  
 
-  # Adding group mean lines
-  # p <- p + geom_hline(
-  #                     yintercept = mean(dd$yvals), 
-  #                     colour     = "red",
-  #                     alpha      = 1/2,
-  #                     linetype   = 3
-  #          )
-  #                   
-  # p <- p + geom_vline(
-  #                     xintercept = mean(dd$xvals), 
-  #                     colour     = "red",
-  #                     alpha      = 1/2,
-  #                     linetype   = 3
-  #          ) 
   # Adding the 95% Confidence band
   p <- p + geom_segment(
             aes_string(
