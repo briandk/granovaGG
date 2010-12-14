@@ -106,10 +106,13 @@ granova.ds.bd <- function(
            
   # Adding the perpendicular crossbow
   p <- p + geom_abline(
-                intercept = crossbowIntercept,
-                alpha     = I(1/2),
+              aes_string(
+                intercept = I(crossbowIntercept),
                 slope     = -1                
-           )
+              ),
+              alpha     = I(1/2)
+            )
+              
   
 
   # Adding group mean lines
