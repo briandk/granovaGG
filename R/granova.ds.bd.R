@@ -49,31 +49,43 @@ granova.ds.bd <- function(
   xshadow <- ((-dd$effect + crossbowIntercept) / 2) + shadowOffset
   yshadow <- (xshadow) + (dd$effect)
 
-  # I have to name the resultant dataframe variables as "xvals" and "yvals" so
-  # that the subsequent geom_point(data = ddshadow) can inherit the dd dataframe
-  # column names and plot correctly (Wickham, ggplot2 book, p. 63)
+  # I have to name the resultant dataframe variables as "xvals" and "yvals" so 
+  # that the subsequent geom_point(data = ddshadow) can inherit the dd dataframe 
+  # column names and plot correctly (Wickham, ggplot2 book, p. 63) 
   ddshadow <- data.frame(xvals = xshadow, yvals = yshadow)
   
-  ## Computing Point Trails
+  ## Computing Point Trails 
   ddtrails <- data.frame(
-                xTrailStart = dd$xvals,
+                xTrailStart = dd$xvals, 
                 yTrailStart = dd$yvals,
-                xTrailEnd   = xshadow,
-                yTrailEnd   = yshadow
-              )
+                xTrailEnd   = xshadow, 
+                yTrailEnd   = yshadow )
   
-  # Setting up the ggplot object
-  p <- ggplot(aes_string(x = "xvals", y = "yvals"), 
-                data = dd)
+   # Setting up the ggplot object 
+   p <- ggplot(aes_string(x = "xvals", y = "yvals"), data = dd)
   
-  # Adding the treatment effect line
+  ## Adding the treatment effect line. 
+  # Here, I'm using a hack by specifying that treatmentLine is
+  # built from a dataframe that contains the variable "Legend". The Confidence Interval will also be
+  # built from a dataframe containing the variable "Legend", so that the title of the resulting
+  # legend ends up being "Legend." The strategy here is to create self-contained dataframes (like
+  # treatmentLine) for each object that should appear in the legend. The dataframes themselves hold
+  # information for things like slopes and intercepts, etc. 
+  treatmentLine <- data.frame( 
+                   treatmentIntercept = meanTreatmentEffect, 
+                   treatmentSlope     = 1, 
+                   Legend             = factor("Mean Difference")
+                 ) 
+  
   p <- p + geom_abline(
-                       intercept = meanTreatmentEffect,
-                       slope     = 1,
-                       color     = "red",
-                       alpha     = I(1/2),
-                       size      = I(1),
-                       title     = "main effect"
+             aes(
+               intercept = treatmentIntercept, 
+               slope     = treatmentSlope, 
+               color     = Legend, 
+             ),
+             alpha = I(1/2), 
+             size  = I(1),
+             data  = treatmentLine
            )
 
   
@@ -110,7 +122,7 @@ granova.ds.bd <- function(
                 intercept = I(crossbowIntercept),
                 slope     = -1                
               ),
-              alpha     = I(1/2)
+              alpha = I(1/2)
             )
 
   # Adding the 95% Confidence band
@@ -151,8 +163,11 @@ granova.ds.bd <- function(
              size     = I(1/3),
              color    = "black",
              linetype = 1,
-             alpha    = I(1/6)              
+             alpha    = I(1/8)              
            ) 
+  
+  # Adding a legend
+  p <- p + scale_color_manual(value = c("red", "orange", "yellow", "green", "blue"))
   
   # Removing the gridlines and background
   p <- p +
