@@ -12,8 +12,9 @@ granova.ds.bd <- function(
                    data                      = pair65, 
                    southwestPlotOffsetFactor = 0.4,
                    northeastPlotOffsetFactor = 0.5,
-                   title                   = "Dependent Sample Scatterplot",
-                   conf.level                = 0.95
+                   plotTitle                 = "Dependent Sample Scatterplot",
+                   conf.level                = 0.95,
+                   produceBlankPlotObject    = TRUE
                  ) 
                  {
   dd <- data.frame(
@@ -22,6 +23,13 @@ granova.ds.bd <- function(
           effect = (data[ , 2]  - data[ , 1])
         )  
 
+  # We're going to build the plot in several pieces. First, we compute
+  # statistics on the data passed in, and use them to define square graphical
+  # bounds for the viewing window. Then, we use grammar to build the plot layer
+  # by layer. Because of the way ggplot2 creates plot objects, layers can be
+  # added to a plot p simply by calling "p <- p + newLayer", so for now you'll
+  # see that structure of code throughout.
+    
   ## Computing Statistics for the Confidence Band
   effectQuantiles <- quantile(dd$effect, probs = c(0, 0.025, 0.5, 0.975, 1))
 
@@ -32,6 +40,7 @@ granova.ds.bd <- function(
   meanTreatmentEffect  <- dsttest$estimate
   upperTreatmentEffect <- dsttest$conf.int[1]
   lowerTreatmentEffect <- dsttest$conf.int[2]
+  CIBandText           <- paste(100 * conf.level, "% CI", sep = "")
 
   ## Setting the graphical bounds
   aggregateDataRange  <- c(range(dd$xvals), range(dd$yvals))
@@ -43,7 +52,7 @@ granova.ds.bd <- function(
   graphicalBounds     <- c(lowerGraphicalBound, upperGraphicalBound)
 
   crossbowIntercept   <- mean(graphicalBounds) + min(graphicalBounds)
-  shadowOffset        <- squareDataRange / 60
+  shadowOffset        <- squareDataRange / 50
 
   ## Computing point shadows
   xshadow <- ((-dd$effect + crossbowIntercept) / 2) + shadowOffset
@@ -63,7 +72,7 @@ granova.ds.bd <- function(
               )
   
   ## Setting up the ggplot object 
-  p <- ggplot(aes_string(x = "xvals", y = "yvals"), data = dd)
+  p <- ggplot(aes(x = xvals, y = yvals), data = dd)
   
   ## Adding the treatment effect line. 
   # Here, I'm using a hack by specifying that treatmentLine is
@@ -126,8 +135,7 @@ granova.ds.bd <- function(
               alpha = I(1/2)
             )
 
-  ## Adding the Confidence band
-  
+  ## Adding the Confidence band    
   confidenceBand <- data.frame(
                       cx    = ((crossbowIntercept - lowerTreatmentEffect) / 2) 
                               - shadowOffset,
@@ -137,7 +145,7 @@ granova.ds.bd <- function(
                               - shadowOffset,
                       cyend = ((crossbowIntercept + upperTreatmentEffect) / 2) 
                               - shadowOffset,
-                      Legend = factor("Confidence Band")
+                      Legend = factor(CIBandText)
                     )
   p <- p + geom_segment(
                aes(
@@ -175,17 +183,24 @@ granova.ds.bd <- function(
              alpha    = I(1/8)              
            ) 
   
-  ## Adding a legend
+  ## Adding a legend and title
   legendColors <- c("red", "darkgreen")
   p <- p + scale_color_manual(value = legendColors)
+  p <- p + opts(title = plotTitle)
   
-  ## Removing the gridlines and background
-  p <- p +
-    opts(panel.grid.major = theme_blank()) +  
-    opts(panel.grid.minor = theme_blank()) +
-    opts(panel.background = theme_blank()) + 
-    opts(axis.line = theme_segment()) +
-    opts(title = paste(title)) 
-
+  ## Renaming the x and y scales
+  p <- p + opts(axis.x.text = (names(data)[1]))
+  p <- p + opts(axis.y.text = (names(data)[2]))
+  
+  
+  ## Removing the gridlines and background if the user asks
+  if (produceBlankPlotObject == TRUE) {
+    p <- p +
+      opts(panel.grid.major = theme_blank()) +  
+      opts(panel.grid.minor = theme_blank()) +
+      opts(panel.background = theme_blank()) + 
+      opts(axis.line = theme_segment())
+  }
+  
   return(p)
 }
