@@ -1,12 +1,12 @@
-# Required Libraries
+## Required Libraries
 library(ggplot2)
 library(DAAG) # contains the pair65 data
 
-# Loading in the data
+## Loading in the data
 data(pair65)
 str(pair65)
 
-# Defining the Function
+## Defining the Function
 
 granova.ds.bd <- function(
                    data                      = pair65, 
@@ -22,7 +22,7 @@ granova.ds.bd <- function(
           effect = (data[ , 2]  - data[ , 1])
         )  
 
-  # Computing Statistics for the Confidence Band
+  ## Computing Statistics for the Confidence Band
   effectQuantiles <- quantile(dd$effect, probs = c(0, 0.025, 0.5, 0.975, 1))
 
   dsttest <- t.test(dd$yvals, dd$xvals, 
@@ -33,7 +33,7 @@ granova.ds.bd <- function(
   upperTreatmentEffect <- dsttest$conf.int[1]
   lowerTreatmentEffect <- dsttest$conf.int[2]
 
-  # Setting the graphical bounds
+  ## Setting the graphical bounds
   aggregateDataRange  <- c(range(dd$xvals), range(dd$yvals))
   extrema             <- c(max(aggregateDataRange), min(aggregateDataRange))    
   squareDataRange     <- max(extrema) - min(extrema)
@@ -59,10 +59,11 @@ granova.ds.bd <- function(
                 xTrailStart = dd$xvals, 
                 yTrailStart = dd$yvals,
                 xTrailEnd   = xshadow, 
-                yTrailEnd   = yshadow )
+                yTrailEnd   = yshadow 
+              )
   
-   # Setting up the ggplot object 
-   p <- ggplot(aes_string(x = "xvals", y = "yvals"), data = dd)
+  ## Setting up the ggplot object 
+  p <- ggplot(aes_string(x = "xvals", y = "yvals"), data = dd)
   
   ## Adding the treatment effect line. 
   # Here, I'm using a hack by specifying that treatmentLine is
@@ -89,22 +90,22 @@ granova.ds.bd <- function(
            )
 
   
-  # Plotting the raw data
+  ## Plotting the raw data
   p <- p + geom_point(size = I(3)) + xlim(graphicalBounds) + ylim(graphicalBounds)
 
-  # Adding the y=x line
+  ## Adding the y=x line
   p <- p + geom_abline(slope = 1, intercept = 0)
 
-  # Forcing coordinates to be equal
+  ## Forcing coordinates to be equal
   p <- p + coord_equal()
 
-  # Adding a rugplot
+  ## Adding a rugplot
   p <- p + geom_rug(
              alpha = I(2/3),
              color = "steelblue"
            )
   
-  # Adding mean marks
+  ## Adding mean marks
   p <- p + geom_rug(
              aes(
                x = mean(xvals),
@@ -116,7 +117,7 @@ granova.ds.bd <- function(
              alpha = I(2/3)
            )  
            
-  # Adding the perpendicular crossbow
+  ## Adding the perpendicular crossbow
   p <- p + geom_abline(
               aes_string(
                 intercept = I(crossbowIntercept),
@@ -125,25 +126,33 @@ granova.ds.bd <- function(
               alpha = I(1/2)
             )
 
-  # Adding the 95% Confidence band
+  ## Adding the Confidence band
+  
+  confidenceBand <- data.frame(
+                      cx    = ((crossbowIntercept - lowerTreatmentEffect) / 2) 
+                              - shadowOffset,
+                      cy    = ((crossbowIntercept + lowerTreatmentEffect) / 2) 
+                              - shadowOffset,
+                      cxend = ((crossbowIntercept - upperTreatmentEffect) / 2) 
+                              - shadowOffset,
+                      cyend = ((crossbowIntercept + upperTreatmentEffect) / 2) 
+                              - shadowOffset,
+                      Legend = factor("Confidence Band")
+                    )
   p <- p + geom_segment(
-            aes_string(
-              x    = ((crossbowIntercept - lowerTreatmentEffect) / 2) 
-                      - shadowOffset,
-              y    = ((crossbowIntercept + lowerTreatmentEffect) / 2) 
-                      - shadowOffset,
-              xend = ((crossbowIntercept - upperTreatmentEffect) / 2) 
-                      - shadowOffset,
-              yend = ((crossbowIntercept + upperTreatmentEffect) / 2) 
-                      - shadowOffset
-
-            ), size  = I(2),
-               color = "darkgreen",
-               alpha = I(2/3)
-
+               aes(
+                 x     = cx,
+                 y     = cy,
+                 xend  = cxend,
+                 yend  = cyend,                        
+                 color = Legend
+               ), 
+            size  = I(2),
+            alpha = I(2/3),
+            data  = confidenceBand
           )
                      
-  # Adding point shadows
+  ## Adding point shadows
   p <- p + geom_point(
              data  = ddshadow, 
              color = "black", 
@@ -151,7 +160,7 @@ granova.ds.bd <- function(
              alpha = I(1/4) 
            )
 
-  # Adding the point trails
+  ## Adding the point trails
   p <- p + geom_segment(
              aes(
                x        = xTrailStart,
@@ -166,10 +175,11 @@ granova.ds.bd <- function(
              alpha    = I(1/8)              
            ) 
   
-  # Adding a legend
-  p <- p + scale_color_manual(value = c("red", "orange", "yellow", "green", "blue"))
+  ## Adding a legend
+  legendColors <- c("red", "darkgreen")
+  p <- p + scale_color_manual(value = legendColors)
   
-  # Removing the gridlines and background
+  ## Removing the gridlines and background
   p <- p +
     opts(panel.grid.major = theme_blank()) +  
     opts(panel.grid.minor = theme_blank()) +
