@@ -30,7 +30,7 @@ granova.ds.bd <- function(
   # added to a plot p simply by calling "p <- p + newLayer", so for now you'll
   # see that structure of code throughout.
     
-  ## Computing Statistics for the Confidence Band
+  ## Computing Statistics for the Confidence Band and Mean Difference
   effectQuantiles <- quantile(dd$effect, probs = c(0, 0.025, 0.5, 0.975, 1))
 
   dsttest <- t.test(dd$yvals, dd$xvals, 
@@ -41,6 +41,8 @@ granova.ds.bd <- function(
   upperTreatmentEffect <- dsttest$conf.int[1]
   lowerTreatmentEffect <- dsttest$conf.int[2]
   CIBandText           <- paste(100 * conf.level, "% CI", sep = "")
+  meanDifferenceRound  <- round(meanTreatmentEffect, digits = 2)
+  meanDifferenceText   <- paste("Mean Diff. =", meanDifferenceRound)
 
   ## Setting the graphical bounds
   aggregateDataRange  <- c(range(dd$xvals), range(dd$yvals))
@@ -81,11 +83,12 @@ granova.ds.bd <- function(
   # legend ends up being "Legend." The strategy here is to create self-contained dataframes (like
   # treatmentLine) for each object that should appear in the legend. The dataframes themselves hold
   # information for things like slopes and intercepts, etc. 
+  
   treatmentLine <- data.frame( 
-                   treatmentIntercept = meanTreatmentEffect, 
-                   treatmentSlope     = 1, 
-                   Legend             = factor("Mean Difference")
-                 ) 
+                     treatmentIntercept = meanTreatmentEffect, 
+                     treatmentSlope     = 1, 
+                     Legend             = factor(meanDifferenceText)
+                   ) 
   
   p <- p + geom_abline(
              aes(
@@ -189,8 +192,12 @@ granova.ds.bd <- function(
   p <- p + opts(title = plotTitle)
   
   ## Renaming the x and y scales
-  p <- p + opts(axis.x.text = (names(data)[1]))
-  p <- p + opts(axis.y.text = (names(data)[2]))
+  print("Printing the Names of the x and y values")
+  print(names(data)[1])
+  print(names(data)[2])
+  
+  p <- p + xlab((names(data)[1]))
+  p <- p + ylab((names(data)[2]))
   
   
   ## Removing the gridlines and background if the user asks
