@@ -15,8 +15,9 @@ granova.ds.bd <- function(
                    plotTitle                 = "Dependent Sample Scatterplot",
                    conf.level                = 0.95,
                    produceBlankPlotObject    = TRUE
-                 ) 
-                 {
+) 
+
+{
   dd <- data.frame(
           xvals  = data[ , 1], 
           yvals  = data[ , 2],
