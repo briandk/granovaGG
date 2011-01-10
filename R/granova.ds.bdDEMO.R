@@ -3,7 +3,7 @@ library(granova)
 
 # Custom functions
 source("granova.ds.bd.R")
-
+# trace("granova.ds.bd", browser, exit = browser)
 # pdf("PruzekTestPlots.pdf", onefile = TRUE)
 
 x <- rnorm(mean = 42, n = 25)

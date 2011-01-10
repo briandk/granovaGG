@@ -31,8 +31,7 @@ granova.ds.bd <- function(
   # added to a plot p simply by calling "p <- p + newLayer", so for now you'll
   # see that structure of code throughout.
     
-  ## Computing Statistics for the Confidence Band and Mean Difference
-  
+  ## Computing t-test Statistics for the Confidence Band and Mean Difference
   computeDependentSampleTtest <- function () {
     return (
       t.test( 
@@ -69,22 +68,34 @@ granova.ds.bd <- function(
   crossbowIntercept   <- mean(graphicalBounds) + min(graphicalBounds)
   shadowOffset        <- squareDataRange / 50
 
-  ## Computing point shadows
-  xshadow <- ((-dd$effect + crossbowIntercept) / 2) + shadowOffset
-  yshadow <- (xshadow) + (dd$effect)
-
-  # I have to name the resultant dataframe variables as "xvals" and "yvals" so 
-  # that the subsequent geom_point(data = ddshadow) can inherit the dd dataframe 
-  # column names and plot correctly (Wickham, ggplot2 book, p. 63) 
-  ddshadow <- data.frame(xvals = xshadow, yvals = yshadow)
+  computeDataPointShadows <- function () {
+    xShadow <- ((-dd$effect + crossbowIntercept) / 2) + shadowOffset
+    yShadow <- xShadow + dd$effect
+    return (data.frame(xShadow, yShadow))
+  }
   
-  ## Computing Point Trails 
-  ddtrails <- data.frame(
-                xTrailStart = dd$xvals, 
-                yTrailStart = dd$yvals,
-                xTrailEnd   = xshadow, 
-                yTrailEnd   = yshadow 
-              )
+  appendDataPointShadowsToDataFrame <- function () {
+    dd <- data.frame(dd, computeDataPointShadows())
+    return (dd)
+  }
+    
+  computeDataPointTrails <- function () {
+    ddtrails <- data.frame(
+                  xTrailStart = dd$xvals, 
+                  yTrailStart = dd$yvals,
+                  xTrailEnd   = dd$xShadow, 
+                  yTrailEnd   = dd$yShadow
+    )
+    return (ddtrails)
+  }
+  
+  appendDataPointTrailsToDataFrame <- function () {
+    dd <- data.frame(dd, computeDataPointTrails())
+    return (dd)
+  }
+  
+  dd <- appendDataPointShadowsToDataFrame()
+  dd <- appendDataPointTrailsToDataFrame()
   
   ## Setting up the ggplot object 
   p <- ggplot(aes(x = xvals, y = yvals), data = dd)
@@ -179,7 +190,11 @@ granova.ds.bd <- function(
                      
   ## Adding point shadows
   p <- p + geom_point(
-             data  = ddshadow, 
+             aes(
+               x = xShadow,
+               y = yShadow
+             ),
+             data  = dd, 
              color = "black", 
              size  = I(3),
              alpha = I(1/4) 
@@ -193,7 +208,7 @@ granova.ds.bd <- function(
                xend     = xTrailEnd,
                yend     = yTrailEnd
              ),
-             data     = ddtrails,
+             data     = dd,
              size     = I(1/3),
              color    = "black",
              linetype = 1,
@@ -225,3 +240,4 @@ granova.ds.bd <- function(
   
   return(p)
 }
+
