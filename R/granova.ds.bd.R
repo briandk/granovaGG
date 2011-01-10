@@ -32,13 +32,22 @@ granova.ds.bd <- function(
     
   ## Computing Statistics for the Confidence Band and Mean Difference
   
-  dsttest <- t.test(dd$yvals, dd$xvals, 
-                     paired     = TRUE,
-                     conf.level = conf.level)
+  computeDependentSampleTtest <- function () {
+    return (
+      t.test( 
+              dd$yvals, 
+              dd$xvals, 
+              paired     = TRUE,
+              conf.level = conf.level
+      )
+    )
+  }
+  
+  dependentSampleTtestStatistics <- computeDependentSampleTtest()
 
-  meanTreatmentEffect  <- dsttest$estimate
-  upperTreatmentEffect <- dsttest$conf.int[1]
-  lowerTreatmentEffect <- dsttest$conf.int[2]
+  meanTreatmentEffect  <- dependentSampleTtestStatistics$estimate
+  upperTreatmentEffect <- dependentSampleTtestStatistics$conf.int[1]
+  lowerTreatmentEffect <- dependentSampleTtestStatistics$conf.int[2]
   CIBandText           <- paste(100 * conf.level, "% CI", sep = "")
   meanDifferenceRound  <- round(meanTreatmentEffect, digits = 2)
   meanDifferenceText   <- paste("Mean Diff. =", meanDifferenceRound)
