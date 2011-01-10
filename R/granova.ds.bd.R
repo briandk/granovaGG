@@ -46,6 +46,10 @@ granova.ds.bd <- function(
   
   dependentSampleTtestStatistics <- computeDependentSampleTtest()
 
+  computeTreatmentEffectQuantiles <- function () {
+    dependentSampleTtestStatistics <- computeDependentSampleTtest()
+  }
+  
   meanTreatmentEffect  <- dependentSampleTtestStatistics$estimate
   upperTreatmentEffect <- dependentSampleTtestStatistics$conf.int[1]
   lowerTreatmentEffect <- dependentSampleTtestStatistics$conf.int[2]
