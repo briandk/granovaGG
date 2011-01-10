@@ -18,6 +18,6 @@ testFrame2 <- data.frame(SATVerbalPre = x, SATVerbalPost = y)
 print(granova.ds.bd(testFrame1, conf.level = 0.95))
 print(granova.ds.bd(testFrame2, conf.level = 0.50))
 
-print(granova.ds.bd(testFrame2, title = "awesomeSauce"))
+print(granova.ds.bd(testFrame2, plotTitle = "awesomeSauce"))
 
 dev.off()
