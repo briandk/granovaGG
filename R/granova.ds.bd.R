@@ -1,39 +1,58 @@
-# Required Libraries
+## Required Libraries
 library(ggplot2)
 library(DAAG) # contains the pair65 data
 
-# Loading in the data
+## Loading in the data
 data(pair65)
 str(pair65)
 
-# Defining the Function
+## Defining the Function
 
 granova.ds.bd <- function(
                    data                      = pair65, 
                    southwestPlotOffsetFactor = 0.4,
                    northeastPlotOffsetFactor = 0.5,
-                   title                   = "Dependent Sample Scatterplot",
-                   conf.level                = 0.95
+                   plotTitle                 = "Dependent Sample Scatterplot",
+                   conf.level                = 0.95,
+                   produceBlankPlotObject    = TRUE
                  ) 
                  {
   dd <- data.frame(
           xvals  = data[ , 1], 
           yvals  = data[ , 2],
-          effect = (data[ , 2]  - data[ , 1])
+          effect = data[ , 2]  - data[ , 1]
         )  
 
-  # Computing Statistics for the Confidence Band
-  effectQuantiles <- quantile(dd$effect, probs = c(0, 0.025, 0.5, 0.975, 1))
+  # We're going to build the plot in several pieces. First, we compute
+  # statistics on the data passed in, and use them to define square graphical
+  # bounds for the viewing window. Then, we use grammar to build the plot layer
+  # by layer. Because of the way ggplot2 creates plot objects, layers can be
+  # added to a plot p simply by calling "p <- p + newLayer", so for now you'll
+  # see that structure of code throughout.
+    
+  ## Computing Statistics for the Confidence Band and Mean Difference
+  
+  computeDependentSampleTtest <- function () {
+    return (
+      t.test( 
+              dd$yvals, 
+              dd$xvals, 
+              paired     = TRUE,
+              conf.level = conf.level
+      )
+    )
+  }
+  
+  dependentSampleTtestStatistics <- computeDependentSampleTtest()
 
-  dsttest <- t.test(dd$yvals, dd$xvals, 
-                     paired     = TRUE,
-                     conf.level = conf.level)
+  meanTreatmentEffect  <- dependentSampleTtestStatistics$estimate
+  upperTreatmentEffect <- dependentSampleTtestStatistics$conf.int[1]
+  lowerTreatmentEffect <- dependentSampleTtestStatistics$conf.int[2]
+  CIBandText           <- paste(100 * conf.level, "% CI", sep = "")
+  meanDifferenceRound  <- round(meanTreatmentEffect, digits = 2)
+  meanDifferenceText   <- paste("Mean Diff. =", meanDifferenceRound)
 
-  meanTreatmentEffect  <- dsttest$estimate
-  upperTreatmentEffect <- dsttest$conf.int[1]
-  lowerTreatmentEffect <- dsttest$conf.int[2]
-
-  # Setting the graphical bounds
+  ## Setting the graphical bounds
   aggregateDataRange  <- c(range(dd$xvals), range(dd$yvals))
   extrema             <- c(max(aggregateDataRange), min(aggregateDataRange))    
   squareDataRange     <- max(extrema) - min(extrema)
@@ -43,56 +62,70 @@ granova.ds.bd <- function(
   graphicalBounds     <- c(lowerGraphicalBound, upperGraphicalBound)
 
   crossbowIntercept   <- mean(graphicalBounds) + min(graphicalBounds)
-  shadowOffset        <- squareDataRange / 60
+  shadowOffset        <- squareDataRange / 50
 
   ## Computing point shadows
   xshadow <- ((-dd$effect + crossbowIntercept) / 2) + shadowOffset
   yshadow <- (xshadow) + (dd$effect)
 
-  # I have to name the resultant dataframe variables as "xvals" and "yvals" so
-  # that the subsequent geom_point(data = ddshadow) can inherit the dd dataframe
-  # column names and plot correctly (Wickham, ggplot2 book, p. 63)
+  # I have to name the resultant dataframe variables as "xvals" and "yvals" so 
+  # that the subsequent geom_point(data = ddshadow) can inherit the dd dataframe 
+  # column names and plot correctly (Wickham, ggplot2 book, p. 63) 
   ddshadow <- data.frame(xvals = xshadow, yvals = yshadow)
   
-  ## Computing Point Trails
+  ## Computing Point Trails 
   ddtrails <- data.frame(
-                xTrailStart = dd$xvals,
+                xTrailStart = dd$xvals, 
                 yTrailStart = dd$yvals,
-                xTrailEnd   = xshadow,
-                yTrailEnd   = yshadow
+                xTrailEnd   = xshadow, 
+                yTrailEnd   = yshadow 
               )
   
-  # Setting up the ggplot object
-  p <- ggplot(aes_string(x = "xvals", y = "yvals"), 
-                data = dd)
+  ## Setting up the ggplot object 
+  p <- ggplot(aes(x = xvals, y = yvals), data = dd)
   
-  # Adding the treatment effect line
+  ## Adding the treatment effect line. 
+  # Here, I'm using a hack by specifying that treatmentLine is
+  # built from a dataframe that contains the variable "Legend". The Confidence Interval will also be
+  # built from a dataframe containing the variable "Legend", so that the title of the resulting
+  # legend ends up being "Legend." The strategy here is to create self-contained dataframes (like
+  # treatmentLine) for each object that should appear in the legend. The dataframes themselves hold
+  # information for things like slopes and intercepts, etc. 
+  
+  treatmentLine <- data.frame( 
+                     treatmentIntercept = meanTreatmentEffect, 
+                     treatmentSlope     = 1, 
+                     Legend             = factor(meanDifferenceText)
+                   ) 
+  
   p <- p + geom_abline(
-                       intercept = meanTreatmentEffect,
-                       slope     = 1,
-                       color     = "red",
-                       alpha     = I(1/2),
-                       size      = I(1),
-                       title     = "main effect"
+             aes(
+               intercept = treatmentIntercept, 
+               slope     = treatmentSlope, 
+               color     = Legend, 
+             ),
+             alpha = I(1/2), 
+             size  = I(1),
+             data  = treatmentLine
            )
 
   
-  # Plotting the raw data
+  ## Plotting the raw data
   p <- p + geom_point(size = I(3)) + xlim(graphicalBounds) + ylim(graphicalBounds)
 
-  # Adding the y=x line
+  ## Adding the y=x line
   p <- p + geom_abline(slope = 1, intercept = 0)
 
-  # Forcing coordinates to be equal
+  ## Forcing coordinates to be equal
   p <- p + coord_equal()
 
-  # Adding a rugplot
+  ## Adding a rugplot
   p <- p + geom_rug(
              alpha = I(2/3),
              color = "steelblue"
            )
   
-  # Adding mean marks
+  ## Adding mean marks
   p <- p + geom_rug(
              aes(
                x = mean(xvals),
@@ -104,34 +137,42 @@ granova.ds.bd <- function(
              alpha = I(2/3)
            )  
            
-  # Adding the perpendicular crossbow
+  ## Adding the perpendicular crossbow
   p <- p + geom_abline(
               aes_string(
                 intercept = I(crossbowIntercept),
                 slope     = -1                
               ),
-              alpha     = I(1/2)
+              alpha = I(1/2)
             )
 
-  # Adding the 95% Confidence band
+  ## Adding the Confidence band    
+  confidenceBand <- data.frame(
+                      cx    = ((crossbowIntercept - lowerTreatmentEffect) / 2) 
+                              - shadowOffset,
+                      cy    = ((crossbowIntercept + lowerTreatmentEffect) / 2) 
+                              - shadowOffset,
+                      cxend = ((crossbowIntercept - upperTreatmentEffect) / 2) 
+                              - shadowOffset,
+                      cyend = ((crossbowIntercept + upperTreatmentEffect) / 2) 
+                              - shadowOffset,
+                      Legend = factor(CIBandText)
+                    )
+
   p <- p + geom_segment(
-            aes_string(
-              x    = ((crossbowIntercept - lowerTreatmentEffect) / 2) 
-                      - shadowOffset,
-              y    = ((crossbowIntercept + lowerTreatmentEffect) / 2) 
-                      - shadowOffset,
-              xend = ((crossbowIntercept - upperTreatmentEffect) / 2) 
-                      - shadowOffset,
-              yend = ((crossbowIntercept + upperTreatmentEffect) / 2) 
-                      - shadowOffset
-
-            ), size  = I(2),
-               color = "darkgreen",
-               alpha = I(2/3)
-
+               aes(
+                 x     = cx,
+                 y     = cy,
+                 xend  = cxend,
+                 yend  = cyend,                        
+                 color = Legend
+               ), 
+            size  = I(2),
+            alpha = I(2/3),
+            data  = confidenceBand
           )
                      
-  # Adding point shadows
+  ## Adding point shadows
   p <- p + geom_point(
              data  = ddshadow, 
              color = "black", 
@@ -139,7 +180,7 @@ granova.ds.bd <- function(
              alpha = I(1/4) 
            )
 
-  # Adding the point trails
+  ## Adding the point trails
   p <- p + geom_segment(
              aes(
                x        = xTrailStart,
@@ -151,16 +192,31 @@ granova.ds.bd <- function(
              size     = I(1/3),
              color    = "black",
              linetype = 1,
-             alpha    = I(1/6)              
+             alpha    = I(1/8)              
            ) 
   
-  # Removing the gridlines and background
-  p <- p +
-    opts(panel.grid.major = theme_blank()) +  
-    opts(panel.grid.minor = theme_blank()) +
-    opts(panel.background = theme_blank()) + 
-    opts(axis.line = theme_segment()) +
-    opts(title = paste(title)) 
-
+  ## Adding a legend and title
+  legendColors <- c("red", "darkgreen")
+  p <- p + scale_color_manual(value = legendColors)
+  p <- p + opts(title = plotTitle)
+  
+  ## Renaming the x and y scales
+  print("Printing the Names of the x and y values")
+  print(names(data)[1])
+  print(names(data)[2])
+  
+  p <- p + xlab((names(data)[1]))
+  p <- p + ylab((names(data)[2]))
+  
+  
+  ## Removing the gridlines and background if the user asks
+  if (produceBlankPlotObject == TRUE) {
+    p <- p +
+      opts(panel.grid.major = theme_blank()) +  
+      opts(panel.grid.minor = theme_blank()) +
+      opts(panel.background = theme_blank()) + 
+      opts(axis.line = theme_segment())
+  }
+  
   return(p)
 }
