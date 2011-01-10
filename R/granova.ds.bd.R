@@ -20,7 +20,7 @@ granova.ds.bd <- function(
   dd <- data.frame(
           xvals  = data[ , 1], 
           yvals  = data[ , 2],
-          effect = (data[ , 2]  - data[ , 1])
+          effect = data[ , 2]  - data[ , 1]
         )  
 
   # We're going to build the plot in several pieces. First, we compute
@@ -31,8 +31,7 @@ granova.ds.bd <- function(
   # see that structure of code throughout.
     
   ## Computing Statistics for the Confidence Band and Mean Difference
-  effectQuantiles <- quantile(dd$effect, probs = c(0, 0.025, 0.5, 0.975, 1))
-
+  
   dsttest <- t.test(dd$yvals, dd$xvals, 
                      paired     = TRUE,
                      conf.level = conf.level)
