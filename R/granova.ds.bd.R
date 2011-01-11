@@ -32,7 +32,7 @@ granova.ds.bd <- function(
   # see that structure of code throughout.
     
   ## Computing t-test Statistics for the Confidence Band and Mean Difference
-  computeDependentSampleTtest <- function (xValues, yValues, confidenceLevel) {
+  performDependentSampleTtest <- function (xValues, yValues, confidenceLevel) {
     return (
       t.test( 
               xValues, 
@@ -43,19 +43,23 @@ granova.ds.bd <- function(
     )
   }
   
-  dependentSampleTtestStatistics <- computeDependentSampleTtest(
+  dependentSampleTtestStatistics <- performDependentSampleTtest(
                                       dd$xvals,
                                       dd$yvals,
                                       confidenceLevel = tTestConfidenceLevel
-                                    )
+  )
 
-  computeTreatmentEffectQuantiles <- function () {
-    dependentSampleTtestStatistics <- computeDependentSampleTtest()
+  getTreatmentEffectQuantiles <- function (tTestStatistics) {
+    effectQuantiles <- data.frame(
+      lowerTreatmentEffect = as.numeric(tTestStatistics$conf.int[2]),
+      meanTreatmentEffect  = as.numeric(tTestStatistics$estimate),
+      upperTreatmentEffect = as.numeric(tTestStatistics$conf.int[1])
+    )  
+    return(effectQuantiles)
   }
   
-  meanTreatmentEffect  <- dependentSampleTtestStatistics$estimate
-  upperTreatmentEffect <- dependentSampleTtestStatistics$conf.int[1]
-  lowerTreatmentEffect <- dependentSampleTtestStatistics$conf.int[2]
+  treatmentEffectQuantiles <- getTreatmentEffectQuantiles(dependentSampleTtestStatistics)
+  
   CIBandText           <- paste(100 * tTestConfidenceLevel, "% CI", sep = "")
   meanDifferenceRound  <- round(meanTreatmentEffect, digits = 2)
   meanDifferenceText   <- paste("Mean Diff. =", meanDifferenceRound)
