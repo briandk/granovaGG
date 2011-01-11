@@ -1,15 +1,7 @@
-## Required Libraries
-library(ggplot2)
-library(DAAG) # contains the pair65 data
-
-## Loading in the data
-data(pair65)
-str(pair65)
-
 ## Defining the Function
 
 granova.ds.bd <- function(
-                   data                      = pair65, 
+                   data                      = null, 
                    southwestPlotOffsetFactor = 0.4,
                    northeastPlotOffsetFactor = 0.5,
                    plotTitle                 = "Dependent Sample Scatterplot",

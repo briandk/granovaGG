@@ -1,5 +1,6 @@
 # For plot comparisons
 library(granova)
+library(ggplot2)
 
 # Custom functions
 source("granova.ds.bd.R")
