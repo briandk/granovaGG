@@ -1,20 +1,65 @@
 ## Defining the Function
 
-granova.ds.bd <- function(
-                   data                      = null, 
-                   southwestPlotOffsetFactor = 0.4,
-                   northeastPlotOffsetFactor = 0.5,
-                   plotTitle                 = "Dependent Sample Scatterplot",
-                   conf.level                = 0.95,
-                   produceBlankPlotObject    = TRUE
-) 
+granova.ds.bd <- function( data                      = null, 
+                           southwestPlotOffsetFactor = 0.4,
+                           northeastPlotOffsetFactor = 0.5,
+                           plotTitle                 = "Dependent Sample Scatterplot",
+                           conf.level                = 0.95,
+                           produceBlankPlotObject    = TRUE
+                 ) 
 
 {
-  dd <- data.frame(
-          xvals  = data[ , 1], 
-          yvals  = data[ , 2],
-          effect = data[ , 2]  - data[ , 1]
+
+  ## Functions should be grouped so that they're easy to locate and the
+  ## rest of your code can be read from beginning to end.
+
+  ## Computing t-test Statistics for the Confidence Band and Mean Difference
+  computeDependentSampleTtest <- function (data, conf.level) {
+    return (   t.test(data[, 1], 
+                      data[, 2], 
+                      paired     = TRUE,
+                      conf.level = conf.level
+               )
+    )
+  }
+
+  computeTreatmentEffectQuantiles <- function (data, conf.level) {
+    dependentSampleTtestStatistics <- computeDependentSampleTtest(dd, conf.level)
+  }
+
+  computeDataPointShadows <- function () {
+    xShadow <- ((-dd$effect + crossbowIntercept) / 2) + shadowOffset
+    yShadow <- xShadow + dd$effect
+    return (data.frame(xShadow, yShadow))
+  }
+
+  appendDataPointShadowsToDataFrame <- function () {
+    dd <- data.frame(dd, computeDataPointShadows())
+    return (dd)
+  }
+
+  computeDataPointTrails <- function () {
+    ddtrails <- data.frame( xTrailStart = dd$xvals, 
+                            yTrailStart = dd$yvals,
+                            xTrailEnd   = dd$xShadow, 
+                            yTrailEnd   = dd$yShadow
+                )
+    return (ddtrails)
+  }
+
+  appendDataPointTrailsToDataFrame <- function () {
+    dd <- data.frame(dd, computeDataPointTrails())
+    return (dd)
+  }
+
+
+
+
+  dd <- data.frame( xvals  = data[ , 1], 
+                    yvals  = data[ , 2],
+                    effect = data[ , 2]  - data[ , 1]
         )  
+
 
   # We're going to build the plot in several pieces. First, we compute
   # statistics on the data passed in, and use them to define square graphical
@@ -23,23 +68,8 @@ granova.ds.bd <- function(
   # added to a plot p simply by calling "p <- p + newLayer", so for now you'll
   # see that structure of code throughout.
     
-  ## Computing t-test Statistics for the Confidence Band and Mean Difference
-  computeDependentSampleTtest <- function () {
-    return (
-      t.test( 
-              dd$yvals, 
-              dd$xvals, 
-              paired     = TRUE,
-              conf.level = conf.level
-      )
-    )
-  }
   
-  dependentSampleTtestStatistics <- computeDependentSampleTtest()
-
-  computeTreatmentEffectQuantiles <- function () {
-    dependentSampleTtestStatistics <- computeDependentSampleTtest()
-  }
+  dependentSampleTtestStatistics <- computeDependentSampleTtest(dd, conf.level)
   
   meanTreatmentEffect  <- dependentSampleTtestStatistics$estimate
   upperTreatmentEffect <- dependentSampleTtestStatistics$conf.int[1]
@@ -59,38 +89,12 @@ granova.ds.bd <- function(
 
   crossbowIntercept   <- mean(graphicalBounds) + min(graphicalBounds)
   shadowOffset        <- squareDataRange / 50
-
-  computeDataPointShadows <- function () {
-    xShadow <- ((-dd$effect + crossbowIntercept) / 2) + shadowOffset
-    yShadow <- xShadow + dd$effect
-    return (data.frame(xShadow, yShadow))
-  }
-  
-  appendDataPointShadowsToDataFrame <- function () {
-    dd <- data.frame(dd, computeDataPointShadows())
-    return (dd)
-  }
-    
-  computeDataPointTrails <- function () {
-    ddtrails <- data.frame(
-                  xTrailStart = dd$xvals, 
-                  yTrailStart = dd$yvals,
-                  xTrailEnd   = dd$xShadow, 
-                  yTrailEnd   = dd$yShadow
-    )
-    return (ddtrails)
-  }
-  
-  appendDataPointTrailsToDataFrame <- function () {
-    dd <- data.frame(dd, computeDataPointTrails())
-    return (dd)
-  }
   
   dd <- appendDataPointShadowsToDataFrame()
   dd <- appendDataPointTrailsToDataFrame()
   
   ## Setting up the ggplot object 
-  p <- ggplot(aes(x = xvals, y = yvals), data = dd)
+  p <- ggplot( aes(x = xvals, y = yvals), data = dd )
   
   ## Adding the treatment effect line. 
   # Here, I'm using a hack by specifying that treatmentLine is
