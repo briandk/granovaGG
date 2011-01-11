@@ -13,7 +13,7 @@ granova.ds.bd <- function(
                    southwestPlotOffsetFactor = 0.4,
                    northeastPlotOffsetFactor = 0.5,
                    plotTitle                 = "Dependent Sample Scatterplot",
-                   conf.level                = 0.95,
+                   tTestConfidenceLevel      = 0.95,
                    produceBlankPlotObject    = TRUE
 ) 
 
@@ -32,18 +32,22 @@ granova.ds.bd <- function(
   # see that structure of code throughout.
     
   ## Computing t-test Statistics for the Confidence Band and Mean Difference
-  computeDependentSampleTtest <- function () {
+  computeDependentSampleTtest <- function (xValues, yValues, confidenceLevel) {
     return (
       t.test( 
-              dd$yvals, 
-              dd$xvals, 
+              xValues, 
+              yValues, 
               paired     = TRUE,
-              conf.level = conf.level
+              conf.level = confidenceLevel
       )
     )
   }
   
-  dependentSampleTtestStatistics <- computeDependentSampleTtest()
+  dependentSampleTtestStatistics <- computeDependentSampleTtest(
+                                      dd$xvals,
+                                      dd$yvals,
+                                      confidenceLevel = tTestConfidenceLevel
+                                    )
 
   computeTreatmentEffectQuantiles <- function () {
     dependentSampleTtestStatistics <- computeDependentSampleTtest()
@@ -52,7 +56,7 @@ granova.ds.bd <- function(
   meanTreatmentEffect  <- dependentSampleTtestStatistics$estimate
   upperTreatmentEffect <- dependentSampleTtestStatistics$conf.int[1]
   lowerTreatmentEffect <- dependentSampleTtestStatistics$conf.int[2]
-  CIBandText           <- paste(100 * conf.level, "% CI", sep = "")
+  CIBandText           <- paste(100 * tTestConfidenceLevel, "% CI", sep = "")
   meanDifferenceRound  <- round(meanTreatmentEffect, digits = 2)
   meanDifferenceText   <- paste("Mean Diff. =", meanDifferenceRound)
 
