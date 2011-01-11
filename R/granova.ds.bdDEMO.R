@@ -17,7 +17,8 @@ x <- rnorm(mean = 534, n = 25, sd = 100)
 y <- rnorm(mean = 517, n = 25, sd = 100)
 testFrame2 <- data.frame(SATVerbalPre = x, SATVerbalPost = y)
 
-print(granova.ds.bd(testFrame2, conf.level = 0.50))
+print(granova.ds.bd(testFrame1, tTestConfidenceLevel = 0.95))
+print(granova.ds.bd(testFrame2, tTestConfidenceLevel = 0.50))
 
 print(granova.ds.bd(testFrame2, plotTitle = "awesomeSauce"))
 

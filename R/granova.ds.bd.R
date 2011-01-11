@@ -4,7 +4,7 @@ granova.ds.bd <- function( data                      = null,
                            southwestPlotOffsetFactor = 0.4,
                            northeastPlotOffsetFactor = 0.5,
                            plotTitle                 = "Dependent Sample Scatterplot",
-                           conf.level                = 0.95,
+                           tTestConfidenceLevel      = 0.95,
                            produceBlankPlotObject    = TRUE
                  ) 
 
@@ -68,13 +68,36 @@ granova.ds.bd <- function( data                      = null,
   # added to a plot p simply by calling "p <- p + newLayer", so for now you'll
   # see that structure of code throughout.
     
+  ## Computing t-test Statistics for the Confidence Band and Mean Difference
+  performDependentSampleTtest <- function (xValues, yValues, confidenceLevel) {
+    return (
+      t.test( 
+              xValues, 
+              yValues, 
+              paired     = TRUE,
+              conf.level = confidenceLevel
+      )
+    )
+  }
   
-  dependentSampleTtestStatistics <- computeDependentSampleTtest(dd, conf.level)
+  dependentSampleTtestStatistics <- performDependentSampleTtest(
+                                      dd$xvals,
+                                      dd$yvals,
+                                      confidenceLevel = tTestConfidenceLevel
+  )
+
+  getTreatmentEffectQuantiles <- function (tTestStatistics) {
+    effectQuantiles <- data.frame(
+      lowerTreatmentEffect = as.numeric(tTestStatistics$conf.int[2]),
+      meanTreatmentEffect  = as.numeric(tTestStatistics$estimate),
+      upperTreatmentEffect = as.numeric(tTestStatistics$conf.int[1])
+    )  
+    return(effectQuantiles)
+  }
   
-  meanTreatmentEffect  <- dependentSampleTtestStatistics$estimate
-  upperTreatmentEffect <- dependentSampleTtestStatistics$conf.int[1]
-  lowerTreatmentEffect <- dependentSampleTtestStatistics$conf.int[2]
-  CIBandText           <- paste(100 * conf.level, "% CI", sep = "")
+  treatmentEffectQuantiles <- getTreatmentEffectQuantiles(dependentSampleTtestStatistics)
+  
+  CIBandText           <- paste(100 * tTestConfidenceLevel, "% CI", sep = "")
   meanDifferenceRound  <- round(meanTreatmentEffect, digits = 2)
   meanDifferenceText   <- paste("Mean Diff. =", meanDifferenceRound)
 
