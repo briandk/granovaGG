@@ -27,15 +27,15 @@ granova.ds.bd <- function( data                      = null,
     dependentSampleTtestStatistics <- computeDependentSampleTtest(dd, conf.level)
   }
 
+  appendDataPointShadowsToDataFrame <- function () {
+    dd <- data.frame(dd, computeDataPointShadows())
+    return (dd)
+  }
+
   computeDataPointShadows <- function () {
     xShadow <- ((-dd$effect + crossbowIntercept) / 2) + shadowOffset
     yShadow <- xShadow + dd$effect
     return (data.frame(xShadow, yShadow))
-  }
-
-  appendDataPointShadowsToDataFrame <- function () {
-    dd <- data.frame(dd, computeDataPointShadows())
-    return (dd)
   }
 
   computeDataPointTrails <- function () {
