@@ -14,17 +14,22 @@ granova.ds.bd <- function( data                      = null,
   ## rest of your code can be read from beginning to end.
 
   ## Computing t-test Statistics for the Confidence Band and Mean Difference
-  computeDependentSampleTtest <- function (data, conf.level) {
+  computeTtest <- function (data, confidenceLevel) {
     return (   t.test(data[, 1], 
                       data[, 2], 
                       paired     = TRUE,
-                      conf.level = conf.level
+                      conf.level = confidenceLevel
                )
     )
   }
 
-  computeTreatmentEffectQuantiles <- function (data, conf.level) {
-    dependentSampleTtestStatistics <- computeDependentSampleTtest(dd, conf.level)
+  getEffectQuantiles <- function (tTest) {
+    effectQuantiles <- data.frame(
+      lowerTreatmentEffect = as.numeric(tTest$conf.int[2]),
+      meanTreatmentEffect  = as.numeric(tTest$estimate),
+      upperTreatmentEffect = as.numeric(tTest$conf.int[1])
+    )  
+    return(effectQuantiles)
   }
 
   appendDataPointShadowsToDataFrame <- function () {
@@ -68,34 +73,9 @@ granova.ds.bd <- function( data                      = null,
   # added to a plot p simply by calling "p <- p + newLayer", so for now you'll
   # see that structure of code throughout.
     
-  ## Computing t-test Statistics for the Confidence Band and Mean Difference
-  performDependentSampleTtest <- function (xValues, yValues, confidenceLevel) {
-    return (
-      t.test( 
-              xValues, 
-              yValues, 
-              paired     = TRUE,
-              conf.level = confidenceLevel
-      )
-    )
-  }
-  
-  dependentSampleTtestStatistics <- performDependentSampleTtest(
-                                      dd$xvals,
-                                      dd$yvals,
-                                      confidenceLevel = tTestConfidenceLevel
-  )
-
-  getTreatmentEffectQuantiles <- function (tTestStatistics) {
-    effectQuantiles <- data.frame(
-      lowerTreatmentEffect = as.numeric(tTestStatistics$conf.int[2]),
-      meanTreatmentEffect  = as.numeric(tTestStatistics$estimate),
-      upperTreatmentEffect = as.numeric(tTestStatistics$conf.int[1])
-    )  
-    return(effectQuantiles)
-  }
-  
-  treatmentEffectQuantiles <- getTreatmentEffectQuantiles(dependentSampleTtestStatistics)
+  ## Computing t-test Statistics for the Confidence Band and Mean Difference  
+  tTest <- computeTtest (data, tTestConfidenceLevel)
+  EffectQuantiles <- getEffectQuantiles(tTest)
   
   CIBandText           <- paste(100 * tTestConfidenceLevel, "% CI", sep = "")
   meanDifferenceRound  <- round(meanTreatmentEffect, digits = 2)
