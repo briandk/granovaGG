@@ -1,3 +1,4 @@
 /plots/testplots.pdf
 /R/.Rhistory
 .DS_Store
+*.Rhistory
