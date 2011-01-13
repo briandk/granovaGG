@@ -4,7 +4,7 @@ granova.ds.bd <- function( data                      = null,
                            southwestPlotOffsetFactor = 0.4,
                            northeastPlotOffsetFactor = 0.5,
                            plotTitle                 = "Dependent Sample Scatterplot",
-                           tTestConfidenceLevel      = 0.95,
+                           conf.level                = 0.95,
                            produceBlankPlotObject    = TRUE
                  ) 
 
@@ -14,11 +14,11 @@ granova.ds.bd <- function( data                      = null,
   ## rest of your code can be read from beginning to end.
 
   ## Computing t-test Statistics for the Confidence Band and Mean Difference
-  computeTtest <- function (data, confidenceLevel) {
+  getTtest <- function (data, conf.level) {
     return (   t.test(data[, 1], 
                       data[, 2], 
                       paired     = TRUE,
-                      conf.level = confidenceLevel
+                      conf.level = conf.level
                )
     )
   }
@@ -32,69 +32,72 @@ granova.ds.bd <- function( data                      = null,
     return(effectQuantiles)
   }
 
-  appendDataPointShadowsToDataFrame <- function () {
-    dd <- data.frame(dd, computeDataPointShadows())
-    return (dd)
-  }
-
-  computeDataPointShadows <- function () {
-    xShadow <- ((-dd$effect + crossbowIntercept) / 2) + shadowOffset
-    yShadow <- xShadow + dd$effect
+  getShadows <- function (dsp) {
+    xShadow <- ( (-dsp$effect + dsp$graphic$crossbowIntercept) / 2) + dsp$graphic$shadowOffset
+    yShadow <- xShadow + dsp$effect
     return (data.frame(xShadow, yShadow))
   }
 
-  computeDataPointTrails <- function () {
-    ddtrails <- data.frame( xTrailStart = dd$xvals, 
-                            yTrailStart = dd$yvals,
-                            xTrailEnd   = dd$xShadow, 
-                            yTrailEnd   = dd$yShadow
+  getTrails <- function (dsp) {
+    ddtrails <- data.frame( xTrailStart = getXs(dsp$data), 
+                            yTrailStart = getYs(dsp$data),
+                            xTrailEnd   = getXs(dsp$shadow), 
+                            yTrailEnd   = getYs(dsp$shadow)
                 )
     return (ddtrails)
   }
 
-  appendDataPointTrailsToDataFrame <- function () {
-    dd <- data.frame(dd, computeDataPointTrails())
-    return (dd)
+
+  getXs <- function (data) {
+    return( data[, 1])
   }
 
-
-
-
-  dd <- data.frame( xvals  = data[ , 1], 
-                    yvals  = data[ , 2],
-                    effect = data[ , 2]  - data[ , 1]
-        )  
-
+  getYs <- function (data) {
+    return( data[, 2])
+  }
 
   # We're going to build the plot in several pieces. First, we compute
   # statistics on the data passed in, and use them to define square graphical
-  # bounds for the viewing window. Then, we use grammar to build the plot layer
+  # bounds for the viewing window. 
+    
+  dsp <- list( data = data )
+
+  dsp$effect <- getYs(dsp$data) - getXs(dsp$data)
+
+  
+  dsp$ttest <- getTtest(dsp$data, conf.level)
+  
+  dsp$stats$meanTreatmentEffect  <- dsp$ttest$estimate
+  dsp$stats$upperTreatmentEffect <- dsp$ttest$conf.int[1]
+  dsp$stats$lowerTreatmentEffect <- dsp$ttest$conf.int[2]
+  dsp$stats$meanDifferenceRound  <- round(dsp$stats$meanTreatmentEffect, digits = 2)
+
+  CIBandText           <- paste(100 * conf.level, "% CI", sep = "")
+  meanDifferenceText   <- paste("Mean Diff. =", dsp$stats$meanDifferenceRound)
+
+  ## Setting the graphical bounds
+  dsp$graphic$aggregateDataRange  <- c(range(getXs(dsp$data)), range(getYs(dsp$data)))
+  dsp$graphic$extrema             <- c(max(dsp$graphic$aggregateDataRange), min(dsp$graphic$aggregateDataRange))    
+  dsp$graphic$squareDataRange     <- max(dsp$graphic$extrema) - min(dsp$graphic$extrema)
+  
+  dsp$graphic$lowerGraphicalBound <- min(dsp$graphic$extrema) - (1.2 * northeastPlotOffsetFactor * dsp$graphic$squareDataRange)
+  dsp$graphic$upperGraphicalBound <- max(dsp$graphic$extrema) + (0.5 * southwestPlotOffsetFactor * dsp$graphic$squareDataRange)
+  dsp$graphic$graphicalBounds     <- c(dsp$graphic$lowerGraphicalBound, dsp$graphic$upperGraphicalBound)
+
+  dsp$graphic$crossbowIntercept   <- mean(dsp$graphic$graphicalBounds) + min(dsp$graphic$graphicalBounds)
+  dsp$graphic$shadowOffset        <- dsp$graphic$squareDataRange / 50
+  
+  dsp$shadows <- getShadows(dsp)
+  dsp$trails  <- getTrails(dsp)
+  print( str(dsp) )
+}
+ 
+ xxxx <- function() { 
+  
+  # Now, we use grammar to build the plot layer
   # by layer. Because of the way ggplot2 creates plot objects, layers can be
   # added to a plot p simply by calling "p <- p + newLayer", so for now you'll
   # see that structure of code throughout.
-    
-  ## Computing t-test Statistics for the Confidence Band and Mean Difference  
-  tTest <- computeTtest (data, tTestConfidenceLevel)
-  EffectQuantiles <- getEffectQuantiles(tTest)
-  
-  CIBandText           <- paste(100 * tTestConfidenceLevel, "% CI", sep = "")
-  meanDifferenceRound  <- round(meanTreatmentEffect, digits = 2)
-  meanDifferenceText   <- paste("Mean Diff. =", meanDifferenceRound)
-
-  ## Setting the graphical bounds
-  aggregateDataRange  <- c(range(dd$xvals), range(dd$yvals))
-  extrema             <- c(max(aggregateDataRange), min(aggregateDataRange))    
-  squareDataRange     <- max(extrema) - min(extrema)
-  
-  lowerGraphicalBound <- min(extrema) - (1.2 * northeastPlotOffsetFactor * squareDataRange)
-  upperGraphicalBound <- max(extrema) + (0.5 * southwestPlotOffsetFactor * squareDataRange)
-  graphicalBounds     <- c(lowerGraphicalBound, upperGraphicalBound)
-
-  crossbowIntercept   <- mean(graphicalBounds) + min(graphicalBounds)
-  shadowOffset        <- squareDataRange / 50
-  
-  dd <- appendDataPointShadowsToDataFrame()
-  dd <- appendDataPointTrailsToDataFrame()
   
   ## Setting up the ggplot object 
   p <- ggplot( aes(x = xvals, y = yvals), data = dd )
@@ -112,7 +115,7 @@ granova.ds.bd <- function( data                      = null,
                      treatmentSlope     = 1, 
                      Legend             = factor(meanDifferenceText)
                    ) 
-  
+
   p <- p + geom_abline(
              aes(
                intercept = treatmentIntercept, 
