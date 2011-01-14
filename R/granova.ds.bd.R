@@ -135,16 +135,7 @@ granova.ds.bd <- function( data                      = null,
             data = dsp$data
           )
   }
-  
-  p <- createGgplot(dsp)
-  ## Adding the treatment effect line. 
-  # Here, I'm using a hack by specifying that treatmentLine is
-  # built from a dataframe that contains the variable "Legend". The Confidence Interval will also be
-  # built from a dataframe containing the variable "Legend", so that the title of the resulting
-  # legend ends up being "Legend." The strategy here is to create self-contained dataframes (like
-  # treatmentLine) for each object that should appear in the legend. The dataframes themselves hold
-  # information for things like slopes and intercepts, etc. 
-    
+      
   treatmentLine <- function (dsp) {
     return( geom_abline(
                      aes_string(
@@ -157,10 +148,18 @@ granova.ds.bd <- function( data                      = null,
     )
   }
   
+  rawData <- function (dsp) {
+    rawData <- geom_point(size = I(3))
+    return (rawData)
+  }
+  
+  p <- createGgplot(dsp)
+  
   p <- p + treatmentLine(dsp)
+  
+  p <- p + rawData(dsp)
 
-  ## Plotting the raw data
-  p <- p + geom_point(size = I(3)) + xlim(dsp$graphic$graphicalBounds) + ylim(dsp$graphic$graphicalBounds)
+  # p <- p + geom_point(size = I(3)) + xlim(dsp$graphic$graphicalBounds) + ylim(dsp$graphic$graphicalBounds)
 
   ## Adding the y=x line
   p <- p + geom_abline(slope = 1, intercept = 0)
