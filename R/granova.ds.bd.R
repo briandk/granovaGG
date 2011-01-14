@@ -57,6 +57,12 @@ granova.ds.bd <- function( data                      = null,
     return( data[, 2])
   }
 
+  getExtrema <- function(dsp) {
+    aggregateDataRange  = c(range(getXs(dsp$data)), range(getYs(dsp$data))),
+    extrema             = c(max(aggregateDataRange), min(aggregateDataRange)),    
+    return (extrema)
+  }
+
   getGraphicsParams <- function(dsp) {
     graphicsParams <- list(
       aggregateDataRange  = c(range(getXs(dsp$data)), range(getYs(dsp$data))),
