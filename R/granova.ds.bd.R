@@ -62,10 +62,10 @@ granova.ds.bd <- function( data                      = null,
     return (extrema)
   }
   
-  getGraphicalBounds <- function(dsp) {
+  getGraphicalBounds <- function(extrema) {
     graphicalBounds <- c(
-      lowerGraphicalBound = min(dsp$extrema) - (1.2 * northeastPlotOffsetFactor * (max(dsp$extrema) - min(dsp$extrema))),
-      upperGraphicalBound = max(dsp$extrema) + (0.5 * southwestPlotOffsetFactor * (max(dsp$extrema) - min(dsp$extrema)))
+      lowerGraphicalBound = min(extrema) - (1.2 * northeastPlotOffsetFactor * (max(extrema) - min(extrema))),
+      upperGraphicalBound = max(extrema) + (0.5 * southwestPlotOffsetFactor * (max(extrema) - min(extrema)))
     )
     return(graphicalBounds)
   }
@@ -109,7 +109,7 @@ granova.ds.bd <- function( data                      = null,
   ## Setting the graphical bounds
   
   dsp$graphic$extrema  <- getExtrema(dsp)
-  dsp$graphic$bounds   <- getGraphicalBounds(dsp)
+  dsp$graphic$bounds   <- getGraphicalBounds(dsp$graphic$extrema)
   dsp$graphic$crossbow <- getCrossbow(dsp)
   
   dsp$graphic <- getGraphicsParams(dsp)
