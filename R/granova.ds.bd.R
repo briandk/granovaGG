@@ -110,6 +110,8 @@ granova.ds.bd <- function( data                      = null,
   dsp$ttest <- getTtest(dsp$data, conf.level)
   
   dsp$stats <- getEffectQuantiles(dsp$ttest)
+  
+  dsp$text  <- getGraphicsText(dsp)
 
   CIBandText           <- paste(100 * conf.level, "% CI", sep = "")
   meanDifferenceText   <- paste("Mean Diff. =", dsp$stats$meanDifferenceRound)
