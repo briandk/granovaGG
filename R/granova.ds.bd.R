@@ -92,8 +92,8 @@ granova.ds.bd <- function( data                      = null,
     .meanDifferenceText  <- paste("Mean Diff. =", .meanDifferenceRound)
     
     return ( list(
-      meanDifferenceRound = .meanDifferenceRound
-      CIBandText          = .CIBandText         
+      meanDifferenceRound = .meanDifferenceRound,
+      CIBandText          = .CIBandText,         
       meanDifferenceText  = .meanDifferenceText 
       )
     )  
