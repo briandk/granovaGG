@@ -62,6 +62,14 @@ granova.ds.bd <- function( data                      = null,
     extrema             = c(max(aggregateDataRange), min(aggregateDataRange)),    
     return (extrema)
   }
+  
+  getGraphicalBounds <- function(dsp) {
+    graphicalBounds <- c(
+      lowerGraphicalBound = min(dsp$extrema) - (1.2 * northeastPlotOffsetFactor * (max(dsp$extrema) - min(dsp$extrema)))
+      upperGraphicalBound = max(dsp$extrema) + (0.5 * southwestPlotOffsetFactor * (max(dsp$extrema) - min(dsp$extrema)))
+    )
+    return(graphicalBounds)
+  }
 
   getGraphicsParams <- function(dsp) {
     graphicsParams <- list(
