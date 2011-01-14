@@ -79,25 +79,25 @@ granova.ds.bd <- function( data                      = null,
   }
 
   getGraphicsParams <- function(dsp) {
-    aggregateDataRange  <- c(range(getXs(dsp$data)), range(getYs(dsp$data)))
-    extrema             <- c(max(aggregateDataRange), min(aggregateDataRange))    
-    squareDataRange     <- max(extrema) - min(extrema)
-    lowerGraphicalBound <- min(extrema) - (1.2 * northeastPlotOffsetFactor * squareDataRange)
-    upperGraphicalBound <- max(extrema) + (0.5 * southwestPlotOffsetFactor * squareDataRange)
-    graphicalBounds     <- c(lowerGraphicalBound, upperGraphicalBound)
-    crossbowIntercept   <- mean(graphicalBounds) + min(graphicalBounds)
-    shadowOffset        <- squareDataRange / 50
+    .aggregateDataRange  <- c(range(getXs(dsp$data)), range(getYs(dsp$data)))
+    .extrema             <- c(max(.aggregateDataRange), min(.aggregateDataRange))    
+    .squareDataRange     <- max(.extrema) - min(.extrema)
+    .lowerGraphicalBound <- min(.extrema) - (1.2 * northeastPlotOffsetFactor * .squareDataRange)
+    .upperGraphicalBound <- max(.extrema) + (0.5 * southwestPlotOffsetFactor * .squareDataRange)
+    .graphicalBounds     <- c(.lowerGraphicalBound, .upperGraphicalBound)
+    .crossbowIntercept   <- mean(.graphicalBounds) + min(.graphicalBounds)
+    .shadowOffset        <- .squareDataRange / 50
     
-    return list(
-      aggregateDataRange,
-      extrema,
-      squareDataRange,    
-      lowerGraphicalBound,
-      upperGraphicalBound,
-      graphicalBounds,  
-      crossbowIntercept, 
-      shadowOffset      
-    )
+    return ( list(
+      aggregateDataRange  = .aggregateDataRange,
+      extrema             = .extrema,
+      squareDataRange     = .squareDataRange,    
+      lowerGraphicalBound = .lowerGraphicalBound,
+      upperGraphicalBound = .upperGraphicalBound,
+      graphicalBounds     = .graphicalBounds,  
+      crossbowIntercept   = .crossbowIntercept, 
+      shadowOffset        = .shadowOffset      
+    ) )
   }
 
   # We're going to build the plot in several pieces. First, we compute
@@ -116,12 +116,12 @@ granova.ds.bd <- function( data                      = null,
   meanDifferenceText   <- paste("Mean Diff. =", dsp$stats$meanDifferenceRound)
 
   ## Setting the graphical bounds
-  
+  dsp$graphic <- getGraphicsParams(dsp)
+
   dsp$graphic$extrema  <- getExtrema(dsp)
   dsp$graphic$bounds   <- getGraphicalBounds(dsp$graphic$extrema)
   dsp$graphic$crossbow <- getCrossbow(dsp)
   
-  dsp$graphic <- getGraphicsParams(dsp)
     
   dsp$shadows <- getShadows(dsp)
   dsp$trails  <- getTrails(dsp)
