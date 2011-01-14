@@ -117,12 +117,9 @@ granova.ds.bd <- function( data                      = null,
   dsp$graphic <- getGraphicsParams(dsp)
     
   dsp$shadows <- getShadows(dsp)
-  dsp$trails  <- getTrails(dsp)
-  print( str(dsp) )
-
- 
-
   
+  dsp$trails  <- getTrails(dsp)
+
   # Now, we use grammar to build the plot layer
   # by layer. Because of the way ggplot2 creates plot objects, layers can be
   # added to a plot p simply by calling "p <- p + newLayer", so for now you'll
@@ -148,7 +145,6 @@ granova.ds.bd <- function( data                      = null,
   # information for things like slopes and intercepts, etc. 
   
   layerTreatmentLine <- function (plot) {
-    
     plot <- plot + geom_abline(
                      aes(
                        intercept = dsp$stats$meanTreatmentEffect,
