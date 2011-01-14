@@ -185,17 +185,19 @@ granova.ds.bd <- function( data                      = null,
              size  = I(3/2),
              alpha = I(2/3)
            )  
-}
 
-xxx <- function() {
   ## Adding the perpendicular crossbow
   p <- p + geom_abline(
               aes_string(
-                intercept = I(dsp$crossbow['intercept']),
+                intercept = I(dsp$graphic$crossbow['intercept']),
                 slope     = -1                
               ),
               alpha = I(1/2)
             )
+
+}
+
+xxx <- function() {
 
   ## Adding the Confidence band    
   confidenceBand <- data.frame(
