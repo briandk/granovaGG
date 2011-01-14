@@ -61,15 +61,7 @@ granova.ds.bd <- function( data                      = null,
     extrema             = c(max(aggregateDataRange), min(aggregateDataRange))    
     return (extrema)
   }
-  
-  getGraphicalBounds <- function(extrema) {
-    graphicalBounds <- c(
-      lowerGraphicalBound = min(extrema) - (1.2 * northeastPlotOffsetFactor * (max(extrema) - min(extrema))),
-      upperGraphicalBound = max(extrema) + (0.5 * southwestPlotOffsetFactor * (max(extrema) - min(extrema)))
-    )
-    return(graphicalBounds)
-  }
-  
+
   getCrossbow <- function(bounds) {
     crossbow <- data.frame(
       intercept = mean(bounds) + min(bounds),
