@@ -71,7 +71,7 @@ granova.ds.bd <- function( data                      = null,
     .lowerGraphicalBound <- min(.extrema) - (1.2 * northeastPlotOffsetFactor * .squareDataRange)
     .upperGraphicalBound <- max(.extrema) + (0.5 * southwestPlotOffsetFactor * .squareDataRange)
     .graphicalBounds     <- c(.lowerGraphicalBound, .upperGraphicalBound)
-    .crossbowIntercept   <- mean(.graphicalBounds) + min(.graphicalBounds)
+    .crossbow            <- getCrossbow(.graphicalBounds)
     .shadowOffset        <- .squareDataRange / 50
     
     return ( list(
@@ -81,7 +81,7 @@ granova.ds.bd <- function( data                      = null,
       lowerGraphicalBound = .lowerGraphicalBound,
       upperGraphicalBound = .upperGraphicalBound,
       graphicalBounds     = .graphicalBounds,  
-      crossbowIntercept   = .crossbowIntercept, 
+      crossbow            = .crossbow, 
       shadowOffset        = .shadowOffset      
     ) )
   }
