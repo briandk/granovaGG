@@ -173,7 +173,20 @@ granova.ds.bd <- function( data                      = null,
       )  
     )
   }
-
+  
+  meanMarks <- function (dsp) {
+    meanMarks <- geom_rug(
+      aes_string(
+        x = mean(dsp$data[ , 1]),
+        y = mean(dsp$data[ , 2])
+      ),
+      data  = dsp$data,
+      color = "red",
+      size  = I(3/2),
+      alpha = I(2/3)
+    )
+  }
+  
   p <- createGgplot(dsp)
   
   p <- p + treatmentLine(dsp)
@@ -186,25 +199,9 @@ granova.ds.bd <- function( data                      = null,
   
   p <- p + rugPlot(dsp)
   
-xxx <- function() {
-
-  ## Adding a rugplot
-  p <- p + geom_rug(
-             alpha = I(2/3),
-             color = "steelblue"
-           )
+  p <- p + meanMarks(dsp)
   
-  ## Adding mean marks
-  p <- p + geom_rug(
-             aes(
-               x = mean( xvals ),
-               y = mean( yvals ) 
-             ),
-             data  = dsp$data,
-             color = "red",
-             size  = I(3/2),
-             alpha = I(2/3)
-           )  
+xxx <- function() {
 
   ## Adding the perpendicular crossbow
   p <- p + geom_abline(
