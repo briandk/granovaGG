@@ -79,15 +79,24 @@ granova.ds.bd <- function( data                      = null,
   }
 
   getGraphicsParams <- function(dsp) {
-    graphicsParams <- list(
-      aggregateDataRange  = c(range(getXs(dsp$data)), range(getYs(dsp$data))),
-      extrema             = c(max(aggregateDataRange), min(aggregateDataRange)),    
-      squareDataRange     = max(extrema) - min(extrema),
-      lowerGraphicalBound = min(extrema) - (1.2 * northeastPlotOffsetFactor * squareDataRange),
-      upperGraphicalBound = max(extrema) + (0.5 * southwestPlotOffsetFactor * squareDataRange),
-      graphicalBounds     = c(lowerGraphicalBound, upperGraphicalBound),
-      crossbowIntercept   = mean(graphicalBounds) + min(graphicalBounds),
-      shadowOffset        = squareDataRange / 50
+    aggregateDataRange  <- c(range(getXs(dsp$data)), range(getYs(dsp$data))),
+    extrema             <- c(max(aggregateDataRange), min(aggregateDataRange)),    
+    squareDataRange     <- max(extrema) - min(extrema),
+    lowerGraphicalBound <- min(extrema) - (1.2 * northeastPlotOffsetFactor * squareDataRange),
+    upperGraphicalBound <- max(extrema) + (0.5 * southwestPlotOffsetFactor * squareDataRange),
+    graphicalBounds     <- c(lowerGraphicalBound, upperGraphicalBound),
+    crossbowIntercept   <- mean(graphicalBounds) + min(graphicalBounds),
+    shadowOffset        <- squareDataRange / 50
+    
+    return list(
+      aggregateDataRange,
+      extrema,
+      squareDataRange,    
+      lowerGraphicalBound,
+      upperGraphicalBound,
+      graphicalBounds,  
+      crossbowIntercept, 
+      shadowOffset      
     )
   }
 
