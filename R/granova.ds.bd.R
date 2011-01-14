@@ -129,7 +129,13 @@ granova.ds.bd <- function( data                      = null,
   # see that structure of code throughout.
   
   createGgplot <- function(dsp) {
-    p <- ggplot( aes(x = getXs(dsp$data), y = getYs(dsp$data)), data = dsp$data )
+    p <- ggplot( 
+           aes_string(
+             x = names(dsp$data)[1], 
+             y = names(dsp$data)[2]
+            ),
+            data = dsp$data
+          )
   }
   
   p <- createGgplot(dsp)
@@ -142,14 +148,15 @@ granova.ds.bd <- function( data                      = null,
   # information for things like slopes and intercepts, etc. 
   
   layerTreatmentLine <- function (plot) {
+    
     plot <- plot + geom_abline(
                      aes(
                        intercept = dsp$stats$meanTreatmentEffect,
                        slope     = 1,
-                       color     = factor(dsp$text$meanDifferenceText)
+                       color     = factor("Mean Diff. = ")
                      ),
                      alpha = I(1/2),
-                     size  = I(1)
+                     size  = I(1),
     )
   }
   
