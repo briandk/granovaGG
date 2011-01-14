@@ -103,6 +103,7 @@ granova.ds.bd <- function( data                      = null,
   # statistics on the data passed in, and use them to define square graphical
   # bounds for the viewing window. 
     
+  colnames(data) <- c("xvals", "yvals")
   dsp <- list( data = data )
 
   dsp$effect <- getYs(dsp$data) - getXs(dsp$data)
@@ -176,19 +177,21 @@ granova.ds.bd <- function( data                      = null,
   ## Adding mean marks
   p <- p + geom_rug(
              aes_string(
-               x = mean( getXs(dsp$data) ),
-               y = mean( getYs(dsp$data) ) 
+               x = mean( xvals ),
+               y = mean( yvals ) 
              ),
              data  = dsp$data,
              color = "red",
              size  = I(3/2),
              alpha = I(2/3)
            )  
-           
+}
+
+xxx <- function() {
   ## Adding the perpendicular crossbow
   p <- p + geom_abline(
               aes_string(
-                intercept = I(crossbowIntercept),
+                intercept = I(dsp$crossbow['intercept']),
                 slope     = -1                
               ),
               alpha = I(1/2)
