@@ -57,6 +57,19 @@ granova.ds.bd <- function( data                      = null,
     return( data[, 2])
   }
 
+  getGraphicsParams <- function(dsp) {
+    graphicsParams <- list(
+      aggregateDataRange  = c(range(getXs(dsp$data)), range(getYs(dsp$data))),
+      extrema             = c(max(aggregateDataRange), min(aggregateDataRange)),    
+      squareDataRange     = max(extrema) - min(extrema),
+      lowerGraphicalBound = min(extrema) - (1.2 * northeastPlotOffsetFactor * squareDataRange),
+      upperGraphicalBound = max(extrema) + (0.5 * southwestPlotOffsetFactor * squareDataRange),
+      graphicalBounds     = c(lowerGraphicalBound, upperGraphicalBound),
+      crossbowIntercept   = mean(graphicalBounds) + min(graphicalBounds),
+      shadowOffset        = squareDataRange / 50
+    )
+  }
+
   # We're going to build the plot in several pieces. First, we compute
   # statistics on the data passed in, and use them to define square graphical
   # bounds for the viewing window. 
@@ -73,17 +86,9 @@ granova.ds.bd <- function( data                      = null,
   meanDifferenceText   <- paste("Mean Diff. =", dsp$stats$meanDifferenceRound)
 
   ## Setting the graphical bounds
-  dsp$graphic$aggregateDataRange  <- c(range(getXs(dsp$data)), range(getYs(dsp$data)))
-  dsp$graphic$extrema             <- c(max(dsp$graphic$aggregateDataRange), min(dsp$graphic$aggregateDataRange))    
-  dsp$graphic$squareDataRange     <- max(dsp$graphic$extrema) - min(dsp$graphic$extrema)
   
-  dsp$graphic$lowerGraphicalBound <- min(dsp$graphic$extrema) - (1.2 * northeastPlotOffsetFactor * dsp$graphic$squareDataRange)
-  dsp$graphic$upperGraphicalBound <- max(dsp$graphic$extrema) + (0.5 * southwestPlotOffsetFactor * dsp$graphic$squareDataRange)
-  dsp$graphic$graphicalBounds     <- c(dsp$graphic$lowerGraphicalBound, dsp$graphic$upperGraphicalBound)
-
-  dsp$graphic$crossbowIntercept   <- mean(dsp$graphic$graphicalBounds) + min(dsp$graphic$graphicalBounds)
-  dsp$graphic$shadowOffset        <- dsp$graphic$squareDataRange / 50
-  
+  dsp$graphic <- getGraphicsParams(dsp)
+    
   dsp$shadows <- getShadows(dsp)
   dsp$trails  <- getTrails(dsp)
   print( str(dsp) )
