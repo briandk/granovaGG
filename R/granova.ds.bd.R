@@ -70,9 +70,9 @@ granova.ds.bd <- function( data                      = null,
     return(graphicalBounds)
   }
   
-  getCrossbow <- function(dsp) {
+  getCrossbow <- function(bounds) {
     crossbow <- data.frame(
-      intercept = mean(dsp$graphic$graphicalBounds) + min(dsp$graphic$graphicalBounds),
+      intercept = mean(bounds) + min(bounds),
       slope     = -1
     )
     return (crossbow)
@@ -120,7 +120,7 @@ granova.ds.bd <- function( data                      = null,
 
   dsp$graphic$extrema  <- getExtrema(dsp)
   dsp$graphic$bounds   <- getGraphicalBounds(dsp$graphic$extrema)
-  dsp$graphic$crossbow <- getCrossbow(dsp)
+  dsp$graphic$crossbow <- getCrossbow(dsp$graphic$bounds)
   
     
   dsp$shadows <- getShadows(dsp)
