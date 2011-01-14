@@ -175,11 +175,11 @@ granova.ds.bd <- function( data                      = null,
   
   ## Adding mean marks
   p <- p + geom_rug(
-             aes(
-               x = mean(xvals),
-               y = mean(yvals) 
+             aes_string(
+               x = mean( getXs(dsp$data) ),
+               y = mean( getYs(dsp$data) ) 
              ),
-             data  = dd,
+             data  = dsp$data,
              color = "red",
              size  = I(3/2),
              alpha = I(2/3)
