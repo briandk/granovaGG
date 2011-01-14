@@ -119,18 +119,20 @@ granova.ds.bd <- function( data                      = null,
   dsp$shadows <- getShadows(dsp)
   dsp$trails  <- getTrails(dsp)
   print( str(dsp) )
-}
+
  
- xxxx <- function() { 
+
   
   # Now, we use grammar to build the plot layer
   # by layer. Because of the way ggplot2 creates plot objects, layers can be
   # added to a plot p simply by calling "p <- p + newLayer", so for now you'll
   # see that structure of code throughout.
   
-  ## Setting up the ggplot object 
-  p <- ggplot( aes(x = xvals, y = yvals), data = dd )
+  createGgplot <- function(dsp) {
+    p <- ggplot( aes(x = getXs(dsp$data), y = getYs(dsp$data)), data = dsp$data )
+  }
   
+  p <- createGgplot(dsp)
   ## Adding the treatment effect line. 
   # Here, I'm using a hack by specifying that treatmentLine is
   # built from a dataframe that contains the variable "Legend". The Confidence Interval will also be
