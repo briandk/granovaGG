@@ -24,10 +24,11 @@ granova.ds.bd <- function( data                      = null,
   }
 
   getEffectQuantiles <- function (tTest) {
-    effectQuantiles <- data.frame(
+    effectQuantiles <- list(
       lowerTreatmentEffect = as.numeric(tTest$conf.int[2]),
       meanTreatmentEffect  = as.numeric(tTest$estimate),
       upperTreatmentEffect = as.numeric(tTest$conf.int[1])
+      meanDifferenceRound  = round(meanTreatmentEffect, digits = 2)
     )  
     return(effectQuantiles)
   }
@@ -63,14 +64,10 @@ granova.ds.bd <- function( data                      = null,
   dsp <- list( data = data )
 
   dsp$effect <- getYs(dsp$data) - getXs(dsp$data)
-
   
   dsp$ttest <- getTtest(dsp$data, conf.level)
   
-  dsp$stats$meanTreatmentEffect  <- dsp$ttest$estimate
-  dsp$stats$upperTreatmentEffect <- dsp$ttest$conf.int[1]
-  dsp$stats$lowerTreatmentEffect <- dsp$ttest$conf.int[2]
-  dsp$stats$meanDifferenceRound  <- round(dsp$stats$meanTreatmentEffect, digits = 2)
+  dsp$stats <- getEffectQuantiles(dsp$ttest)
 
   CIBandText           <- paste(100 * conf.level, "% CI", sep = "")
   meanDifferenceText   <- paste("Mean Diff. =", dsp$stats$meanDifferenceRound)
