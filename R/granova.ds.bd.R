@@ -27,7 +27,7 @@ granova.ds.bd <- function( data                      = null,
     effectQuantiles <- list(
       lowerTreatmentEffect = as.numeric(tTest$conf.int[2]),
       meanTreatmentEffect  = as.numeric(tTest$estimate),
-      upperTreatmentEffect = as.numeric(tTest$conf.int[1])
+      upperTreatmentEffect = as.numeric(tTest$conf.int[1]),
       meanDifferenceRound  = round(meanTreatmentEffect, digits = 2)
     )  
     return(effectQuantiles)
