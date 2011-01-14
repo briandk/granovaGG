@@ -157,19 +157,22 @@ granova.ds.bd <- function( data                      = null,
     return (geom_abline(slope = 1, intercept = 0))
   }
   
+  scaleX <- function (dsp) {
+    return (scale_x_continuous(limits = dsp$graphic$graphicalBounds))
+  }
   
+  scaleY <- function(dsp)
+    return (scale_y_continuous(limits = dsp$graphic$graphicalBounds))
+    
   p <- createGgplot(dsp)
   
   p <- p + treatmentLine(dsp)
   
   p <- p + rawData(dsp)
-
-  # p <- p + geom_point(size = I(3)) + xlim(dsp$graphic$graphicalBounds) + ylim(dsp$graphic$graphicalBounds)
   
   p <- p + identityLine()
 
-  ## Forcing coordinates to be equal
-  p <- p + coord_equal()
+  p <- p + scaleX(dsp) + scaleY(dsp)
 
   ## Adding a rugplot
   p <- p + geom_rug(
