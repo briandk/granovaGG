@@ -145,19 +145,19 @@ granova.ds.bd <- function( data                      = null,
   # treatmentLine) for each object that should appear in the legend. The dataframes themselves hold
   # information for things like slopes and intercepts, etc. 
     
-  layerTreatmentLine <- function (plot) {
-    plot <- plot + geom_abline(
-                     aes(
+  layerTreatmentLine <- function (dsp) {
+    return( geom_abline(
+                     aes_string(
                        intercept = dsp$stats$meanTreatmentEffect,
-                       slope     = 1,
-                       color     = factor("Mean Diff. = ")
+                       slope     = 1
                      ),
                      alpha = I(1/2),
                      size  = I(1),
+            )
     )
   }
   
-  p <- layerTreatmentLine(p)
+  p <- p + layerTreatmentLine(dsp)
 
   ## Plotting the raw data
   p <- p + geom_point(size = I(3)) + xlim(dsp$graphic$graphicalBounds) + ylim(dsp$graphic$graphicalBounds)
@@ -176,7 +176,7 @@ granova.ds.bd <- function( data                      = null,
   
   ## Adding mean marks
   p <- p + geom_rug(
-             aes_string(
+             aes(
                x = mean( xvals ),
                y = mean( yvals ) 
              ),
