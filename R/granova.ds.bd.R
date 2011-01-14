@@ -143,7 +143,7 @@ granova.ds.bd <- function( data                      = null,
   # legend ends up being "Legend." The strategy here is to create self-contained dataframes (like
   # treatmentLine) for each object that should appear in the legend. The dataframes themselves hold
   # information for things like slopes and intercepts, etc. 
-  
+    
   layerTreatmentLine <- function (plot) {
     plot <- plot + geom_abline(
                      aes(
@@ -159,7 +159,7 @@ granova.ds.bd <- function( data                      = null,
   p <- layerTreatmentLine(p)
 
   ## Plotting the raw data
-  p <- p + geom_point(size = I(3)) + xlim(graphicalBounds) + ylim(graphicalBounds)
+  p <- p + geom_point(size = I(3)) + xlim(dsp$graphic$graphicalBounds) + ylim(dsp$graphic$graphicalBounds)
 
   ## Adding the y=x line
   p <- p + geom_abline(slope = 1, intercept = 0)
