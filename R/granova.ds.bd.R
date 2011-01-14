@@ -141,6 +141,20 @@ granova.ds.bd <- function( data                      = null,
   # treatmentLine) for each object that should appear in the legend. The dataframes themselves hold
   # information for things like slopes and intercepts, etc. 
   
+  layerTreatmentLine <- function (plot) {
+    plot <- plot + geom_abline(
+                     aes(
+                       intercept = dsp$stats$meanTreatmentEffect,
+                       slope     = 1,
+                       color     = factor(dsp$text$meanDifferenceText)
+                     ),
+                     alpha = I(1/2),
+                     size  = I(1)
+    )
+  }
+  
+  p <- layerTreatmentLine(p)
+  
   treatmentLine <- data.frame( 
                      treatmentIntercept = meanTreatmentEffect, 
                      treatmentSlope     = 1, 
