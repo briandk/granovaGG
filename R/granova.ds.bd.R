@@ -153,6 +153,11 @@ granova.ds.bd <- function( data                      = null,
     return (rawData)
   }
   
+  identityLine <- function() {
+    return (geom_abline(slope = 1, intercept = 0))
+  }
+  
+  
   p <- createGgplot(dsp)
   
   p <- p + treatmentLine(dsp)
@@ -160,9 +165,8 @@ granova.ds.bd <- function( data                      = null,
   p <- p + rawData(dsp)
 
   # p <- p + geom_point(size = I(3)) + xlim(dsp$graphic$graphicalBounds) + ylim(dsp$graphic$graphicalBounds)
-
-  ## Adding the y=x line
-  p <- p + geom_abline(slope = 1, intercept = 0)
+  
+  p <- p + identityLine()
 
   ## Forcing coordinates to be equal
   p <- p + coord_equal()
