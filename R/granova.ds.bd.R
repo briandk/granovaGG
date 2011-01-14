@@ -157,25 +157,7 @@ granova.ds.bd <- function( data                      = null,
   }
   
   p <- layerTreatmentLine(p)
-  
-  treatmentLine <- data.frame( 
-                     treatmentIntercept = meanTreatmentEffect, 
-                     treatmentSlope     = 1, 
-                     Legend             = factor(meanDifferenceText)
-                   ) 
 
-  p <- p + geom_abline(
-             aes(
-               intercept = treatmentIntercept, 
-               slope     = treatmentSlope, 
-               color     = Legend, 
-             ),
-             alpha = I(1/2), 
-             size  = I(1),
-             data  = treatmentLine
-           )
-
-  
   ## Plotting the raw data
   p <- p + geom_point(size = I(3)) + xlim(graphicalBounds) + ylim(graphicalBounds)
 
