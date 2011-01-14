@@ -109,6 +109,10 @@ granova.ds.bd <- function( data                      = null,
 
   ## Setting the graphical bounds
   
+  dsp$graphic$extrema  <- getExtrema(dsp)
+  dsp$graphic$bounds   <- getGraphicalBounds(dsp)
+  dsp$graphic$crossbow <- getCrossbow(dsp)
+  
   dsp$graphic <- getGraphicsParams(dsp)
     
   dsp$shadows <- getShadows(dsp)
