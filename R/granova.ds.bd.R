@@ -33,7 +33,7 @@ granova.ds.bd <- function( data                      = null,
   }
 
   getShadows <- function (dsp) {
-    xShadow <- ( (-dsp$effect + dsp$graphic$crossbowIntercept) / 2) + dsp$graphic$shadowOffset
+    xShadow <- ( (-dsp$effect + dsp$graphic$crossbow$intercept) / 2) + dsp$graphic$shadowOffset
     yShadow <- xShadow + dsp$effect
     return (data.frame(xShadow, yShadow))
   }
@@ -112,9 +112,6 @@ granova.ds.bd <- function( data                      = null,
   dsp$stats <- getEffectQuantiles(dsp$ttest)
   
   dsp$text  <- getGraphicsText(dsp)
-
-  CIBandText           <- paste(100 * conf.level, "% CI", sep = "")
-  meanDifferenceText   <- paste("Mean Diff. =", dsp$stats$meanDifferenceRound)
 
   ## Setting the graphical bounds
   dsp$graphic <- getGraphicsParams(dsp)
