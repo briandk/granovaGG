@@ -26,9 +26,8 @@ granova.ds.bd <- function( data                      = null,
   getEffectQuantiles <- function (tTest) {
     effectQuantiles <- list(
       lowerTreatmentEffect = as.numeric(tTest$conf.int[2]),
-      meanTreatmentEffect  = as.numeric(tTest$estimate),
-      upperTreatmentEffect = as.numeric(tTest$conf.int[1]),
-      meanDifferenceRound  = round(meanTreatmentEffect, digits = 2)
+      meanTreatmentEffect  = as.numeric(tTest$estimate[1]),
+      upperTreatmentEffect = as.numeric(tTest$conf.int[1])
     )  
     return(effectQuantiles)
   }
@@ -58,14 +57,14 @@ granova.ds.bd <- function( data                      = null,
   }
 
   getExtrema <- function(dsp) {
-    aggregateDataRange  = c(range(getXs(dsp$data)), range(getYs(dsp$data))),
-    extrema             = c(max(aggregateDataRange), min(aggregateDataRange)),    
+    aggregateDataRange  = c(range(getXs(dsp$data)), range(getYs(dsp$data)))
+    extrema             = c(max(aggregateDataRange), min(aggregateDataRange))    
     return (extrema)
   }
   
   getGraphicalBounds <- function(dsp) {
     graphicalBounds <- c(
-      lowerGraphicalBound = min(dsp$extrema) - (1.2 * northeastPlotOffsetFactor * (max(dsp$extrema) - min(dsp$extrema)))
+      lowerGraphicalBound = min(dsp$extrema) - (1.2 * northeastPlotOffsetFactor * (max(dsp$extrema) - min(dsp$extrema))),
       upperGraphicalBound = max(dsp$extrema) + (0.5 * southwestPlotOffsetFactor * (max(dsp$extrema) - min(dsp$extrema)))
     )
     return(graphicalBounds)
