@@ -56,7 +56,7 @@ granova.ds.bd <- function( data                      = null,
     return( data[, 2])
   }
 
-  getCrossbow <- function(dsp) {
+  getCrossbow <- function (dsp) {
     crossbow <- data.frame(
       x    = min(dsp$shadows$xShadow),
       y    = max(dsp$shadows$yShadow),
@@ -66,6 +66,23 @@ granova.ds.bd <- function( data                      = null,
     return (crossbow)
   }
 
+  getCIBand <- function (dsp) {
+    anchor <- mean(dsp$graphic$graphicalBounds) + min(dsp$graphic$graphicalBounds)
+    CIBand <- data.frame(
+      cx    = ((anchor - dsp$stats$lowerTreatmentEffect) / 2) 
+              - dsp$graphic$shadowOffset,
+      cy    = ((anchor + dsp$stats$lowerTreatmentEffect) / 2) 
+              - dsp$graphic$shadowOffset,
+      cxend = ((anchor - dsp$stats$upperTreatmentEffect) / 2) 
+              - dsp$graphic$shadowOffset,
+      cyend = ((anchor + dsp$stats$upperTreatmentEffect) / 2) 
+              - dsp$graphic$shadowOffset,
+      color = factor(dsp$text$CIBand)
+      )
+      
+    return (CIBand)
+  }
+  
   getGraphicsParams <- function(dsp) {
     .aggregateDataRange  <- c(range(getXs(dsp$data)), range(getYs(dsp$data)))
     .extrema             <- c(max(.aggregateDataRange), min(.aggregateDataRange))    
@@ -88,12 +105,12 @@ granova.ds.bd <- function( data                      = null,
 
   getGraphicsText <- function(dsp) {
     .meanDifferenceRound <- round(dsp$stats$meanTreatmentEffect, digits = 2)
-    .CIBandText          <- paste(100 * conf.level, "% CI", sep = "")
+    .CIBand              <- paste(100 * conf.level, "% CI", sep = "")
     .meanDifferenceText  <- paste("Mean Diff. =", .meanDifferenceRound)
     
     return ( list(
       meanDifferenceRound = .meanDifferenceRound,
-      CIBandText          = .CIBandText,         
+      CIBand              = .CIBand,         
       meanDifferenceText  = .meanDifferenceText 
       )
     )  
@@ -119,6 +136,8 @@ granova.ds.bd <- function( data                      = null,
   dsp$shadows <- getShadows(dsp)
   
   dsp$graphic$crossbow <- getCrossbow(dsp)
+  
+  dsp$graphic$CIBand <- getCIBand(dsp)
   
   dsp$trails  <- getTrails(dsp)
 
@@ -206,6 +225,22 @@ granova.ds.bd <- function( data                      = null,
     return (crossbow)
   }
   
+  CIBand <- function (dsp) {
+    CIBand <- geom_segment(
+      aes(
+       x     = cx,
+       y     = cy,
+       xend  = cxend,
+       yend  = cyend,                        
+       color = color
+      ), 
+              size  = I(2),
+              alpha = I(2/3),
+              data  = dsp$graphic$CIBand
+            )
+    
+  }
+  
   p <- createGgplot(dsp)
   
   p <- p + treatmentLine(dsp)
@@ -222,7 +257,9 @@ granova.ds.bd <- function( data                      = null,
 
   p <- p + crossbow(dsp)
 
+  p <- p + CIBand(dsp)
 
+  p <- p + coord_equal()
 }
 
   # placed here to keep working code, above, 
