@@ -33,7 +33,7 @@ granova.ds.bd <- function( data                      = null,
   }
 
   getShadows <- function (dsp) {
-    xShadow <- ( (-dsp$effect + dsp$graphic$crossbow$intercept) / 2) + dsp$graphic$shadowOffset
+    xShadow <- ( (-dsp$effect + mean(dsp$graphic$graphicalBounds) + min(dsp$graphic$graphicalBounds)) / 2) + dsp$graphic$shadowOffset
     yShadow <- xShadow + dsp$effect
     return (data.frame(xShadow, yShadow))
   }
@@ -56,10 +56,12 @@ granova.ds.bd <- function( data                      = null,
     return( data[, 2])
   }
 
-  getCrossbow <- function(bounds) {
+  getCrossbow <- function(dsp) {
     crossbow <- data.frame(
-      intercept = mean(bounds) + min(bounds),
-      slope     = -1
+      x    = min(dsp$shadows$xShadow),
+      y    = max(dsp$shadows$yShadow),
+      xend = max(dsp$shadows$xShadow),
+      yend = min(dsp$shadows$yShadow)
     )
     return (crossbow)
   }
@@ -71,7 +73,6 @@ granova.ds.bd <- function( data                      = null,
     .lowerGraphicalBound <- min(.extrema) - (1.2 * northeastPlotOffsetFactor * .squareDataRange)
     .upperGraphicalBound <- max(.extrema) + (0.5 * southwestPlotOffsetFactor * .squareDataRange)
     .graphicalBounds     <- c(.lowerGraphicalBound, .upperGraphicalBound)
-    .crossbow            <- getCrossbow(.graphicalBounds)
     .shadowOffset        <- .squareDataRange / 50
     
     return ( list(
@@ -81,7 +82,6 @@ granova.ds.bd <- function( data                      = null,
       lowerGraphicalBound = .lowerGraphicalBound,
       upperGraphicalBound = .upperGraphicalBound,
       graphicalBounds     = .graphicalBounds,  
-      crossbow            = .crossbow, 
       shadowOffset        = .shadowOffset      
     ) )
   }
@@ -115,8 +115,10 @@ granova.ds.bd <- function( data                      = null,
 
   ## Setting the graphical bounds
   dsp$graphic <- getGraphicsParams(dsp)
-    
+  
   dsp$shadows <- getShadows(dsp)
+  
+  dsp$graphic$crossbow <- getCrossbow(dsp)
   
   dsp$trails  <- getTrails(dsp)
 
