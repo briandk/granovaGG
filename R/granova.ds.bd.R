@@ -15,8 +15,8 @@ granova.ds.bd <- function( data                      = null,
 
   ## Computing t-test Statistics for the Confidence Band and Mean Difference
   getTtest <- function (data, conf.level) {
-    return (   t.test(data[, 1], 
-                      data[, 2], 
+    return (   t.test(data[, 2], 
+                      data[, 1], 
                       paired     = TRUE,
                       conf.level = conf.level
                )
