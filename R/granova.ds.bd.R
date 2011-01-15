@@ -187,6 +187,21 @@ granova.ds.bd <- function( data                      = null,
       size  = I(3/2),
       alpha = I(2/3)
     )
+    
+    return (meanMarks)
+  }
+  
+  crossbow <- function (dsp) {
+    crossbow <- geom_segment(
+      aes(
+        x     = x,
+        y     = y,
+        xend  = xend,
+        yend  = yend
+      ), data = dsp$graphic$crossbow
+    )  
+      
+    return (crossbow)
   }
   
   p <- createGgplot(dsp)
@@ -203,7 +218,7 @@ granova.ds.bd <- function( data                      = null,
   
   p <- p + meanMarks(dsp)
 
-
+  p <- p + crossbow(dsp)
 
 
 }
