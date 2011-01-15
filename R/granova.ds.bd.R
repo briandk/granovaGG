@@ -300,9 +300,6 @@ xxx <- function() {
       opts(panel.background = theme_blank()) + 
       opts(axis.line = theme_segment())
   }
-  
-}
   return(p)
-
-
+  
 }
