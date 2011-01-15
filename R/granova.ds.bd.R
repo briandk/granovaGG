@@ -284,18 +284,6 @@ granova.ds.bd <- function( data                      = null,
   # separate from code waiting to be updated, below
   
 xxx <- function() {
-  ## Adding point shadows
-  p <- p + geom_point(
-             aes(
-               x = xShadow,
-               y = yShadow
-             ),
-             data  = dd, 
-             color = "black", 
-             size  = I(3),
-             alpha = I(1/4) 
-           )
-
   ## Adding the point trails
   p <- p + geom_segment(
              aes(
