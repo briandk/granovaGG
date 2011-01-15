@@ -257,6 +257,24 @@ granova.ds.bd <- function( data                      = null,
     return (shadows)
   }
   
+  trails <- function (dsp) {
+    trails <- geom_segment(
+      aes(
+        x        = xTrailStart,
+        y        = yTrailStart,
+        xend     = xTrailEnd,
+        yend     = yTrailEnd
+      ),
+      data     = dsp$trails,
+      size     = I(1/3),
+      color    = "black",
+      linetype = 1,
+      alpha    = I(1/8)              
+    ) 
+    
+    return (trails)
+  }
+  
   p <- createGgplot(dsp)
   
   p <- p + treatmentLine(dsp)
@@ -277,6 +295,8 @@ granova.ds.bd <- function( data                      = null,
   
   p <- p + shadows(dsp)
 
+  p <- p + trails(dsp)
+  
   p <- p + coord_equal()
 }
 
@@ -284,21 +304,6 @@ granova.ds.bd <- function( data                      = null,
   # separate from code waiting to be updated, below
   
 xxx <- function() {
-  ## Adding the point trails
-  p <- p + geom_segment(
-             aes(
-               x        = xTrailStart,
-               y        = yTrailStart,
-               xend     = xTrailEnd,
-               yend     = yTrailEnd
-             ),
-             data     = dd,
-             size     = I(1/3),
-             color    = "black",
-             linetype = 1,
-             alpha    = I(1/8)              
-           ) 
-  
   ## Adding a legend and title
   legendColors <- c("red", "darkgreen")
   p <- p + scale_color_manual(value = legendColors)
