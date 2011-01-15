@@ -103,7 +103,6 @@ granova.ds.bd <- function( data                      = null,
   # statistics on the data passed in, and use them to define square graphical
   # bounds for the viewing window. 
     
-  colnames(data) <- c("xvals", "yvals")
   dsp <- list( data = data )
 
   dsp$effect <- getYs(dsp$data) - getXs(dsp$data)
@@ -161,9 +160,33 @@ granova.ds.bd <- function( data                      = null,
     return (scale_x_continuous(limits = dsp$graphic$graphicalBounds))
   }
   
-  scaleY <- function(dsp)
+  scaleY <- function (dsp) {
     return (scale_y_continuous(limits = dsp$graphic$graphicalBounds))
-    
+  }
+  
+  rugPlot <- function (dsp) {
+    return(
+      geom_rug(
+        alpha = I(2/3),
+        color = "steelblue",
+        data  = dsp$data
+      )  
+    )
+  }
+  
+  meanMarks <- function (dsp) {
+    meanMarks <- geom_rug(
+      aes_string(
+        x = mean(dsp$data[ , 1]),
+        y = mean(dsp$data[ , 2])
+      ),
+      data  = dsp$data,
+      color = "red",
+      size  = I(3/2),
+      alpha = I(2/3)
+    )
+  }
+  
   p <- createGgplot(dsp)
   
   p <- p + treatmentLine(dsp)
@@ -173,24 +196,12 @@ granova.ds.bd <- function( data                      = null,
   p <- p + identityLine()
 
   p <- p + scaleX(dsp) + scaleY(dsp)
-
-  ## Adding a rugplot
-  p <- p + geom_rug(
-             alpha = I(2/3),
-             color = "steelblue"
-           )
   
-  ## Adding mean marks
-  p <- p + geom_rug(
-             aes(
-               x = mean( xvals ),
-               y = mean( yvals ) 
-             ),
-             data  = dsp$data,
-             color = "red",
-             size  = I(3/2),
-             alpha = I(2/3)
-           )  
+  p <- p + rugPlot(dsp)
+  
+  p <- p + meanMarks(dsp)
+  
+xxx <- function() {
 
   ## Adding the perpendicular crossbow
   p <- p + geom_abline(
@@ -201,9 +212,8 @@ granova.ds.bd <- function( data                      = null,
               alpha = I(1/2)
             )
 
-}
 
-xxx <- function() {
+
 
   ## Adding the Confidence band    
   confidenceBand <- data.frame(
@@ -281,6 +291,8 @@ xxx <- function() {
       opts(axis.line = theme_segment())
   }
   
-  return(p)
 }
+  return(p)
 
+
+}
