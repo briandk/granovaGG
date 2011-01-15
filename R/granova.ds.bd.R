@@ -58,10 +58,10 @@ granova.ds.bd <- function( data                      = null,
 
   getCrossbow <- function (dsp) {
     crossbow <- data.frame(
-      x    = min(dsp$shadows$xShadow),
-      y    = max(dsp$shadows$yShadow),
-      xend = max(dsp$shadows$xShadow),
-      yend = min(dsp$shadows$yShadow)
+      x    = min(dsp$shadows$xShadow) - dsp$graphic$shadowOffset,
+      y    = max(dsp$shadows$yShadow) - dsp$graphic$shadowOffset,
+      xend = max(dsp$shadows$xShadow) - dsp$graphic$shadowOffset,
+      yend = min(dsp$shadows$yShadow) - dsp$graphic$shadowOffset
     )
     return (crossbow)
   }
@@ -238,7 +238,23 @@ granova.ds.bd <- function( data                      = null,
               alpha = I(2/3),
               data  = dsp$graphic$CIBand
             )
+   
+   return (CIBand) 
+  }
+  
+  shadows <- function (dsp) {
+    shadows <- geom_point(
+      aes(
+        x = xShadow,
+        y = yShadow
+      ),
+      data  = dsp$shadow, 
+      color = "black", 
+      size  = I(3),
+      alpha = I(1/4) 
+    )
     
+    return (shadows)
   }
   
   p <- createGgplot(dsp)
@@ -258,6 +274,8 @@ granova.ds.bd <- function( data                      = null,
   p <- p + crossbow(dsp)
 
   p <- p + CIBand(dsp)
+  
+  p <- p + shadows(dsp)
 
   p <- p + coord_equal()
 }
