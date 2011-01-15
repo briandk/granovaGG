@@ -200,8 +200,18 @@ granova.ds.bd <- function( data                      = null,
   p <- p + rugPlot(dsp)
   
   p <- p + meanMarks(dsp)
+
+
+
+
+}
+
+  # placed here to keep working code, above, 
+  # separate from code waiting to be updated, below
   
 xxx <- function() {
+
+
 
   ## Adding the perpendicular crossbow
   p <- p + geom_abline(
