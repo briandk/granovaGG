@@ -266,33 +266,6 @@ granova.ds.bd <- function( data                      = null,
   # separate from code waiting to be updated, below
   
 xxx <- function() {
-
-  ## Adding the Confidence band    
-  confidenceBand <- data.frame(
-                      cx    = ((crossbowIntercept - lowerTreatmentEffect) / 2) 
-                              - shadowOffset,
-                      cy    = ((crossbowIntercept + lowerTreatmentEffect) / 2) 
-                              - shadowOffset,
-                      cxend = ((crossbowIntercept - upperTreatmentEffect) / 2) 
-                              - shadowOffset,
-                      cyend = ((crossbowIntercept + upperTreatmentEffect) / 2) 
-                              - shadowOffset,
-                      Legend = factor(CIBandText)
-                    )
-
-  p <- p + geom_segment(
-               aes(
-                 x     = cx,
-                 y     = cy,
-                 xend  = cxend,
-                 yend  = cyend,                        
-                 color = Legend
-               ), 
-            size  = I(2),
-            alpha = I(2/3),
-            data  = confidenceBand
-          )
-                     
   ## Adding point shadows
   p <- p + geom_point(
              aes(
