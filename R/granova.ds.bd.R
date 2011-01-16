@@ -36,7 +36,7 @@ granova.ds.bd <- function( data                      = null,
   }
 
   getShadows <- function (dsp) {
-    xShadow <- ( (-dsp$effect + mean(dsp$graphic$bounds) + min(dsp$graphic$bounds)) / 2) + dsp$graphic$shadowOffset
+    xShadow <- ( (-dsp$effect + mean(dsp$parameters$bounds) + min(dsp$parameters$bounds)) / 2) + dsp$parameters$shadowOffset
     yShadow <- xShadow + dsp$effect
     return (data.frame(xShadow, yShadow))
   }
@@ -61,25 +61,25 @@ granova.ds.bd <- function( data                      = null,
 
   getCrossbow <- function (dsp) {
     crossbow <- data.frame(
-      x    = min(dsp$shadows$xShadow) - dsp$graphic$shadowOffset,
-      y    = max(dsp$shadows$yShadow) - dsp$graphic$shadowOffset,
-      xend = max(dsp$shadows$xShadow) - dsp$graphic$shadowOffset,
-      yend = min(dsp$shadows$yShadow) - dsp$graphic$shadowOffset
+      x    = min(dsp$shadows$xShadow) - dsp$parameters$shadowOffset,
+      y    = max(dsp$shadows$yShadow) - dsp$parameters$shadowOffset,
+      xend = max(dsp$shadows$xShadow) - dsp$parameters$shadowOffset,
+      yend = min(dsp$shadows$yShadow) - dsp$parameters$shadowOffset
     )
     return (crossbow)
   }
 
   getCIBand <- function (dsp) {
-    anchor <- mean(dsp$graphic$bounds) + min(dsp$graphic$bounds)
+    anchor <- mean(dsp$parameters$bounds) + min(dsp$parameters$bounds)
     CIBand <- data.frame(
       cx    = ((anchor - dsp$stats$lowerTreatmentEffect) / 2) 
-              - dsp$graphic$shadowOffset,
+              - dsp$parameters$shadowOffset,
       cy    = ((anchor + dsp$stats$lowerTreatmentEffect) / 2) 
-              - dsp$graphic$shadowOffset,
+              - dsp$parameters$shadowOffset,
       cxend = ((anchor - dsp$stats$upperTreatmentEffect) / 2) 
-              - dsp$graphic$shadowOffset,
+              - dsp$parameters$shadowOffset,
       cyend = ((anchor + dsp$stats$upperTreatmentEffect) / 2) 
-              - dsp$graphic$shadowOffset,
+              - dsp$parameters$shadowOffset,
       color = factor(dsp$text$CIBand)
       )
       
@@ -128,13 +128,13 @@ granova.ds.bd <- function( data                      = null,
   dsp$text  <- getGraphicsText(dsp)
 
   ## Setting the graphical bounds
-  dsp$graphic <- getGraphicsParams(dsp)
+  dsp$parameters <- getGraphicsParams(dsp)
   
   dsp$shadows <- getShadows(dsp)
   
-  dsp$graphic$crossbow <- getCrossbow(dsp)
+  dsp$crossbow <- getCrossbow(dsp)
   
-  dsp$graphic$CIBand <- getCIBand(dsp)
+  dsp$CIBand <- getCIBand(dsp)
   
   dsp$trails  <- getTrails(dsp)
 
@@ -175,11 +175,11 @@ granova.ds.bd <- function( data                      = null,
   }
   
   scaleX <- function (dsp) {
-    return (scale_x_continuous(limits = dsp$graphic$bounds))
+    return (scale_x_continuous(limits = dsp$parameters$bounds))
   }
   
   scaleY <- function (dsp) {
-    return (scale_y_continuous(limits = dsp$graphic$bounds))
+    return (scale_y_continuous(limits = dsp$parameters$bounds))
   }
   
   rugPlot <- function (dsp) {
@@ -215,7 +215,7 @@ granova.ds.bd <- function( data                      = null,
         xend  = xend,
         yend  = yend
       ), 
-      data  = dsp$graphic$crossbow,
+      data  = dsp$crossbow,
       alpha = I(1/2)
     )  
       
@@ -233,7 +233,7 @@ granova.ds.bd <- function( data                      = null,
       ), 
               size  = I(2),
               alpha = I(2/3),
-              data  = dsp$graphic$CIBand
+              data  = dsp$CIBand
             )
    
    return (CIBand) 
