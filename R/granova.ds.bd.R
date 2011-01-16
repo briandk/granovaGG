@@ -23,13 +23,16 @@ granova.ds.bd <- function( data                      = null,
     )
   }
 
-  getEffectQuantiles <- function (tTest) {
-    effectQuantiles <- data.frame(
+  getStats <- function (data, conf.level) {
+    tTest <- getTtest(data, conf.level)
+    stats <- data.frame(
       lowerTreatmentEffect = as.numeric(tTest$conf.int[2]),
       meanTreatmentEffect  = as.numeric(tTest$estimate[1]),
-      upperTreatmentEffect = as.numeric(tTest$conf.int[1])
+      upperTreatmentEffect = as.numeric(tTest$conf.int   ),
+      tStatistic           = as.numeric(tTest$statistic  )
     )  
-    return(effectQuantiles)
+    
+    return(stats)
   }
 
   getShadows <- function (dsp) {
@@ -119,10 +122,8 @@ granova.ds.bd <- function( data                      = null,
   dsp <- list( data = data )
 
   dsp$effect <- getYs(dsp$data) - getXs(dsp$data)
-  
-  dsp$ttest <- getTtest(dsp$data, conf.level)
-  
-  dsp$stats <- getEffectQuantiles(dsp$ttest)
+    
+  dsp$stats <- getStats(dsp$data, conf.level)
   
   dsp$text  <- getGraphicsText(dsp)
 
