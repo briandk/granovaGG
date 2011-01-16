@@ -33,7 +33,7 @@ granova.ds.bd <- function( data                      = null,
   }
 
   getShadows <- function (dsp) {
-    xShadow <- ( (-dsp$effect + mean(dsp$graphic$graphicalBounds) + min(dsp$graphic$graphicalBounds)) / 2) + dsp$graphic$shadowOffset
+    xShadow <- ( (-dsp$effect + mean(dsp$graphic$bounds) + min(dsp$graphic$bounds)) / 2) + dsp$graphic$shadowOffset
     yShadow <- xShadow + dsp$effect
     return (data.frame(xShadow, yShadow))
   }
@@ -67,7 +67,7 @@ granova.ds.bd <- function( data                      = null,
   }
 
   getCIBand <- function (dsp) {
-    anchor <- mean(dsp$graphic$graphicalBounds) + min(dsp$graphic$graphicalBounds)
+    anchor <- mean(dsp$graphic$bounds) + min(dsp$graphic$bounds)
     CIBand <- data.frame(
       cx    = ((anchor - dsp$stats$lowerTreatmentEffect) / 2) 
               - dsp$graphic$shadowOffset,
@@ -89,14 +89,12 @@ granova.ds.bd <- function( data                      = null,
     .squareDataRange     <- max(.extrema) - min(.extrema)
     .lowerGraphicalBound <- min(.extrema) - (1.2 * northeastPlotOffsetFactor * .squareDataRange)
     .upperGraphicalBound <- max(.extrema) + (0.5 * southwestPlotOffsetFactor * .squareDataRange)
-    .graphicalBounds     <- c(.lowerGraphicalBound, .upperGraphicalBound)
+    .bounds     <- c(.lowerGraphicalBound, .upperGraphicalBound)
     .shadowOffset        <- .squareDataRange / 50
     
     return ( list(
       squareDataRange     = .squareDataRange,    
-      lowerGraphicalBound = .lowerGraphicalBound,
-      upperGraphicalBound = .upperGraphicalBound,
-      graphicalBounds     = .graphicalBounds,  
+      bounds              = .bounds,  
       shadowOffset        = .shadowOffset      
     ) )
   }
@@ -176,11 +174,11 @@ granova.ds.bd <- function( data                      = null,
   }
   
   scaleX <- function (dsp) {
-    return (scale_x_continuous(limits = dsp$graphic$graphicalBounds))
+    return (scale_x_continuous(limits = dsp$graphic$bounds))
   }
   
   scaleY <- function (dsp) {
-    return (scale_y_continuous(limits = dsp$graphic$graphicalBounds))
+    return (scale_y_continuous(limits = dsp$graphic$bounds))
   }
   
   rugPlot <- function (dsp) {
