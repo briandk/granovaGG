@@ -28,8 +28,8 @@ granova.ds.bd <- function( data                      = null,
     stats <- data.frame(
       lowerTreatmentEffect = as.numeric(tTest$conf.int[2]),
       meanTreatmentEffect  = as.numeric(tTest$estimate[1]),
-      upperTreatmentEffect = as.numeric(tTest$conf.int   ),
-      tStatistic           = as.numeric(tTest$statistic  )
+      upperTreatmentEffect = as.numeric(tTest$conf.int[1]),
+      tStatistic           = as.numeric(tTest$statistic[1])
     )  
     
     return(stats)
