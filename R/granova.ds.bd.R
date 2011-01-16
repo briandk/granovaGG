@@ -93,8 +93,6 @@ granova.ds.bd <- function( data                      = null,
     .shadowOffset        <- .squareDataRange / 50
     
     return ( list(
-      aggregateDataRange  = .aggregateDataRange,
-      extrema             = .extrema,
       squareDataRange     = .squareDataRange,    
       lowerGraphicalBound = .lowerGraphicalBound,
       upperGraphicalBound = .upperGraphicalBound,
