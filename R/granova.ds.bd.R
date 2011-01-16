@@ -24,7 +24,7 @@ granova.ds.bd <- function( data                      = null,
   }
 
   getEffectQuantiles <- function (tTest) {
-    effectQuantiles <- list(
+    effectQuantiles <- data.frame(
       lowerTreatmentEffect = as.numeric(tTest$conf.int[2]),
       meanTreatmentEffect  = as.numeric(tTest$estimate[1]),
       upperTreatmentEffect = as.numeric(tTest$conf.int[1])
