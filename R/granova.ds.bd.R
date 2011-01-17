@@ -36,7 +36,7 @@ granova.ds.bd <- function( data                      = null,
   }
 
   getShadows <- function (dsp) {
-    xShadow <- ( (-dsp$effect + mean(dsp$parameters$bounds) + min(dsp$parameters$bounds)) / 2) + dsp$parameters$shadowOffset
+    xShadow <- (-dsp$effect + dsp$parameters$anchor) / 2 + dsp$parameters$shadowOffset
     yShadow <- xShadow + dsp$effect
     return (data.frame(xShadow, yShadow))
   }
@@ -70,7 +70,6 @@ granova.ds.bd <- function( data                      = null,
   }
 
   getCIBand <- function (dsp) {
-    anchor <- mean(dsp$parameters$bounds) + min(dsp$parameters$bounds)
     CIBand <- data.frame(
       cx    = ((anchor - dsp$stats$lowerTreatmentEffect) / 2) 
               - dsp$parameters$shadowOffset,
@@ -92,13 +91,16 @@ granova.ds.bd <- function( data                      = null,
     .squareDataRange     <- max(.extrema) - min(.extrema)
     .lowerGraphicalBound <- min(.extrema) - (1.2 * northeastPlotOffsetFactor * .squareDataRange)
     .upperGraphicalBound <- max(.extrema) + (0.5 * southwestPlotOffsetFactor * .squareDataRange)
-    .bounds     <- c(.lowerGraphicalBound, .upperGraphicalBound)
+    .bounds              <- c(.lowerGraphicalBound, .upperGraphicalBound)
+    .center              <- mean(.bounds)
+    .crossbowAnchor      <- mean(.bounds) + min(.bounds)
     .shadowOffset        <- .squareDataRange / 50
     
     return ( list(
       squareDataRange     = .squareDataRange,    
       bounds              = .bounds,  
-      shadowOffset        = .shadowOffset      
+      shadowOffset        = .shadowOffset,
+      anchor              = .crossbowAnchor      
     ) )
   }
 
