@@ -294,6 +294,10 @@ granova.ds.bd <- function( data                      = null,
     return (scale_color_manual(value = colors))
   }
   
+  title <- function () {
+    return (opts(title = plotTitle))
+  }
+  
   p <- createGgplot(dsp)
   
   p <- p + treatmentLine(dsp)
@@ -319,6 +323,8 @@ granova.ds.bd <- function( data                      = null,
   p <- p + legend(dsp)
   
   p <- p + coord_equal()
+  
+  p <- p + title()
 }
 
   # placed here to keep working code, above, 
