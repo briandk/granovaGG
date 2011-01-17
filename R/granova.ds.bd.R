@@ -104,6 +104,16 @@ granova.ds.bd <- function( data                      = null,
     ) )
   }
 
+  getTreatmentLine <- function (dsp) {
+    treatmentLine <- data.frame(
+      intercept      = dsp$stats$meanTreatmentEffect,
+      slope          = 1,
+      color          = factor(paste("Mean Diff. =", round(dsp$stats$meanTreatmentEffect, digits = 2)))
+    )
+    
+    return (treatmentLine)
+  }
+  
   getGraphicsText <- function(dsp) {
     .meanDifferenceRound <- round(dsp$stats$meanTreatmentEffect, digits = 2)
     .CIBand              <- paste(100 * conf.level, "% CI", sep = "")
@@ -138,6 +148,8 @@ granova.ds.bd <- function( data                      = null,
   
   dsp$CIBand <- getCIBand(dsp)
   
+  dsp$treatmentLine <- getTreatmentLine(dsp)
+  
   dsp$trails  <- getTrails(dsp)
 
   # Now, we use grammar to build the plot layer
@@ -157,12 +169,14 @@ granova.ds.bd <- function( data                      = null,
       
   treatmentLine <- function (dsp) {
     return( geom_abline(
-                     aes_string(
-                       intercept = dsp$stats$meanTreatmentEffect,
-                       slope     = 1
+                     aes(
+                       intercept = intercept,
+                       slope     = slope,
+                       color     = color
                      ),
                      alpha = I(1/2),
                      size  = I(1),
+                     data  = dsp$treatmentLine
             )
     )
   }
@@ -274,6 +288,12 @@ granova.ds.bd <- function( data                      = null,
     return (trails)
   }
   
+  legend <- function (dsp) {
+    colors <- c("red", "darkgreen")
+    
+    return (scale_color_manual(value = colors))
+  }
+  
   p <- createGgplot(dsp)
   
   p <- p + treatmentLine(dsp)
@@ -295,6 +315,8 @@ granova.ds.bd <- function( data                      = null,
   p <- p + shadows(dsp)
 
   p <- p + trails(dsp)
+  
+  p <- p + legend(dsp)
   
   p <- p + coord_equal()
 }
