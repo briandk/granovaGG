@@ -340,7 +340,7 @@ granova.ds.bd <- function( data                      = null,
   
   p <- p + title()
   
-}
+
 
   return(p)
   
