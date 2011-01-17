@@ -25,14 +25,13 @@ granova.ds.bd <- function( data                      = null,
 
   getStats <- function (data, conf.level) {
     tTest <- getTtest(data, conf.level)
-    stats <- data.frame(
-      lowerTreatmentEffect = as.numeric(tTest$conf.int[2]),
-      meanTreatmentEffect  = as.numeric(tTest$estimate[1]),
-      upperTreatmentEffect = as.numeric(tTest$conf.int[1]),
-      tStatistic           = as.numeric(tTest$statistic[1])
-    )  
-    
-    return(stats)
+    return(  data.frame(
+              lowerTreatmentEffect = as.numeric(tTest$conf.int[2]),
+              meanTreatmentEffect  = as.numeric(tTest$estimate[1]),
+              upperTreatmentEffect = as.numeric(tTest$conf.int[1]),
+              tStatistic           = as.numeric(tTest$statistic[1])
+            )
+    )    
   }
 
   getShadows <- function (dsp) {
@@ -42,12 +41,13 @@ granova.ds.bd <- function( data                      = null,
   }
 
   getTrails <- function (dsp) {
-    ddtrails <- data.frame( xTrailStart = getXs(dsp$data), 
-                            yTrailStart = getYs(dsp$data),
-                            xTrailEnd   = getXs(dsp$shadow), 
-                            yTrailEnd   = getYs(dsp$shadow)
-                )
-    return (ddtrails)
+    return(  data.frame(
+               xTrailStart = getXs(dsp$data), 
+               yTrailStart = getYs(dsp$data),
+               xTrailEnd   = getXs(dsp$shadow), 
+               yTrailEnd   = getYs(dsp$shadow)
+             )
+    )
   }
 
 
@@ -60,13 +60,13 @@ granova.ds.bd <- function( data                      = null,
   }
 
   getCrossbow <- function (dsp) {
-    crossbow <- data.frame(
+    return(  data.frame(
       x    = min(dsp$shadows$xShadow) - dsp$parameters$shadowOffset,
       y    = max(dsp$shadows$yShadow) - dsp$parameters$shadowOffset,
       xend = max(dsp$shadows$xShadow) - dsp$parameters$shadowOffset,
       yend = min(dsp$shadows$yShadow) - dsp$parameters$shadowOffset
-    )
-    return (crossbow)
+      )
+    )  
   }
 
   getCIBand <- function (dsp) {
