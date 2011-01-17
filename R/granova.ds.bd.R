@@ -116,19 +116,6 @@ granova.ds.bd <- function( data                      = null,
     return (treatmentLine)
   }
   
-  getGraphicsText <- function(dsp) {
-    .meanDifferenceRound <- round(dsp$stats$meanTreatmentEffect, digits = 2)
-    .CIBand              <- paste(100 * conf.level, "% CI", sep = "")
-    .meanDifferenceText  <- paste("Mean Diff. =", .meanDifferenceRound)
-    
-    return ( list(
-      meanDifferenceRound = .meanDifferenceRound,
-      CIBand              = .CIBand,         
-      meanDifferenceText  = .meanDifferenceText 
-      )
-    )  
-  }
-  
   # We're going to build the plot in several pieces. First, we compute
   # statistics on the data passed in, and use them to define square graphical
   # bounds for the viewing window. 
@@ -139,8 +126,6 @@ granova.ds.bd <- function( data                      = null,
     
   dsp$stats <- getStats(dsp$data, conf.level)
   
-  dsp$text  <- getGraphicsText(dsp)
-
   ## Setting the graphical bounds
   dsp$parameters <- getGraphicsParams(dsp)
   
