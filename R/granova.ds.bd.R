@@ -71,15 +71,15 @@ granova.ds.bd <- function( data                      = null,
 
   getCIBand <- function (dsp) {
     CIBand <- data.frame(
-      cx    = ((anchor - dsp$stats$lowerTreatmentEffect) / 2) 
+      cx    = ((dsp$parameters$anchor - dsp$stats$lowerTreatmentEffect) / 2) 
               - dsp$parameters$shadowOffset,
-      cy    = ((anchor + dsp$stats$lowerTreatmentEffect) / 2) 
+      cy    = ((dsp$parameters$anchor + dsp$stats$lowerTreatmentEffect) / 2) 
               - dsp$parameters$shadowOffset,
-      cxend = ((anchor - dsp$stats$upperTreatmentEffect) / 2) 
+      cxend = ((dsp$parameters$anchor - dsp$stats$upperTreatmentEffect) / 2) 
               - dsp$parameters$shadowOffset,
-      cyend = ((anchor + dsp$stats$upperTreatmentEffect) / 2) 
+      cyend = ((dsp$parameters$anchor + dsp$stats$upperTreatmentEffect) / 2) 
               - dsp$parameters$shadowOffset,
-      color = factor(dsp$text$CIBand)
+      color = factor(paste(100 * conf.level, "% CI", sep = ""))
       )
       
     return (CIBand)
