@@ -95,12 +95,14 @@ granova.ds.bd <- function( data                      = null,
     .center              <- mean(.bounds)
     .crossbowAnchor      <- mean(.bounds) + min(.bounds)
     .shadowOffset        <- .squareDataRange / 50
+    .expand              <- c(0.1, 0)
     
     return ( list(
       squareDataRange     = .squareDataRange,    
       bounds              = .bounds,  
       shadowOffset        = .shadowOffset,
-      anchor              = .crossbowAnchor      
+      anchor              = .crossbowAnchor,
+      expand              = .expand      
     ) )
   }
 
@@ -191,11 +193,11 @@ granova.ds.bd <- function( data                      = null,
   }
   
   scaleX <- function (dsp) {
-    return (scale_x_continuous(limits = dsp$parameters$bounds))
+    return (scale_x_continuous(limits = dsp$parameters$bounds, expand = dsp$parameters$expand))
   }
   
   scaleY <- function (dsp) {
-    return (scale_y_continuous(limits = dsp$parameters$bounds))
+    return (scale_y_continuous(limits = dsp$parameters$bounds, expand = dsp$parameters$expand))
   }
   
   rugPlot <- function (dsp) {
@@ -298,11 +300,23 @@ granova.ds.bd <- function( data                      = null,
     return (opts(title = plotTitle))
   }
   
+  blank <- function () {
+    return( opts(
+              panel.grid.major = theme_blank(),
+              panel.grid.minor = theme_blank(),
+              panel.background = theme_blank(),
+              axis.line = theme_segment()
+            )
+    )
+  }
+  
   p <- createGgplot(dsp)
   
   p <- p + treatmentLine(dsp)
   
   p <- p + rawData(dsp)
+  
+  p <- p + blank()
   
   p <- p + identityLine()
 
@@ -325,34 +339,9 @@ granova.ds.bd <- function( data                      = null,
   p <- p + coord_equal()
   
   p <- p + title()
+  
 }
 
-  # placed here to keep working code, above, 
-  # separate from code waiting to be updated, below
-  
-xxx <- function() {
-  ## Adding a legend and title
-  legendColors <- c("red", "darkgreen")
-  p <- p + scale_color_manual(value = legendColors)
-  p <- p + opts(title = plotTitle)
-  
-  ## Renaming the x and y scales
-  print("Printing the Names of the x and y values")
-  print(names(data)[1])
-  print(names(data)[2])
-  
-  p <- p + xlab((names(data)[1]))
-  p <- p + ylab((names(data)[2]))
-  
-  
-  ## Removing the gridlines and background if the user asks
-  if (produceBlankPlotObject == TRUE) {
-    p <- p +
-      opts(panel.grid.major = theme_blank()) +  
-      opts(panel.grid.minor = theme_blank()) +
-      opts(panel.background = theme_blank()) + 
-      opts(axis.line = theme_segment())
-  }
   return(p)
   
 }
