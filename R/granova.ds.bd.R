@@ -300,15 +300,15 @@ granova.ds.bd <- function( data                      = null,
   
     p <- createGgplot(dsp)
   
+    p <- p + scaleX(dsp) + scaleY(dsp)
+    
     p <- p + treatmentLine(dsp)
-  
+      
     p <- p + rawData(dsp)
   
     p <- p + blank()
   
     p <- p + identityLine()
-
-    p <- p + scaleX(dsp) + scaleY(dsp)
   
     p <- p + rugPlot(dsp)
   
