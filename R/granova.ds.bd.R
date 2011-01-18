@@ -223,7 +223,7 @@ granova.ds.bd <- function( data                      = null,
           yend  = yend
         ), 
         data  = dsp$crossbow,
-        alpha = I(1/2)
+        alpha = I(3/4)
       )  
       
       return (crossbow)
