@@ -104,7 +104,8 @@ granova.ds.bd <- function( data                      = null,
         bounds              = .bounds,  
         shadowOffset        = .shadowOffset,
         anchor              = .crossbowAnchor,
-        expand              = .expand      
+        expand              = .expand,
+        pointsize           = I(3)      
       ) )
     }
 
@@ -176,7 +177,7 @@ granova.ds.bd <- function( data                      = null,
     }
   
     rawData <- function (dsp) {
-      rawData <- geom_point(size = I(3))
+      rawData <- geom_point(size = dsp$parameters$pointsize)
       return (rawData)
     }
   
@@ -257,7 +258,7 @@ granova.ds.bd <- function( data                      = null,
         ),
         data  = dsp$shadow, 
         color = "black", 
-        size  = I(3),
+        size  = dsp$parameters$pointsize,
         alpha = I(1/4) 
       )
     
