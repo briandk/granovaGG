@@ -81,7 +81,7 @@ granova.ds.bd <- function( data                      = null,
                 - dsp$parameters$shadowOffset,
         cyend = ((dsp$parameters$anchor + dsp$stats$upperTreatmentEffect) / 2) 
                 - dsp$parameters$shadowOffset,
-        color = factor(paste(100 * conf.level, "% CI", sep = ""))
+        color = factor(paste(100 * conf.level, "% CI", " (t = ", round(dsp$stats$tStatistic, digits = 2), ")", sep =""))
         )
       
       return (CIBand)
