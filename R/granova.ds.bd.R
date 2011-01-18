@@ -73,14 +73,10 @@ granova.ds.bd <- function( data                      = null,
 
     getCIBand <- function (dsp) {
       CIBand <- data.frame(
-        cx    = ((dsp$parameters$anchor - dsp$stats$lowerTreatmentEffect) / 2) 
-                - dsp$parameters$shadowOffset,
-        cy    = ((dsp$parameters$anchor + dsp$stats$lowerTreatmentEffect) / 2) 
-                - dsp$parameters$shadowOffset,
-        cxend = ((dsp$parameters$anchor - dsp$stats$upperTreatmentEffect) / 2) 
-                - dsp$parameters$shadowOffset,
-        cyend = ((dsp$parameters$anchor + dsp$stats$upperTreatmentEffect) / 2) 
-                - dsp$parameters$shadowOffset,
+        cx    = ((dsp$parameters$anchor - dsp$stats$lowerTreatmentEffect) / 2) - 3 * (dsp$parameters$shadowOffset),
+        cy    = ((dsp$parameters$anchor + dsp$stats$lowerTreatmentEffect) / 2) - 3 * (dsp$parameters$shadowOffset),
+        cxend = ((dsp$parameters$anchor - dsp$stats$upperTreatmentEffect) / 2) - 3 * (dsp$parameters$shadowOffset),
+        cyend = ((dsp$parameters$anchor + dsp$stats$upperTreatmentEffect) / 2) - 3 * (dsp$parameters$shadowOffset),
         color = factor(paste(100 * conf.level, "% CI", " (t = ", round(dsp$stats$tStatistic, digits = 2), ")", sep =""))
         )
       
@@ -105,7 +101,7 @@ granova.ds.bd <- function( data                      = null,
         shadowOffset        = .shadowOffset,
         anchor              = .crossbowAnchor,
         expand              = .expand,
-        pointsize           = I(3)      
+        pointsize           = I(2)      
       ) )
     }
 
