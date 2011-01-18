@@ -10,7 +10,7 @@ granova.ds.bd <- function( data                      = null,
 
 {
 
-  marshalData <- function() {
+  marshalData <- function () {
 
     ## Functions should be grouped so that they're easy to locate and the
     ## rest of your code can be read from beginning to end.
@@ -87,7 +87,7 @@ granova.ds.bd <- function( data                      = null,
       return (CIBand)
     }
   
-    getGraphicsParams <- function(dsp) {
+    getGraphicsParams <- function (dsp) {
       .aggregateDataRange  <- c(range(getXs(dsp$data)), range(getYs(dsp$data)))
       .extrema             <- c(max(.aggregateDataRange), min(.aggregateDataRange))    
       .squareDataRange     <- max(.extrema) - min(.extrema)
@@ -118,9 +118,6 @@ granova.ds.bd <- function( data                      = null,
       return (treatmentLine)
     }
   
-    # We're going to build the plot in several pieces. First, we compute
-    # statistics on the data passed in, and use them to define square graphical
-    # bounds for the viewing window. 
     
     dsp <- list( data = data )
 
@@ -128,7 +125,6 @@ granova.ds.bd <- function( data                      = null,
     
     dsp$stats <- getStats(dsp$data, conf.level)
   
-    ## Setting the graphical bounds
     dsp$parameters <- getGraphicsParams(dsp)
   
     dsp$shadows <- getShadows(dsp)
@@ -149,13 +145,12 @@ granova.ds.bd <- function( data                      = null,
 
 
 
-  generateDSggplot <- function(dsp) {
+  generateDSggplot <- function (dsp) {
 
-    # Now, we use grammar to build the plot layer
+    # Now, we use ggplot2 grammar to build the plot layer
     # by layer. Because of the way ggplot2 creates plot objects, layers can be
-    # added to a plot p simply by calling "p <- p + newLayer", so for now you'll
-    # see that structure of code throughout.
-  
+    # added to a plot p simply by calling "p <- p + newLayer"
+    
     createGgplot <- function(dsp) {
       p <- ggplot( 
              aes_string(
@@ -337,7 +332,7 @@ granova.ds.bd <- function( data                      = null,
   
     p <- p + title()
   
-    return(p)
+    return (p)
   }
   
   
