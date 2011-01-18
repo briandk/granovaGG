@@ -207,7 +207,6 @@ granova.ds.bd <- function( data                      = null,
         ),
         data  = dsp$data,
         color = "red",
-        size  = I(3/2),
         alpha = I(2/3)
       )
     

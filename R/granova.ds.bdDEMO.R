@@ -10,10 +10,12 @@ source("granova.ds.bd.R")
 
 x <- rnorm(mean = 42, n = 25)
 y <- rnorm(mean = 45, n = 25)
-testFrame1 <- data.frame(MathPreTest = x, MathPostTest = y)
-print(granova.ds.bd(testFrame1, conf.level = 0.95, plotTitle = "This is a test plot"))
+caseid <- 1:25
+testFrame1 <- data.frame(MathPreTest = x, MathPostTest = y, caseid)
+p <- granova.ds.bd(testFrame1, conf.level = 0.95, plotTitle = "This is a test plot")
+p + geom_text(aes(label = caseid), data = testFrame1, size = I(3), vjust = -1)
 print(granova.ds.bd(pair65, conf.level = 0.99, plotTitle = "Second test plot"))
-print(granova.ds(testFrame1))
+
 
 # 
 # 
