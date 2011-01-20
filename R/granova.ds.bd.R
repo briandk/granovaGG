@@ -285,7 +285,7 @@ granova.ds.bd <- function( data                      = null,
     legend <- function (dsp) {
       colors <- c("red", "darkgreen")
     
-      return (scale_color_manual(value = colors))
+      return (scale_color_manual(value = colors, name = ""))
     }
   
     title <- function () {
@@ -301,7 +301,7 @@ granova.ds.bd <- function( data                      = null,
               )
       )
     }
-  
+      
     p <- createGgplot(dsp)
 
     p <- p + scaleX(dsp) + scaleY(dsp)
@@ -331,7 +331,7 @@ granova.ds.bd <- function( data                      = null,
     p <- p + coord_equal()
   
     p <- p + title()
-  
+      
     return (p)
   }
   
