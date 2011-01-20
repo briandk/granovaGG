@@ -2,7 +2,7 @@
 
 granova.ds.bd <- function( data                      = NULL, 
                            plotTitle                 = "Dependent Sample Scatterplot",
-                           conf.level                = 0.95,
+                           conf.level                = 0.95
                  ) 
 
 {
@@ -114,26 +114,21 @@ granova.ds.bd <- function( data                      = NULL,
       return (treatmentLine)
     }
   
+    createDSPobject <- function () {
+      dsp               <- list( data = data )
+      dsp$effect        <- getEffect(dsp)
+      dsp$stats         <- getStats(dsp, conf.level)
+      dsp$parameters    <- getGraphicsParams(dsp)
+      dsp$shadows       <- getShadows(dsp)
+      dsp$crossbow      <- getCrossbow(dsp)
+      dsp$CIBand        <- getCIBand(dsp)
+      dsp$treatmentLine <- getTreatmentLine(dsp)
+      dsp$trails        <- getTrails(dsp)
+      
+      return(dsp)
+    }
     
-    dsp <- list( data = data )
-
-    dsp$effect <- getEffect(dsp)
-    
-    dsp$stats <- getStats(dsp, conf.level)
-  
-    dsp$parameters <- getGraphicsParams(dsp)
-  
-    dsp$shadows <- getShadows(dsp)
-  
-    dsp$crossbow <- getCrossbow(dsp)
-  
-    dsp$CIBand <- getCIBand(dsp)
-  
-    dsp$treatmentLine <- getTreatmentLine(dsp)
-  
-    dsp$trails  <- getTrails(dsp)
-    
-    return(dsp)
+    return(createDSPobject())
   }
 
 
