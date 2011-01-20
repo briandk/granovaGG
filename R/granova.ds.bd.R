@@ -35,8 +35,8 @@ granova.ds.bd <- function( data                      = null,
     }
 
     getShadows <- function (dsp) {
-      xShadow <- (-dsp$effect + dsp$parameters$anchor) / 2 + dsp$parameters$shadowOffset
-      yShadow <- xShadow + dsp$effect
+      xShadow <- (dsp$effect / 2) + (3 * dsp$parameters$bounds[1] + dsp$parameters$bounds[2]) / 4 + dsp$parameters$shadowOffset
+      yShadow <- xShadow - dsp$effect
       return (data.frame(xShadow, yShadow))
     }
 
@@ -60,7 +60,7 @@ granova.ds.bd <- function( data                      = null,
     }
 
     getEffect <- function (dsp) {
-      return( getYs(dsp$data) - getXs(dsp$data) )
+      return( getXs(dsp$data) - getYs(dsp$data) )
     }
     
     getCrossbow <- function (dsp) {
@@ -89,15 +89,15 @@ granova.ds.bd <- function( data                      = null,
       .aggregateDataRange  <- c(range(getXs(dsp$data)), range(getYs(dsp$data)))
       .extrema             <- c(max(.aggregateDataRange), min(.aggregateDataRange))    
       .squareDataRange     <- max(.extrema) - min(.extrema)
-      .southWestPadding    <- (70/100) * .squareDataRange
-      .northEastPadding    <- (20/100) * .squareDataRange
+      .southWestPadding    <- (60/100) * .squareDataRange
+      .northEastPadding    <- (25/100) * .squareDataRange
       .lowerGraphicalBound <- min(.extrema) - .southWestPadding
       .upperGraphicalBound <- max(.extrema) + .northEastPadding
       .bounds              <- c(.lowerGraphicalBound, .upperGraphicalBound)
       .center              <- mean(.bounds)
       .crossbowAnchor      <- mean(.bounds) + min(.bounds)
-      .shadowOffset        <- .squareDataRange / 50
-      .expand              <- c(0.1, 0)
+      .shadowOffset        <- 0.008*.squareDataRange
+      .expand              <- c(0, 100)
     
       return ( list(
         squareDataRange     = .squareDataRange,    
@@ -304,8 +304,14 @@ granova.ds.bd <- function( data                      = null,
       
     p <- createGgplot(dsp)
 
-    p <- p + scaleX(dsp) + scaleY(dsp)
-
+    setEqualAxisLimits <- function (dsp) {
+      return(  coord_cartesian(
+                 xlim = dsp$parameters$bounds, 
+                 ylim = dsp$parameters$bounds
+               )
+      )
+    }
+    
     p <- p + shadows(dsp)
     
     p <- p + treatmentLine(dsp)
@@ -328,7 +334,9 @@ granova.ds.bd <- function( data                      = null,
   
     p <- p + legend(dsp)
   
-    p <- p + coord_equal()
+    # p <- p + scaleX(dsp) + scaleY(dsp)
+    
+    p <- p + setEqualAxisLimits(dsp) + coord_equal()
   
     p <- p + title()
       

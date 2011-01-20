@@ -25,5 +25,6 @@ testFrame1 <- rbind(testFrame1, z)
 p <- granova.ds.bd(testFrame1, conf.level = 0.95, plotTitle = "This is a test plot")
 p + geom_text(aes(label = caseid), data = testFrame1, size = I(3), vjust = -1)
 print(granova.ds.bd(pair65, conf.level = 0.99, plotTitle = "Second test plot"))
-ggplot(aes_string(x = x, y = y, label = caseid), data = testFrame1) + geom_text()
 
+testFrame1 <- data.frame(testFrame1[ , 1], testFrame1[ , 2])
+granova.ds(testFrame1)
