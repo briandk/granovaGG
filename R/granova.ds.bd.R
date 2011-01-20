@@ -1,9 +1,8 @@
 ## Defining the Function
 
-granova.ds.bd <- function( data                      = null, 
+granova.ds.bd <- function( data                      = NULL, 
                            plotTitle                 = "Dependent Sample Scatterplot",
                            conf.level                = 0.95,
-                           produceBlankPlotObject    = TRUE
                  ) 
 
 {
