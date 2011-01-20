@@ -10,10 +10,6 @@ granova.ds.bd <- function( data                      = null,
 
   marshalData <- function () {
 
-    ## Functions should be grouped so that they're easy to locate and the
-    ## rest of your code can be read from beginning to end.
-
-    ## Computing t-test Statistics for the Confidence Band and Mean Difference
     getTtest <- function (data, conf.level) {
       return (   t.test(data[, 2], 
                         data[, 1], 
@@ -142,14 +138,9 @@ granova.ds.bd <- function( data                      = null,
   }
 
 
-
-
-
-
   generateDSggplot <- function (dsp) {
 
-    # Now, we use ggplot2 grammar to build the plot layer
-    # by layer. Because of the way ggplot2 creates plot objects, layers can be
+    # Because of the way ggplot2 creates plot objects, layers can be
     # added to a plot p simply by calling "p <- p + newLayer"
     
     createGgplot <- function(dsp) {
@@ -302,15 +293,15 @@ granova.ds.bd <- function( data                      = null,
       )
     }
       
-    p <- createGgplot(dsp)
-
     setEqualAxisLimits <- function (dsp) {
       return(  coord_cartesian(
                  xlim = dsp$parameters$bounds, 
                  ylim = dsp$parameters$bounds
                )
       )
-    }
+    }  
+    
+    p <- createGgplot(dsp)
     
     p <- p + shadows(dsp)
     
