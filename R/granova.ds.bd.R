@@ -292,35 +292,20 @@ granova.ds.bd <- function( data                      = NULL,
     }  
     
     p <- createGgplot(dsp)
-    
     p <- p + shadows(dsp)
-    
     p <- p + treatmentLine(dsp)
-      
     p <- p + rawData(dsp)
-  
     p <- p + blank()
-  
     p <- p + identityLine()
-  
     p <- p + rugPlot(dsp)
-  
     p <- p + meanMarks(dsp)
-
     p <- p + crossbow(dsp)
-
     p <- p + CIBand(dsp)
-  
     p <- p + trails(dsp)
-  
     p <- p + legend(dsp)
-  
     # p <- p + scaleX(dsp) + scaleY(dsp)
-    
     p <- p + setEqualAxisLimits(dsp) + coord_equal()
-  
     p <- p + title()
-      
     return (p)
   }
   
