@@ -1,8 +1,6 @@
 ## Defining the Function
 
 granova.ds.bd <- function( data                      = null, 
-                           southwestPlotOffsetFactor = 0.4,
-                           northeastPlotOffsetFactor = 0.5,
                            plotTitle                 = "Dependent Sample Scatterplot",
                            conf.level                = 0.95,
                            produceBlankPlotObject    = TRUE
@@ -87,8 +85,10 @@ granova.ds.bd <- function( data                      = null,
       .aggregateDataRange  <- c(range(getXs(dsp$data)), range(getYs(dsp$data)))
       .extrema             <- c(max(.aggregateDataRange), min(.aggregateDataRange))    
       .squareDataRange     <- max(.extrema) - min(.extrema)
-      .lowerGraphicalBound <- min(.extrema) - (1.2 * northeastPlotOffsetFactor * .squareDataRange)
-      .upperGraphicalBound <- max(.extrema) + (0.5 * southwestPlotOffsetFactor * .squareDataRange)
+      .southWestPadding    <- (60/100) * .squareDataRange
+      .northEastPadding    <- (20/100) * .squareDataRange
+      .lowerGraphicalBound <- min(.extrema) - .southWestPadding
+      .upperGraphicalBound <- max(.extrema) + .northEastPadding
       .bounds              <- c(.lowerGraphicalBound, .upperGraphicalBound)
       .center              <- mean(.bounds)
       .crossbowAnchor      <- mean(.bounds) + min(.bounds)
