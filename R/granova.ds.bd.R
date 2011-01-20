@@ -8,7 +8,7 @@ granova.ds.bd <- function( data                      = null,
 
 {
 
-  marshalData <- function () {
+  prepareData <- function () {
 
     getTtest <- function (data, conf.level) {
       return (   t.test(data[, 2], 
@@ -334,6 +334,6 @@ granova.ds.bd <- function( data                      = null,
     return (p)
   }
   
-  return( generateDSggplot( dsp=marshalData() ) )
+  return( generateDSggplot( dsp = prepareData() ) )
   
 }
