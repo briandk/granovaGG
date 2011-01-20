@@ -9,43 +9,6 @@ granova.ds.bd <- function( data                      = NULL,
 
   prepareData <- function () {
 
-    getTtest <- function (data, conf.level) {
-      return (   t.test(data[, 2], 
-                        data[, 1], 
-                        paired     = TRUE,
-                        conf.level = conf.level
-                 )
-      )
-    }
-
-    getStats <- function (dsp, conf.level) {
-      tTest <- getTtest(dsp$data, conf.level)
-      return(  data.frame(
-                lowerTreatmentEffect = as.numeric(tTest$conf.int[2]),
-                meanTreatmentEffect  = as.numeric(tTest$estimate[1]),
-                upperTreatmentEffect = as.numeric(tTest$conf.int[1]),
-                tStatistic           = as.numeric(tTest$statistic[1])
-              )
-      )    
-    }
-
-    getShadows <- function (dsp) {
-      xShadow <- (dsp$effect / 2) + (3 * dsp$parameters$bounds[1] + dsp$parameters$bounds[2]) / 4 + dsp$parameters$shadowOffset
-      yShadow <- xShadow - dsp$effect
-      return (data.frame(xShadow, yShadow))
-    }
-
-    getTrails <- function (dsp) {
-      return(  data.frame(
-                 xTrailStart = getXs(dsp$data), 
-                 yTrailStart = getYs(dsp$data),
-                 xTrailEnd   = getXs(dsp$shadow), 
-                 yTrailEnd   = getYs(dsp$shadow)
-               )
-      )
-    }
-
-
     getXs <- function (data) {
       return( data[, 1])
     }
@@ -58,28 +21,26 @@ granova.ds.bd <- function( data                      = NULL,
       return( getXs(dsp$data) - getYs(dsp$data) )
     }
     
-    getCrossbow <- function (dsp) {
+    getTtest <- function (data, conf.level) {
+      return (   t.test(data[, 2], 
+                        data[, 1], 
+                        paired     = TRUE,
+                        conf.level = conf.level
+                 )
+      )
+    }
+    
+    getStats <- function (dsp, conf.level) {
+      tTest <- getTtest(dsp$data, conf.level)
       return(  data.frame(
-        x    = min(dsp$shadows$xShadow) - dsp$parameters$shadowOffset,
-        y    = max(dsp$shadows$yShadow) - dsp$parameters$shadowOffset,
-        xend = max(dsp$shadows$xShadow) - dsp$parameters$shadowOffset,
-        yend = min(dsp$shadows$yShadow) - dsp$parameters$shadowOffset
-        )
-      )  
+                lowerTreatmentEffect = as.numeric(tTest$conf.int[2]),
+                meanTreatmentEffect  = as.numeric(tTest$estimate[1]),
+                upperTreatmentEffect = as.numeric(tTest$conf.int[1]),
+                tStatistic           = as.numeric(tTest$statistic[1])
+              )
+      )    
     }
-
-    getCIBand <- function (dsp) {
-      CIBand <- data.frame(
-        cx    = ((dsp$parameters$anchor - dsp$stats$lowerTreatmentEffect) / 2) - 3 * (dsp$parameters$shadowOffset),
-        cy    = ((dsp$parameters$anchor + dsp$stats$lowerTreatmentEffect) / 2) - 3 * (dsp$parameters$shadowOffset),
-        cxend = ((dsp$parameters$anchor - dsp$stats$upperTreatmentEffect) / 2) - 3 * (dsp$parameters$shadowOffset),
-        cyend = ((dsp$parameters$anchor + dsp$stats$upperTreatmentEffect) / 2) - 3 * (dsp$parameters$shadowOffset),
-        color = factor(paste(100 * conf.level, "% CI", " (t = ", round(dsp$stats$tStatistic, digits = 2), ")", sep =""))
-        )
-      
-      return (CIBand)
-    }
-  
+    
     getGraphicsParams <- function (dsp) {
       .aggregateDataRange  <- c(range(getXs(dsp$data)), range(getYs(dsp$data)))
       .extrema             <- c(max(.aggregateDataRange), min(.aggregateDataRange))    
@@ -103,34 +64,69 @@ granova.ds.bd <- function( data                      = NULL,
         pointsize           = I(2)      
       ) )
     }
-
-    getTreatmentLine <- function (dsp) {
-      treatmentLine <- data.frame(
-        intercept      = dsp$stats$meanTreatmentEffect,
-        slope          = 1,
-        color          = factor(paste("Mean Diff. =", round(dsp$stats$meanTreatmentEffect, digits = 2)))
-      )
     
-      return (treatmentLine)
+    getShadows <- function (dsp) {
+      xShadow <- (dsp$effect / 2) + (3 * dsp$parameters$bounds[1] + dsp$parameters$bounds[2]) / 4 + dsp$parameters$shadowOffset
+      yShadow <- xShadow - dsp$effect
+      return (data.frame(xShadow, yShadow))
     }
-  
-    createDSPobject <- function () {
-      dsp               <- list( data = data )
-      dsp$effect        <- getEffect(dsp)
-      dsp$stats         <- getStats(dsp, conf.level)
-      dsp$parameters    <- getGraphicsParams(dsp)
-      dsp$shadows       <- getShadows(dsp)
-      dsp$crossbow      <- getCrossbow(dsp)
-      dsp$CIBand        <- getCIBand(dsp)
-      dsp$treatmentLine <- getTreatmentLine(dsp)
-      dsp$trails        <- getTrails(dsp)
+
+    getCrossbow <- function (dsp) {
+      return(  data.frame(
+        x    = min(dsp$shadows$xShadow) - dsp$parameters$shadowOffset,
+        y    = max(dsp$shadows$yShadow) - dsp$parameters$shadowOffset,
+        xend = max(dsp$shadows$xShadow) - dsp$parameters$shadowOffset,
+        yend = min(dsp$shadows$yShadow) - dsp$parameters$shadowOffset
+        )
+      )  
+    }
+    
+    getCIBand <- function (dsp) {
+      CIBand <- data.frame(
+        cx    = ((dsp$parameters$anchor - dsp$stats$lowerTreatmentEffect) / 2) - 3 * (dsp$parameters$shadowOffset),
+        cy    = ((dsp$parameters$anchor + dsp$stats$lowerTreatmentEffect) / 2) - 3 * (dsp$parameters$shadowOffset),
+        cxend = ((dsp$parameters$anchor - dsp$stats$upperTreatmentEffect) / 2) - 3 * (dsp$parameters$shadowOffset),
+        cyend = ((dsp$parameters$anchor + dsp$stats$upperTreatmentEffect) / 2) - 3 * (dsp$parameters$shadowOffset),
+        color = factor(paste(100 * conf.level, "% CI", " (t = ", round(dsp$stats$tStatistic, digits = 2), ")", sep =""))
+        )
       
-      return(dsp)
+      return (CIBand)
     }
     
-    return(createDSPobject())
-  }
+    getTreatmentLine <- function (dsp) {
+      return( data.frame(
+                intercept      = dsp$stats$meanTreatmentEffect,
+                slope          = 1,
+                color          = factor(paste("Mean Diff. =", round(dsp$stats$meanTreatmentEffect, digits = 2)))
+              )
+      )
+    }
 
+    getTrails <- function (dsp) {
+      
+      return(  data.frame(
+                 xTrailStart = getXs(dsp$data), 
+                 yTrailStart = getYs(dsp$data),
+                 xTrailEnd   = getXs(dsp$shadow), 
+                 yTrailEnd   = getYs(dsp$shadow)
+               )
+      )
+    }
+    
+
+    dsp               <- list( data = data )
+    dsp$effect        <- getEffect(dsp)
+    dsp$stats         <- getStats(dsp, conf.level)
+    dsp$parameters    <- getGraphicsParams(dsp)
+    dsp$shadows       <- getShadows(dsp)
+    dsp$crossbow      <- getCrossbow(dsp)
+    dsp$CIBand        <- getCIBand(dsp)
+    dsp$treatmentLine <- getTreatmentLine(dsp)
+    dsp$trails        <- getTrails(dsp)
+
+    return( dsp )
+  }
+    
 
   generateDSggplot <- function (dsp) {
 
