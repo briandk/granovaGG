@@ -23,8 +23,8 @@ granova.ds.bd <- function( data                      = null,
       )
     }
 
-    getStats <- function (data, conf.level) {
-      tTest <- getTtest(data, conf.level)
+    getStats <- function (dsp, conf.level) {
+      tTest <- getTtest(dsp$data, conf.level)
       return(  data.frame(
                 lowerTreatmentEffect = as.numeric(tTest$conf.int[2]),
                 meanTreatmentEffect  = as.numeric(tTest$estimate[1]),
@@ -59,6 +59,10 @@ granova.ds.bd <- function( data                      = null,
       return( data[, 2])
     }
 
+    getEffect <- function (dsp) {
+      return( getYs(dsp$data) - getXs(dsp$data) )
+    }
+    
     getCrossbow <- function (dsp) {
       return(  data.frame(
         x    = min(dsp$shadows$xShadow) - dsp$parameters$shadowOffset,
@@ -85,7 +89,7 @@ granova.ds.bd <- function( data                      = null,
       .aggregateDataRange  <- c(range(getXs(dsp$data)), range(getYs(dsp$data)))
       .extrema             <- c(max(.aggregateDataRange), min(.aggregateDataRange))    
       .squareDataRange     <- max(.extrema) - min(.extrema)
-      .southWestPadding    <- (60/100) * .squareDataRange
+      .southWestPadding    <- (70/100) * .squareDataRange
       .northEastPadding    <- (20/100) * .squareDataRange
       .lowerGraphicalBound <- min(.extrema) - .southWestPadding
       .upperGraphicalBound <- max(.extrema) + .northEastPadding
@@ -118,9 +122,9 @@ granova.ds.bd <- function( data                      = null,
     
     dsp <- list( data = data )
 
-    dsp$effect <- getYs(dsp$data) - getXs(dsp$data)
+    dsp$effect <- getEffect(dsp)
     
-    dsp$stats <- getStats(dsp$data, conf.level)
+    dsp$stats <- getStats(dsp, conf.level)
   
     dsp$parameters <- getGraphicsParams(dsp)
   
