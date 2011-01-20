@@ -299,8 +299,10 @@ granova.ds.bd <- function( data                      = null,
     }
   
     p <- createGgplot(dsp)
-  
+
     p <- p + scaleX(dsp) + scaleY(dsp)
+
+    p <- p + shadows(dsp)
     
     p <- p + treatmentLine(dsp)
       
@@ -318,8 +320,6 @@ granova.ds.bd <- function( data                      = null,
 
     p <- p + CIBand(dsp)
   
-    p <- p + shadows(dsp)
-
     p <- p + trails(dsp)
   
     p <- p + legend(dsp)
@@ -330,10 +330,6 @@ granova.ds.bd <- function( data                      = null,
   
     return (p)
   }
-  
-  
-  
-  
   
   return( generateDSggplot( dsp=marshalData() ) )
   

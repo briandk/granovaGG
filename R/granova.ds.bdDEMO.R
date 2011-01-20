@@ -17,7 +17,7 @@ testFrame1 <- data.frame(MathPreTest = x, MathPostTest = y, caseid)
 p <- granova.ds.bd(testFrame1, conf.level = 0.95, plotTitle = "This is a test plot")
 p + geom_text(aes(label = caseid), data = testFrame1, size = I(3), vjust = -1)
 print(granova.ds.bd(pair65, conf.level = 0.99, plotTitle = "Second test plot"))
-qplot(x, y, data = testFrame1, main = "Problematic Dataset")
+qplot(x, y, main = "Problematic Dataset")
 
 # 
 # 
