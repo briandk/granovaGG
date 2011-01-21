@@ -188,18 +188,23 @@ granova.ds.bd <- function( data                      = NULL,
       )
     }
   
-    meanMarks <- function (dsp) {
-      meanMarks <- geom_rug(
-        aes_string(
-          x = mean(dsp$data[ , 1]),
-          y = mean(dsp$data[ , 2])
-        ),
-        data  = dsp$data,
-        color = dsp$colors$meanLine,
-        alpha = I(2/3)
+    xMeanLine <- function (dsp) {
+      return( 
+        geom_vline(
+          xintercept = mean(getXs(dsp$data)),
+          color      = dsp$colors$meanLine
+        ) 
       )
+    }
     
-      return (meanMarks)
+    yMeanLine <- function (dsp)  {
+      return( 
+        geom_hline(
+          yintercept = mean(getYs(dsp$data)),
+          color      = dsp$colors$meanLine
+        ) 
+      )
+      
     }
   
     crossbow <- function (dsp) {
@@ -294,7 +299,7 @@ granova.ds.bd <- function( data                      = NULL,
     # p <- p + blank()
     p <- p + identityLine()
     p <- p + rugPlot(dsp)
-    p <- p + meanMarks(dsp)
+    p <- p + xMeanLine(dsp) + yMeanLine(dsp)
     p <- p + crossbow(dsp)
     p <- p + CIBand(dsp)
     p <- p + trails(dsp)
