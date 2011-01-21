@@ -15,8 +15,6 @@ granova.ds.bd <- function( data                      = NULL,
     return( data[, 2])
   }
 
-  prepareData <- function () {
-
     getEffect <- function (dsp) {
       return( getXs(dsp$data) - getYs(dsp$data) )
     }
@@ -114,12 +112,12 @@ granova.ds.bd <- function( data                      = NULL,
     }
     
     getColors <- function (dsp) {
-      palette <- display.brewer.pal(n = 4, name = "Set1")
+      palette <- brewer.pal(n = 4, name = "Set1")
       return(  list(
                  treatmentLine = palette[1],
                  rugplot       = palette[2],
-                 meanLine      = palette[3],
-                 CIBand        = palette[4]
+                 meanLine      = palette[4],
+                 CIBand        = palette[3]
                )
       )         
     }
@@ -134,15 +132,12 @@ granova.ds.bd <- function( data                      = NULL,
     dsp$treatmentLine <- getTreatmentLine(dsp)
     dsp$trails        <- getTrails(dsp)
     dsp$colors        <- getColors(dsp)
-    
-    return(dsp)
-  }
+      
     
 
     # Because of the way ggplot2 creates plot objects, layers can be
     # added to a plot p simply by calling "p <- p + newLayer"
 
-  generateGgplotObject <- function (dsp) {
     
     initializeGgplot <- function(dsp) {
       p <- ggplot( 
@@ -316,7 +311,5 @@ granova.ds.bd <- function( data                      = NULL,
     p <- p + title()
 
     return( p )
-  }
-  
-  return( generateGgplotObject( dsp = prepareData()))
+
 }
