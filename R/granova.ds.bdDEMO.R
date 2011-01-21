@@ -1,33 +1,39 @@
 # For plot comparisons
 library(granova)
 library(ggplot2)
-library(DAAG)
 library(RColorBrewer)
 
 source("granova.ds.bd.R")
 
-set.seed(1001)
+loadGranovaData <- function (filepath) {
+  data   <- read.csv(filepath, header = TRUE)
+  caseid <- 1:length(data[ , 1])
+  return( cbind(data, caseid))
+}
 
-
-x <- rnorm(mean = 42, n = 25)
-y <- rnorm(mean = 45, n = 25)
-caseid <- 1:25
-testFrame1 <- data.frame(MathPreTest = x, MathPostTest = y, caseid)
-
-granova.ds.bd(
-  data               = testFrame1, 
-  conf.level         = 0.95, 
-  plotTitle          = "This is a test plot",
-  colorBrewerPalette = "Dark2",
-  noBackground       = TRUE
-)
+tobacco  <- loadGranovaData("~/Desktop/tobacco.csv")
+anorexia <- loadGranovaData("~/Desktop/anorexia.csv")
+lead     <- loadGranovaData("~/Desktop/lead.csv")
 
 granova.ds.bd(
-  data               = testFrame1, 
+  data               = lead, 
   conf.level         = 0.95, 
-  plotTitle          = "This is a test plot",
-  colorBrewerPalette = "Dark2",
-  noBackground       = TRUE
-)
+  plotTitle          = "Lead Levels in the Blood of Children",
+) + opts(panel.background = theme_rect(fill = "grey95", colour = NA))
+
+granova.ds.bd(
+  data               = tobacco, 
+  conf.level         = 0.95, 
+  plotTitle          = "Effect of Preparation on Lesions",
+) + opts(panel.background = theme_rect(fill = "grey95", colour = NA))
+
+granova.ds.bd(
+  data               = anorexia, 
+  conf.level         = 0.95, 
+  plotTitle          = "Effect of Therapy on Anorexic Patients",
+) + opts(panel.background = theme_rect(fill = "grey95", colour = NA))
+
+
+
 
 # p + geom_text(aes(label = caseid), data = testFrame1, size = I(3), vjust = -1)

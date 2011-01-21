@@ -209,7 +209,7 @@ granova.ds.bd <- function( data                      = NULL,
           xintercept = mean(getXs(dsp$data)),
           color      = dsp$colors$meanLine,
           size       = dsp$parameters$meanLineSize,
-          alpha      = I(1/2)
+          alpha      = I(1)
         ) 
       )
     }
@@ -220,7 +220,7 @@ granova.ds.bd <- function( data                      = NULL,
           yintercept = mean(getYs(dsp$data)),
           color      = dsp$colors$meanLine,
           size       = dsp$parameters$meanLineSize,
-          alpha      = I(1/2)
+          alpha      = I(1)
         ) 
       )
       
@@ -234,7 +234,8 @@ granova.ds.bd <- function( data                      = NULL,
           xend  = xend,
           yend  = yend
         ), 
-        size  = I(1.5),
+        size  = I(3/4),
+        alpha = I(3/4),
         color = dsp$colors$crossbow,
         data  = dsp$crossbow
       )  
