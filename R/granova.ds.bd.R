@@ -73,10 +73,10 @@ granova.ds.bd <- function( data                      = NULL,
 
     getCrossbow <- function (dsp) {
       return(  data.frame(
-        x    = min(dsp$shadows$xShadow) - dsp$parameters$shadowOffset,
-        y    = max(dsp$shadows$yShadow) - dsp$parameters$shadowOffset,
-        xend = max(dsp$shadows$xShadow) - dsp$parameters$shadowOffset,
-        yend = min(dsp$shadows$yShadow) - dsp$parameters$shadowOffset
+        x    = min(dsp$shadows$xShadow) - (1.5 * dsp$parameters$shadowOffset),
+        y    = max(dsp$shadows$yShadow) - (1.5 * dsp$parameters$shadowOffset),
+        xend = max(dsp$shadows$xShadow) - (1.5 * dsp$parameters$shadowOffset),
+        yend = min(dsp$shadows$yShadow) - (1.5 * dsp$parameters$shadowOffset)
         )
       )  
     }
@@ -190,6 +190,8 @@ granova.ds.bd <- function( data                      = NULL,
     rugPlot <- function (dsp) {
       return(
         geom_rug(
+          size  = I(1/2),
+          alpha = I(1/2),
           color = dsp$colors$rugplot,
           data  = dsp$data
         )  
@@ -227,7 +229,6 @@ granova.ds.bd <- function( data                      = NULL,
           yend  = yend
         ), 
         data  = dsp$crossbow,
-        alpha = I(3/4)
       )  
       
       return (crossbow)
