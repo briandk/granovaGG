@@ -25,14 +25,22 @@ granova.ds.bd(
   data               = tobacco, 
   conf.level         = 0.95, 
   plotTitle          = "Effect of Preparation on Lesions",
-) + opts(panel.background = theme_rect(fill = "grey95", colour = NA))
+) + 
+opts(panel.background = theme_rect(fill = "grey95", colour = NA)) + 
+geom_text(
+  aes(label = caseid), 
+    data    = tobacco, 
+    size    = I(3), 
+    vjust   = -1,
+    alpha   = I(3/4)
+)
+
 
 granova.ds.bd(
   data               = anorexia, 
   conf.level         = 0.95, 
   plotTitle          = "Effect of Therapy on Anorexic Patients",
 ) + opts(panel.background = theme_rect(fill = "grey95", colour = NA))
-
 
 
 # p + geom_text(aes(label = caseid), data = testFrame1, size = I(3), vjust = -1)
