@@ -7,13 +7,15 @@ granova.ds.bd <- function( data                      = NULL,
 
 {
 
-    getXs <- function (data) {
-      return( data[, 1])
-    }
+  getXs <- function (data) {
+    return( data[, 1])
+  }
 
-    getYs <- function (data) {
-      return( data[, 2])
-    }
+  getYs <- function (data) {
+    return( data[, 2])
+  }
+
+  prepareData <- function () {
 
     getEffect <- function (dsp) {
       return( getXs(dsp$data) - getYs(dsp$data) )
@@ -131,11 +133,15 @@ granova.ds.bd <- function( data                      = NULL,
     dsp$treatmentLine <- getTreatmentLine(dsp)
     dsp$trails        <- getTrails(dsp)
     dsp$colors        <- getColors(dsp)
-
+    
+    return(dsp)
+  }
     
 
     # Because of the way ggplot2 creates plot objects, layers can be
     # added to a plot p simply by calling "p <- p + newLayer"
+
+  generateGgplotObject <- function (dsp) {
     
     initializeGgplot <- function(dsp) {
       p <- ggplot( 
@@ -307,7 +313,9 @@ granova.ds.bd <- function( data                      = NULL,
     p <- p + scaleX(dsp) + scaleY(dsp)
     p <- p + coord_fixed()
     p <- p + title()
+
+    return( p )
+  }
   
-  return( p )
-  
+  return( generateGgplotObject( dsp = prepareData()))
 }
