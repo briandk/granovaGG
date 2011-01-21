@@ -157,7 +157,7 @@ granova.ds.bd <- function( data                      = NULL,
                          slope     = slope,
                          color     = color
                        ),
-                       size  = I(3/4),
+                       size  = I(1/2),
                        data  = dsp$treatmentLine
               )
       )
@@ -169,7 +169,13 @@ granova.ds.bd <- function( data                      = NULL,
     }
   
     identityLine <- function() {
-      return (geom_abline(slope = 1, intercept = 0))
+      return (
+        geom_abline(
+          slope     = 1, 
+          intercept = 0,
+          alpha     = I(1/2)
+        )
+      )
     }
   
     scaleX <- function (dsp) {
