@@ -2,7 +2,8 @@
 
 granova.ds.bd <- function( data                      = NULL, 
                            plotTitle                 = "Dependent Sample Scatterplot",
-                           conf.level                = 0.95
+                           conf.level                = 0.95,
+                           noBackground              = FALSE
                  ) 
 
 {
@@ -173,7 +174,7 @@ granova.ds.bd <- function( data                      = NULL,
         geom_abline(
           slope     = 1, 
           intercept = 0,
-          alpha     = I(1/2)
+          alpha     = I(3/4)
         )
       )
     }
@@ -189,7 +190,6 @@ granova.ds.bd <- function( data                      = NULL,
     rugPlot <- function (dsp) {
       return(
         geom_rug(
-          alpha = I(2/3),
           color = dsp$colors$rugplot,
           data  = dsp$data
         )  
@@ -293,13 +293,15 @@ granova.ds.bd <- function( data                      = NULL,
     }
   
     blank <- function () {
-      return( opts(
-                panel.grid.major = theme_blank(),
-                panel.grid.minor = theme_blank(),
-                panel.background = theme_blank(),
-                axis.line = theme_segment()
-              )
-      )
+      if (noBackground)
+        return( opts(
+                  panel.grid.major = theme_blank(),
+                  panel.grid.minor = theme_blank(),
+                  panel.background = theme_blank(),
+                  axis.line = theme_segment()
+                )
+        )
+      else return (NULL)
     }
           
     p <- initializeGgplot(dsp)
