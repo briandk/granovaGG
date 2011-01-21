@@ -7,8 +7,6 @@ granova.ds.bd <- function( data                      = NULL,
 
 {
 
-  prepareData <- function () {
-
     getXs <- function (data) {
       return( data[, 1])
     }
@@ -134,11 +132,7 @@ granova.ds.bd <- function( data                      = NULL,
     dsp$trails        <- getTrails(dsp)
     dsp$colors        <- getColors(dsp)
 
-    return( dsp )
-  }
     
-
-  generateDSggplot <- function (dsp) {
 
     # Because of the way ggplot2 creates plot objects, layers can be
     # added to a plot p simply by calling "p <- p + newLayer"
@@ -201,7 +195,7 @@ granova.ds.bd <- function( data                      = NULL,
           y = mean(dsp$data[ , 2])
         ),
         data  = dsp$data,
-        color = dsp$colors$meanMarks,
+        color = dsp$colors$meanLine,
         alpha = I(2/3)
       )
     
@@ -308,9 +302,7 @@ granova.ds.bd <- function( data                      = NULL,
     p <- p + scaleX(dsp) + scaleY(dsp)
     p <- p + coord_fixed()
     p <- p + title()
-    return (p)
-  }
   
-  return( generateDSggplot( dsp = prepareData() ) )
+  return( p )
   
 }
