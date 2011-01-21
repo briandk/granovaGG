@@ -14,17 +14,16 @@ x <- rnorm(mean = 42, n = 25)
 y <- rnorm(mean = 45, n = 25)
 caseid <- 1:25
 testFrame1 <- data.frame(MathPreTest = x, MathPostTest = y, caseid)
+granova.ds(testFrame1[ , c(1, 2)])
+
 p <- granova.ds.bd(testFrame1, conf.level = 0.95, plotTitle = "This is a test plot")
 p + geom_text(aes(label = caseid), data = testFrame1, size = I(3), vjust = -1)
-print(granova.ds.bd(pair65, conf.level = 0.99, plotTitle = "Second test plot"))
-ggplot(aes(x = x, y = y, label = caseid), data = testFrame1) + geom_text()
 
-z <- c((40 - 10), (46.5 + 10), 26)
+z <- c((40 - 10000000), (46.5 + 10000000), 26)
 testFrame1 <- rbind(testFrame1, z)
 
 p <- granova.ds.bd(testFrame1, conf.level = 0.95, plotTitle = "This is a test plot")
 p + geom_text(aes(label = caseid), data = testFrame1, size = I(3), vjust = -1)
-print(granova.ds.bd(pair65, conf.level = 0.99, plotTitle = "Second test plot"))
 
 testFrame1 <- data.frame(testFrame1[ , 1], testFrame1[ , 2])
 granova.ds(testFrame1)

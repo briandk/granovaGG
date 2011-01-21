@@ -45,28 +45,28 @@ granova.ds.bd <- function( data                      = NULL,
       .aggregateDataRange  <- c(range(getXs(dsp$data)), range(getYs(dsp$data)))
       .extrema             <- c(max(.aggregateDataRange), min(.aggregateDataRange))    
       .squareDataRange     <- max(.extrema) - min(.extrema)
-      .southWestPadding    <- (60/100) * .squareDataRange
+      .southWestPadding    <- (65/100) * .squareDataRange
       .northEastPadding    <- (25/100) * .squareDataRange
       .lowerGraphicalBound <- min(.extrema) - .southWestPadding
       .upperGraphicalBound <- max(.extrema) + .northEastPadding
       .bounds              <- c(.lowerGraphicalBound, .upperGraphicalBound)
       .center              <- mean(.bounds)
       .crossbowAnchor      <- mean(.bounds) + min(.bounds)
-      .shadowOffset        <- 0.008*.squareDataRange
-      .expand              <- c(0, 100)
+      .shadowOffset        <- (1/100)*.squareDataRange
     
       return ( list(
         squareDataRange     = .squareDataRange,    
         bounds              = .bounds,  
         shadowOffset        = .shadowOffset,
         anchor              = .crossbowAnchor,
-        expand              = .expand,
         pointsize           = I(2)      
       ) )
     }
     
     getShadows <- function (dsp) {
-      xShadow <- (dsp$effect / 2) + (3 * dsp$parameters$bounds[1] + dsp$parameters$bounds[2]) / 4 + dsp$parameters$shadowOffset
+      xShadow <- (dsp$effect / 2) + 
+                 (3 * dsp$parameters$bounds[1] + dsp$parameters$bounds[2]) / 4 + 
+                 (4 * dsp$parameters$shadowOffset)
       yShadow <- xShadow - dsp$effect
       return (data.frame(xShadow, yShadow))
     }
@@ -167,11 +167,11 @@ granova.ds.bd <- function( data                      = NULL,
     }
   
     scaleX <- function (dsp) {
-      return (scale_x_continuous(limits = dsp$parameters$bounds, expand = dsp$parameters$expand))
+      return (scale_x_continuous(limits = dsp$parameters$bounds))
     }
   
     scaleY <- function (dsp) {
-      return (scale_y_continuous(limits = dsp$parameters$bounds, expand = dsp$parameters$expand))
+      return (scale_y_continuous(limits = dsp$parameters$bounds))
     }
   
     rugPlot <- function (dsp) {
@@ -303,8 +303,8 @@ granova.ds.bd <- function( data                      = NULL,
     p <- p + CIBand(dsp)
     p <- p + trails(dsp)
     p <- p + legend(dsp)
-    # p <- p + scaleX(dsp) + scaleY(dsp)
-    p <- p + setEqualAxisLimits(dsp) + coord_equal()
+    p <- p + scaleX(dsp) + scaleY(dsp)
+    p <- p + coord_fixed()
     p <- p + title()
     return (p)
   }
