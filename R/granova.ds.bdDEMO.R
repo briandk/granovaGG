@@ -6,7 +6,7 @@ library(RColorBrewer)
 
 source("granova.ds.bd.R")
 
-
+set.seed(1001)
 
 
 x <- rnorm(mean = 42, n = 25)
@@ -18,7 +18,7 @@ granova.ds.bd(
   data               = testFrame1, 
   conf.level         = 0.95, 
   plotTitle          = "This is a test plot",
-  colorBrewerPalette = "Set1",
+  colorBrewerPalette = "Dark2",
   noBackground       = TRUE
 )
 

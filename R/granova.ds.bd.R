@@ -117,10 +117,10 @@ granova.ds.bd <- function( data                      = NULL,
     getColors <- function (dsp) {
       palette <- brewer.pal(n = 4, name = colorBrewerPalette)
       return(  list(
-                 treatmentLine = palette[1],
-                 rugplot       = palette[2],
-                 meanLine      = palette[3],
-                 CIBand        = palette[4]
+                 treatmentLine = "#542570",
+                 rugplot       = "black",
+                 meanLine      = "#542570",
+                 CIBand        = "#33A02C"
                )
       )         
     }
@@ -159,14 +159,17 @@ granova.ds.bd <- function( data                      = NULL,
                          slope     = slope,
                          color     = color
                        ),
-                       size  = I(1/2),
+                       alpha = I(1/2),
+                       size  = I(1),
                        data  = dsp$treatmentLine
               )
       )
     }
   
     rawData <- function (dsp) {
-      rawData <- geom_point(size = dsp$parameters$pointsize)
+      rawData <- geom_point(
+        size  = dsp$parameters$pointsize
+      )
       return (rawData)
     }
   
@@ -175,7 +178,7 @@ granova.ds.bd <- function( data                      = NULL,
         geom_abline(
           slope     = 1, 
           intercept = 0,
-          alpha     = I(3/4)
+          alpha     = I(1)
         )
       )
     }
@@ -192,7 +195,7 @@ granova.ds.bd <- function( data                      = NULL,
       return(
         geom_rug(
           size  = I(1/2),
-          alpha = I(1/2),
+          alpha = I(1/3),
           color = dsp$colors$rugplot,
           data  = dsp$data
         )  
@@ -204,7 +207,8 @@ granova.ds.bd <- function( data                      = NULL,
         geom_vline(
           xintercept = mean(getXs(dsp$data)),
           color      = dsp$colors$meanLine,
-          size       = dsp$parameters$meanLineSize
+          size       = dsp$parameters$meanLineSize,
+          alpha      = I(1/2)
         ) 
       )
     }
@@ -214,8 +218,8 @@ granova.ds.bd <- function( data                      = NULL,
         geom_hline(
           yintercept = mean(getYs(dsp$data)),
           color      = dsp$colors$meanLine,
-          size       = dsp$parameters$meanLineSize
-          
+          size       = dsp$parameters$meanLineSize,
+          alpha      = I(1/2)
         ) 
       )
       
@@ -258,9 +262,9 @@ granova.ds.bd <- function( data                      = NULL,
           y = yShadow
         ),
         data  = dsp$shadow, 
-        color = "black", 
+        color = "#D95F02", 
         size  = dsp$parameters$pointsize,
-        alpha = I(1/4) 
+        alpha = I(1/3) 
       )
     
       return (shadows)
@@ -278,7 +282,7 @@ granova.ds.bd <- function( data                      = NULL,
         size     = I(1/3),
         color    = "black",
         linetype = 1,
-        alpha    = I(1/8)              
+        alpha    = I(1/10)              
       ) 
     
       return (trails)
@@ -310,13 +314,13 @@ granova.ds.bd <- function( data                      = NULL,
     p <- p + treatmentLine(dsp)
     p <- p + xMeanLine(dsp) + yMeanLine(dsp)
     p <- p + shadows(dsp)
+    p <- p + trails(dsp)
     p <- p + rawData(dsp)
     p <- p + blank()
     p <- p + identityLine()
     p <- p + rugPlot(dsp)
     p <- p + crossbow(dsp)
     p <- p + CIBand(dsp)
-    p <- p + trails(dsp)
     p <- p + legend(dsp)
     p <- p + scaleX(dsp) + scaleY(dsp)
     p <- p + coord_fixed()
