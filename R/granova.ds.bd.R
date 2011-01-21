@@ -3,7 +3,8 @@
 granova.ds.bd <- function( data                      = NULL, 
                            plotTitle                 = "Dependent Sample Scatterplot",
                            conf.level                = 0.95,
-                           noBackground              = FALSE
+                           noBackground              = FALSE,
+                           colorBrewerPalette        = "Set1"
                  ) 
 
 {
@@ -114,12 +115,12 @@ granova.ds.bd <- function( data                      = NULL,
     }
     
     getColors <- function (dsp) {
-      palette <- brewer.pal(n = 4, name = "Set1")
+      palette <- brewer.pal(n = 4, name = colorBrewerPalette)
       return(  list(
                  treatmentLine = palette[1],
                  rugplot       = palette[2],
-                 meanLine      = palette[4],
-                 CIBand        = palette[3]
+                 meanLine      = palette[3],
+                 CIBand        = palette[4]
                )
       )         
     }
