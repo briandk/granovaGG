@@ -15,6 +15,8 @@ tobacco  <- loadGranovaData("~/Desktop/tobacco.csv")
 anorexia <- loadGranovaData("~/Desktop/anorexia.csv")
 lead     <- loadGranovaData("~/Desktop/lead.csv")
 
+pdf(file = "PruzekTestPlots.pdf", onefile = TRUE)
+
 granova.ds.bd(
   data               = lead, 
   conf.level         = 0.95, 
@@ -33,7 +35,7 @@ granova.ds.bd(
   plotTitle          = "Effect of Therapy on Anorexic Patients",
 ) + opts(panel.background = theme_rect(fill = "grey95", colour = NA))
 
-
+dev.off()
 
 
 # p + geom_text(aes(label = caseid), data = testFrame1, size = I(3), vjust = -1)
