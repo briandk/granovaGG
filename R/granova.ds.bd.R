@@ -57,7 +57,8 @@ granova.ds.bd <- function( data                      = NULL,
         bounds              = .bounds,  
         shadowOffset        = .shadowOffset,
         anchor              = .crossbowAnchor,
-        pointsize           = I(2)      
+        pointsize           = I(2),
+        meanLineSize        = I(1/10)      
       ) )
     }
     
@@ -194,7 +195,8 @@ granova.ds.bd <- function( data                      = NULL,
       return( 
         geom_vline(
           xintercept = mean(getXs(dsp$data)),
-          color      = dsp$colors$meanLine
+          color      = dsp$colors$meanLine,
+          size       = dsp$parameters$meanLineSize
         ) 
       )
     }
@@ -203,7 +205,9 @@ granova.ds.bd <- function( data                      = NULL,
       return( 
         geom_hline(
           yintercept = mean(getYs(dsp$data)),
-          color      = dsp$colors$meanLine
+          color      = dsp$colors$meanLine,
+          size       = dsp$parameters$meanLineSize
+          
         ) 
       )
       
