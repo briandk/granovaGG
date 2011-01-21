@@ -157,8 +157,7 @@ granova.ds.bd <- function( data                      = NULL,
                          slope     = slope,
                          color     = color
                        ),
-                       alpha = I(1/2),
-                       size  = I(1),
+                       size  = I(3/4),
                        data  = dsp$treatmentLine
               )
       )
@@ -238,7 +237,6 @@ granova.ds.bd <- function( data                      = NULL,
          color = color
         ), 
                 size  = I(2),
-                alpha = I(2/3),
                 data  = dsp$CIBand
               )
    
@@ -299,13 +297,13 @@ granova.ds.bd <- function( data                      = NULL,
     }
           
     p <- initializeGgplot(dsp)
-    p <- p + shadows(dsp)
     p <- p + treatmentLine(dsp)
+    p <- p + xMeanLine(dsp) + yMeanLine(dsp)
+    p <- p + shadows(dsp)
     p <- p + rawData(dsp)
-    # p <- p + blank()
+    p <- p + blank()
     p <- p + identityLine()
     p <- p + rugPlot(dsp)
-    p <- p + xMeanLine(dsp) + yMeanLine(dsp)
     p <- p + crossbow(dsp)
     p <- p + CIBand(dsp)
     p <- p + trails(dsp)

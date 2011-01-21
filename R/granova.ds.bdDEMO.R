@@ -19,4 +19,5 @@ granova.ds(testFrame1[ , c(1, 2)])
 
 p <- granova.ds.bd(testFrame1, conf.level = 0.95, plotTitle = "This is a test plot")
 p
-p + geom_text(aes(label = caseid), data = testFrame1, size = I(3), vjust = -1)
+
+# p + geom_text(aes(label = caseid), data = testFrame1, size = I(3), vjust = -1)
