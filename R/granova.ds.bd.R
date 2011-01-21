@@ -114,11 +114,12 @@ granova.ds.bd <- function( data                      = NULL,
     }
     
     getColors <- function (dsp) {
+      palette <- display.brewer.pal(n = 4, name = "Set1")
       return(  list(
-                 treatmentLine = "#932CB2",
-                 rugplot       = "#932CB2",
-                 meanLine      = "#D858FF",
-                 CIBand        = "#7DB21A"
+                 treatmentLine = palette[1],
+                 rugplot       = palette[2],
+                 meanLine      = palette[3],
+                 CIBand        = palette[4]
                )
       )         
     }

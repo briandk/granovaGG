@@ -2,6 +2,7 @@
 library(granova)
 library(ggplot2)
 library(DAAG)
+library(RColorBrewer)
 
 # Custom functions
 source("granova.ds.bd.R")
