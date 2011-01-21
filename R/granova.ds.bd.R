@@ -113,6 +113,15 @@ granova.ds.bd <- function( data                      = NULL,
       )
     }
     
+    getColors <- function (dsp) {
+      return(  list(
+                 treatmentLine = "#932CB2",
+                 rugplot       = "#932CB2",
+                 meanLine      = "#D858FF",
+                 CIBand        = "#7DB21A"
+               )
+      )         
+    }
 
     dsp               <- list( data = data )
     dsp$effect        <- getEffect(dsp)
@@ -123,6 +132,7 @@ granova.ds.bd <- function( data                      = NULL,
     dsp$CIBand        <- getCIBand(dsp)
     dsp$treatmentLine <- getTreatmentLine(dsp)
     dsp$trails        <- getTrails(dsp)
+    dsp$colors        <- getColors(dsp)
 
     return( dsp )
   }
@@ -133,7 +143,7 @@ granova.ds.bd <- function( data                      = NULL,
     # Because of the way ggplot2 creates plot objects, layers can be
     # added to a plot p simply by calling "p <- p + newLayer"
     
-    createGgplot <- function(dsp) {
+    initializeGgplot <- function(dsp) {
       p <- ggplot( 
              aes_string(
                x = names(dsp$data)[1], 
@@ -178,7 +188,7 @@ granova.ds.bd <- function( data                      = NULL,
       return(
         geom_rug(
           alpha = I(2/3),
-          color = "steelblue",
+          color = dsp$colors$rugplot,
           data  = dsp$data
         )  
       )
@@ -191,7 +201,7 @@ granova.ds.bd <- function( data                      = NULL,
           y = mean(dsp$data[ , 2])
         ),
         data  = dsp$data,
-        color = "red",
+        color = dsp$colors$meanMarks,
         alpha = I(2/3)
       )
     
@@ -264,7 +274,7 @@ granova.ds.bd <- function( data                      = NULL,
     }
   
     legend <- function (dsp) {
-      colors <- c("red", "darkgreen")
+      colors <- c(dsp$colors$treatmentLine, dsp$colors$CIBand)
     
       return (scale_color_manual(value = colors, name = ""))
     }
@@ -282,20 +292,12 @@ granova.ds.bd <- function( data                      = NULL,
               )
       )
     }
-      
-    setEqualAxisLimits <- function (dsp) {
-      return(  coord_cartesian(
-                 xlim = dsp$parameters$bounds, 
-                 ylim = dsp$parameters$bounds
-               )
-      )
-    }  
-    
-    p <- createGgplot(dsp)
+          
+    p <- initializeGgplot(dsp)
     p <- p + shadows(dsp)
     p <- p + treatmentLine(dsp)
     p <- p + rawData(dsp)
-    p <- p + blank()
+    # p <- p + blank()
     p <- p + identityLine()
     p <- p + rugPlot(dsp)
     p <- p + meanMarks(dsp)
