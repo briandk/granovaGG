@@ -74,10 +74,10 @@ granova.ds.bd <- function( data                      = NULL,
 
     getCrossbow <- function (dsp) {
       return(  data.frame(
-        x    = min(dsp$shadows$xShadow) - (1.5 * dsp$parameters$shadowOffset),
-        y    = max(dsp$shadows$yShadow) - (1.5 * dsp$parameters$shadowOffset),
-        xend = max(dsp$shadows$xShadow) - (1.5 * dsp$parameters$shadowOffset),
-        yend = min(dsp$shadows$yShadow) - (1.5 * dsp$parameters$shadowOffset)
+        x    = min(dsp$shadows$xShadow) - (2 * dsp$parameters$shadowOffset),
+        y    = max(dsp$shadows$yShadow) - (2 * dsp$parameters$shadowOffset),
+        xend = max(dsp$shadows$xShadow) - (2 * dsp$parameters$shadowOffset),
+        yend = min(dsp$shadows$yShadow) - (2 * dsp$parameters$shadowOffset)
         )
       )  
     }
@@ -120,7 +120,8 @@ granova.ds.bd <- function( data                      = NULL,
                  treatmentLine = "#542570",
                  rugplot       = "black",
                  meanLine      = "#542570",
-                 CIBand        = "#33A02C"
+                 CIBand        = "#33A02C",
+                 crossbow      = palette[2]
                )
       )         
     }
@@ -178,7 +179,7 @@ granova.ds.bd <- function( data                      = NULL,
         geom_abline(
           slope     = 1, 
           intercept = 0,
-          alpha     = I(1)
+          alpha     = I(3/4)
         )
       )
     }
@@ -233,7 +234,9 @@ granova.ds.bd <- function( data                      = NULL,
           xend  = xend,
           yend  = yend
         ), 
-        data  = dsp$crossbow,
+        size  = I(1.5),
+        color = dsp$colors$crossbow,
+        data  = dsp$crossbow
       )  
       
       return (crossbow)
@@ -262,9 +265,8 @@ granova.ds.bd <- function( data                      = NULL,
           y = yShadow
         ),
         data  = dsp$shadow, 
-        color = "#D95F02", 
         size  = dsp$parameters$pointsize,
-        alpha = I(1/3) 
+        alpha = I(1/4) 
       )
     
       return (shadows)
