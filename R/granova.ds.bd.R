@@ -301,16 +301,14 @@ granova.ds.bd <- function( data                      = NULL,
       return (opts(title = plotTitle))
     }
   
-    blank <- function () {
-      if (noBackground)
-        return( opts(
-                  panel.grid.major = theme_blank(),
-                  panel.grid.minor = theme_blank(),
-                  panel.background = theme_blank(),
-                  axis.line = theme_segment()
-                )
-        )
-      else return (NULL)
+    theme <- function () {
+      if (plotTheme == theme_granova())
+        theme_granova <- theme_grey()
+        theme_granova$panel.background <- theme_rect(fill = "grey95", colour = "white")
+        return (theme_granova)
+      
+      else 
+        return (plotTheme)
     }
           
     p <- initializeGgplot(dsp)
@@ -319,7 +317,7 @@ granova.ds.bd <- function( data                      = NULL,
     p <- p + shadows(dsp)
     p <- p + trails(dsp)
     p <- p + rawData(dsp)
-    p <- p + blank()
+    p <- p + theme()
     p <- p + identityLine()
     p <- p + rugPlot(dsp)
     p <- p + crossbow(dsp)
