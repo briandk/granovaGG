@@ -1,14 +1,31 @@
-if ( length( .find.package("granova", quiet=TRUE) ) == 1 ) {
-  if ( "package:granova" %in% search() ) {
-    detach("package:granova")
-  }
-
-  remove.packages("granova")
+isGranovaInstalled <- function () {
+  return( "granova" %in% .packages(all.available = TRUE))  
 }
 
-install.packages('~/Dropbox/Brian-Wil/programming/granova/', repos=NULL, type='source')
-library(granova)
+isGranovaAttached <- function () {
+  return( ("package:granova" %in% search()))
+}
 
-#trace(granova.ds.bd, browser)
+removeCurrentVersionOfGranova <- function () {
+  if ( isGranovaInstalled() ) {
+    
+    if (isGranovaAttached()) {
+      print("Detaching granova package")
+      detach(package:granova)
+    }  
+    
+    remove.packages("granova")
+  }
+}
 
+installGranovaDev <- function () {
+  removeCurrentVersionOfGranova()
+  install.packages(
+    pkgs    = '~/Dropbox/Brian-Wil/programming/granova/', 
+    repos   = NULL, 
+    type    = 'source'
+  )
+}
+
+installGranovaDev()
 demo("granova.ds.bdDEMO")

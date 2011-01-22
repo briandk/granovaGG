@@ -5,7 +5,7 @@ Title: Graphical Analysis of Variance
 Author: Robert M. Pruzek <RMPruzek@yahoo.com> and James E. Helmreich
         <James.Helmreich@Marist.edu>
 Maintainer: James E. Helmreich <James.Helmreich@Marist.edu>
-Depends: R (>= 2.5.0), car, ggplot2 (>= 0.8.9), RColorBrewer
+Depends: R (>= 2.5.0), car, ggplot2 (>= 0.8.9)
 Suggests: mgcv, rgl, tcltk, DAAG, MASS
 Description: This small collection of functions provides distinctive
         graphics for display of anova results. The two principal
