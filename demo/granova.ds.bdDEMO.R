@@ -16,9 +16,9 @@ lead$caseid <- 1:length(lead[ , 1])
 
 #pdf("testplots.pdf", onefile = TRUE)
 
-#granova.ds(lead[ , c(1,2)])
-#granova.ds(tobacco[ , c(1,2)])
-#granova.ds(anorexia[ , c(1,2)])
+granova.ds(lead[ , c(1,2)])
+granova.ds(tobacco[ , c(1,2)])
+granova.ds(anorexia[ , c(1,2)])
 
 granova.ds.bd(
   data               = lead, 
