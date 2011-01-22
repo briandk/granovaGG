@@ -3,8 +3,6 @@
 granova.ds.bd <- function( data                      = NULL, 
                            plotTitle                 = "Dependent Sample Scatterplot",
                            conf.level                = 0.95,
-                           noBackground              = FALSE,
-                           colorBrewerPalette        = "Set1",
                            plotTheme                 = theme_granova()
                  ) 
 
@@ -116,13 +114,12 @@ granova.ds.bd <- function( data                      = NULL,
     }
     
     getColors <- function (dsp) {
-      palette <- brewer.pal(n = 4, name = colorBrewerPalette)
       return(  list(
                  treatmentLine = "#542570",
                  rugplot       = "black",
                  meanLine      = "#542570",
                  CIBand        = "#33A02C",
-                 crossbow      = palette[2]
+                 crossbow      = "#377EB8"
                )
       )         
     }
