@@ -309,7 +309,6 @@ granova.ds.bd <- function( data                      = NULL,
       }
     }
           
-    getGranovaTheme()
     p <- initializeGgplot(dsp)
     p <- p + treatmentLine(dsp)
     p <- p + xMeanLine(dsp) + yMeanLine(dsp)
