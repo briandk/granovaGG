@@ -5,15 +5,14 @@
 
 #source("granova.ds.bd.R")
 
-loadGranovaData <- function (filepath) {
-  data   <- read.csv(filepath, header = TRUE)
-  caseid <- 1:length(data[ , 1])
-  return( cbind(data, caseid))
-}
+tobacco  <- data(tobacco)
+tobacco$caseid <- 1:length(tobacco[ , 1])
 
-tobacco  <- loadGranovaData("../data/tobacco.csv")
-anorexia <- loadGranovaData("../data/anorexia.csv")
-lead     <- loadGranovaData("../data/lead.csv")
+anorexia <- data(anorexia)
+anorexia$caseid <- 1:length(anorexia[ , 1])
+
+lead     <- data(lead)
+lead$caseid <- 1:length(lead[ , 1])
 
 pdf("testplots.pdf", onefile = TRUE)
 
