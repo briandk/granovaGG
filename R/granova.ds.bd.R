@@ -300,13 +300,7 @@ granova.ds.bd <- function( data                      = NULL,
     }
     
     theme <- function () {
-      if (identical(plotTheme, theme_granova)) {
-        return (theme_granova())
-      }
-      
-      else {
-        return (plotTheme)
-      }
+      return (plotTheme)
     }
           
     p <- initializeGgplot(dsp)

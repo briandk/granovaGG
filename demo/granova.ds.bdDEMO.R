@@ -14,11 +14,11 @@ anorexia$caseid <- 1:length(anorexia[ , 1])
 data(lead)
 lead$caseid <- 1:length(lead[ , 1])
 
-pdf("testplots.pdf", onefile = TRUE)
+#pdf("testplots.pdf", onefile = TRUE)
 
-granova.ds(lead[ , c(1,2)])
-granova.ds(tobacco[ , c(1,2)])
-granova.ds(anorexia[ , c(1,2)])
+#granova.ds(lead[ , c(1,2)])
+#granova.ds(tobacco[ , c(1,2)])
+#granova.ds(anorexia[ , c(1,2)])
 
 granova.ds.bd(
   data               = lead, 
@@ -54,7 +54,7 @@ granova.ds.bd(
   plotTheme          = theme_gray()
 ) # Same plot as above, but with the default ggplot2 theme applied.
 
-dev.off()
+#dev.off()
 
 
 
