@@ -4,11 +4,12 @@ granova.ds.bd <- function( data                      = NULL,
                            plotTitle                 = "Dependent Sample Scatterplot",
                            conf.level                = 0.95,
                            noBackground              = FALSE,
-                           colorBrewerPalette        = "Set1"
+                           colorBrewerPalette        = "Set1",
+                           plotTheme                 = theme_granova()
                  ) 
 
 {
-
+  
   getXs <- function (data) {
     return( data[, 1])
   }
@@ -300,17 +301,22 @@ granova.ds.bd <- function( data                      = NULL,
     title <- function () {
       return (opts(title = plotTitle))
     }
-  
+    
+    getGranovaTheme <- function () {
+      source("theme-defaults.R")
+    }
+    
     theme <- function () {
-      if (plotTheme == theme_granova())
-        theme_granova <- theme_grey()
-        theme_granova$panel.background <- theme_rect(fill = "grey95", colour = "white")
-        return (theme_granova)
+      if (identical(plotTheme, theme_granova)) {
+        return (theme_granova())
+      }
       
-      else 
+      else {
         return (plotTheme)
+      }
     }
           
+    getGranovaTheme()
     p <- initializeGgplot(dsp)
     p <- p + treatmentLine(dsp)
     p <- p + xMeanLine(dsp) + yMeanLine(dsp)

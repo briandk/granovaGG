@@ -4,7 +4,6 @@ library(ggplot2)
 library(RColorBrewer)
 
 source("granova.ds.bd.R")
-R.Version()
 
 loadGranovaData <- function (filepath) {
   data   <- read.csv(filepath, header = TRUE)
@@ -20,39 +19,37 @@ granova.ds.bd(
   data               = lead, 
   conf.level         = 0.95, 
   plotTitle          = "Lead Levels in the Blood of Children",
-) + opts(
-      panel.background = theme_rect(fill = "grey95", colour = "white"),
-      panel.grid.minor = theme_line(colour = "white", size = I(1/10)))
+) 
 
-granova.ds.bd(
+p <- granova.ds.bd(
   data               = tobacco, 
   conf.level         = 0.95, 
   plotTitle          = "Effect of Preparation on Lesions",
-) + 
-geom_text(
-  aes(label = caseid), 
-    data    = tobacco, 
-    size    = I(3), 
-    vjust   = -1,
-    alpha   = I(3/4)
+) 
+
+caseLabels <- geom_text(
+                aes(label = caseid), 
+                  data    = tobacco, 
+                  size    = I(3), 
+                  vjust   = -1,
+                  alpha   = I(3/4)
 )
 
+p + caseLabels
 
 granova.ds.bd(
   data               = anorexia, 
   conf.level         = 0.95, 
   plotTitle          = "Effect of Therapy on Anorexic Patients",
-) + opts(
-        panel.background = theme_rect(fill = "grey95", colour = "white"),
-        panel.grid.minor = theme_line(colour = "white", size = I(1/5)))
-
+  plotTheme          = theme_granova()
+) 
 
 granova.ds.bd(
   data               = anorexia, 
   conf.level         = 0.95, 
   plotTitle          = "Effect of Therapy on Anorexic Patients",
+  plotTheme          = theme_gray()
 )
 
 
 
-# p + geom_text(aes(label = caseid), data = testFrame1, size = I(3), vjust = -1)
