@@ -1,13 +1,13 @@
-isGranovaInstalled <- function (RLibraryLocations) {
-  return( "granova" %in% .packages(all.available = TRUE, lib.loc = RLibraryLocations))  
+isGranovaInstalled <- function () {
+  return( "granova" %in% .packages(all.available = TRUE))  
 }
 
 isGranovaAttached <- function () {
   return( ("package:granova" %in% search()))
 }
 
-removeCurrentVersionOfGranova <- function (RLibraryLocations) {
-  if ( isGranovaInstalled(RLibraryLocations) ) {
+removeCurrentVersionOfGranova <- function () {
+  if ( isGranovaInstalled() ) {
     
     if (isGranovaAttached()) {
       print("Detaching granova package")
@@ -15,7 +15,7 @@ removeCurrentVersionOfGranova <- function (RLibraryLocations) {
     }  
     
     print("Removing granova package")
-    remove.packages("granova", lib = RLibraryLocations)
+    remove.packages("granova")
   }
 }
 
@@ -25,7 +25,7 @@ installGranovaDev <- function () {
     "/Library/Frameworks/R.framework/Versions/2.12/Resources/library"
   )
   
-  removeCurrentVersionOfGranova(RLibraryLocations)
+  removeCurrentVersionOfGranova()
   install.packages(
     pkgs    = '~/Dropbox/Brian-Wil/programming/granova/', 
     repos   = NULL, 
