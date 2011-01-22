@@ -299,10 +299,6 @@ granova.ds.bd <- function( data                      = NULL,
       return (opts(title = plotTitle))
     }
     
-    getGranovaTheme <- function () {
-      source("theme-defaults.R")
-    }
-    
     theme <- function () {
       if (identical(plotTheme, theme_granova)) {
         return (theme_granova())
