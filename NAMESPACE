@@ -1,2 +1,2 @@
 export(granova.1w, granova.2w, granova.ds, granova.contr)
-importFrom(car, scatter3d, identify3d)
+importFrom(car, scatter3d, identify3d, ggplot2, RColorBrewer)

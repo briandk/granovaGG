@@ -1,9 +1,9 @@
 # For plot comparisons
-library(granova)
-library(ggplot2)
-library(RColorBrewer)
+#library(granova)
+#library(ggplot2)
+#library(RColorBrewer)
 
-source("granova.ds.bd.R")
+#source("granova.ds.bd.R")
 
 loadGranovaData <- function (filepath) {
   data   <- read.csv(filepath, header = TRUE)
