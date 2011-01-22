@@ -5,13 +5,14 @@
 
 #source("granova.ds.bd.R")
 
-tobacco  <- data(tobacco)
+tobacco  <- data("tobacco")
+str(tobacco)
 tobacco$caseid <- 1:length(tobacco[ , 1])
 
-anorexia <- data(anorexia)
+anorexia <- data("anorexia")
 anorexia$caseid <- 1:length(anorexia[ , 1])
 
-lead     <- data(lead)
+lead     <- data("lead")
 lead$caseid <- 1:length(lead[ , 1])
 
 pdf("testplots.pdf", onefile = TRUE)
