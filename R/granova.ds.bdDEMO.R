@@ -15,7 +15,7 @@ tobacco  <- loadGranovaData("../data/tobacco.csv")
 anorexia <- loadGranovaData("../data/anorexia.csv")
 lead     <- loadGranovaData("../data/lead.csv")
 
-pdf("PruzekTestPlots.pdf", onefile = TRUE)
+pdf("testplots.pdf", onefile = TRUE)
 
 granova.ds(lead[ , c(1,2)])
 granova.ds(tobacco[ , c(1,2)])
