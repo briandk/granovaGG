@@ -1,9 +1,9 @@
 ## Defining the Function
 
 granova.ds.ggplot <- function( data                      = NULL, 
-                           plotTitle                 = "Dependent Sample Scatterplot",
-                           conf.level                = 0.95,
-                           plotTheme                 = theme_granova()
+                               plotTitle                 = "Dependent Sample Scatterplot",
+                               conf.level                = 0.95,
+                               plotTheme                 = theme_granova()
                      ) 
 
 {
