@@ -1,44 +1,38 @@
-granova.ds <- function(xdata, revc = FALSE, sw = 0.4, ne=.5, ptpch=c(19,3), ptcex=c(1,1.4), labcex = 1, ident = FALSE, 
+granova.ds <- function(data, revc = FALSE, sw = 0.4, ne=.5, ptpch=c(19,3), ptcex=c(.8,1.4), labcex = 1, ident = FALSE, 
             colors = c(1,2,1,4,2,'green3'), pt.lab = NULL,
             xlab = NULL, ylab = NULL, main = NULL, sub = NULL, par.orig = TRUE){
 
-# Given dependent sample data (X,Y) data points are plotted (blue, small
-# closed circles). The X and Y scores are used to generate differences X - Y
-# (default) or as Y - X (if revc = T; see below). The main 45 degree diagonal
-# line (black) corresponds to X = Y, a reference (or identity) diagonal. Mean
-# of differences corresponds to heavy (red) dashed line, parallel to identity
-# line. The marginal distribution of the differences is plotted after making
-# (parallel) projections to line segment at the lower left corner of the
-# figure. Marginal distributions of Y & X are given as rug plots, top and
-# right side; the means of these marginal distributions are shown as vertical
-# and horizontal lines. Note that the mean D corresponds to the intersection
-# of means for X and Y.
+# Given dependent sample data (X,Y) data points are plotted (blue, small closed circles).
+# The X and Y scores are used to generate differences X - Y (default) or as Y - X (if revc = T; see below).
+# The main 45 degree diagonal line (black) corresponds to X = Y, a reference (or identity) diagonal.
+# Mean of differences corresponds to heavy (red) dashed line, parallel to identity line.
+# The marginal distribution of the differences is plotted after making (parallel) projections to line segment
+# at the lower left corner of the figure. Marginal distributions of Y & X are given as rug
+# plots, top and right side; the means of these marginal distributions are shown as vertical and horizontal lines.
+# Note that the mean D corresponds to the intersection of means for X and Y.
 
 # 'xdata' should be an n X 2 dataframe.
 # 'revc = TRUE' reverses X,Y axes;
-# 'sw' extends axes on lower ends, effectively moving circles to lower left,
-# or southwest. 'ne' extends ases on upper ends, effectively moving circles to
-# upper right, or northeast. Making both sw and ne smaller moves points
-# farther apart, both larger moves them closer together. 'ptpch' controls the
-# X,Y point and marginal dotplot pch. 'ptcex' controls the X,Y point and
-# marginal dotplot cex. 'labcex' controls the size of the axes labels. 'ident'
-# allows user to identify specific points on the plot 'colors' is a vector of
-# colors found in the plot:  round points, dashed mean lines, light diagonal
-# dashed lines, 
+# 'sw' extends axes on lower ends, effectively moving circles to lower left, or southwest.
+# 'ne' extends ases on upper ends, effectively moving circles to upper right, or northeast.
+# Making both sw and ne smaller moves points farther apart, both larger moves them closer together.
+# 'ptpch' controls the X,Y point and marginal dotplot pch.
+# 'ptcex' controls the X,Y point and marginal dotplot cex.
+# 'labcex' controls the size of the axes labels.
+# 'ident' allows user to identify specific points on the plot
+# 'colors' is a vector of colors found in the plot:  round points, dashed mean lines, light diagonal dashed lines, 
 #   marginal plot points, dashed diagonal difference mean line, confidence interval. 
-# 'pt.lab' allows user to provide labels for points, else the rownames of
-# xdata are used (if defined), or if not labels are 1:n. 'xlab', 'ylab',
-# 'main', 'sub' are optional, with axes labels taken from column names
-# otherwise. 'par.orig' returns par to original settings; if trellis plots are
-# desired it may be best to set to 'FALSE'. Please REPORT
-# experiences/suggestions for editing: 'rmpruzek@yahoo.com' or
-# 'james.helmreich@marist.edu' ..w/ thanks!
+# 'pt.lab' allows user to provide labels for points, else the rownames of xdata are used (if defined), or if not labels are 1:n.
+# 'xlab', 'ylab', 'main', 'sub' are optional, with axes labels taken from column names otherwise.
+# 'par.orig' returns par to original settings; if trellis plots are desired it may be best to set to 'FALSE'.
+# Please REPORT experiences/suggestions for editing: 'rmpruzek@yahoo.com' or 'james.helmreich@marist.edu' ..w/ thanks!
 
-#Setting margins, forcing square plot to aid interpretations (saving current
-#settings; restore settings at end).
+#Setting margins, forcing square plot to aid interpretations (saving current settings; restore settings at end).
 op <- par(no.readonly = TRUE)
 if(par.orig){on.exit(par(op))}
 par(mai = c(1, 1.7, 1, 1.7), pty="s")
+
+xdata <- data
 
 col.dim <- dim(as.matrix(xdata))[2]
 if(!col.dim == 2){stop("Input data must be a n X 2 dataframe or matrix.")}
@@ -59,10 +53,8 @@ xr <- range(x)
 yr <- range(y)
 min.xy <- min(xr[1], yr[1])
 max.xy <- max(xr[2], yr[2])
-(lwb <- min.xy - 1.2 * ne * (max.xy - min.xy))
-(upb <- max.xy + .5 * sw * (max.xy - min.xy))
-
-print(c(lwb, upb))
+lwb <- min.xy - 1.2 * ne * (max.xy - min.xy)
+upb <- max.xy + .5 * sw * (max.xy - min.xy)
 
 #Weighted mean difference; standard deviation of strata estimates
 mn.diff <- mean(d)
@@ -93,8 +85,8 @@ ext <- .025*(upb-lwb)
 segments((lwb+upb)/2+ext,lwb-ext,lwb-ext,(lwb+upb)/2+ext,lwd=2)
 
 #Rug plots of data
-rug(x, side = 3)
-rug(y, side = 4)
+rug(x, side = 3, lwd = 0.6)
+rug(y, side = 4, lwd = 0.6)
 
 #Default labels from axes taken from column names, or if none and none given explicitly are X, Y.
 if(is.null(colnames(xdata))){colnames(xdata)<-c("X","Y")}
@@ -155,6 +147,3 @@ if(ident){
 
 return(Summary)
 }
-
-library(DAAG)
-pair65

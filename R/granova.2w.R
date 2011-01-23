@@ -1,5 +1,6 @@
-granova.2w <- function(formula = NULL, data.A.B, fit = "linear", ident = FALSE, offset = NULL, ...){
+granova.2w <- function(data, formula = NULL, fit = "linear", ident = FALSE,  offset = NULL, ...){
 
+# offset = NULL,
 # Function depicts two-way ANOVA using data-based contrasts.
 # Argument 'data.A.B' should be an n X 3 dataframe.  If the rows are named uniquely, then points
 # will be able to be identified with those labels, otherwise the row number is used.
@@ -22,9 +23,15 @@ require(mgcv)
 #car:::scatter3d
 #car:::identify3d
 
-
+data.A.B<-data
 mtx <- is.data.frame(data.A.B)
 if(!mtx)data.A.B <- data.frame(data.A.B)
+if(!is.factor(data.A.B[,2]))data.A.B[,2] <- as.factor(data.A.B[,2])
+if(!is.factor(data.A.B[,3]))data.A.B[,3] <- as.factor(data.A.B[,3])
+
+A.name<-names(data.A.B)[2]
+B.name<-names(data.A.B)[3]
+resp.name<-names(data.A.B)[1]
 
 vA <- length(unique(data.A.B[,2]))
 vB <- length(unique(data.A.B[,3]))
@@ -67,7 +74,7 @@ facA.mn.cntrst <- mnsA - grndmean
 facB.mn.cntrst <- mnsB - grndmean
 
 #Allow user defined model for basic two way analysis of variance summary.
-if(is.null(formula)){formula<-yy ~ factor(A)*factor(B)}
+if(is.null(formula)){formula<-as.formula(print(paste(resp.name,"~",A.name,"*",B.name),quote=F))}
 aov.yy <- aov(formula=formula,data=data.A.B)
 
 #Trying to put means in: something of a hack.  Adding points at the means for each cell,
@@ -95,7 +102,9 @@ offset<-(((100/length(mnsA))^(1/3)) * 0.02)
 
 scatter3d(facA.mn.cntrst, yy, facB.mn.cntrst, xlab = colnames(data.A.B)[2], ylab = colnames(data.A.B[1]), 
     zlab = colnames(data.A.B)[3], group = group.factor, fogtype='exp2',fov=55, surface = TRUE, fit = fit, surface.col = c(4,8), ...)
-if(ident){identify3d(facA.mn.cntrst, yy, facB.mn.cntrst, labels = c(rownames(data.A.B), aaa), offset = offset)}
+if(ident){
+	if(is.null(offset)){offset<-((100/length(facA.mn.cntrst))^(1/3)) * 0.02}
+	identify3d(facA.mn.cntrst, yy, facB.mn.cntrst, labels = c(rownames(data.A.B), aaa), offset = offset)}
 
 return(out)
 }
