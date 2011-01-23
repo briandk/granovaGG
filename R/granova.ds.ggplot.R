@@ -95,7 +95,7 @@ granova.ds.ggplot <- function( data                      = NULL,
   
   getTreatmentLine <- function (dsp) {
     return( data.frame(
-              intercept      = dsp$stats$meanTreatmentEffect,
+              intercept      = -dsp$stats$meanTreatmentEffect,
               slope          = 1,
               color          = factor(paste("Mean Diff. =", round(dsp$stats$meanTreatmentEffect, digits = 2)))
             )
