@@ -23,12 +23,12 @@ granova.ds(anorexia[ , c(1,2)])
 granova.ds.bd(
   data               = lead, 
   conf.level         = 0.95, 
-  plotTitle          = "Lead Levels in the Blood of Children (theme_granova)",
+  plotTitle          = "Lead Levels in the Blood of Children (theme_granova)"
 ) 
 
 p <- granova.ds.bd(
   data               = tobacco, 
-  plotTitle          = "Effect of Preparation on Lesions (theme_granova)",
+  plotTitle          = "Effect of Preparation on Lesions (theme_granova)"
 ) 
 
 caseLabels <- geom_text(
