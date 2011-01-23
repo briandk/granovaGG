@@ -15,16 +15,11 @@ removeCurrentVersionOfGranova <- function () {
     }  
     
     print("Removing granova package")
-    remove.packages("granova")
+    remove.packages("granova", lib = .libPaths())
   }
 }
 
 installGranovaDev <- function () {
-  RLibraryLocations <- c(
-    "~/Library/R/2.12/library",
-    "/Library/Frameworks/R.framework/Versions/2.12/Resources/library"
-  )
-  
   removeCurrentVersionOfGranova()
   install.packages(
     pkgs    = '~/Dropbox/Brian-Wil/programming/granova/', 
