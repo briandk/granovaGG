@@ -1,6 +1,6 @@
 ## Defining the Function
 
-granova.ds.bd <- function( data                      = NULL, 
+granova.ds.ggplot <- function( data                      = NULL, 
                            plotTitle                 = "Dependent Sample Scatterplot",
                            conf.level                = 0.95,
                            plotTheme                 = theme_granova()
