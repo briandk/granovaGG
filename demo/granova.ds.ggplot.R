@@ -1,60 +1,51 @@
-# For plot comparisons
-#library(granova)
-#library(ggplot2)
-#library(RColorBrewer)
+data(blood_lead)
 
-#source("granova.ds.ggplot.R")
-
-data(tobacco)
-tobacco$caseid <- 1:length(tobacco[ , 1])
-
-data(anorexia)
-anorexia$caseid <- 1:length(anorexia[ , 1])
-
-data(lead)
-lead$caseid <- 1:length(lead[ , 1])
-
-#pdf("testplots.pdf", onefile = TRUE)
-
-granova.ds(lead[ , c(1,2)])
-granova.ds(tobacco[ , c(1,2)])
-granova.ds(anorexia[ , c(1,2)])
+granova.ds(blood_lead)
 
 granova.ds.ggplot(
-  data               = lead, 
+  data               = blood_lead, 
   conf.level         = 0.95, 
   plotTitle          = "Lead Levels in the Blood of Children (theme_granova)"
 ) 
 
+
+
+
+data(anorexia.sub)
+
+granova.ds(anorexia.sub)
+
+anorexia.sub$caseid <- 1:length(anorexia.sub[ , 1])
+
+granova.ds.ggplot(
+  data               = anorexia.sub, 
+  plotTitle          = "Effect of Therapy on Anorexic Patients (theme_granova)",
+  plotTheme          = theme_granova()
+) 
+
+# Same plot as above, but with the default ggplot2 theme applied.
+granova.ds.ggplot(
+  data               = anorexia.sub, 
+  conf.level         = 0.95, 
+  plotTitle          = "Effect of Therapy on Anorexic Patients (theme_gray)",
+  plotTheme          = theme_gray()
+) 
+
+# Once again, but with case labels.
 p <- granova.ds.ggplot(
-  data               = tobacco, 
-  plotTitle          = "Effect of Preparation on Lesions (theme_granova)"
+  data               = anorexia.sub, 
+  plotTitle          = "Effect of Therapy on Anorexic Patients (theme_granova)",
+  plotTheme          = theme_granova()
 ) 
 
 caseLabels <- geom_text(
                 aes(label = caseid), 
-                  data    = tobacco, 
+                  data    = anorexia.sub, 
                   size    = I(3), 
                   vjust   = -1,
                   alpha   = I(3/4)
 )
 
 p + caseLabels
-
-granova.ds.ggplot(
-  data               = anorexia, 
-  plotTitle          = "Effect of Therapy on Anorexic Patients (theme_granova)",
-  plotTheme          = theme_granova()
-) 
-
-granova.ds.ggplot(
-  data               = anorexia, 
-  conf.level         = 0.95, 
-  plotTitle          = "Effect of Therapy on Anorexic Patients (theme_gray)",
-  plotTheme          = theme_gray()
-) # Same plot as above, but with the default ggplot2 theme applied.
-
-#dev.off()
-
 
 
