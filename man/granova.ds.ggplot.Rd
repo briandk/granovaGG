@@ -7,7 +7,7 @@
     a 95\% confidence interval for the mean difference as well as the t-statistic and degrees of freedom.
 }
 \usage{
-granova.ds.ggplot(data, plotTitle = "Dependent Sample Scatterplot", conf.level = 0.95, plotTheme = theme_granova())
+granova.ds.ggplot(data, plotTitle = "Dependent Sample Scatterplot", conf.level = 0.95, plotTheme = theme_bw())
 }
 \arguments{
   \item{data}{is an n X 2 dataframe or matrix. First column defines X (intially for horzontal axis), the second defines Y. }
@@ -79,7 +79,7 @@ granova.ds(blood_lead)
 granova.ds.ggplot(
   data               = blood_lead, 
   conf.level         = 0.95, 
-  plotTitle          = "Lead Levels in the Blood of Children (theme_granova)"
+  plotTitle          = "Lead Levels in the Blood of Children (theme_bw)"
 ) 
 
 
@@ -92,8 +92,8 @@ anorexia.sub$caseid <- 1:length(anorexia.sub[ , 1])
 
 granova.ds.ggplot(
   data               = anorexia.sub, 
-  plotTitle          = "Effect of Therapy on Anorexic Patients (theme_granova)",
-  plotTheme          = theme_granova()
+  plotTitle          = "Effect of Therapy on Anorexic Patients (theme_bw)",
+  plotTheme          = theme_bw()
 ) 
 
 # Same plot as above, but with the default ggplot2 theme applied.
@@ -107,8 +107,8 @@ granova.ds.ggplot(
 # Once again, but with case labels.
 p <- granova.ds.ggplot(
   data               = anorexia.sub, 
-  plotTitle          = "Effect of Therapy on Anorexic Patients (theme_granova)",
-  plotTheme          = theme_granova()
+  plotTitle          = "Effect of Therapy on Anorexic Patients (theme_bw)",
+  plotTheme          = theme_bw()
 ) 
 
 caseLabels <- geom_text(

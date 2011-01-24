@@ -30,4 +30,4 @@ installGranovaDev <- function () {
 removeCurrentVersionOfGranova()
 installGranovaDev()
 library(granova)
-demo("granova.1w.ggplot")
+demo("granova.ds.ggplot")

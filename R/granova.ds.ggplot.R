@@ -3,7 +3,7 @@
 granova.ds.ggplot <- function( data                      = NULL, 
                                plotTitle                 = "Dependent Sample Scatterplot",
                                conf.level                = 0.95,
-                               plotTheme                 = theme_granova()
+                               plotTheme                 = theme_bw()
                      ) 
 
 {
@@ -59,7 +59,7 @@ granova.ds.ggplot <- function( data                      = NULL,
       shadowOffset        = .shadowOffset,
       anchor              = .crossbowAnchor,
       pointsize           = I(2),
-      meanLineSize        = I(1/10)      
+      meanLineSize        = I(1/2)      
     ) )
   }
   
@@ -207,7 +207,7 @@ granova.ds.ggplot <- function( data                      = NULL,
         xintercept = mean(getXs(dsp$data)),
         color      = dsp$colors$meanLine,
         size       = dsp$parameters$meanLineSize,
-        alpha      = I(1)
+        alpha      = I(1/2)
       ) 
     )
   }
@@ -218,7 +218,7 @@ granova.ds.ggplot <- function( data                      = NULL,
         yintercept = mean(getYs(dsp$data)),
         color      = dsp$colors$meanLine,
         size       = dsp$parameters$meanLineSize,
-        alpha      = I(1)
+        alpha      = I(1/2)
       ) 
     )
     
