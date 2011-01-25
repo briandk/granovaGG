@@ -47,3 +47,4 @@ License: GPL (>= 2)
 Packaged: 2010-11-04 23:16:16 UTC; ilfautetre
 Repository: CRAN
 Date/Publication: 2010-11-05 20:20:49
+Collate: granova.R granova.1w.R granova.2w.R granova.contr.R granova.ds.R granova.1w.ggplot.R granova.ds.ggplot.R

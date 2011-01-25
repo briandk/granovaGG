@@ -1,4 +1,2 @@
-example <- function() {
-  print("example")
-}
+
 
