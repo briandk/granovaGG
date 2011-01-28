@@ -1,24 +1,24 @@
-granova.ds.ggplot <- function( data                      = NULL, 
-                               plot.title                 = "Dependent Sample Scatterplot",
-                               conf.level                = 0.95,
-                               plot.theme                 = theme_bw()
-                     ) 
+granova.ds.ggplot <- function(data       = NULL, 
+                              plot.title = "Dependent Sample Scatterplot",
+                              conf.level = 0.95,
+                              plot.theme = theme_bw()
+                             ) 
 
 {
   
-  GetXs <- function (data) {
+  GetXs <- function(data) {
     return( data[, 1])
   }
 
-  GetYs <- function (data) {
+  GetYs <- function(data) {
     return( data[, 2])
   }
 
-  GetEffect <- function (dsp) {
+  GetEffect <- function(dsp) {
     return( GetXs(dsp$data) - GetYs(dsp$data) )
   }
   
-  GetTtest <- function (data, conf.level) {
+  GetTtest <- function(data, conf.level) {
     return (   t.test(data[, 1], 
                       data[, 2], 
                       paired     = TRUE,
@@ -27,7 +27,7 @@ granova.ds.ggplot <- function( data                      = NULL,
     )
   }
   
-  GetStats <- function (dsp, conf.level) {
+  GetStats <- function(dsp, conf.level) {
     ttest <- GetTtest(dsp$data, conf.level)
     return(  data.frame(
               lower.treatment.effect = as.numeric(ttest$conf.int[2]),
@@ -38,7 +38,7 @@ granova.ds.ggplot <- function( data                      = NULL,
     )    
   }
   
-  GetGraphicsParams <- function (dsp) {
+  GetGraphicsParams <- function(dsp) {
     .aggregate.data.range  <- c(range(GetXs(dsp$data)), range(GetYs(dsp$data)))
     .extrema             <- c(max(.aggregate.data.range), min(.aggregate.data.range))    
     .square.data.range     <- max(.extrema) - min(.extrema)
@@ -61,7 +61,7 @@ granova.ds.ggplot <- function( data                      = NULL,
     ) )
   }
   
-  GetShadows <- function (dsp) {
+  GetShadows <- function(dsp) {
     x.shadow <- (dsp$effect / 2) + 
                (3 * dsp$parameters$bounds[1] + dsp$parameters$bounds[2]) / 4 + 
                (4 * dsp$parameters$shadow.offset)
@@ -69,7 +69,7 @@ granova.ds.ggplot <- function( data                      = NULL,
     return (data.frame(x.shadow, y.shadow))
   }
 
-  GetCrossbow <- function (dsp) {
+  GetCrossbow <- function(dsp) {
     return(  data.frame(
       x    = min(dsp$shadows$x.shadow) - (2 * dsp$parameters$shadow.offset),
       y    = max(dsp$shadows$y.shadow) - (2 * dsp$parameters$shadow.offset),
@@ -79,7 +79,7 @@ granova.ds.ggplot <- function( data                      = NULL,
     )  
   }
   
-  GetCIBand <- function (dsp) {
+  GetCIBand <- function(dsp) {
     CIBand <- data.frame(
       cx    = ((dsp$parameters$anchor + dsp$stats$lower.treatment.effect) / 2) - 3 * (dsp$parameters$shadow.offset),
       cy    = ((dsp$parameters$anchor - dsp$stats$lower.treatment.effect) / 2) - 3 * (dsp$parameters$shadow.offset),
@@ -91,7 +91,7 @@ granova.ds.ggplot <- function( data                      = NULL,
     return (CIBand)
   }
   
-  GetTreatmentLine <- function (dsp) {
+  GetTreatmentLine <- function(dsp) {
     return( data.frame(
               intercept      = -dsp$stats$mean.treatment.effect,
               slope          = 1,
@@ -100,7 +100,7 @@ granova.ds.ggplot <- function( data                      = NULL,
     )
   }
 
-  GetTrails <- function (dsp) {
+  GetTrails <- function(dsp) {
     
     return(  data.frame(
                x.trail.start = GetXs(dsp$data), 
@@ -111,7 +111,7 @@ granova.ds.ggplot <- function( data                      = NULL,
     )
   }
   
-  GetColors <- function (dsp) {
+  GetColors <- function(dsp) {
     return(  list(
                treatment.line = "#542570",
                rugplot       = "black",
@@ -149,7 +149,7 @@ granova.ds.ggplot <- function( data                      = NULL,
           )
   }
     
-  TreatmentLine <- function (dsp) {
+  TreatmentLine <- function(dsp) {
     return( geom_abline(
                      aes(
                        intercept = intercept,
@@ -163,7 +163,7 @@ granova.ds.ggplot <- function( data                      = NULL,
     )
   }
 
-  RawData <- function (dsp) {
+  RawData <- function(dsp) {
     RawData <- geom_point(
       size  = dsp$parameters$point.size
     )
@@ -180,15 +180,15 @@ granova.ds.ggplot <- function( data                      = NULL,
     )
   }
 
-  ScaleX <- function (dsp) {
+  ScaleX <- function(dsp) {
     return (scale_x_continuous(limits = dsp$parameters$bounds))
   }
 
-  ScaleY <- function (dsp) {
+  ScaleY <- function(dsp) {
     return (scale_y_continuous(limits = dsp$parameters$bounds))
   }
 
-  RugPlot <- function (dsp) {
+  RugPlot <- function(dsp) {
     return(
       geom_rug(
         size  = I(1/2),
@@ -199,7 +199,7 @@ granova.ds.ggplot <- function( data                      = NULL,
     )
   }
 
-  XMeanLine <- function (dsp) {
+  XMeanLine <- function(dsp) {
     return( 
       geom_vline(
         xintercept = mean(GetXs(dsp$data)),
@@ -210,7 +210,7 @@ granova.ds.ggplot <- function( data                      = NULL,
     )
   }
   
-  YMeanLine <- function (dsp)  {
+  YMeanLine <- function(dsp)  {
     return( 
       geom_hline(
         yintercept = mean(GetYs(dsp$data)),
@@ -222,7 +222,7 @@ granova.ds.ggplot <- function( data                      = NULL,
     
   }
 
-  Crossbow <- function (dsp) {
+  Crossbow <- function(dsp) {
     crossbow <- geom_segment(
       aes(
         x     = x,
@@ -239,7 +239,7 @@ granova.ds.ggplot <- function( data                      = NULL,
     return (crossbow)
   }
 
-  CIBand <- function (dsp) {
+  CIBand <- function(dsp) {
     CIBand <- geom_segment(
       aes(
        x     = cx,
@@ -255,7 +255,7 @@ granova.ds.ggplot <- function( data                      = NULL,
    return (CIBand) 
   }
 
-  Shadows <- function (dsp) {
+  Shadows <- function(dsp) {
     shadows <- geom_point(
       aes(
         x = x.shadow,
@@ -269,7 +269,7 @@ granova.ds.ggplot <- function( data                      = NULL,
     return (shadows)
   }
 
-  Trails <- function (dsp) {
+  Trails <- function(dsp) {
     trails <- geom_segment(
       aes(
         x        = x.trail.start,
@@ -287,17 +287,17 @@ granova.ds.ggplot <- function( data                      = NULL,
     return (trails)
   }
 
-  Legend <- function (dsp) {
+  Legend <- function(dsp) {
     colors <- c(dsp$colors$treatment.line, dsp$colors$CIBand)
   
     return (scale_color_manual(value = colors, name = ""))
   }
 
-  Title <- function () {
+  Title <- function() {
     return (opts(title = plot.title))
   }
   
-  Theme <- function () {
+  Theme <- function() {
     return (plot.theme)
   }
         
