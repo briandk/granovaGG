@@ -284,5 +284,21 @@ if(ident){
          identify(stats.vcj,yr,labels = pt.lab, ...)
          }
 
-return(out)
+
+############ ggplot2 code below ################
+
+getOWP <- function () {
+  return(
+    data.frame(
+      score     = yr,
+      group     = groupf,
+      groupMean = yrm,
+      contrast  = stats.vc
+    )  
+  )
+}
+
+owp <- getOWP()
+
+return(owp)
 }
