@@ -287,18 +287,22 @@ if(ident){
 
 ############ ggplot2 code below ################
 
-getOWP <- function () {
-  return(
-    data.frame(
-      score     = yr,
-      group     = groupf,
-      groupMean = yrm,
-      contrast  = stats.vc
-    )  
+getData <- function () {
+  return( data.frame(
+            score     = yr,
+            group     = groupf,
+            groupMean = yrm,
+            contrast  = stats.vc
+          )
   )
 }
 
-owp <- getOWP()
+createOWP <- function () {
+  return( list( data = getData() )  )
+}
+
+debug(createOWP)
+owp <- createOWP()
 
 return(owp)
 }
