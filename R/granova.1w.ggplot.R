@@ -301,8 +301,23 @@ createOWP <- function () {
   return( list( data = getData() )  )
 }
 
-debug(createOWP)
+initializeGgplot <- function (owp) {
+  return( ggplot() )
+}
+
+scoresByGroupContrast <- function (owp) {
+  return( 
+    geom_point( aes(x = contrast, y = score), data = owp$data
+    )
+  )
+}
+
+# Pepare OWP object
 owp <- createOWP()
 
-return(owp)
+#Plot OWP object
+p <- initializeGgplot(owp)
+p <- p + scoresByGroupContrast(owp)
+
+return(p)
 }
