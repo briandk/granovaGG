@@ -337,6 +337,41 @@ GrandMeanLine <- function(owp) {
   )
 }
 
+XLabel <- function() {
+  if (is.null(xlab)) {
+    return(xlab("Contrast coefficients based on group means and sizes"))
+  }
+  
+  else {
+    return (xlab(xlab))
+  }
+}
+
+YLabel <- function() {  
+  if (is.null(ylab)) {
+    return(ylab("Dependent variable (response)"))
+  }
+  
+  else {
+    return (ylab(ylab))
+  }
+}
+
+ScaleX <- function(owp) {
+  return(scale_x_continuous(breaks = round(owp$means$contrast, digits = 2)))
+}
+
+ScaleY <- function(owp) {
+  aggregate.breaks <- c(owp$means$groupMean, range(owp$data$score))
+  return(scale_y_continuous(
+    breaks = round(aggregate.breaks, digits = 2))
+  )
+}
+
+RotateXTicks <- function() {
+  return(opts(axis.text.x = theme_text(angle = 90)))
+}
+
 # Pepare OWP object
 owp       <- CreateOWP()
 owp$means <- GetMeanSummary(owp)
@@ -344,9 +379,15 @@ owp$means <- GetMeanSummary(owp)
 #Plot OWP object
 p <- InitializeGgplot(owp)
 p <- p + GrandMeanLine(owp)
+p <- p + ScaleX(owp)
+p <- p + ScaleY(owp)
 p <- p + ScoresByGroupContrast(owp)
 p <- p + GroupMeansByContrast(owp)
 p <- p + GrandMeanPoint(owp)
+p <- p + XLabel()
+p <- p + YLabel()
+p <- p + RotateXTicks()
+
 
 return(p)
 }
