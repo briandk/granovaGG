@@ -1,13 +1,13 @@
-isGranovaInstalled <- function () {
-  return( "granova" %in% .packages(all.available = TRUE))  
+isGranovaInstalled <- function() {
+  return("granova" %in% .packages(all.available = TRUE))  
 }
 
-isGranovaAttached <- function () {
-  return( ("package:granova" %in% search()))
+isGranovaAttached <- function() {
+  return(("package:granova" %in% search()))
 }
 
-removeCurrentVersionOfGranova <- function () {
-  if ( isGranovaInstalled() ) {
+removeCurrentVersionOfGranova <- function() {
+  if (isGranovaInstalled()) {
     
     if (isGranovaAttached()) {
       print("Detaching granova package")
@@ -19,15 +19,14 @@ removeCurrentVersionOfGranova <- function () {
   }
 }
 
-installGranovaDev <- function () {
-  install.packages(
-    pkgs    = '../../granova/', 
-    repos   = NULL, 
-    type    = 'source'
-  )
+installGranovaDev <- function() {
+  install.packages(pkgs    = '../../granova/', 
+                   repos   = NULL, 
+                   type    = 'source'
+                  )
 }
 
 removeCurrentVersionOfGranova()
 installGranovaDev()
 library(granova)
-demo("granova.ds.ggplot")
+demo("granova.1w.ggplot")
