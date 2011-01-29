@@ -13,24 +13,25 @@
 # granova.1w (data=data, group=grouping)
 
 granova.1w.ggplot <- function( data, 
-                               group     = NULL, 
-                               dg        = 2, 
-                               h.rng     = 1.25, 
-                               v.rng     = .2, 
-                               box       = FALSE, 
-                               jj        = 1, 
-                               kx        = 1, 
-                               px        = 1,
-                               size.line = -2.5, 
-                               top.dot   = .15, 
-                               trmean    = FALSE, 
-                               resid     = FALSE,  
-                               dosqrs    = TRUE, 
-                               ident     = FALSE, 
-                               pt.lab    = NULL, 
-                               xlab      = NULL, 
-                               ylab      = NULL, 
-                               main      = NULL, ...
+                               group      = NULL, 
+                               dg         = 2, 
+                               h.rng      = 1.25, 
+                               v.rng      = .2, 
+                               box        = FALSE, 
+                               jj         = 1, 
+                               kx         = 1, 
+                               px         = 1,
+                               size.line  = -2.5, 
+                               top.dot    = .15, 
+                               trmean     = FALSE, 
+                               resid      = FALSE,  
+                               dosqrs     = TRUE, 
+                               ident      = FALSE, 
+                               pt.lab     = NULL, 
+                               xlab       = NULL, 
+                               ylab       = NULL, 
+                               main       = NULL,
+                               plot.theme = NULL, ...
 )
 
 {
@@ -372,6 +373,16 @@ RotateXTicks <- function() {
   return(opts(axis.text.x = theme_text(angle = 90)))
 }
 
+Theme <- function() {
+  if (is.null(plot.theme)) {
+    return(theme_granova())
+  }
+  
+  else {
+    return(plot.theme)
+  }
+}
+
 # Pepare OWP object
 owp       <- CreateOWP()
 owp$means <- GetMeanSummary(owp)
@@ -387,7 +398,7 @@ p <- p + GrandMeanPoint(owp)
 p <- p + XLabel()
 p <- p + YLabel()
 p <- p + RotateXTicks()
-
+p <- p + Theme()
 
 return(p)
 }
