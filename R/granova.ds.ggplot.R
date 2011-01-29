@@ -63,26 +63,26 @@ granova.ds.ggplot <- function(data       = NULL,
   
   GetShadows <- function(dsp) {
     x.shadow <- (dsp$effect / 2) + 
-                (3 * dsp$parameters$bounds[1] + dsp$parameters$bounds[2]) / 4 + 
-                (4 * dsp$parameters$shadow.offset)
+                (3 * dsp$params$bounds[1] + dsp$params$bounds[2]) / 4 + 
+                (4 * dsp$params$shadow.offset)
     y.shadow <- x.shadow - dsp$effect
     return(data.frame(x.shadow, y.shadow))
   }
 
   GetCrossbow <- function(dsp) {
-    return(data.frame(x     = min(dsp$shadows$x.shadow) - (2 * dsp$parameters$shadow.offset),
-                      y     = max(dsp$shadows$y.shadow) - (2 * dsp$parameters$shadow.offset),
-                      x.end = max(dsp$shadows$x.shadow) - (2 * dsp$parameters$shadow.offset),
-                      y.end = min(dsp$shadows$y.shadow) - (2 * dsp$parameters$shadow.offset)
+    return(data.frame(x     = min(dsp$shadows$x.shadow) - (2 * dsp$params$shadow.offset),
+                      y     = max(dsp$shadows$y.shadow) - (2 * dsp$params$shadow.offset),
+                      x.end = max(dsp$shadows$x.shadow) - (2 * dsp$params$shadow.offset),
+                      y.end = min(dsp$shadows$y.shadow) - (2 * dsp$params$shadow.offset)
                      )
           )  
   }
   
   GetCIBand <- function(dsp) {
-    return(data.frame(cx     = ((dsp$parameters$anchor + dsp$stats$lower.treatment.effect) / 2) - 3 * (dsp$parameters$shadow.offset),
-                      cy     = ((dsp$parameters$anchor - dsp$stats$lower.treatment.effect) / 2) - 3 * (dsp$parameters$shadow.offset),
-                      cx.end = ((dsp$parameters$anchor + dsp$stats$upper.treatment.effect) / 2) - 3 * (dsp$parameters$shadow.offset),
-                      cy.end = ((dsp$parameters$anchor - dsp$stats$upper.treatment.effect) / 2) - 3 * (dsp$parameters$shadow.offset),
+    return(data.frame(cx     = ((dsp$params$anchor + dsp$stats$lower.treatment.effect) / 2) - 3 * (dsp$params$shadow.offset),
+                      cy     = ((dsp$params$anchor - dsp$stats$lower.treatment.effect) / 2) - 3 * (dsp$params$shadow.offset),
+                      cx.end = ((dsp$params$anchor + dsp$stats$upper.treatment.effect) / 2) - 3 * (dsp$params$shadow.offset),
+                      cy.end = ((dsp$params$anchor - dsp$stats$upper.treatment.effect) / 2) - 3 * (dsp$params$shadow.offset),
                       color  = factor(paste(100 * conf.level, "% CI", " (t = ", round(dsp$stats$t.statistic, digits = 2), ")", sep =""))
                      )
           )
@@ -116,10 +116,10 @@ granova.ds.ggplot <- function(data       = NULL,
           )         
   }
 
-  dsp                <- list( data = data )
+  dsp                <- list(data = data)
   dsp$effect         <- GetEffect(dsp)
   dsp$stats          <- GetStats(dsp, conf.level)
-  dsp$parameters     <- GetGraphicsParams(dsp)
+  dsp$params     <- GetGraphicsParams(dsp)
   dsp$shadows        <- GetShadows(dsp)
   dsp$crossbow       <- GetCrossbow(dsp)
   dsp$CIBand         <- GetCIBand(dsp)
@@ -155,7 +155,7 @@ granova.ds.ggplot <- function(data       = NULL,
   }
 
   RawData <- function(dsp) {
-    return(geom_point(size = dsp$parameters$point.size))
+    return(geom_point(size = dsp$params$point.size))
   }
 
   IdentityLine <- function() {
@@ -167,11 +167,11 @@ granova.ds.ggplot <- function(data       = NULL,
   }
 
   ScaleX <- function(dsp) {
-    return(scale_x_continuous(limits = dsp$parameters$bounds))
+    return(scale_x_continuous(limits = dsp$params$bounds))
   }
 
   ScaleY <- function(dsp) {
-    return(scale_y_continuous(limits = dsp$parameters$bounds))
+    return(scale_y_continuous(limits = dsp$params$bounds))
   }
 
   RugPlot <- function(dsp) {
@@ -186,7 +186,7 @@ granova.ds.ggplot <- function(data       = NULL,
   XMeanLine <- function(dsp) {
     return(geom_vline(xintercept = mean(GetXs(dsp$data)),
                       color      = dsp$colors$mean.line,
-                      size       = dsp$parameters$mean.line.size,
+                      size       = dsp$params$mean.line.size,
                       alpha      = I(1/2)
                      ) 
           )
@@ -195,7 +195,7 @@ granova.ds.ggplot <- function(data       = NULL,
   YMeanLine <- function(dsp)  {
     return(geom_hline(yintercept = mean(GetYs(dsp$data)),
                       color      = dsp$colors$mean.line,
-                      size       = dsp$parameters$mean.line.size,
+                      size       = dsp$params$mean.line.size,
                       alpha      = I(1/2)
                      ) 
           )
@@ -234,7 +234,7 @@ granova.ds.ggplot <- function(data       = NULL,
                           y = y.shadow
                          ),
                       data  = dsp$shadow, 
-                      size  = dsp$parameters$point.size,
+                      size  = dsp$params$point.size,
                       alpha = I(1/4) 
                      )
           )
