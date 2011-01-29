@@ -7,131 +7,125 @@ granova.ds.ggplot <- function(data       = NULL,
 {
   
   GetXs <- function(data) {
-    return( data[, 1])
+    return(data[, 1])
   }
 
   GetYs <- function(data) {
-    return( data[, 2])
+    return(data[, 2])
   }
 
   GetEffect <- function(dsp) {
-    return( GetXs(dsp$data) - GetYs(dsp$data) )
+    return(GetXs(dsp$data) - GetYs(dsp$data))
   }
   
   GetTtest <- function(data, conf.level) {
-    return (   t.test(data[, 1], 
-                      data[, 2], 
-                      paired     = TRUE,
-                      conf.level = conf.level
-               )
-    )
+    return(t.test(data[, 1], 
+                  data[, 2], 
+                  paired     = TRUE,
+                  conf.level = conf.level
+                 )
+          )
   }
   
   GetStats <- function(dsp, conf.level) {
     ttest <- GetTtest(dsp$data, conf.level)
-    return(  data.frame(
+    return(data.frame(
               lower.treatment.effect = as.numeric(ttest$conf.int[2]),
               mean.treatment.effect  = as.numeric(ttest$estimate[1]),
               upper.treatment.effect = as.numeric(ttest$conf.int[1]),
               t.statistic            = as.numeric(ttest$statistic[1])
             )
-    )    
+          )
   }
   
   GetGraphicsParams <- function(dsp) {
     .aggregate.data.range  <- c(range(GetXs(dsp$data)), range(GetYs(dsp$data)))
-    .extrema             <- c(max(.aggregate.data.range), min(.aggregate.data.range))    
+    .extrema               <- c(max(.aggregate.data.range), min(.aggregate.data.range))    
     .square.data.range     <- max(.extrema) - min(.extrema)
-    .southwest.padding    <- (65/100) * .square.data.range
+    .southwest.padding     <- (65/100) * .square.data.range
     .north.east.padding    <- (25/100) * .square.data.range
     .lower.graphical.bound <- min(.extrema) - .southwest.padding
     .upper.graphical.bound <- max(.extrema) + .north.east.padding
-    .bounds              <- c(.lower.graphical.bound, .upper.graphical.bound)
-    .center              <- mean(.bounds)
-    .crossbow.anchor      <- mean(.bounds) + min(.bounds)
-    .shadow.offset        <- (1/100)*.square.data.range
+    .bounds                <- c(.lower.graphical.bound, .upper.graphical.bound)
+    .center                <- mean(.bounds)
+    .crossbow.anchor       <- mean(.bounds) + min(.bounds)
+    .shadow.offset         <- (1/100)*.square.data.range
   
-    return ( list(
-      square.data.range     = .square.data.range,    
-      bounds              = .bounds,  
-      shadow.offset        = .shadow.offset,
-      anchor              = .crossbow.anchor,
-      point.size           = I(2),
-      mean.line.size        = I(1/2)      
-    ) )
+    return(list(square.data.range = .square.data.range,    
+                bounds            = .bounds,  
+                shadow.offset     = .shadow.offset,
+                anchor            = .crossbow.anchor,
+                point.size        = I(2),
+                mean.line.size    = I(1/2)      
+               )
+          )
   }
   
   GetShadows <- function(dsp) {
     x.shadow <- (dsp$effect / 2) + 
-               (3 * dsp$parameters$bounds[1] + dsp$parameters$bounds[2]) / 4 + 
-               (4 * dsp$parameters$shadow.offset)
+                (3 * dsp$parameters$bounds[1] + dsp$parameters$bounds[2]) / 4 + 
+                (4 * dsp$parameters$shadow.offset)
     y.shadow <- x.shadow - dsp$effect
-    return (data.frame(x.shadow, y.shadow))
+    return(data.frame(x.shadow, y.shadow))
   }
 
   GetCrossbow <- function(dsp) {
-    return(  data.frame(
-      x    = min(dsp$shadows$x.shadow) - (2 * dsp$parameters$shadow.offset),
-      y    = max(dsp$shadows$y.shadow) - (2 * dsp$parameters$shadow.offset),
-      x.end = max(dsp$shadows$x.shadow) - (2 * dsp$parameters$shadow.offset),
-      y.end = min(dsp$shadows$y.shadow) - (2 * dsp$parameters$shadow.offset)
-      )
-    )  
+    return(data.frame(x     = min(dsp$shadows$x.shadow) - (2 * dsp$parameters$shadow.offset),
+                      y     = max(dsp$shadows$y.shadow) - (2 * dsp$parameters$shadow.offset),
+                      x.end = max(dsp$shadows$x.shadow) - (2 * dsp$parameters$shadow.offset),
+                      y.end = min(dsp$shadows$y.shadow) - (2 * dsp$parameters$shadow.offset)
+                     )
+          )  
   }
   
   GetCIBand <- function(dsp) {
-    CIBand <- data.frame(
-      cx    = ((dsp$parameters$anchor + dsp$stats$lower.treatment.effect) / 2) - 3 * (dsp$parameters$shadow.offset),
-      cy    = ((dsp$parameters$anchor - dsp$stats$lower.treatment.effect) / 2) - 3 * (dsp$parameters$shadow.offset),
-      cx.end = ((dsp$parameters$anchor + dsp$stats$upper.treatment.effect) / 2) - 3 * (dsp$parameters$shadow.offset),
-      cy.end = ((dsp$parameters$anchor - dsp$stats$upper.treatment.effect) / 2) - 3 * (dsp$parameters$shadow.offset),
-      color = factor(paste(100 * conf.level, "% CI", " (t = ", round(dsp$stats$t.statistic, digits = 2), ")", sep =""))
-      )
+    return(data.frame(cx     = ((dsp$parameters$anchor + dsp$stats$lower.treatment.effect) / 2) - 3 * (dsp$parameters$shadow.offset),
+                      cy     = ((dsp$parameters$anchor - dsp$stats$lower.treatment.effect) / 2) - 3 * (dsp$parameters$shadow.offset),
+                      cx.end = ((dsp$parameters$anchor + dsp$stats$upper.treatment.effect) / 2) - 3 * (dsp$parameters$shadow.offset),
+                      cy.end = ((dsp$parameters$anchor - dsp$stats$upper.treatment.effect) / 2) - 3 * (dsp$parameters$shadow.offset),
+                      color  = factor(paste(100 * conf.level, "% CI", " (t = ", round(dsp$stats$t.statistic, digits = 2), ")", sep =""))
+                     )
+          )
     
-    return (CIBand)
   }
   
   GetTreatmentLine <- function(dsp) {
-    return( data.frame(
-              intercept      = -dsp$stats$mean.treatment.effect,
-              slope          = 1,
-              color          = factor(paste("Mean Diff. =", round(dsp$stats$mean.treatment.effect, digits = 2)))
-            )
-    )
+    return(data.frame(intercept = -dsp$stats$mean.treatment.effect,
+                      slope     = 1,
+                      color     = factor(paste("Mean Diff. =", round(dsp$stats$mean.treatment.effect, digits = 2)))
+                     )
+          )
   }
 
   GetTrails <- function(dsp) {
-    
-    return(  data.frame(
-               x.trail.start = GetXs(dsp$data), 
-               y.trail.start = GetYs(dsp$data),
-               x.trail.end   = GetXs(dsp$shadow), 
-               y.trail.end   = GetYs(dsp$shadow)
-             )
-    )
+    return(data.frame(x.trail.start = GetXs(dsp$data), 
+                      y.trail.start = GetYs(dsp$data),
+                      x.trail.end   = GetXs(dsp$shadow), 
+                      y.trail.end   = GetYs(dsp$shadow)
+                     )
+          )
   }
   
   GetColors <- function(dsp) {
-    return(  list(
-               treatment.line = "#542570",
-               rugplot       = "black",
-               mean.line      = "#542570",
-               CIBand        = "#33A02C",
-               crossbow      = "#377EB8"
-             )
-    )         
+    return(list(treatment.line = "#542570",
+                rugplot        = "black",
+                mean.line      = "#542570",
+                CIBand         = "#33A02C",
+                crossbow       = "#377EB8"
+               )
+          )         
   }
 
-  dsp               <- list( data = data )
-  dsp$effect        <- GetEffect(dsp)
-  dsp$stats         <- GetStats(dsp, conf.level)
-  dsp$parameters    <- GetGraphicsParams(dsp)
-  dsp$shadows       <- GetShadows(dsp)
-  dsp$crossbow      <- GetCrossbow(dsp)
-  dsp$CIBand        <- GetCIBand(dsp)
+  dsp                <- list( data = data )
+  dsp$effect         <- GetEffect(dsp)
+  dsp$stats          <- GetStats(dsp, conf.level)
+  dsp$parameters     <- GetGraphicsParams(dsp)
+  dsp$shadows        <- GetShadows(dsp)
+  dsp$crossbow       <- GetCrossbow(dsp)
+  dsp$CIBand         <- GetCIBand(dsp)
   dsp$treatment.line <- GetTreatmentLine(dsp)
-  dsp$trails        <- GetTrails(dsp)
-  dsp$colors        <- GetColors(dsp)
+  dsp$trails         <- GetTrails(dsp)
+  dsp$colors         <- GetColors(dsp)
     
   
 
@@ -140,165 +134,139 @@ granova.ds.ggplot <- function(data       = NULL,
 
   
   InitializeGgplot <- function(dsp) {
-    p <- ggplot( 
-           aes_string(
-             x = names(dsp$data)[1], 
-             y = names(dsp$data)[2]
-            ),
-            data = dsp$data
+    return(ggplot(aes_string(x = names(dsp$data)[1], 
+                             y = names(dsp$data)[2]
+                            ),
+                  data = dsp$data
+                 )
           )
   }
     
   TreatmentLine <- function(dsp) {
-    return( geom_abline(
-                     aes(
-                       intercept = intercept,
-                       slope     = slope,
-                       color     = color
-                     ),
-                     alpha = I(1/2),
-                     size  = I(1),
-                     data  = dsp$treatment.line
-            )
-    )
+    return(geom_abline(aes(intercept = intercept,
+                           slope     = slope,
+                           color     = color
+                          ),
+                       alpha = I(1/2),
+                       size  = I(1),
+                       data  = dsp$treatment.line
+                      )
+          )
   }
 
   RawData <- function(dsp) {
-    RawData <- geom_point(
-      size  = dsp$parameters$point.size
-    )
-    return (RawData)
+    return(geom_point(size = dsp$parameters$point.size))
   }
 
   IdentityLine <- function() {
-    return (
-      geom_abline(
-        slope     = 1, 
-        intercept = 0,
-        alpha     = I(3/4)
-      )
-    )
+    return(geom_abline(slope     = 1, 
+                       intercept = 0,
+                       alpha     = I(3/4)
+                      )
+          )
   }
 
   ScaleX <- function(dsp) {
-    return (scale_x_continuous(limits = dsp$parameters$bounds))
+    return(scale_x_continuous(limits = dsp$parameters$bounds))
   }
 
   ScaleY <- function(dsp) {
-    return (scale_y_continuous(limits = dsp$parameters$bounds))
+    return(scale_y_continuous(limits = dsp$parameters$bounds))
   }
 
   RugPlot <- function(dsp) {
-    return(
-      geom_rug(
-        size  = I(1/2),
-        alpha = I(1/3),
-        color = dsp$colors$rugplot,
-        data  = dsp$data
-      )  
-    )
+    return(geom_rug(size  = I(1/2),
+                    alpha = I(1/3),
+                    color = dsp$colors$rugplot,
+                    data  = dsp$data
+                   )  
+          )
   }
 
   XMeanLine <- function(dsp) {
-    return( 
-      geom_vline(
-        xintercept = mean(GetXs(dsp$data)),
-        color      = dsp$colors$mean.line,
-        size       = dsp$parameters$mean.line.size,
-        alpha      = I(1/2)
-      ) 
-    )
+    return(geom_vline(xintercept = mean(GetXs(dsp$data)),
+                      color      = dsp$colors$mean.line,
+                      size       = dsp$parameters$mean.line.size,
+                      alpha      = I(1/2)
+                     ) 
+          )
   }
   
   YMeanLine <- function(dsp)  {
-    return( 
-      geom_hline(
-        yintercept = mean(GetYs(dsp$data)),
-        color      = dsp$colors$mean.line,
-        size       = dsp$parameters$mean.line.size,
-        alpha      = I(1/2)
-      ) 
-    )
+    return(geom_hline(yintercept = mean(GetYs(dsp$data)),
+                      color      = dsp$colors$mean.line,
+                      size       = dsp$parameters$mean.line.size,
+                      alpha      = I(1/2)
+                     ) 
+          )
     
   }
 
   Crossbow <- function(dsp) {
-    crossbow <- geom_segment(
-      aes(
-        x     = x,
-        y     = y,
-        xend  = x.end,
-        yend  = y.end
-      ), 
-      size  = I(3/4),
-      alpha = I(3/4),
-      color = dsp$colors$crossbow,
-      data  = dsp$crossbow
-    )  
-    
-    return (crossbow)
+    return(geom_segment(aes(x    = x,
+                            y    = y,
+                            xend = x.end,
+                            yend = y.end
+                           ), 
+                        size  = I(3/4),
+                        alpha = I(3/4),
+                        color = dsp$colors$crossbow,
+                        data  = dsp$crossbow
+                       )  
+          )
   }
 
   CIBand <- function(dsp) {
-    CIBand <- geom_segment(
-      aes(
-       x     = cx,
-       y     = cy,
-       xend  = cx.end,
-       yend  = cy.end,                        
-       color = color
-      ), 
-              size  = I(2),
-              data  = dsp$CIBand
-            )
- 
-   return (CIBand) 
+    return(geom_segment(aes(x     = cx,
+                            y     = cy,
+                            xend  = cx.end,
+                            yend  = cy.end,                        
+                            color = color
+                           ), 
+                        size = I(2),
+                        data = dsp$CIBand
+                       )
+          )
   }
 
   Shadows <- function(dsp) {
-    shadows <- geom_point(
-      aes(
-        x = x.shadow,
-        y = y.shadow
-      ),
-      data  = dsp$shadow, 
-      size  = dsp$parameters$point.size,
-      alpha = I(1/4) 
-    )
-  
-    return (shadows)
+    return(geom_point(aes(x = x.shadow,
+                          y = y.shadow
+                         ),
+                      data  = dsp$shadow, 
+                      size  = dsp$parameters$point.size,
+                      alpha = I(1/4) 
+                     )
+          )
   }
 
   Trails <- function(dsp) {
-    trails <- geom_segment(
-      aes(
-        x        = x.trail.start,
-        y        = y.trail.start,
-        xend     = x.trail.end,
-        yend     = y.trail.end
-      ),
-      data     = dsp$trails,
-      size     = I(1/3),
-      color    = "black",
-      linetype = 1,
-      alpha    = I(1/10)              
-    ) 
-  
-    return (trails)
+    return(geom_segment(aes(x    = x.trail.start,
+                            y    = y.trail.start,
+                            xend = x.trail.end,
+                            yend = y.trail.end
+                           ),
+                        data     = dsp$trails,
+                        size     = I(1/3),
+                        color    = "black",
+                        linetype = 1,
+                        alpha    = I(1/10)              
+                       ) 
+          )
   }
 
   Legend <- function(dsp) {
     colors <- c(dsp$colors$treatment.line, dsp$colors$CIBand)
   
-    return (scale_color_manual(value = colors, name = ""))
+    return(scale_color_manual(value = colors, name = ""))
   }
 
   Title <- function() {
-    return (opts(title = plot.title))
+    return(opts(title = plot.title))
   }
   
   Theme <- function() {
-    return (plot.theme)
+    return(plot.theme)
   }
         
   p <- InitializeGgplot(dsp)
@@ -317,6 +285,6 @@ granova.ds.ggplot <- function(data       = NULL,
   p <- p + coord_fixed()
   p <- p + Title()
 
-  return( p )
+  return(p)
 
 }
