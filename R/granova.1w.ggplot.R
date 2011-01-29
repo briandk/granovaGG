@@ -359,13 +359,17 @@ YLabel <- function() {
 }
 
 ScaleX <- function(owp) {
-  return(scale_x_continuous(breaks = round(owp$means$contrast, digits = 2)))
+  return(scale_x_continuous(
+    breaks = round(owp$means$contrast, digits = 2),
+    expand = c(0.1, 0))
+  )
 }
 
 ScaleY <- function(owp) {
   aggregate.breaks <- c(owp$means$groupMean, range(owp$data$score))
   return(scale_y_continuous(
-    breaks = round(aggregate.breaks, digits = 2))
+    breaks = round(aggregate.breaks, digits = 2),
+    expand = c(0.1, 0))
   )
 }
 
@@ -383,9 +387,34 @@ Theme <- function() {
   }
 }
 
+GetGroupMeanLine <- function(owp) {
+  return(
+    data.frame(
+      x     = min(owp$data$contrast),
+      y     = min(owp$data$groupMean),
+      xend  = max(owp$data$contrast),
+      yend  = max(owp$data$groupMean),
+      color = "blue"      
+    )
+  )
+}
+
+GroupMeanLine <- function(owp) {
+  return(geom_segment(
+    aes(
+      x      = x,
+      y      = y,
+      xend   = xend,
+      yend   = yend
+    ), color = "blue",
+       data  = owp$group.mean.line
+  ))
+}
+
 # Pepare OWP object
-owp       <- CreateOWP()
-owp$means <- GetMeanSummary(owp)
+owp                 <- CreateOWP()
+owp$means           <- GetMeanSummary(owp)
+owp$group.mean.line <- GetGroupMeanLine(owp)
 
 #Plot OWP object
 p <- InitializeGgplot(owp)
@@ -393,6 +422,7 @@ p <- p + GrandMeanLine(owp)
 p <- p + ScaleX(owp)
 p <- p + ScaleY(owp)
 p <- p + ScoresByGroupContrast(owp)
+p <- p + GroupMeanLine(owp)
 p <- p + GroupMeansByContrast(owp)
 p <- p + GrandMeanPoint(owp)
 p <- p + XLabel()

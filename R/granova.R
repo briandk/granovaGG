@@ -6,8 +6,9 @@ getSquareDataRange <- function(data) {
 }
 
 theme_granova <- function(base_size = 12) {
-  theme_granova <- theme_gray()
-  theme_granova$axis.text.x <- theme_text(size = base_size * 0.8 , lineheight = 0.9, colour = "grey50", vjust = 1, angle = 90)
+  theme_granova                  <- theme_gray()
+  theme_granova$axis.text.x      <- theme_text(size = base_size * 0.8 , lineheight = 0.9, colour = "grey50", vjust = 1, angle = 90)
+  theme_granova$panel.grid.minor <- theme_line(colour = NA, size = 0.25)
   return(theme_granova)
   
   # structure(list(
