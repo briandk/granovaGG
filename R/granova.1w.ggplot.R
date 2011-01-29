@@ -301,6 +301,10 @@ createOWP <- function () {
   return( list( data = getData() )  )
 }
 
+getMeanSummary <- function (owp) {
+  return (ddply(owp$data, .(group), numcolwise(mean)))
+}
+
 initializeGgplot <- function (owp) {
   return( ggplot() )
 }
@@ -312,12 +316,22 @@ scoresByGroupContrast <- function (owp) {
   )
 }
 
+groupMeansByContrast <- function (owp) {
+  return( 
+    geom_point( aes(x = contrast, y = groupMean), data = owp$means, color = "red"
+    )
+  )
+}
+
+
 # Pepare OWP object
-owp <- createOWP()
+owp       <- createOWP()
+owp$means <- getMeanSummary(owp)
 
 #Plot OWP object
 p <- initializeGgplot(owp)
 p <- p + scoresByGroupContrast(owp)
+p <- p + groupMeansByContrast(owp)
 
 return(p)
 }
