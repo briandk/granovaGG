@@ -119,7 +119,7 @@ granova.ds.ggplot <- function(data       = NULL,
   dsp                <- list(data = data)
   dsp$effect         <- GetEffect(dsp)
   dsp$stats          <- GetStats(dsp, conf.level)
-  dsp$params     <- GetGraphicsParams(dsp)
+  dsp$params         <- GetGraphicsParams(dsp)
   dsp$shadows        <- GetShadows(dsp)
   dsp$crossbow       <- GetCrossbow(dsp)
   dsp$CIBand         <- GetCIBand(dsp)
