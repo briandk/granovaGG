@@ -29,12 +29,11 @@ granova.ds.ggplot <- function(data       = NULL,
   
   GetStats <- function(dsp, conf.level) {
     ttest <- GetTtest(dsp$data, conf.level)
-    return(data.frame(
-              lower.treatment.effect = as.numeric(ttest$conf.int[2]),
-              mean.treatment.effect  = as.numeric(ttest$estimate[1]),
-              upper.treatment.effect = as.numeric(ttest$conf.int[1]),
-              t.statistic            = as.numeric(ttest$statistic[1])
-            )
+    return(data.frame(lower.treatment.effect = as.numeric(ttest$conf.int[2]),
+                      mean.treatment.effect  = as.numeric(ttest$estimate[1]),
+                      upper.treatment.effect = as.numeric(ttest$conf.int[1]),
+                      t.statistic            = as.numeric(ttest$statistic[1])
+                     )
           )
   }
   
