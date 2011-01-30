@@ -309,6 +309,18 @@ InitializeGgplot <- function(owp) {
   return(ggplot())
 }
 
+getMSbetweenSquare <- function() {
+  squareSideLength <- sqrs
+  return(
+    data.frame(
+      xmin = -sqrs/2,
+      xmax =  sqrs/2,
+      ymin = grandmean - sqrs/2,
+      ymax = grandmean + sqrs/2
+    )
+  )
+}
+
 ScoresByGroupContrast <- function(owp) {
   return( 
     geom_point( 
@@ -423,6 +435,19 @@ Residuals <- function(owp) {
   )
 }
 
+MSBetweenSquare <- function() {
+  return(
+    geom_rect(
+            aes(
+              xmin = xmin,
+              xmax = xmax,
+              ymin = ymin,
+              ymax = ymax
+            ), data = getMSbetweenSquare()
+    )
+  )
+}
+
 # Pepare OWP object
 owp                 <- CreateOWP()
 owp$means           <- GetMeanSummary(owp)
@@ -439,6 +464,7 @@ p <- p + ScoresByGroupContrast(owp)
 p <- p + GroupMeanLine(owp)
 p <- p + GroupMeansByContrast(owp)
 p <- p + Residuals(owp)
+p <- p + MSBetweenSquare()
 p <- p + XLabel()
 p <- p + YLabel()
 p <- p + RotateXTicks()
