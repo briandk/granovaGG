@@ -315,8 +315,8 @@ getMSbetweenSquare <- function() {
     data.frame(
       xmin = -sqrs/2,
       xmax =  sqrs/2,
-      ymin = grandmean - sqrs/2,
-      ymax = grandmean + sqrs/2
+      ymin = grandmean - (sqrs/2) / (owp$params$aspect.ratio),
+      ymax = grandmean + (sqrs/2) / (owp$params$aspect.ratio)
     )
   )
 }
@@ -439,20 +439,39 @@ MSBetweenSquare <- function() {
   return(
     geom_rect(
             aes(
-              xmin = xmin,
-              xmax = xmax,
-              ymin = ymin,
-              ymax = ymax
-            ), data = getMSbetweenSquare()
+              xmin   = xmin,
+              xmax   = xmax,
+              ymin   = ymin,
+              ymax   = ymax
+            ), data  = getMSbetweenSquare(),
+               fill  = NA,
+               color = "blue"
     )
   )
 }
+
+ForceCoordinateAxesToBeEqual <- function(owp) {
+  return(coord_fixed(ratio = owp$params$aspect.ratio))
+}
+
+GetGraphicalParameters <- function(owp) {
+  .contrast.range.distance <- (max(owp$data$contrast) - min(owp$data$contrast))
+  .score.range.distance    <- (max(owp$data$score) - min(owp$data$score))
+  .aspect.ratio            <- .contrast.range.distance / .score.range.distance
+  
+  return(list(
+           aspect.ratio = .aspect.ratio
+         )
+  )
+}
+
 
 # Pepare OWP object
 owp                 <- CreateOWP()
 owp$means           <- GetMeanSummary(owp)
 owp$group.mean.line <- GetGroupMeanLine(owp)
 owp$residuals       <- GetResiduals()
+owp$params          <- GetGraphicalParameters(owp)
 
 #Plot OWP object
 p <- InitializeGgplot(owp)
@@ -469,7 +488,7 @@ p <- p + XLabel()
 p <- p + YLabel()
 p <- p + RotateXTicks()
 p <- p + Theme()
-p <- p + ForceCoordinateAxesToBeEqual()
+p <- p + ForceCoordinateAxesToBeEqual(owp)
 
 return(p)
 }
