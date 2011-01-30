@@ -12,27 +12,27 @@
 # dumbGroupingVector <- c(1, 2, 3)
 # granova.1w (data=data, group=grouping)
 
-granova.1w.ggplot <- function( data, 
-                               group      = NULL, 
-                               dg         = 2, 
-                               h.rng      = 1.25, 
-                               v.rng      = .2, 
-                               box        = FALSE, 
-                               jj         = 1, 
-                               kx         = 1, 
-                               px         = 1,
-                               size.line  = -2.5, 
-                               top.dot    = .15, 
-                               trmean     = FALSE, 
-                               resid      = FALSE,  
-                               dosqrs     = TRUE, 
-                               ident      = FALSE, 
-                               pt.lab     = NULL, 
-                               xlab       = NULL, 
-                               ylab       = NULL, 
-                               main       = NULL,
-                               plot.theme = NULL, ...
-)
+granova.1w.ggplot <- function(data, 
+                              group      = NULL, 
+                              dg         = 2, 
+                              h.rng      = 1.25, 
+                              v.rng      = .2, 
+                              box        = FALSE, 
+                              jj         = 1, 
+                              kx         = 1, 
+                              px         = 1,
+                              size.line  = -2.5, 
+                              top.dot    = .15, 
+                              trmean     = FALSE, 
+                              resid      = FALSE,  
+                              dosqrs     = TRUE, 
+                              ident      = FALSE, 
+                              pt.lab     = NULL, 
+                              xlab       = NULL, 
+                              ylab       = NULL, 
+                              main       = NULL,
+                              plot.theme = NULL, ...
+                             )
 
 {
 # Graphic corresponds to conventional one-way ANOVA, either vector or matrix input; plots grouped data from yy.
@@ -288,18 +288,17 @@ if(ident){
 
 ############ ggplot2 code below ################
 
-getData <- function () {
-  return( data.frame(
-            score     = yr,
-            group     = groupf,
-            groupMean = yrm,
-            contrast  = stats.vc
-          )
-  )
+getData <- function() {
+  return(data.frame(score      = yr,
+                    group      = groupf,
+                    group.mean = yrm,
+                    contrast   = stats.vc
+                   )
+        )
 }
 
 CreateOWP <- function() {
-  return( list( data = getData() )  )
+  return(list(data = getData()))
 }
 
 GetMeanSummary <- function(owp) {
@@ -307,7 +306,7 @@ GetMeanSummary <- function(owp) {
 }
 
 InitializeGgplot <- function(owp) {
-  return( ggplot() )
+  return(ggplot())
 }
 
 ScoresByGroupContrast <- function(owp) {
@@ -322,7 +321,7 @@ ScoresByGroupContrast <- function(owp) {
 
 GroupMeansByContrast <- function(owp) {
   return( 
-    geom_point( aes(x = contrast, y = groupMean), data = owp$means, color = "red"
+    geom_point( aes(x = contrast, y = group.mean), data = owp$means, color = "red"
     )
   )
 }
@@ -366,7 +365,7 @@ ScaleX <- function(owp) {
 }
 
 ScaleY <- function(owp) {
-  aggregate.breaks <- c(owp$means$groupMean, range(owp$data$score))
+  aggregate.breaks <- c(owp$means$group.mean, range(owp$data$score))
   return(scale_y_continuous(
     breaks = round(aggregate.breaks, digits = 2),
     expand = c(0.1, 0))
@@ -391,9 +390,9 @@ GetGroupMeanLine <- function(owp) {
   return(
     data.frame(
       x     = min(owp$data$contrast),
-      y     = min(owp$data$groupMean),
+      y     = min(owp$data$group.mean),
       xend  = max(owp$data$contrast),
-      yend  = max(owp$data$groupMean),
+      yend  = max(owp$data$group.mean),
       color = "blue"      
     )
   )
