@@ -267,6 +267,11 @@ granova.ds.ggplot <- function(data       = NULL,
   Theme <- function() {
     return(plot.theme)
   }
+  
+  ForceCoordinateAxesToBeEqual <- function() {
+    return(coord_fixed())
+  }
+  
         
   p <- InitializeGgplot(dsp)
   p <- p + TreatmentLine(dsp)
