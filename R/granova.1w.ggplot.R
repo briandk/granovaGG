@@ -469,6 +469,7 @@ p <- p + XLabel()
 p <- p + YLabel()
 p <- p + RotateXTicks()
 p <- p + Theme()
+p <- p + ForceCoordinateAxesToBeEqual()
 
 return(p)
 }

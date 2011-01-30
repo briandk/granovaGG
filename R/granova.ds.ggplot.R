@@ -281,7 +281,7 @@ granova.ds.ggplot <- function(data       = NULL,
   p <- p + CIBand(dsp)
   p <- p + Legend(dsp)
   p <- p + ScaleX(dsp) + ScaleY(dsp)
-  p <- p + coord_fixed()
+  p <- p + ForceCoordinateAxesToBeEqual()
   p <- p + Title()
 
   return(p)

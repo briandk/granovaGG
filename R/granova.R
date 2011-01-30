@@ -44,3 +44,7 @@ theme_granova <- function(base_size = 12) {
   #   plot.margin       = unit(c(1, 1, 0.5, 0.5), "lines")
   # ), class            = "options")
 }
+
+ForceCoordinateAxesToBeEqual <- function() {
+  return(coord_fixed())
+}
