@@ -398,6 +398,10 @@ GetGroupMeanLine <- function(owp) {
   )
 }
 
+GetResiduals <- function () {
+  return(data.frame(residuals = residuals))
+}
+
 GroupMeanLine <- function(owp) {
   return(geom_segment(
     aes(
@@ -410,10 +414,20 @@ GroupMeanLine <- function(owp) {
   ))
 }
 
+Residuals <- function(owp) {
+  return(
+    geom_rug(
+           aes(x = NULL, y = residuals),
+           data  = owp$residuals
+    )
+  )
+}
+
 # Pepare OWP object
 owp                 <- CreateOWP()
 owp$means           <- GetMeanSummary(owp)
 owp$group.mean.line <- GetGroupMeanLine(owp)
+owp$residuals       <- GetResiduals()
 
 #Plot OWP object
 p <- InitializeGgplot(owp)
@@ -424,6 +438,7 @@ p <- p + ScaleY(owp)
 p <- p + ScoresByGroupContrast(owp)
 p <- p + GroupMeanLine(owp)
 p <- p + GroupMeansByContrast(owp)
+p <- p + Residuals(owp)
 p <- p + XLabel()
 p <- p + YLabel()
 p <- p + RotateXTicks()
