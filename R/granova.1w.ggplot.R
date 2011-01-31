@@ -345,11 +345,11 @@ ScoresByGroupContrast <- function(owp) {
 GroupMeansByContrast <- function(owp) {
   return( 
     geom_point( 
-             aes(x = contrast, y = group.mean), 
+             aes(x = contrast, y = group.mean, fill = factor("Group Means")), 
                data              = owp$means, 
                color             = "black",
                shape             = 24,
-               fill              = "red"
+               size              = I(3)
     )
   )
 }
@@ -504,10 +504,12 @@ GetGraphicalParameters <- function(owp) {
   )
 }
 
-ColorScale <- function() {
-  colors <- c("green", "blue", "red")
+ColorScale <- function(owp) {
+  return(scale_color_manual(value = owp$colors, name = ""))
+}
 
-  return(scale_color_manual(value = colors, name = ""))
+FillScale <- function() {
+  return(scale_fill_manual(value = owp$colors, name = ""))
 }
 
 Title <- function() {
@@ -524,12 +526,31 @@ Title <- function() {
   }
 }
 
+GetColors <- function() {
+  colors <- c(
+   "red",
+   "green",
+   "red",
+   "blue"
+  )
+  
+  names(colors) <- c(
+    "MS-within",
+    "Grand Mean",
+    "Group Means",
+    "MS-between"
+  )
+  
+  return(colors)
+}
+
 # Pepare OWP object
 owp                 <- CreateOWP()
 owp$means           <- GetMeanSummary(owp)
 owp$group.mean.line <- GetGroupMeanLine(owp)
 owp$residuals       <- GetResiduals()
 owp$params          <- GetGraphicalParameters(owp)
+owp$colors          <- GetColors()
 
 #Plot OWP object
 p <- InitializeGgplot(owp)
@@ -543,7 +564,8 @@ p <- p + GroupMeansByContrast(owp)
 p <- p + Residuals(owp)
 p <- p + MSwithinSquare()
 p <- p + MSbetweenSquare()
-p <- p + ColorScale()
+p <- p + ColorScale(owp)
+p <- p + FillScale()
 p <- p + XLabel()
 p <- p + YLabel()
 p <- p + RotateXTicks()
