@@ -309,7 +309,7 @@ InitializeGgplot <- function(owp) {
   return(ggplot())
 }
 
-getMSbetweenSquare <- function() {
+GetMSwithinSquare <- function() {
   squareSideLength <- sqrs
   return(
     data.frame(
@@ -435,7 +435,7 @@ Residuals <- function(owp) {
   )
 }
 
-MSBetweenSquare <- function() {
+MSwithinSquare <- function() {
   return(
     geom_rect(
             aes(
@@ -443,7 +443,7 @@ MSBetweenSquare <- function() {
               xmax   = xmax,
               ymin   = ymin,
               ymax   = ymax
-            ), data  = getMSbetweenSquare(),
+            ), data  = GetMSwithinSquare(),
                fill  = NA,
                color = "blue"
     )
@@ -483,7 +483,7 @@ p <- p + ScoresByGroupContrast(owp)
 p <- p + GroupMeanLine(owp)
 p <- p + GroupMeansByContrast(owp)
 p <- p + Residuals(owp)
-p <- p + MSBetweenSquare()
+p <- p + MSwithinSquare()
 p <- p + XLabel()
 p <- p + YLabel()
 p <- p + RotateXTicks()
