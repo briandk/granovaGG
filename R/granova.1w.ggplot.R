@@ -394,7 +394,8 @@ YLabel <- function() {
 
 ScaleX <- function(owp) {
   return(scale_x_continuous(
-    breaks = round(owp$means$contrast, digits = 2),
+    breaks = (owp$means$contrast),
+    labels = round(owp$means$contrast, digits = 1),
     expand = c(0.1, 0))
   )
 }
@@ -402,7 +403,8 @@ ScaleX <- function(owp) {
 ScaleY <- function(owp) {
   aggregate.breaks <- c(owp$means$group.mean, range(owp$data$score))
   return(scale_y_continuous(
-    breaks = round(aggregate.breaks, digits = 2),
+    breaks = (aggregate.breaks),
+    labels = round(aggregate.breaks, digits = 1),
     expand = c(0.1, 0))
   )
 }
@@ -452,7 +454,7 @@ GroupMeanLine <- function(owp) {
 Residuals <- function(owp) {
   return(
     geom_rug(
-           aes(x = NULL, y = residuals),
+           aes(x = NULL, y = residuals, color = factor("Residuals")),
            data  = owp$residuals
     )
   )
@@ -516,9 +518,11 @@ Title <- function() {
   classic.granova.1w.title <- paste("One-way ANOVA displaying",ngroups,"groups")
   
   if (main == classic.granova.1w.title) {
-    return(opts(title = paste(
-      "One-way ANOVA displaying ", ngroups, " groups\n","F-Statistic = ",
-      round(F.stat, digits = 2), sep = "")))
+    return(
+        opts(
+          title = paste( "One-way ANOVA displaying ", ngroups, " groups ","(F = ", round(F.stat, digits = 2), ")", sep = "")
+        )
+    )
   }
   
   else {
@@ -531,14 +535,16 @@ GetColors <- function() {
    "red",
    "green",
    "red",
-   "blue"
+   "blue",
+   "darkblue"
   )
   
   names(colors) <- c(
-    "MS-within",
+    "MS-between",
     "Grand Mean",
     "Group Means",
-    "MS-between"
+    "MS-within",
+    "Residuals"
   )
   
   return(colors)
