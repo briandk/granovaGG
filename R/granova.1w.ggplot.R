@@ -451,15 +451,6 @@ GroupMeanLine <- function(owp) {
   ))
 }
 
-Residuals <- function(owp) {
-  return(
-    geom_rug(
-           aes(x = NULL, y = residuals, color = factor("Residuals")),
-           data  = owp$residuals
-    )
-  )
-}
-
 GetGraphicalParameters <- function(owp) {
   .contrast.range.distance <- (max(owp$data$contrast) - min(owp$data$contrast))
   .score.range.distance    <- (max(owp$data$score) - min(owp$data$score))
@@ -515,6 +506,15 @@ owp$standard.error  <- GetStandardError(owp)
 
 
 ######## Plot Functions Below
+
+Residuals <- function(owp) {
+  return(
+    geom_rug(
+           aes(x = NULL, y = residuals, color = factor("Residuals")),
+           data  = owp$residuals
+    )
+  )
+}
 
 MSwithinSquare <- function() {
   return(
