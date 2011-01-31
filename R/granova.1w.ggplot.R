@@ -409,10 +409,6 @@ ScaleY <- function(owp) {
   )
 }
 
-RotateXTicks <- function() {
-  return(opts(axis.text.x = theme_text(angle = 90)))
-}
-
 GetGroupMeanLine <- function(owp) {
   return(
     data.frame(
@@ -551,6 +547,10 @@ ColorScale <- function(owp) {
 
 FillScale <- function() {
   return(scale_fill_manual(value = owp$colors, name = ""))
+}
+
+RotateXTicks <- function() {
+  return(opts(axis.text.x = theme_text(angle = 90)))
 }
 
 Theme <- function() {
