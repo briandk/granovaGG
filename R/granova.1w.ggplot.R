@@ -536,7 +536,8 @@ GetColors <- function() {
    "green",
    "red",
    "blue",
-   "darkblue"
+   "darkblue",
+   "steelblue"
   )
   
   names(colors) <- c(
@@ -544,10 +545,31 @@ GetColors <- function() {
     "Grand Mean",
     "Group Means",
     "MS-within",
-    "Residuals"
+    "Residuals",
+    "SE-within"
   )
   
   return(colors)
+}
+
+GetStandardError <- function(owp) {
+  return(
+    data.frame( 
+      SE = c(
+          mean(owp$means$group.mean) + sqrs/2, 
+          mean(owp$means$group.mean) - sqrs/2
+      )
+    )
+  )
+}
+
+StandardError <- function(owp) {
+  return(
+    geom_hline(
+             aes(color  = factor("SE-within"), yintercept = SE),
+             data = owp$standard.error
+    )
+  )
 }
 
 # Pepare OWP object
@@ -557,6 +579,7 @@ owp$group.mean.line <- GetGroupMeanLine(owp)
 owp$residuals       <- GetResiduals()
 owp$params          <- GetGraphicalParameters(owp)
 owp$colors          <- GetColors()
+owp$standard.error  <- GetStandardError(owp)
 
 #Plot OWP object
 p <- InitializeGgplot(owp)
@@ -570,6 +593,7 @@ p <- p + GroupMeansByContrast(owp)
 p <- p + Residuals(owp)
 p <- p + MSwithinSquare()
 p <- p + MSbetweenSquare()
+p <- p + StandardError(owp)
 p <- p + ColorScale(owp)
 p <- p + FillScale()
 p <- p + XLabel()
