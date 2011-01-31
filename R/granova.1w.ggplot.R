@@ -429,18 +429,6 @@ GetResiduals <- function () {
   return(data.frame(residuals = residuals))
 }
 
-GroupMeanLine <- function(owp) {
-  return(geom_segment(
-    aes(
-      x      = x,
-      y      = y,
-      xend   = xend,
-      yend   = yend
-    ), color = "blue",
-       data  = owp$group.mean.line
-  ))
-}
-
 GetGraphicalParameters <- function(owp) {
   .contrast.range.distance <- (max(owp$data$contrast) - min(owp$data$contrast))
   .score.range.distance    <- (max(owp$data$score) - min(owp$data$score))
@@ -496,6 +484,18 @@ owp$standard.error  <- GetStandardError(owp)
 
 
 ######## Plot Functions Below
+
+GroupMeanLine <- function(owp) {
+  return(geom_segment(
+    aes(
+      x      = x,
+      y      = y,
+      xend   = xend,
+      yend   = yend
+    ), color = "blue",
+       data  = owp$group.mean.line
+  ))
+}
 
 Residuals <- function(owp) {
   return(
