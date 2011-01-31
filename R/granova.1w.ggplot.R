@@ -453,10 +453,10 @@ MSwithinSquare <- function() {
               xmin   = xmin,
               xmax   = xmax,
               ymin   = ymin,
-              ymax   = ymax
+              ymax   = ymax,
+              color  = factor("MS-within")
             ), data  = GetMSwithinSquare(),
                fill  = NA,
-               color = "blue"
     )
   )
 }
@@ -468,10 +468,10 @@ MSbetweenSquare <- function() {
               xmin   = xmin,
               xmax   = xmax,
               ymin   = ymin,
-              ymax   = ymax
+              ymax   = ymax,
+              color  = factor(paste("MS-between\n", "F-Statistic = ", "F-STAT!", sep = ""))
             ), data  = GetMSbetweenSquare(),
                fill  = NA,
-               color = "red"
     )
   )
 }
@@ -492,6 +492,12 @@ GetGraphicalParameters <- function(owp) {
   )
 }
 
+ColorScale <- function() {
+  colors <- c("red", "blue")
+
+  return(scale_color_manual(value = colors, name = ""))
+}
+
 
 # Pepare OWP object
 owp                 <- CreateOWP()
@@ -510,8 +516,9 @@ p <- p + ScoresByGroupContrast(owp)
 p <- p + GroupMeanLine(owp)
 p <- p + GroupMeansByContrast(owp)
 p <- p + Residuals(owp)
-p <- p + MSbetweenSquare()
 p <- p + MSwithinSquare()
+p <- p + MSbetweenSquare()
+p <- p + ColorScale()
 p <- p + XLabel()
 p <- p + YLabel()
 p <- p + RotateXTicks()
