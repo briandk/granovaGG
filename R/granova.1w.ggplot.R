@@ -305,10 +305,6 @@ GetMeanSummary <- function(owp) {
   return (ddply(owp$data, .(group), numcolwise(mean)))
 }
 
-InitializeGgplot <- function(owp) {
-  return(ggplot())
-}
-
 GetMSwithinSquare <- function() {
   squareSideLength <- sqrs
   return(
@@ -403,6 +399,10 @@ owp$standard.error  <- GetStandardError(owp)
 
 
 ######## Plot Functions Below
+
+InitializeGgplot <- function(owp) {
+  return(ggplot())
+}
 
 GrandMeanLine <- function(owp) {
   return(geom_hline(
