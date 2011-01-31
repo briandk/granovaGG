@@ -352,23 +352,6 @@ YLabel <- function() {
   }
 }
 
-ScaleX <- function(owp) {
-  return(scale_x_continuous(
-    breaks = (owp$means$contrast),
-    labels = round(owp$means$contrast, digits = 1),
-    expand = c(0.1, 0))
-  )
-}
-
-ScaleY <- function(owp) {
-  aggregate.breaks <- c(owp$means$group.mean, range(owp$data$score))
-  return(scale_y_continuous(
-    breaks = (aggregate.breaks),
-    labels = round(aggregate.breaks, digits = 1),
-    expand = c(0.1, 0))
-  )
-}
-
 GetGroupMeanLine <- function(owp) {
   return(
     data.frame(
@@ -456,6 +439,23 @@ GrandMeanPoint <- function(owp) {
       ), 
       data = owp$data
     )
+  )
+}
+
+ScaleX <- function(owp) {
+  return(scale_x_continuous(
+    breaks = (owp$means$contrast),
+    labels = round(owp$means$contrast, digits = 1),
+    expand = c(0.1, 0))
+  )
+}
+
+ScaleY <- function(owp) {
+  aggregate.breaks <- c(owp$means$group.mean, range(owp$data$score))
+  return(scale_y_continuous(
+    breaks = (aggregate.breaks),
+    labels = round(aggregate.breaks, digits = 1),
+    expand = c(0.1, 0))
   )
 }
 
