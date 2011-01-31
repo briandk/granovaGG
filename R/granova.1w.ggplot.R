@@ -475,21 +475,6 @@ MSwithinSquare <- function() {
   )
 }
 
-MSbetweenSquare <- function() {
-  return(
-    geom_rect(
-            aes(
-              xmin   = xmin,
-              xmax   = xmax,
-              ymin   = ymin,
-              ymax   = ymax,
-              color  = factor(paste("MS-between"))
-            ), data  = GetMSbetweenSquare(),
-               fill  = NA,
-    )
-  )
-}
-
 GetGraphicalParameters <- function(owp) {
   .contrast.range.distance <- (max(owp$data$contrast) - min(owp$data$contrast))
   .score.range.distance    <- (max(owp$data$score) - min(owp$data$score))
@@ -545,6 +530,21 @@ owp$standard.error  <- GetStandardError(owp)
 
 
 ######## Plot Functions Below
+
+MSbetweenSquare <- function() {
+  return(
+    geom_rect(
+            aes(
+              xmin   = xmin,
+              xmax   = xmax,
+              ymin   = ymin,
+              ymax   = ymax,
+              color  = factor(paste("MS-between"))
+            ), data  = GetMSbetweenSquare(),
+               fill  = NA,
+    )
+  )
+}
 
 StandardError <- function(owp) {
   return(
