@@ -365,13 +365,6 @@ GrandMeanPoint <- function(owp) {
   )
 }
 
-GrandMeanLine <- function(owp) {
-  return(geom_hline(
-    yintercept = mean(owp$data$score),
-    color      = "green")
-  )
-}
-
 XLabel <- function() {
   if (is.null(xlab)) {
     return(xlab("Contrast coefficients based on group means and sizes"))
@@ -480,6 +473,13 @@ owp$standard.error  <- GetStandardError(owp)
 
 
 ######## Plot Functions Below
+
+GrandMeanLine <- function(owp) {
+  return(geom_hline(
+    yintercept = mean(owp$data$score),
+    color      = "green")
+  )
+}
 
 GroupMeanLine <- function(owp) {
   return(geom_segment(
