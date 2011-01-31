@@ -299,16 +299,13 @@ CreateOWP <- function() {
   return(list(data = getData()))
 }
 
-GetWeightedVariances <- function(owp) {
-  return(by())
-}
-
 GetSummary <- function(owp) {
   return(
     ddply(owp$data, .(group), summarise,
-      group      = unique(group),
-      group.mean = mean(score),
-      contrast   = unique(contrast)
+      group             = unique(group),
+      group.mean        = mean(score),
+      contrast          = unique(contrast),
+      weighted.variance = (length(score) - 1) * var(score)
     )
   )
 }
