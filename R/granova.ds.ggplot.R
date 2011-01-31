@@ -254,7 +254,7 @@ granova.ds.ggplot <- function(data       = NULL,
           )
   }
 
-  Legend <- function(dsp) {
+  ColorScale <- function(dsp) {
     colors <- c(dsp$colors$treatment.line, dsp$colors$CIBand)
   
     return(scale_color_manual(value = colors, name = ""))
@@ -284,7 +284,7 @@ granova.ds.ggplot <- function(data       = NULL,
   p <- p + RugPlot(dsp)
   p <- p + Crossbow(dsp)
   p <- p + CIBand(dsp)
-  p <- p + Legend(dsp)
+  p <- p + ColorScale(dsp)
   p <- p + ScaleX(dsp) + ScaleY(dsp)
   p <- p + ForceCoordinateAxesToBeEqual()
   p <- p + Title()
