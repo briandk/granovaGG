@@ -460,21 +460,6 @@ Residuals <- function(owp) {
   )
 }
 
-MSwithinSquare <- function() {
-  return(
-    geom_rect(
-            aes(
-              xmin   = xmin,
-              xmax   = xmax,
-              ymin   = ymin,
-              ymax   = ymax,
-              color  = factor("MS-within")
-            ), data  = GetMSwithinSquare(),
-               fill  = NA,
-    )
-  )
-}
-
 GetGraphicalParameters <- function(owp) {
   .contrast.range.distance <- (max(owp$data$contrast) - min(owp$data$contrast))
   .score.range.distance    <- (max(owp$data$score) - min(owp$data$score))
@@ -530,6 +515,21 @@ owp$standard.error  <- GetStandardError(owp)
 
 
 ######## Plot Functions Below
+
+MSwithinSquare <- function() {
+  return(
+    geom_rect(
+            aes(
+              xmin   = xmin,
+              xmax   = xmax,
+              ymin   = ymin,
+              ymax   = ymax,
+              color  = factor("MS-within")
+            ), data  = GetMSwithinSquare(),
+               fill  = NA,
+    )
+  )
+}
 
 MSbetweenSquare <- function() {
   return(
