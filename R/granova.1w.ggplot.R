@@ -286,8 +286,6 @@ if(ident){
          }
 
 
-############ ggplot2 code below ################
-
 getData <- function() {
   return(data.frame(score      = yr,
                     group      = groupf,
@@ -301,8 +299,18 @@ CreateOWP <- function() {
   return(list(data = getData()))
 }
 
-GetMeanSummary <- function(owp) {
-  return (ddply(owp$data, .(group), numcolwise(mean)))
+GetWeightedVariances <- function(owp) {
+  return(by())
+}
+
+GetSummary <- function(owp) {
+  return(
+    ddply(owp$data, .(group), summarise,
+      group      = unique(group),
+      group.mean = mean(score),
+      contrast   = unique(contrast)
+    )
+  )
 }
 
 GetMSwithinSquare <- function() {
@@ -381,8 +389,8 @@ GetStandardError <- function(owp) {
   return(
     data.frame( 
       SE = c(
-          mean(owp$means$group.mean) + sqrs/2, 
-          mean(owp$means$group.mean) - sqrs/2
+          mean(owp$summary$group.mean) + sqrs/2, 
+          mean(owp$summary$group.mean) - sqrs/2
       )
     )
   )
@@ -390,7 +398,7 @@ GetStandardError <- function(owp) {
 
 # Pepare OWP object
 owp                 <- CreateOWP()
-owp$means           <- GetMeanSummary(owp)
+owp$summary         <- GetSummary(owp)
 owp$group.mean.line <- GetGroupMeanLine(owp)
 owp$residuals       <- GetResiduals()
 owp$params          <- GetGraphicalParameters(owp)
@@ -424,14 +432,14 @@ GrandMeanPoint <- function(owp) {
 
 ScaleX <- function(owp) {
   return(scale_x_continuous(
-    breaks = (owp$means$contrast),
-    labels = round(owp$means$contrast, digits = 1),
+    breaks = (owp$summary$contrast),
+    labels = round(owp$summary$contrast, digits = 1),
     expand = c(0.1, 0))
   )
 }
 
 ScaleY <- function(owp) {
-  aggregate.breaks <- c(owp$means$group.mean, range(owp$data$score))
+  aggregate.breaks <- c(owp$summary$group.mean, range(owp$data$score))
   return(scale_y_continuous(
     breaks = (aggregate.breaks),
     labels = round(aggregate.breaks, digits = 1),
@@ -465,7 +473,7 @@ GroupMeansByContrast <- function(owp) {
   return( 
     geom_point( 
              aes(x = contrast, y = group.mean, fill = factor("Group Means")), 
-               data              = owp$means, 
+               data              = owp$summary, 
                color             = "black",
                shape             = 24,
                size              = I(3)
