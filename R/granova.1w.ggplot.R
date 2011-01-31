@@ -342,18 +342,6 @@ ScoresByGroupContrast <- function(owp) {
   )
 }
 
-GroupMeansByContrast <- function(owp) {
-  return( 
-    geom_point( 
-             aes(x = contrast, y = group.mean, fill = factor("Group Means")), 
-               data              = owp$means, 
-               color             = "black",
-               shape             = 24,
-               size              = I(3)
-    )
-  )
-}
-
 XLabel <- function() {
   if (is.null(xlab)) {
     return(xlab("Contrast coefficients based on group means and sizes"))
@@ -491,6 +479,18 @@ GroupMeanLine <- function(owp) {
     ), color = "blue",
        data  = owp$group.mean.line
   ))
+}
+
+GroupMeansByContrast <- function(owp) {
+  return( 
+    geom_point( 
+             aes(x = contrast, y = group.mean, fill = factor("Group Means")), 
+               data              = owp$means, 
+               color             = "black",
+               shape             = 24,
+               size              = I(3)
+    )
+  )
 }
 
 Residuals <- function(owp) {
