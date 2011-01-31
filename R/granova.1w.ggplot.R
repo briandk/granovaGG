@@ -498,6 +498,15 @@ ColorScale <- function() {
   return(scale_color_manual(value = colors, name = ""))
 }
 
+Title <- function() {
+  if (is.null(main)) {
+    return(opts(title = 'One-way ANOVA displaying',ngroups,'groups'))
+  }
+  
+  else {
+    return(opts(title = main))
+  }
+}
 
 # Pepare OWP object
 owp                 <- CreateOWP()
@@ -524,6 +533,7 @@ p <- p + YLabel()
 p <- p + RotateXTicks()
 p <- p + Theme()
 p <- p + ForceCoordinateAxesToBeEqual(owp)
+p <- p + Title()
 
 return(p)
 }

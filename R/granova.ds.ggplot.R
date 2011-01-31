@@ -272,7 +272,7 @@ granova.ds.ggplot <- function(data       = NULL,
     return(coord_fixed())
   }
   
-        
+          
   p <- InitializeGgplot(dsp)
   p <- p + TreatmentLine(dsp)
   p <- p + XMeanLine(dsp) + YMeanLine(dsp)
