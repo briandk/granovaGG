@@ -413,16 +413,6 @@ RotateXTicks <- function() {
   return(opts(axis.text.x = theme_text(angle = 90)))
 }
 
-Theme <- function() {
-  if (is.null(plot.theme)) {
-    return(theme_granova())
-  }
-  
-  else {
-    return(plot.theme)
-  }
-}
-
 GetGroupMeanLine <- function(owp) {
   return(
     data.frame(
@@ -561,6 +551,16 @@ ColorScale <- function(owp) {
 
 FillScale <- function() {
   return(scale_fill_manual(value = owp$colors, name = ""))
+}
+
+Theme <- function() {
+  if (is.null(plot.theme)) {
+    return(theme_granova())
+  }
+  
+  else {
+    return(plot.theme)
+  }
 }
 
 ForceCoordinateAxesToBeEqual <- function(owp) {
