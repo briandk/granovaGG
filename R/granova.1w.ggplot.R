@@ -344,13 +344,25 @@ ScoresByGroupContrast <- function(owp) {
 
 GroupMeansByContrast <- function(owp) {
   return( 
-    geom_point( aes(x = contrast, y = group.mean), data = owp$means, color = "red"
+    geom_point( 
+             aes(x = contrast, y = group.mean), 
+               data              = owp$means, 
+               color             = "black",
+               shape             = 24,
+               fill              = "red"
     )
   )
 }
 
 GrandMeanPoint <- function(owp) {
-  return(geom_point(aes(x = 0, y = mean(score)), data = owp$data, color = "green"))
+  return(
+    geom_point(
+      aes(
+        x = 0, y = mean(score), color = factor(paste("Grand Mean"))
+      ), 
+      data = owp$data
+    )
+  )
 }
 
 GrandMeanLine <- function(owp) {
@@ -493,7 +505,7 @@ GetGraphicalParameters <- function(owp) {
 }
 
 ColorScale <- function() {
-  colors <- c("red", "blue")
+  colors <- c("green", "blue", "red")
 
   return(scale_color_manual(value = colors, name = ""))
 }
