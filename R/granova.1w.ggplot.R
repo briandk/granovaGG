@@ -400,7 +400,7 @@ owp$standard.error  <- GetStandardError(owp)
 
 ######## Plot Functions Below
 
-InitializeGgplot <- function(owp) {
+InitializeGgplot <- function() {
   return(ggplot())
 }
 
@@ -584,7 +584,7 @@ Title <- function() {
 }
 
 #Plot OWP object
-p <- InitializeGgplot(owp)
+p <- InitializeGgplot()
 p <- p + GrandMeanLine(owp)
 p <- p + GrandMeanPoint(owp)
 p <- p + ScaleX(owp)
