@@ -321,6 +321,17 @@ GetMSwithinSquare <- function() {
   )
 }
 
+GetMSbetweenSquare <- function() {
+  return(
+    data.frame(
+      xmin = -sqrs/2 * sqrt(F.stat),
+      xmax =  sqrs/2 * sqrt(F.stat),
+      ymin = grandmean - (sqrs/2 * sqrt(F.stat)) / (owp$params$aspect.ratio),
+      ymax = grandmean + (sqrs/2 * sqrt(F.stat)) / (owp$params$aspect.ratio)
+    )
+  )
+}
+
 ScoresByGroupContrast <- function(owp) {
   return( 
     geom_point( 
@@ -450,6 +461,22 @@ MSwithinSquare <- function() {
   )
 }
 
+MSbetweenSquare <- function() {
+  return(
+    geom_rect(
+            aes(
+              xmin   = xmin,
+              xmax   = xmax,
+              ymin   = ymin,
+              ymax   = ymax
+            ), data  = GetMSbetweenSquare(),
+               fill  = NA,
+               color = "red"
+    )
+  )
+}
+
+
 ForceCoordinateAxesToBeEqual <- function(owp) {
   return(coord_fixed(ratio = owp$params$aspect.ratio))
 }
@@ -483,6 +510,7 @@ p <- p + ScoresByGroupContrast(owp)
 p <- p + GroupMeanLine(owp)
 p <- p + GroupMeansByContrast(owp)
 p <- p + Residuals(owp)
+p <- p + MSbetweenSquare()
 p <- p + MSwithinSquare()
 p <- p + XLabel()
 p <- p + YLabel()
