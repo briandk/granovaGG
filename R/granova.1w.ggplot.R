@@ -332,16 +332,6 @@ GetMSbetweenSquare <- function() {
   )
 }
 
-ScoresByGroupContrast <- function(owp) {
-  return( 
-    geom_point( 
-      aes(x = contrast, y = score), 
-      size = I(3/2),
-      data = owp$data
-    )
-  )
-}
-
 XLabel <- function() {
   if (is.null(xlab)) {
     return(xlab("Contrast coefficients based on group means and sizes"))
@@ -464,6 +454,16 @@ GrandMeanPoint <- function(owp) {
       aes(
         x = 0, y = mean(score), color = factor(paste("Grand Mean"))
       ), 
+      data = owp$data
+    )
+  )
+}
+
+ScoresByGroupContrast <- function(owp) {
+  return( 
+    geom_point( 
+      aes(x = contrast, y = score), 
+      size = I(3/2),
       data = owp$data
     )
   )
