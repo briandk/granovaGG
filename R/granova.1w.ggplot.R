@@ -506,30 +506,6 @@ GetGraphicalParameters <- function(owp) {
   )
 }
 
-ColorScale <- function(owp) {
-  return(scale_color_manual(value = owp$colors, name = ""))
-}
-
-FillScale <- function() {
-  return(scale_fill_manual(value = owp$colors, name = ""))
-}
-
-Title <- function() {
-  classic.granova.1w.title <- paste("One-way ANOVA displaying",ngroups,"groups")
-  
-  if (main == classic.granova.1w.title) {
-    return(
-        opts(
-          title = paste( "One-way ANOVA displaying ", ngroups, " groups ","(F = ", round(F.stat, digits = 2), ")", sep = "")
-        )
-    )
-  }
-  
-  else {
-    return(opts(title = main))
-  }
-}
-
 GetColors <- function() {
   colors <- c(
    "red",
@@ -563,6 +539,18 @@ GetStandardError <- function(owp) {
   )
 }
 
+# Pepare OWP object
+owp                 <- CreateOWP()
+owp$means           <- GetMeanSummary(owp)
+owp$group.mean.line <- GetGroupMeanLine(owp)
+owp$residuals       <- GetResiduals()
+owp$params          <- GetGraphicalParameters(owp)
+owp$colors          <- GetColors()
+owp$standard.error  <- GetStandardError(owp)
+
+
+######## Plot Functions Below
+
 StandardError <- function(owp) {
   return(
     geom_hline(
@@ -572,14 +560,29 @@ StandardError <- function(owp) {
   )
 }
 
-# Pepare OWP object
-owp                 <- CreateOWP()
-owp$means           <- GetMeanSummary(owp)
-owp$group.mean.line <- GetGroupMeanLine(owp)
-owp$residuals       <- GetResiduals()
-owp$params          <- GetGraphicalParameters(owp)
-owp$colors          <- GetColors()
-owp$standard.error  <- GetStandardError(owp)
+ColorScale <- function(owp) {
+  return(scale_color_manual(value = owp$colors, name = ""))
+}
+
+FillScale <- function() {
+  return(scale_fill_manual(value = owp$colors, name = ""))
+}
+
+Title <- function() {
+  classic.granova.1w.title <- paste("One-way ANOVA displaying",ngroups,"groups")
+  
+  if (main == classic.granova.1w.title) {
+    return(
+        opts(
+          title = paste( "One-way ANOVA displaying ", ngroups, " groups ","(F = ", round(F.stat, digits = 2), ")", sep = "")
+        )
+    )
+  }
+  
+  else {
+    return(opts(title = main))
+  }
+}
 
 #Plot OWP object
 p <- InitializeGgplot(owp)
