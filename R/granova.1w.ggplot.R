@@ -332,26 +332,6 @@ GetMSbetweenSquare <- function() {
   )
 }
 
-XLabel <- function() {
-  if (is.null(xlab)) {
-    return(xlab("Contrast coefficients based on group means and sizes"))
-  }
-  
-  else {
-    return (xlab(xlab))
-  }
-}
-
-YLabel <- function() {  
-  if (is.null(ylab)) {
-    return(ylab("Dependent variable (response)"))
-  }
-  
-  else {
-    return (ylab(ylab))
-  }
-}
-
 GetGroupMeanLine <- function(owp) {
   return(
     data.frame(
@@ -547,6 +527,26 @@ ColorScale <- function(owp) {
 
 FillScale <- function() {
   return(scale_fill_manual(value = owp$colors, name = ""))
+}
+
+XLabel <- function() {
+  if (is.null(xlab)) {
+    return(xlab("Contrast coefficients based on group means and sizes"))
+  }
+  
+  else {
+    return (xlab(xlab))
+  }
+}
+
+YLabel <- function() {  
+  if (is.null(ylab)) {
+    return(ylab("Dependent variable (response)"))
+  }
+  
+  else {
+    return (ylab(ylab))
+  }
 }
 
 RotateXTicks <- function() {
