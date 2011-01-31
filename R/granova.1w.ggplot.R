@@ -469,7 +469,7 @@ MSbetweenSquare <- function() {
               xmax   = xmax,
               ymin   = ymin,
               ymax   = ymax,
-              color  = factor(paste("MS-between\n", "F-Statistic = ", "F-STAT!", sep = ""))
+              color  = factor(paste("MS-between"))
             ), data  = GetMSbetweenSquare(),
                fill  = NA,
     )
@@ -499,8 +499,12 @@ ColorScale <- function() {
 }
 
 Title <- function() {
-  if (is.null(main)) {
-    return(opts(title = 'One-way ANOVA displaying',ngroups,'groups'))
+  classic.granova.1w.title <- paste("One-way ANOVA displaying",ngroups,"groups")
+  
+  if (main == classic.granova.1w.title) {
+    return(opts(title = paste(
+      "One-way ANOVA displaying ", ngroups, " groups\n","F-Statistic = ",
+      round(F.stat, digits = 2), sep = "")))
   }
   
   else {
