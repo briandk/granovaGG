@@ -490,11 +490,6 @@ MSbetweenSquare <- function() {
   )
 }
 
-
-ForceCoordinateAxesToBeEqual <- function(owp) {
-  return(coord_fixed(ratio = owp$params$aspect.ratio))
-}
-
 GetGraphicalParameters <- function(owp) {
   .contrast.range.distance <- (max(owp$data$contrast) - min(owp$data$contrast))
   .score.range.distance    <- (max(owp$data$score) - min(owp$data$score))
@@ -566,6 +561,10 @@ ColorScale <- function(owp) {
 
 FillScale <- function() {
   return(scale_fill_manual(value = owp$colors, name = ""))
+}
+
+ForceCoordinateAxesToBeEqual <- function(owp) {
+  return(coord_fixed(ratio = owp$params$aspect.ratio))
 }
 
 Title <- function() {
