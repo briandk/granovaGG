@@ -345,10 +345,6 @@ GetGroupMeanLine <- function(owp) {
   )
 }
 
-GetResiduals <- function () {
-  return(data.frame(residuals = residuals))
-}
-
 GetGraphicalParameters <- function(owp) {
   .contrast.range.distance <- (max(owp$data$contrast) - min(owp$data$contrast))
   .score.range.distance    <- (max(owp$data$score) - min(owp$data$score))
@@ -415,16 +411,25 @@ GetStats <- function(owp) {
   )
 }
 
+GetResiduals <- function (owp) {
+  return(
+    data.frame(
+      residuals = owp$data$score - owp$data$group.mean + owp$stats$grand.mean
+    )
+  )
+}
+
 # Pepare OWP object
 owp                 <- CreateOWP()
 owp$summary         <- GetSummary(owp)
 owp$group.mean.line <- GetGroupMeanLine(owp)
-owp$residuals       <- GetResiduals()
 owp$params          <- GetGraphicalParameters(owp)
 owp$colors          <- GetColors()
 owp$standard.error  <- GetStandardError(owp)
 owp$model           <- GetLinearModel(owp)
 owp$stats           <- GetStats(owp)
+owp$residuals       <- GetResiduals(owp)
+
 
 ######## Plot Functions Below
 
@@ -633,5 +638,5 @@ p <- p + Theme()
 p <- p + ForceCoordinateAxesToBeEqual(owp)
 p <- p + Title()
 
-return(owp)
+return(p)
 }
