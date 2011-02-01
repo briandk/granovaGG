@@ -393,6 +393,23 @@ GetStandardError <- function(owp) {
   )
 }
 
+GetLinearModel <- function(owp) {
+  return(lm(score ~ group, data = owp$data))
+}
+
+GetStats <- function(owp) {
+  owp.anova <- anova(owp$model)
+  return(
+    list(
+      F.statistic = owp.anova[["F value"]][1],
+      SS.between  = owp.anova[["Sum Sq"]][1],
+      SS.within   = owp.anova[["Sum Sq"]][2],
+      df.between  = owp.anova[["Df"]][1],
+      df.within   = owp.anova[["Df"]][2]
+    )  
+  )
+}
+
 # Pepare OWP object
 owp                 <- CreateOWP()
 owp$summary         <- GetSummary(owp)
@@ -401,6 +418,8 @@ owp$residuals       <- GetResiduals()
 owp$params          <- GetGraphicalParameters(owp)
 owp$colors          <- GetColors()
 owp$standard.error  <- GetStandardError(owp)
+owp$model           <- GetLinearModel(owp)
+owp$stats           <- GetStats(owp)
 
 
 ######## Plot Functions Below
@@ -610,5 +629,5 @@ p <- p + Theme()
 p <- p + ForceCoordinateAxesToBeEqual(owp)
 p <- p + Title()
 
-return(p)
+return(owp)
 }
