@@ -361,10 +361,12 @@ GetColors <- function() {
   colors <- c(
    rgb(166, 206, 227, max = 255),
    "green",
-   "red",
+   rgb(51, 160, 44, max = 255),
    rgb(31, 120, 180, max = 255),
    "darkblue",
-   "steelblue"
+   "steelblue",
+   rgb(178, 223, 138, max = 255)
+   
   )
   
   names(colors) <- c(
@@ -373,7 +375,8 @@ GetColors <- function() {
     "Group Means",
     "MS-within",
     "Residuals",
-    "SE-within"
+    "SE-within",
+    "Group Mean Line"
   )
   
   return(colors)
@@ -489,9 +492,9 @@ GroupMeanLine <- function(owp) {
       x      = x,
       y      = y,
       xend   = xend,
-      yend   = yend
-    ), color = "blue",
-       data  = owp$group.mean.line
+      yend   = yend,
+      color  = factor(paste("Group Mean Line"))
+    ), data  = owp$group.mean.line
   ))
 }
 
