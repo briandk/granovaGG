@@ -3,7 +3,8 @@ top_rug <- function(data = NULL, xlabs = NULL, breaks = NULL) {
   x <- data[, 1]
   y <- data[, 2]
   
-  dd <- data.frame(x = x, y = y)
+  names(data)[1] <- "x"
+  names(data)[2] <- "y"
   
   if (is.null(xlabs)) {
     xlabs <- seq(from = floor(min(x)), to = ceiling(max(x)) )
@@ -23,7 +24,7 @@ top_rug <- function(data = NULL, xlabs = NULL, breaks = NULL) {
                                         xend = x, 
                                         yend = max(y) + 0.2  
                                        ),
-                             data = dd
+                             data = data
                             ),     #top-ticks
              
                 geom_segment(aes(x    = min(x) - 1, 
@@ -31,7 +32,7 @@ top_rug <- function(data = NULL, xlabs = NULL, breaks = NULL) {
                                         xend = max(x) + 1, 
                                         yend = max(y) + 0.2  
                                        ),
-                             data = dd
+                             data = data
                             )      #top-axis
                )
 
