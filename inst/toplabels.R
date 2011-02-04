@@ -3,13 +3,16 @@ top_rug <- function(data = NULL, xlabs = NULL, breaks = NULL) {
   x <- data[, 1]
   y <- data[, 2]
   
+  # rename columns of data parameter so I can use it as the data attribute of geom_segment
   names(data)[1] <- "x"
   names(data)[2] <- "y"
   
+  # create default labels
   if (is.null(xlabs)) {
     xlabs <- seq(from = floor(min(x)), to = ceiling(max(x)) )
   }
 
+  # create default breaks
   if (is.null(breaks)) {
     breaks <- seq(from = floor(min(x)), to = ceiling(max(x)) )
   }
@@ -17,7 +20,6 @@ top_rug <- function(data = NULL, xlabs = NULL, breaks = NULL) {
   if (length(xlabs) != length(breaks)) {
     stop("xlabs and breaks must be the same length")  
   }
-
 
   result = list(geom_segment(aes(x    = x, 
                                         y    = max(y) + 0.15, 
@@ -36,8 +38,12 @@ top_rug <- function(data = NULL, xlabs = NULL, breaks = NULL) {
                             )      #top-axis
                )
 
+  # loop through the labels and add each one to the list
   i = 1
   while (i <= length(xlabs)) {
+    
+    #ignore breaks that are outside the data range
+    # ggplot does this automatically, but we need to do it manually
     if ( (breaks[i] >= min(x)) && (breaks[i] <= max(x)) ) {
       result = c(result,  geom_text(aes_string(label = xlabs[i], 
                                                x     = breaks[i], 
@@ -53,6 +59,7 @@ top_rug <- function(data = NULL, xlabs = NULL, breaks = NULL) {
 
 }
 
+# # just another example...
 # x <- rnorm(20)
 # y <- rnorm(20)
 # dd <- data.frame(x, y)
