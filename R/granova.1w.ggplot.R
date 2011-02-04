@@ -357,11 +357,12 @@ GetGraphicalParameters <- function(owp) {
 }
 
 GetColors <- function() {
+  # Color Brewer Palette: 166, 206, 227; 31, 120, 180; 178, 223, 138; 51, 160, 44; 
   colors <- c(
-   "red",
+   rgb(166, 206, 227, max = 255),
    "green",
    "red",
-   "blue",
+   rgb(31, 120, 180, max = 255),
    "darkblue",
    "steelblue"
   )
