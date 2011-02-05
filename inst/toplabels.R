@@ -149,9 +149,9 @@ right_rug <- function(data = NULL, ylabs = NULL, breaks = NULL) {
 
 
 
-
-
-
+if ( !interactive() ) {
+  library(ggplot2)
+}
 
 ## Brian's Sample Code
 set.seed(seed = 1001)
