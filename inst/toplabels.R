@@ -103,7 +103,7 @@ p <- p + scale_x_continuous("Annual Income", breaks=dollars, labels = dollar.lab
 p <- p + scale_y_continuous("Birth Weight", breaks = pounds, labels = pound.labels)
 
 
-p + top_rug(d, euro.labels, dollars)
+p + top_rug(data=d, xlabs=euro.labels, breaks=dollars)
 
 
 
