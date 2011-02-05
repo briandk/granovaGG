@@ -23,6 +23,8 @@ top_rug <- function(data = NULL, xlabs = NULL, breaks = NULL) {
 
   data.labels <- data.frame(xlabs, breaks, maxy=max(y))
 
+  # ignore breaks that are outside the data range
+  # ggplot does this automatically, but we need to do it manually
   data.labels <- data.labels[data.labels$breaks >= min(x), ]
   data.labels <- data.labels[data.labels$breaks <= max(x), ]
 
@@ -43,19 +45,16 @@ top_rug <- function(data = NULL, xlabs = NULL, breaks = NULL) {
                             )      #top-axis
                )
 
-    #ignore breaks that are outside the data range
-    # ggplot does this automatically, but we need to do it manually
-#    if ( (breaks[i] >= min(x)) && (breaks[i] <= max(x)) ) {
+       
       
-      
-      result = c(result,  geom_text(aes(label = xlabs, 
-                                        x     = breaks, 
-                                        y     = maxy + (maxy/30)
-                                       ),
-                                    size  = 4,
-                                    data  = data.labels
-                                   )
-                )
+  result = c(result,  geom_text(aes(label = xlabs, 
+                                    x     = breaks, 
+                                    y     = maxy + (maxy/30)
+                                   ),
+                                size  = 4,
+                                data  = data.labels
+                               )
+            )
   
 
   return(result)
@@ -94,6 +93,12 @@ right_rug <- function(data = NULL, ylabs = NULL, breaks = NULL) {
 
   data.labels <- data.frame(ylabs, breaks, maxx=max(x))
 
+  # ignore breaks that are outside the data range
+  # ggplot does this automatically, but we need to do it manually
+  data.labels <- data.labels[data.labels$breaks >= min(y), ]
+  data.labels <- data.labels[data.labels$breaks <= max(y), ]
+
+
   result = list(geom_segment(aes(x    = max(x) + (max(x)/50), 
                                  y    = y, 
                                  xend = max(x) + (max(x)/60), 
@@ -111,17 +116,14 @@ right_rug <- function(data = NULL, ylabs = NULL, breaks = NULL) {
                             )      #right-axis
                )
 
-     #ignore breaks that are outside the data range
-    # ggplot does this automatically, but we need to do it manually
- #   if ( (breaks[i] >= min(y)) && (breaks[i] <= max(y)) ) {
-      result = c(result,  geom_text(aes(label = ylabs, 
-                                        x     = maxx + (maxx/30), 
-                                        y     = breaks
-                                       ),        
-                                    size  = 4,
-                                    data  = data.labels
-                                   )
-                )
+  result = c(result,  geom_text(aes(label = ylabs, 
+                                    x     = maxx + (maxx/30), 
+                                    y     = breaks
+                                   ),        
+                                size  = 4,
+                                data  = data.labels
+                               )
+            )
  
   return(result)
 
