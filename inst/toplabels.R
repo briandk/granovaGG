@@ -1,5 +1,12 @@
-top_rug <- function(data = NULL, xlabs = NULL, breaks = NULL) {
+top_rug <- function(data = NULL, xlabs = NULL, breaks = NULL, ...) {
 
+  args <- list(...)
+  if ( !is.null(args$angle) ) {
+    angle = args$angle
+  } else {
+    angle = 0
+  }
+    
   x <- data[, 1]
   y <- data[, 2]
   
@@ -52,6 +59,7 @@ top_rug <- function(data = NULL, xlabs = NULL, breaks = NULL) {
                                     y     = maxy + (maxy/30)
                                    ),
                                 size  = 4,
+                                angle = angle,
                                 data  = data.labels
                                )
             )
@@ -68,7 +76,14 @@ top_rug <- function(data = NULL, xlabs = NULL, breaks = NULL) {
 
 
 
-right_rug <- function(data = NULL, ylabs = NULL, breaks = NULL) {
+right_rug <- function(data = NULL, ylabs = NULL, breaks = NULL, ...) {
+
+  args <- list(...)
+  if ( !is.null(args$angle) ) {
+    angle = args$angle
+  } else {
+    angle = 0
+  }
 
   x <- data[, 1]
   y <- data[, 2]
@@ -121,6 +136,7 @@ right_rug <- function(data = NULL, ylabs = NULL, breaks = NULL) {
                                     y     = breaks
                                    ),        
                                 size  = 4,
+                                angle = angle,
                                 data  = data.labels
                                )
             )
@@ -182,7 +198,7 @@ p <- p + scale_x_continuous("Annual Income", breaks=dollars, labels = dollar.lab
 p <- p + scale_y_continuous("Birth Weight", breaks = pounds, labels = pound.labels)
 
 
-p + top_rug(data=d, xlabs=euro.labels, breaks=dollars)  + right_rug(data=d, ylabs=kilo.labels, breaks=pounds)
+p + top_rug(data=d, xlabs=euro.labels, breaks=dollars, angle=45)  + right_rug(data=d, ylabs=kilo.labels, breaks=pounds)
 
 
 
