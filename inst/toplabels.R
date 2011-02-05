@@ -133,17 +133,18 @@ right_rug <- function(data = NULL, ylabs = NULL, breaks = NULL) {
 # 
 # p <- qplot(x,y)
 # 
-# p + top_rug(dd)
-# 
 # xxx <- c( min(x), max(x) )
 # xxx <- round(xxx, 2)
 # 
-# p + top_rug(dd, xxx, xxx)
+# yyy <- c( min(y), max(y) )
+# yyy <- round(yyy, 2)
 # 
+# p + top_rug(data=dd, xlabs=xxx, breaks=xxx) + right_rug(data=dd, ylabs=yyy, breaks=yyy)
 # 
-# 
-# 
-# 
+
+
+
+
 
 
 
