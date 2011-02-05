@@ -21,6 +21,11 @@ top_rug <- function(data = NULL, xlabs = NULL, breaks = NULL) {
     stop("xlabs and breaks must be the same length")  
   }
 
+  data.labels <- data.frame(xlabs, breaks, maxy=max(y))
+
+  data.labels <- data.labels[data.labels$breaks >= min(x), ]
+  data.labels <- data.labels[data.labels$breaks <= max(x), ]
+
   result = list(geom_segment(aes(x    = x, 
                                  y    = max(y) + (max(y)/50), 
                                  xend = x, 
@@ -38,26 +43,30 @@ top_rug <- function(data = NULL, xlabs = NULL, breaks = NULL) {
                             )      #top-axis
                )
 
-  # loop through the labels and add each one to the list
-  i = 1
-  while (i <= length(xlabs)) {
-    
     #ignore breaks that are outside the data range
     # ggplot does this automatically, but we need to do it manually
-    if ( (breaks[i] >= min(x)) && (breaks[i] <= max(x)) ) {
-      result = c(result,  geom_text(aes_string(label = xlabs[i], 
-                                               x     = breaks[i], 
-                                               y     = max(y) + (max(y)/30)),        
-                                    size  = 4
+#    if ( (breaks[i] >= min(x)) && (breaks[i] <= max(x)) ) {
+      
+      
+      result = c(result,  geom_text(aes(label = xlabs, 
+                                        x     = breaks, 
+                                        y     = maxy + (maxy/30)
+                                       ),
+                                    size  = 4,
+                                    data  = data.labels
                                    )
                 )
-    }
-    i = i + 1
-  }
+  
 
   return(result)
 
 }
+
+
+
+
+
+
 
 
 right_rug <- function(data = NULL, ylabs = NULL, breaks = NULL) {
@@ -83,6 +92,8 @@ right_rug <- function(data = NULL, ylabs = NULL, breaks = NULL) {
     stop("ylabs and breaks must be the same length")  
   }
 
+  data.labels <- data.frame(ylabs, breaks, maxx=max(x))
+
   result = list(geom_segment(aes(x    = max(x) + (max(x)/50), 
                                  y    = y, 
                                  xend = max(x) + (max(x)/60), 
@@ -100,23 +111,18 @@ right_rug <- function(data = NULL, ylabs = NULL, breaks = NULL) {
                             )      #right-axis
                )
 
-  # loop through the labels and add each one to the list
-  i = 1
-  while (i <= length(ylabs)) {
-    
-    #ignore breaks that are outside the data range
+     #ignore breaks that are outside the data range
     # ggplot does this automatically, but we need to do it manually
-    if ( (breaks[i] >= min(y)) && (breaks[i] <= max(y)) ) {
-      result = c(result,  geom_text(aes_string(label = ylabs[i], 
-                                               x     = max(x) + (max(x)/30)), 
-                                               y     = breaks[i],        
-                                    size  = 4
+ #   if ( (breaks[i] >= min(y)) && (breaks[i] <= max(y)) ) {
+      result = c(result,  geom_text(aes(label = ylabs, 
+                                        x     = maxx + (maxx/30), 
+                                        y     = breaks
+                                       ),        
+                                    size  = 4,
+                                    data  = data.labels
                                    )
                 )
-    }
-    i = i + 1
-  }
-
+ 
   return(result)
 
 }
@@ -166,7 +172,7 @@ pounds <- seq(6, 11, 1)
 pound.labels <- paste(pounds, "lbs.")
 
 kilos <- pounds * 0.4536
-kilo.labels <- round(kilos, 1)
+kilo.labels <- paste( round(kilos, 1), "kg")
 
 d <- data.frame(annual.income = rnorm(n = 25, mean = 30000, sd = 2500), birth.weight = rnorm(n = 25, mean = 8, sd = 1))
 p <- qplot(x = annual.income, y = birth.weight, data = d)
