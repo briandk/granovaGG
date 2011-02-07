@@ -400,10 +400,6 @@ GetLinearModel <- function(owp) {
   return(lm(score ~ group, data = owp$data))
 }
 
-GetGrandMean <- function(owp) {
-  return(mean(owp$summary$group.mean))
-}
-
 GetStats <- function(owp) {
   owp.anova <- anova(owp$model)
   return(
@@ -413,7 +409,7 @@ GetStats <- function(owp) {
         SS.within   = owp.anova[["Sum Sq"]][2],
         df.between  = owp.anova[["Df"]][1],
         df.within   = owp.anova[["Df"]][2],
-        grand.mean  = GetGrandMean(owp)
+        grand.mean  = owp$stats$grand.mean
     )  
   )
 }
