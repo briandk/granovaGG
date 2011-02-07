@@ -287,7 +287,7 @@ if(ident){
 
 
 AdaptVariablesFromGranovaComputations <- function() {
-  result <- list(data =  data.frame(score      = yr,
+  result  <- list(data = data.frame(score      = yr,
                                     group      = groupf,
                                     group.mean = yrm,
                                     contrast   = stats.vc,
