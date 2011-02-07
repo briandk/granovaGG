@@ -396,20 +396,6 @@ GetStandardError <- function(owp) {
   )
 }
 
-GetStats <- function(owp) {
-  owp.anova <- anova(owp$model)
-  return(
-      list(
-        F.statistic = owp.anova[["F value"]][1],
-        SS.between  = owp.anova[["Sum Sq"]][1],
-        SS.within   = owp.anova[["Sum Sq"]][2],
-        df.between  = owp.anova[["Df"]][1],
-        df.within   = owp.anova[["Df"]][2],
-        grand.mean  = owp$stats$grand.mean
-    )  
-  )
-}
-
 GetResiduals <- function (owp) {
   return(
     data.frame(
