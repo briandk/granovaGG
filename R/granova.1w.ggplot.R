@@ -328,7 +328,7 @@ GetMSwithinSquare <- function(owp) {
   )
 }
 
-GetMSbetweenSquare <- function() {
+GetMSbetweenSquare <- function(owp) {
   return(
     data.frame(
       xmin = -owp$stats$square.side.length/2 * sqrt(owp$stats$F.statistic),
@@ -397,13 +397,14 @@ GetStandardError <- function(owp) {
 }
 
 # Pepare OWP object
-owp                  <- AdaptVariablesFromGranovaComputations()
-owp$summary          <- GetSummary(owp)
-owp$group.mean.line  <- GetGroupMeanLine(owp)
-owp$params           <- GetGraphicalParameters(owp)
-owp$colors           <- GetColors()
-owp$standard.error   <- GetStandardError(owp)
-owp$ms.within.square <- GetMSwithinSquare(owp)
+owp                   <- AdaptVariablesFromGranovaComputations()
+owp$summary           <- GetSummary(owp)
+owp$group.mean.line   <- GetGroupMeanLine(owp)
+owp$params            <- GetGraphicalParameters(owp)
+owp$colors            <- GetColors()
+owp$standard.error    <- GetStandardError(owp)
+owp$ms.within.square  <- GetMSwithinSquare(owp)
+owp$ms.between.square <- GetMSbetweenSquare(owp)
 
 
 ######## Plot Functions Below
@@ -514,7 +515,7 @@ MSbetweenSquare <- function() {
               ymin   = ymin,
               ymax   = ymax,
               color  = factor(paste("MS-between"))
-            ), data  = GetMSbetweenSquare(),
+            ), data  = owp$ms.between.square,
                fill  = NA,
     )
   )
