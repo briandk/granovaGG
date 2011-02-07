@@ -396,10 +396,6 @@ GetStandardError <- function(owp) {
   )
 }
 
-GetLinearModel <- function(owp) {
-  return(lm(score ~ group, data = owp$data))
-}
-
 GetStats <- function(owp) {
   owp.anova <- anova(owp$model)
   return(
@@ -429,7 +425,6 @@ owp$group.mean.line  <- GetGroupMeanLine(owp)
 owp$params           <- GetGraphicalParameters(owp)
 owp$colors           <- GetColors()
 owp$standard.error   <- GetStandardError(owp)
-owp$model            <- GetLinearModel(owp)
 owp$residuals        <- GetResiduals(owp)
 owp$ms.within.square <- GetMSwithinSquare(owp)
 
