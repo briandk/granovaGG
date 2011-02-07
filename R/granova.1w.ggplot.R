@@ -363,7 +363,7 @@ GetColors <- function() {
    "green",
    rgb(51, 160, 44, max = 255),
    rgb(31, 120, 180, max = 255),
-   "darkblue",
+   rgb(31, 120, 180, max = 255),
    "steelblue",
    rgb(178, 223, 138, max = 255)
    
