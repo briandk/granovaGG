@@ -286,6 +286,26 @@ if(ident){
          }
 
 
+AdaptClassicComputations <- function() {
+  result <- list(data =  data.frame(score      = yr,
+                                    group      = groupf,
+                                    group.mean = yrm,
+                                    contrast   = stats.vc,
+                                    residuals  = residuals
+                         )
+  )
+  result$stats <- list(F.statistic        = F.stat,
+                       SS.between         = SS.bet,
+                       SS.within          = SS.w,
+                       df.between         = df.b,
+                       df.within          = df.w,
+                       grand.mean         = grandmean,
+                       square.side.length = sqrs
+  )
+  
+  return(result)
+}
+
 getData <- function() {
   return(data.frame(score      = yr,
                     group      = groupf,
