@@ -295,7 +295,7 @@ getData <- function() {
         )
 }
 
-CreateOWP <- function() {
+AdaptVariablesFromGranovaComputations <- function() {
   return(list(data = getData()))
 }
 
@@ -424,7 +424,7 @@ GetResiduals <- function (owp) {
 }
 
 # Pepare OWP object
-owp                 <- CreateOWP()
+owp                 <- AdaptVariablesFromGranovaComputations()
 owp$summary         <- GetSummary(owp)
 owp$group.mean.line <- GetGroupMeanLine(owp)
 owp$params          <- GetGraphicalParameters(owp)
