@@ -340,10 +340,10 @@ GetMSwithinSquare <- function(owp) {
 GetMSbetweenSquare <- function() {
   return(
     data.frame(
-      xmin = -owp$stats$square.side.length/2 * sqrt(F.stat),
-      xmax =  owp$stats$square.side.length/2 * sqrt(F.stat),
-      ymin = owp$stats$grand.mean - (owp$stats$square.side.length/2 * sqrt(F.stat)) / (owp$params$aspect.ratio),
-      ymax = owp$stats$grand.mean + (owp$stats$square.side.length/2 * sqrt(F.stat)) / (owp$params$aspect.ratio)
+      xmin = -owp$stats$square.side.length/2 * sqrt(owp$stats$F.statistic),
+      xmax =  owp$stats$square.side.length/2 * sqrt(owp$stats$F.statistic),
+      ymin = owp$stats$grand.mean - (owp$stats$square.side.length/2 * sqrt(owp$stats$F.statistic)) / (owp$params$aspect.ratio),
+      ymax = owp$stats$grand.mean + (owp$stats$square.side.length/2 * sqrt(owp$stats$F.statistic)) / (owp$params$aspect.ratio)
     )
   )
 }
