@@ -302,7 +302,6 @@ AdaptClassicComputations <- function() {
                        grand.mean         = grandmean,
                        square.side.length = sqrs
   )
-  
   return(result)
 }
 
@@ -313,10 +312,6 @@ getData <- function() {
                     contrast   = stats.vc
                    )
         )
-}
-
-AdaptVariablesFromGranovaComputations <- function() {
-  return(list(data = getData()))
 }
 
 GetSummary <- function(owp) {
