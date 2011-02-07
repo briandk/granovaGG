@@ -396,14 +396,6 @@ GetStandardError <- function(owp) {
   )
 }
 
-GetResiduals <- function (owp) {
-  return(
-    data.frame(
-      residuals = owp$data$score - owp$data$group.mean + owp$stats$grand.mean
-    )
-  )
-}
-
 # Pepare OWP object
 owp                  <- AdaptVariablesFromGranovaComputations()
 owp$summary          <- GetSummary(owp)
@@ -411,7 +403,6 @@ owp$group.mean.line  <- GetGroupMeanLine(owp)
 owp$params           <- GetGraphicalParameters(owp)
 owp$colors           <- GetColors()
 owp$standard.error   <- GetStandardError(owp)
-owp$residuals        <- GetResiduals(owp)
 owp$ms.within.square <- GetMSwithinSquare(owp)
 
 
@@ -494,7 +485,7 @@ Residuals <- function(owp) {
   return(
     geom_rug(
            aes(x = NULL, y = residuals, color = factor("Residuals")),
-           data  = owp$residuals
+           data  = owp$data
     )
   )
 }
