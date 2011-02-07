@@ -355,9 +355,12 @@ GetGraphicalParameters <- function(owp) {
   .contrast.range.distance <- (max(owp$data$contrast) - min(owp$data$contrast))
   .score.range.distance    <- (max(owp$data$score) - min(owp$data$score))
   .aspect.ratio            <- .contrast.range.distance / .score.range.distance
+  .aggregate.breaks        <- c(owp$summary$group.mean, range(owp$data$score))
+  
   
   return(list(
-           aspect.ratio = .aspect.ratio
+           aspect.ratio     = .aspect.ratio,
+           aggregate.breaks = .aggregate.breaks
          )
   )
 }
@@ -440,11 +443,12 @@ ScaleX <- function(owp) {
 }
 
 ScaleY <- function(owp) {
-  aggregate.breaks <- c(owp$summary$group.mean, range(owp$data$score))
-  return(scale_y_continuous(
-    breaks = (aggregate.breaks),
-    labels = round(aggregate.breaks, digits = 1),
-    expand = c(0.1, 0))
+  return(
+    scale_y_continuous(
+      breaks = (owp$params$aggregate.breaks),
+      labels = round(owp$params$aggregate.breaks, digits = 1),
+      expand = c(0.1, 0),
+    )
   )
 }
 
