@@ -23,8 +23,6 @@ TestLinearModelCoefficients <- function() {
 
   nn <- names(lm1$coef)
   AssertEquals("(Intercept)", nn[1], "The first element of an lm's coefficients should be the intercept")
-
-  nn <- names(lm1$coef)
   AssertEquals("x", nn[2], "The second element of an lm's coefficients should be the regression parameter")
 
   AssertEquals(0.0060, round(lm1$coef[1], 4), "unexpected value for intercept term")
