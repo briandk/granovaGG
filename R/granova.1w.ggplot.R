@@ -325,11 +325,11 @@ GetSummary <- function(owp) {
   )
 }
 
-GetMSwithinSquare <- function() {
+GetMSwithinSquare <- function(owp) {
   return(
     data.frame(
-      xmin = -(owp$stats$square.side.length/2),
-      xmax =  (owp$stats$square.side.length/2),
+      xmin =  -owp$stats$square.side.length/2,
+      xmax =   owp$stats$square.side.length/2,
       ymin = grandmean - (owp$stats$square.side.length/2) / (owp$params$aspect.ratio),
       ymax = grandmean + (owp$stats$square.side.length/2) / (owp$params$aspect.ratio)
     )
@@ -438,15 +438,15 @@ GetResiduals <- function (owp) {
 }
 
 # Pepare OWP object
-owp                 <- AdaptVariablesFromGranovaComputations()
-owp$summary         <- GetSummary(owp)
-owp$group.mean.line <- GetGroupMeanLine(owp)
-owp$params          <- GetGraphicalParameters(owp)
-owp$colors          <- GetColors()
-owp$standard.error  <- GetStandardError(owp)
-owp$model           <- GetLinearModel(owp)
-owp$stats           <- GetStats(owp)
-owp$residuals       <- GetResiduals(owp)
+owp                  <- AdaptVariablesFromGranovaComputations()
+owp$summary          <- GetSummary(owp)
+owp$group.mean.line  <- GetGroupMeanLine(owp)
+owp$params           <- GetGraphicalParameters(owp)
+owp$colors           <- GetColors()
+owp$standard.error   <- GetStandardError(owp)
+owp$model            <- GetLinearModel(owp)
+owp$residuals        <- GetResiduals(owp)
+owp$ms.within.square <- GetMSwithinSquare(owp)
 
 
 ######## Plot Functions Below
@@ -542,7 +542,7 @@ MSwithinSquare <- function() {
               ymin   = ymin,
               ymax   = ymax,
               color  = factor("MS-within")
-            ), data  = GetMSwithinSquare(),
+            ), data  = owp$ms.within.square,
                fill  = NA,
     )
   )
