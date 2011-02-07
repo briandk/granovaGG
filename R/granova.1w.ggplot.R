@@ -477,11 +477,14 @@ GroupMeanLine <- function(owp) {
 GroupMeansByContrast <- function(owp) {
   return( 
     geom_point( 
-             aes(x = contrast, y = group.mean, fill = factor("Group Means")), 
-               data              = owp$summary, 
-               color             = "black",
-               shape             = 24,
-               size              = I(3)
+             aes(
+               x     = contrast, 
+               y     = group.mean, 
+               fill  = factor("Group Means")), 
+               data  = owp$summary, 
+               color = "black",
+               shape = 24,
+               size  = I(3)
     )
   )
 }
@@ -489,7 +492,11 @@ GroupMeansByContrast <- function(owp) {
 Residuals <- function(owp) {
   return(
     geom_rug(
-           aes(x = NULL, y = residuals, color = factor("Residuals")),
+           aes(
+             x     = NULL, 
+             y     = residuals, 
+             color = factor("Residuals")
+           ),
            data  = owp$data
     )
   )
@@ -528,7 +535,7 @@ MSbetweenSquare <- function() {
 StandardError <- function(owp) {
   return(
     geom_hline(
-             aes(color  = factor("SE-within"), yintercept = SE),
+             aes(color = factor("SE-within"), yintercept = SE),
              data = owp$standard.error
     )
   )
