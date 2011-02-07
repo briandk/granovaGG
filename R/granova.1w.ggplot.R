@@ -294,13 +294,14 @@ AdaptVariablesFromGranovaComputations <- function() {
                                     residuals  = residuals
                          )
   )
-  result$stats <- list(F.statistic        = F.stat,
-                       SS.between         = SS.bet,
-                       SS.within          = SS.w,
-                       df.between         = df.b,
-                       df.within          = df.w,
-                       grand.mean         = grandmean,
-                       square.side.length = sqrs
+  result$stats <- list(F.statistic               = F.stat,
+                       SS.between                = SS.bet,
+                       SS.within                 = SS.w,
+                       df.between                = df.b,
+                       df.within                 = df.w,
+                       grand.mean                = grandmean,
+                       square.side.length        = sqrs,
+                       standard.deviation.within = sdw
   )
   return(result)
 }
@@ -400,8 +401,8 @@ GetStandardError <- function(owp) {
   return(
     data.frame( 
       SE = c(
-          mean(owp$summary$group.mean) + sqrs/2, 
-          mean(owp$summary$group.mean) - sqrs/2
+          owp$stats$grand.mean + owp$stats$standard.deviation.within,
+          owp$stats$grand.mean - owp$stats$standard.deviation.within
       )
     )
   )
