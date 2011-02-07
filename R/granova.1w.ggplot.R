@@ -306,15 +306,6 @@ AdaptVariablesFromGranovaComputations <- function() {
   return(result)
 }
 
-getData <- function() {
-  return(data.frame(score      = yr,
-                    group      = groupf,
-                    group.mean = yrm,
-                    contrast   = stats.vc
-                   )
-        )
-}
-
 GetSummary <- function(owp) {
   return(
     ddply(owp$data, .(group), summarise,
