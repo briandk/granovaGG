@@ -286,7 +286,7 @@ if(ident){
          }
 
 
-AdaptClassicComputations <- function() {
+AdaptVariablesFromGranovaComputations <- function() {
   result <- list(data =  data.frame(score      = yr,
                                     group      = groupf,
                                     group.mean = yrm,
@@ -326,13 +326,12 @@ GetSummary <- function(owp) {
 }
 
 GetMSwithinSquare <- function() {
-  squareSideLength <- sqrs
   return(
     data.frame(
-      xmin = -sqrs/2,
-      xmax =  sqrs/2,
-      ymin = grandmean - (sqrs/2) / (owp$params$aspect.ratio),
-      ymax = grandmean + (sqrs/2) / (owp$params$aspect.ratio)
+      xmin = -(owp$stats$square.side.length/2),
+      xmax =  (owp$stats$square.side.length/2),
+      ymin = grandmean - (owp$stats$square.side.length/2) / (owp$params$aspect.ratio),
+      ymax = grandmean + (owp$stats$square.side.length/2) / (owp$params$aspect.ratio)
     )
   )
 }
