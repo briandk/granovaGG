@@ -301,7 +301,7 @@ AdaptVariablesFromGranovaComputations <- function() {
                        df.within                 = df.w,
                        grand.mean                = grandmean,
                        square.side.length        = sqrs,
-                       standard.deviation.within = sdw
+                       sd.within                 = sdw
   )
   return(result)
 }
@@ -320,10 +320,10 @@ GetSummary <- function(owp) {
 GetMSwithinSquare <- function(owp) {
   return(
     data.frame(
-      xmin = -owp$stats$square.side.length/2,
-      xmax = owp$stats$square.side.length/2,
-      ymin = owp$stats$grand.mean - (owp$stats$square.side.length/2),
-      ymax = owp$stats$grand.mean + (owp$stats$square.side.length/2)
+      xmin = -owp$stats$sd.within,
+      xmax = owp$stats$sd.within,
+      ymin = owp$stats$grand.mean - (owp$stats$sd.within),
+      ymax = owp$stats$grand.mean + (owp$stats$sd.within)
     )
   )
 }
@@ -396,8 +396,8 @@ GetColors <- function() {
 
 GetStandardError <- function(owp) {
   return(
-    data.frame(SE = c(owp$stats$grand.mean + owp$stats$standard.deviation.within,
-                      owp$stats$grand.mean - owp$stats$standard.deviation.within)
+    data.frame(SE = c(owp$stats$grand.mean + owp$stats$sd.within,
+                      owp$stats$grand.mean - owp$stats$sd.within)
     )
   )
 }
