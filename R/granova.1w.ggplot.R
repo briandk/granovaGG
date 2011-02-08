@@ -322,8 +322,8 @@ GetMSwithinSquare <- function(owp) {
     data.frame(
       xmin = -owp$stats$square.side.length/2,
       xmax = owp$stats$square.side.length/2,
-      ymin = owp$stats$grand.mean - (owp$stats$square.side.length/2) / (owp$params$aspect.ratio),
-      ymax = owp$stats$grand.mean + (owp$stats$square.side.length/2) / (owp$params$aspect.ratio)
+      ymin = owp$stats$grand.mean - (owp$stats$square.side.length/2),
+      ymax = owp$stats$grand.mean + (owp$stats$square.side.length/2)
     )
   )
 }
