@@ -356,11 +356,14 @@ GetGraphicalParameters <- function(owp) {
   .score.range.distance    <- (max(owp$data$score) - min(owp$data$score))
   .aspect.ratio            <- .contrast.range.distance / .score.range.distance
   .aggregate.breaks        <- c(owp$summary$group.mean, range(owp$data$score))
-  
+  .y.range                 <- range(owp$data$score)
+  .x.range                 <- c(-.score.range.distance/2, .score.range.distance/2)
   
   return(list(
            aspect.ratio     = .aspect.ratio,
-           aggregate.breaks = .aggregate.breaks
+           aggregate.breaks = .aggregate.breaks,
+           y.range          = .y.range,
+           x.range          = .x.range
          )
   )
 }
@@ -438,6 +441,7 @@ ScaleX <- function(owp) {
   return(scale_x_continuous(
     breaks = (owp$summary$contrast),
     labels = round(owp$summary$contrast, digits = 1),
+    limits = owp$params$x.range,
     expand = c(0.1, 0))
   )
 }
@@ -447,6 +451,7 @@ ScaleY <- function(owp) {
     scale_y_continuous(
       breaks = (owp$params$aggregate.breaks),
       labels = round(owp$params$aggregate.breaks, digits = 1),
+      limits = owp$params$y.range,
       expand = c(0.1, 0),
     )
   )
@@ -584,7 +589,7 @@ Theme <- function() {
 }
 
 ForceCoordinateAxesToBeEqual <- function(owp) {
-  return(coord_fixed(ratio = owp$params$aspect.ratio))
+  return(coord_fixed())
 }
 
 Title <- function() {
