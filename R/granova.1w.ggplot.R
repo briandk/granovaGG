@@ -303,7 +303,7 @@ AdaptVariablesFromGranovaComputations <- function() {
                        sd.within                 = sdw
   )
   result$residuals <- data.frame(residuals   = residuals,
-                                 within.1.sd = (abs(residuals) < sdw)                           
+                                 within.1.sd = (abs(residuals - grandmean) < sdw)
   )
   return(result)
 }
