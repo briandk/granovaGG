@@ -532,6 +532,19 @@ Residuals <- function(owp) {
   )
 }
 
+EffectSize <- function(owp) {
+  return(
+    geom_text(
+            aes(
+              x = x,
+              y = y,
+              label = label
+            ),
+            data = owp$effect.size
+    )
+  )
+}
+
 MSbetweenSquare <- function() {
   return(
     geom_rect(
@@ -636,6 +649,7 @@ p <- p + GroupMeansByContrast(owp)
 p <- p + MSbetweenSquare()
 p <- p + MSwithinSquare()
 p <- p + Residuals(owp)
+p <- p + EffectSize(owp)
 p <- p + ColorScale(owp)
 p <- p + FillScale()
 p <- p + XLabel()
