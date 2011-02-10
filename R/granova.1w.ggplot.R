@@ -333,16 +333,18 @@ GetGroupMeanLine <- function(owp) {
 
 GetGraphicalParameters <- function(owp) {
   .score.range.distance    <- (max(owp$data$score) - min(owp$data$score))
-  .aggregate.breaks        <- c(owp$summary$group.mean, range(owp$data$score))
+  .aggregate.y.breaks      <- c(owp$summary$group.mean, range(owp$data$score))
+  .aggregate.x.breaks      <- c(owp$summary$contrast, 0) 
   .y.range                 <- range(owp$data$score)
   .x.range                 <- c(-.score.range.distance/2, .score.range.distance/2)
   .percent.offset          <- .score.range.distance / 100
   
   return(list(
-           aggregate.breaks = .aggregate.breaks,
-           y.range          = .y.range,
-           x.range          = .x.range,
-           percent.offset   = .percent.offset
+           aggregate.x.breaks = .aggregate.x.breaks,
+           aggregate.y.breaks = .aggregate.y.breaks,
+           y.range            = .y.range,
+           x.range            = .x.range,
+           percent.offset     = .percent.offset
          )
   )
 }
@@ -464,8 +466,8 @@ GrandMeanPoint <- function(owp) {
 
 ScaleX <- function(owp) {
   return(scale_x_continuous(
-    breaks = (owp$summary$contrast),
-    labels = round(owp$summary$contrast, digits = 1),
+    breaks = (owp$params$aggregate.x.breaks),
+    labels = round(owp$params$aggregate.x.breaks, digits = 1),
     limits = owp$params$x.range,
     expand = c(0.1, 0))
   )
@@ -474,8 +476,8 @@ ScaleX <- function(owp) {
 ScaleY <- function(owp) {
   return(
     scale_y_continuous(
-      breaks = (owp$params$aggregate.breaks),
-      labels = round(owp$params$aggregate.breaks, digits = 1),
+      breaks = (owp$params$aggregate.y.breaks),
+      labels = round(owp$params$aggregate.y.breaks, digits = 1),
       limits = owp$params$y.range,
       expand = c(0.1, 0),
     )
