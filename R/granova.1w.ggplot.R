@@ -372,7 +372,7 @@ GetGraphicalParameters <- function(owp) {
 GetColors <- function() {
   # Color Brewer Palette: 166, 206, 227; 31, 120, 180; 178, 223, 138; 51, 160, 44; 
   colors <- c(
-   rgb(166, 206, 227, max = 255),
+   brewer.pal(n = 8, name = "Set1")[2],
    brewer.pal(n = 8, name = "Set1")[3],
    brewer.pal(n = 8, name = "Set1")[1],
    rgb(31, 120, 180, max = 255),
@@ -534,9 +534,8 @@ MSbetweenSquare <- function() {
               xmax   = xmax,
               ymin   = ymin,
               ymax   = ymax,
-              color  = factor(paste("MS-between"))
-            ), data  = owp$ms.between.square,
-               fill  = NA,
+              fill   = factor(paste("MS-between"))
+            ), data  = owp$ms.between.square
     )
   )
 }
