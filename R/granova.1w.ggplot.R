@@ -322,10 +322,10 @@ GetSummary <- function(owp) {
 GetMSwithinSquare <- function(owp) {
   return(
     data.frame(
-      xmin = -owp$stats$sd.within,
-      xmax = owp$stats$sd.within,
-      ymin = owp$stats$grand.mean - (owp$stats$sd.within),
-      ymax = owp$stats$grand.mean + (owp$stats$sd.within)
+      xmin = 1,
+      xmax = 2,
+      ymin = 1,
+      ymax = 2
     )
   )
 }
@@ -333,10 +333,10 @@ GetMSwithinSquare <- function(owp) {
 GetMSbetweenSquare <- function(owp) {
   return(
     data.frame(
-      xmin = -owp$stats$sd.within * (1 + sqrt(owp$stats$F.statistic/2)),
-      xmax = owp$stats$sd.within  * (1 + sqrt(owp$stats$F.statistic/2)),
-      ymin = 1,
-      ymax = 5
+      xmin = min(owp$params$x.range) + 5 * (owp$params$percent.offset),
+      xmax = min(owp$params$x.range) + 15  * (owp$params$percent.offset),
+      ymin = max(owp$params$y.range) - 15  * (owp$params$percent.offset),
+      ymax = max(owp$params$y.range) - 5  * (owp$params$percent.offset)
     )
   )
 }
