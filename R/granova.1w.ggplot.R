@@ -372,11 +372,11 @@ GetColors <- function() {
   # Color Brewer Palette: 166, 206, 227; 31, 120, 180; 178, 223, 138; 51, 160, 44; 
   colors <- c(
    rgb(166, 206, 227, max = 255),
-   "green",
-   rgb(51, 160, 44, max = 255),
+   brewer.pal(n = 8, name = "Set1")[3],
+   brewer.pal(n = 8, name = "Set1")[1],
    rgb(31, 120, 180, max = 255),
    "steelblue",
-   rgb(178, 223, 138, max = 255),
+   brewer.pal(n = 8, name = "Set1")[2],
    "darkblue",
    "orange"
   )
@@ -421,9 +421,11 @@ InitializeGgplot <- function() {
 }
 
 GrandMeanLine <- function(owp) {
-  return(geom_hline(
-    yintercept = mean(owp$data$score),
-    color      = "green")
+  return(
+    geom_hline(
+      color      = brewer.pal(n = 8, name = "Set1")[3],
+      yintercept = owp$stats$grand.mean
+    )
   )
 }
 
