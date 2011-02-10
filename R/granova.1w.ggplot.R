@@ -614,7 +614,7 @@ RotateXTicks <- function() {
 
 Theme <- function() {
   if (is.null(plot.theme)) {
-    return(theme_granova())
+    return(theme_granova_1w())
   }
   
   else {

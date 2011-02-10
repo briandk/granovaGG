@@ -5,18 +5,18 @@ getSquareDataRange <- function(data) {
   
 }
 
-theme_granova <- function(base_size = 12) {
-  theme_granova                  <- theme_bw()
-  theme_granova$axis.text.x      <- theme_text(size = base_size * 0.8 , lineheight = 0.9, vjust = 1, angle = 90, colour = "grey20")
-  theme_granova$axis.text.y      <- theme_text(size = base_size * 0.8 , lineheight = 0.9, hjust = 1, colour = "grey20")
-  theme_granova$axis.title.x     <- theme_text(size = 10, vjust = 2)
-  theme_granova$axis.title.y     <- theme_text(size = 10, angle = 90, vjust = 0.3, hjust = 0.5)
-  theme_granova$panel.grid.minor <- theme_line(colour = NA, size = 0.25)
-  theme_granova$panel.grid.major <- theme_line(colour = "grey90", size = 0.2)
-  theme_granova$plot.title       <- theme_text(face = "bold", size = 12, vjust = -1)
-  theme_granova$legend.text      <- theme_text(size = 8)
-  theme_granova$legend.key.size  <- unit(1, "lines")
-  return(theme_granova)
+theme_granova_1w <- function(base_size = 12) {
+  theme_granova_1w                  <- theme_bw()
+  theme_granova_1w$axis.text.x      <- theme_text(size = base_size * 0.8 , lineheight = 0.9, vjust = 1, angle = 90, colour = "grey20")
+  theme_granova_1w$axis.text.y      <- theme_text(size = base_size * 0.8 , lineheight = 0.9, hjust = 1, colour = "grey20")
+  theme_granova_1w$axis.title.x     <- theme_text(size = 10, vjust = 2)
+  theme_granova_1w$axis.title.y     <- theme_text(size = 10, angle = 90, vjust = 0.3, hjust = 0.5)
+  theme_granova_1w$panel.grid.minor <- theme_line(colour = NA, size = 0.25)
+  theme_granova_1w$panel.grid.major <- theme_line(colour = "grey90", size = 0.2)
+  theme_granova_1w$plot.title       <- theme_text(face = "bold", size = 12, vjust = -1)
+  theme_granova_1w$legend.text      <- theme_text(size = 8)
+  theme_granova_1w$legend.key.size  <- unit(1, "lines")
+  return(theme_granova_1w)
   
   # structure(list(
   #   axis.line         = theme_blank(),
