@@ -290,9 +290,7 @@ AdaptVariablesFromGranovaComputations <- function() {
   result  <- list(data = data.frame(score             = yr,
                                     group             = groupf,
                                     group.mean        = yrm,
-                                    contrast          = stats.vc,
-                                    residuals         = residuals,
-                                    residuals.colored = (abs(residuals) < sdw)
+                                    contrast          = stats.vc
                          )
   )
   result$stats <- list(F.statistic               = F.stat,
