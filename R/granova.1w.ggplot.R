@@ -302,8 +302,8 @@ AdaptVariablesFromGranovaComputations <- function() {
                        square.side.length        = sqrs,
                        sd.within                 = sdw
   )
-  result$residuals <- data.frame(residuals   = residuals,
-                                 within.1.sd = (abs(residuals - grandmean) < sdw)
+  result$residuals <- data.frame(residuals                 = residuals,
+                                 within.1.sd.of.grand.mean = abs(residuals - grandmean) < sdw
   )
   return(result)
 }
@@ -375,10 +375,10 @@ GetColors <- function() {
    "green",
    rgb(51, 160, 44, max = 255),
    rgb(31, 120, 180, max = 255),
-   rgb(31, 120, 180, max = 255),
    "steelblue",
-   rgb(178, 223, 138, max = 255)
-   
+   rgb(178, 223, 138, max = 255),
+   "black",
+   "grey50"
   )
   
   names(colors) <- c(
@@ -386,9 +386,10 @@ GetColors <- function() {
     "Grand Mean",
     "Group Means",
     "MS-within",
-    "Residuals",
     "SE-within",
-    "Group Mean Line"
+    "Group Mean Line",
+    "TRUE",
+    "FALSE"
   )
   
   return(colors)
@@ -499,8 +500,8 @@ Residuals <- function(owp) {
     geom_rug(
            aes(
              x     = NULL, 
-             y     = residuals, 
-             color = factor(within.1.sd)
+             y     = residuals,
+             color = factor(within.1.sd.of.grand.mean) 
            ),
            data  = owp$residuals
     )
