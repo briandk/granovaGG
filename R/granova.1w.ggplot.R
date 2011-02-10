@@ -371,10 +371,10 @@ GetMSbetweenSquare <- function(owp) {
 GetMSwithinSquare <- function(owp) {
   return(
     data.frame(
-      xmin = 1,
-      xmax = 2,
-      ymin = 1,
-      ymax = 2
+      xmin = owp$squares$x.center- (owp$squares$side.length / (2 * sqrt(owp$stats$F.statistic))),
+      xmax = owp$squares$x.center+ (owp$squares$side.length / (2 * sqrt(owp$stats$F.statistic))),
+      ymin = owp$squares$y.center- (owp$squares$side.length / (2 * sqrt(owp$stats$F.statistic))),
+      ymax = owp$squares$y.center+ (owp$squares$side.length / (2 * sqrt(owp$stats$F.statistic)))
     )
   )
 }
