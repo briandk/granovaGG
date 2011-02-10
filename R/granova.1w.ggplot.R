@@ -377,8 +377,8 @@ GetColors <- function() {
    rgb(31, 120, 180, max = 255),
    "steelblue",
    rgb(178, 223, 138, max = 255),
-   "black",
-   "grey50"
+   "darkblue",
+   "orange"
   )
   
   names(colors) <- c(
@@ -618,10 +618,9 @@ p <- p + ScaleY(owp)
 p <- p + ScoresByGroupContrast(owp)
 p <- p + GroupMeanLine(owp)
 p <- p + GroupMeansByContrast(owp)
-p <- p + Residuals(owp)
 p <- p + MSwithinSquare()
 p <- p + MSbetweenSquare()
-p <- p + StandardError(owp)
+p <- p + Residuals(owp)
 p <- p + ColorScale(owp)
 p <- p + FillScale()
 p <- p + XLabel()
