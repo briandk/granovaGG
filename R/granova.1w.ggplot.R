@@ -287,11 +287,12 @@ if(ident){
 
 
 AdaptVariablesFromGranovaComputations <- function() {
-  result  <- list(data = data.frame(score      = yr,
-                                    group      = groupf,
-                                    group.mean = yrm,
-                                    contrast   = stats.vc,
-                                    residuals  = residuals
+  result  <- list(data = data.frame(score             = yr,
+                                    group             = groupf,
+                                    group.mean        = yrm,
+                                    contrast          = stats.vc,
+                                    residuals         = residuals,
+                                    residuals.colored = (abs(residuals) < sdw)
                          )
   )
   result$stats <- list(F.statistic               = F.stat,
