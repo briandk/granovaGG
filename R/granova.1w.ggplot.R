@@ -407,14 +407,6 @@ GetColors <- function() {
   return(colors)
 }
 
-GetStandardError <- function(owp) {
-  return(
-    data.frame(SE = c(owp$stats$grand.mean + owp$stats$sd.within,
-                      owp$stats$grand.mean - owp$stats$sd.within)
-    )
-  )
-}
-
 # Pepare OWP object
 owp                   <- AdaptVariablesFromGranovaComputations()
 owp$summary           <- GetSummary(owp)
@@ -422,7 +414,6 @@ owp$group.mean.line   <- GetGroupMeanLine(owp)
 owp$params            <- GetGraphicalParameters(owp)
 owp$squares           <- GetSquareParameters(owp)
 owp$colors            <- GetColors()
-owp$standard.error    <- GetStandardError(owp)
 owp$ms.between.square <- GetMSbetweenSquare(owp)
 owp$ms.within.square  <- GetMSwithinSquare(owp)
 
@@ -548,15 +539,6 @@ MSwithinSquare <- function() {
               fill   = factor("MS-within"),
               color  = factor("MS-within")
             ), data  = owp$ms.within.square,
-    )
-  )
-}
-
-StandardError <- function(owp) {
-  return(
-    geom_hline(
-             aes(color = factor("SE-within"), yintercept = SE),
-             data = owp$standard.error
     )
   )
 }
