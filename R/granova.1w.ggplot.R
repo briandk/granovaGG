@@ -319,28 +319,6 @@ GetSummary <- function(owp) {
   )
 }
 
-GetMSbetweenSquare <- function(owp) {
-  return(
-    data.frame(
-      xmin = min(owp$params$x.range) + 5 * (owp$params$percent.offset),
-      xmax = min(owp$params$x.range) + 15  * (owp$params$percent.offset),
-      ymin = max(owp$params$y.range) - 15  * (owp$params$percent.offset),
-      ymax = max(owp$params$y.range) - 5  * (owp$params$percent.offset)
-    )
-  )
-}
-
-GetMSwithinSquare <- function(owp) {
-  return(
-    data.frame(
-      xmin = 1,
-      xmax = 2,
-      ymin = 1,
-      ymax = 2
-    )
-  )
-}
-
 GetGroupMeanLine <- function(owp) {
   return(
     data.frame(
@@ -368,6 +346,29 @@ GetGraphicalParameters <- function(owp) {
          )
   )
 }
+
+GetMSbetweenSquare <- function(owp) {
+  return(
+    data.frame(
+      xmin = min(owp$params$x.range) + 5 * (owp$params$percent.offset),
+      xmax = min(owp$params$x.range) + 15  * (owp$params$percent.offset),
+      ymin = max(owp$params$y.range) - 15  * (owp$params$percent.offset),
+      ymax = max(owp$params$y.range) - 5  * (owp$params$percent.offset)
+    )
+  )
+}
+
+GetMSwithinSquare <- function(owp) {
+  return(
+    data.frame(
+      xmin = 1,
+      xmax = 2,
+      ymin = 1,
+      ymax = 2
+    )
+  )
+}
+
 
 GetColors <- function() {
   # Color Brewer Palette: 166, 206, 227; 31, 120, 180; 178, 223, 138; 51, 160, 44; 
