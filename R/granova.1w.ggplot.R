@@ -412,6 +412,18 @@ GetModelSummary <- function(owp) {
   return(summary(model))
 }
 
+GetEffectSize <- function(owp) {
+  r.squared   <- owp$model.summary$r.squared
+  effect.size <- (r.squared) / (1 - r.squared)
+  
+  return(
+    data.frame(label = effect.size,
+               x     = owp$squares$x.center,
+               y     = owp$ms.between.square$ymax + 1 * owp$params$percent.offset
+    )
+  )
+}
+
 # Pepare OWP object
 owp                   <- AdaptVariablesFromGranovaComputations()
 owp$summary           <- GetSummary(owp)
@@ -422,6 +434,7 @@ owp$colors            <- GetColors()
 owp$ms.between.square <- GetMSbetweenSquare(owp)
 owp$ms.within.square  <- GetMSwithinSquare(owp)
 owp$model.summary     <- GetModelSummary(owp)
+owp$effect.size       <- GetEffectSize(owp)
 
 ######## Plot Functions Below
 
