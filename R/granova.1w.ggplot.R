@@ -357,29 +357,6 @@ GetSquareParameters <- function(owp) {
   )
 }
 
-GetMSbetweenSquare <- function(owp) {
-  return(
-    data.frame(
-      xmin = owp$squares$x.center - (owp$squares$side.length / 2),
-      xmax = owp$squares$x.center + (owp$squares$side.length / 2),
-      ymin = owp$squares$y.center - (owp$squares$side.length / 2),
-      ymax = owp$squares$y.center + (owp$squares$side.length / 2)
-    )
-  )
-}
-
-GetMSwithinSquare <- function(owp) {
-  return(
-    data.frame(
-      xmin = owp$squares$x.center- (owp$squares$side.length / (2 * sqrt(owp$stats$F.statistic))),
-      xmax = owp$squares$x.center+ (owp$squares$side.length / (2 * sqrt(owp$stats$F.statistic))),
-      ymin = owp$squares$y.center- (owp$squares$side.length / (2 * sqrt(owp$stats$F.statistic))),
-      ymax = owp$squares$y.center+ (owp$squares$side.length / (2 * sqrt(owp$stats$F.statistic)))
-    )
-  )
-}
-
-
 GetColors <- function() {
   # Color Brewer Palette: 166, 206, 227; 31, 120, 180; 178, 223, 138; 51, 160, 44; 
   colors <- c(
@@ -405,6 +382,28 @@ GetColors <- function() {
   )
   
   return(colors)
+}
+
+GetMSbetweenSquare <- function(owp) {
+  return(
+    data.frame(
+      xmin = owp$squares$x.center - (owp$squares$side.length / 2),
+      xmax = owp$squares$x.center + (owp$squares$side.length / 2),
+      ymin = owp$squares$y.center - (owp$squares$side.length / 2),
+      ymax = owp$squares$y.center + (owp$squares$side.length / 2)
+    )
+  )
+}
+
+GetMSwithinSquare <- function(owp) {
+  return(
+    data.frame(
+      xmin = owp$squares$x.center- (owp$squares$side.length / (2 * sqrt(owp$stats$F.statistic))),
+      xmax = owp$squares$x.center+ (owp$squares$side.length / (2 * sqrt(owp$stats$F.statistic))),
+      ymin = owp$squares$y.center- (owp$squares$side.length / (2 * sqrt(owp$stats$F.statistic))),
+      ymax = owp$squares$y.center+ (owp$squares$side.length / (2 * sqrt(owp$stats$F.statistic)))
+    )
+  )
 }
 
 # Pepare OWP object
