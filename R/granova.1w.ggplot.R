@@ -510,6 +510,20 @@ Residuals <- function(owp) {
   )
 }
 
+MSbetweenSquare <- function() {
+  return(
+    geom_rect(
+            aes(
+              xmin   = xmin,
+              xmax   = xmax,
+              ymin   = ymin,
+              ymax   = ymax,
+              fill   = factor(paste("MS-between"))
+            ), data  = owp$ms.between.square
+    )
+  )
+}
+
 MSwithinSquare <- function() {
   return(
     geom_rect(
@@ -521,20 +535,6 @@ MSwithinSquare <- function() {
               color  = factor("MS-within")
             ), data  = owp$ms.within.square,
                fill  = NA,
-    )
-  )
-}
-
-MSbetweenSquare <- function() {
-  return(
-    geom_rect(
-            aes(
-              xmin   = xmin,
-              xmax   = xmax,
-              ymin   = ymin,
-              ymax   = ymax,
-              fill   = factor(paste("MS-between"))
-            ), data  = owp$ms.between.square
     )
   )
 }
@@ -619,8 +619,8 @@ p <- p + ScaleY(owp)
 p <- p + ScoresByGroupContrast(owp)
 p <- p + GroupMeanLine(owp)
 p <- p + GroupMeansByContrast(owp)
-p <- p + MSwithinSquare()
 p <- p + MSbetweenSquare()
+p <- p + MSwithinSquare()
 p <- p + Residuals(owp)
 p <- p + ColorScale(owp)
 p <- p + FillScale()
