@@ -542,7 +542,8 @@ EffectSize <- function(owp) {
               y = y,
               label = label
             ),
-            data = owp$effect.size
+            color = "grey20",
+            data  = owp$effect.size
     )
   )
 }
