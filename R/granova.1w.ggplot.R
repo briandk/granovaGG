@@ -319,17 +319,6 @@ GetSummary <- function(owp) {
   )
 }
 
-GetMSwithinSquare <- function(owp) {
-  return(
-    data.frame(
-      xmin = 1,
-      xmax = 2,
-      ymin = 1,
-      ymax = 2
-    )
-  )
-}
-
 GetMSbetweenSquare <- function(owp) {
   return(
     data.frame(
@@ -337,6 +326,17 @@ GetMSbetweenSquare <- function(owp) {
       xmax = min(owp$params$x.range) + 15  * (owp$params$percent.offset),
       ymin = max(owp$params$y.range) - 15  * (owp$params$percent.offset),
       ymax = max(owp$params$y.range) - 5  * (owp$params$percent.offset)
+    )
+  )
+}
+
+GetMSwithinSquare <- function(owp) {
+  return(
+    data.frame(
+      xmin = 1,
+      xmax = 2,
+      ymin = 1,
+      ymax = 2
     )
   )
 }
@@ -411,9 +411,8 @@ owp$group.mean.line   <- GetGroupMeanLine(owp)
 owp$params            <- GetGraphicalParameters(owp)
 owp$colors            <- GetColors()
 owp$standard.error    <- GetStandardError(owp)
-owp$ms.within.square  <- GetMSwithinSquare(owp)
 owp$ms.between.square <- GetMSbetweenSquare(owp)
-
+owp$ms.within.square  <- GetMSwithinSquare(owp)
 
 ######## Plot Functions Below
 
