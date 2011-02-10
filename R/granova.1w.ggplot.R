@@ -514,11 +514,10 @@ GroupMeansByContrast <- function(owp) {
              aes(
                x     = contrast, 
                y     = group.mean, 
-               fill  = factor("Group Means")), 
+               color = factor("Group Means")
+             ), 
                data  = owp$summary, 
-               color = "black",
-               shape = 24,
-               size  = I(3)
+               size  = I(2.5)
     )
   )
 }
