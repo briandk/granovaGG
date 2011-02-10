@@ -386,7 +386,7 @@ GetColors <- function() {
    brewer.pal(n = 8, name = "Set1")[2],
    brewer.pal(n = 8, name = "Set1")[3],
    brewer.pal(n = 8, name = "Set1")[1],
-   rgb(31, 120, 180, max = 255),
+   brewer.pal(n = 8, name = "Set1")[1],
    "steelblue",
    brewer.pal(n = 8, name = "Set1")[2],
    "darkblue",
@@ -530,7 +530,8 @@ MSbetweenSquare <- function() {
               xmax   = xmax,
               ymin   = ymin,
               ymax   = ymax,
-              fill   = factor(paste("MS-between"))
+              fill   = factor(paste("MS-between")),
+              color  = factor(paste("MS-between"))
             ), data  = owp$ms.between.square
     )
   )
@@ -544,9 +545,9 @@ MSwithinSquare <- function() {
               xmax   = xmax,
               ymin   = ymin,
               ymax   = ymax,
+              fill   = factor("MS-within"),
               color  = factor("MS-within")
             ), data  = owp$ms.within.square,
-               fill  = NA,
     )
   )
 }
