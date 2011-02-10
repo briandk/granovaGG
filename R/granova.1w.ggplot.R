@@ -448,6 +448,7 @@ GrandMeanLine <- function(owp) {
   return(
     geom_hline(
       color      = brewer.pal(n = 8, name = "Set1")[3],
+      alpha      = I(1/2),
       yintercept = owp$stats$grand.mean
     )
   )
@@ -502,7 +503,8 @@ GroupMeanLine <- function(owp) {
       xend   = xend,
       yend   = yend,
       color  = factor(paste("Group Mean Line"))
-    ), data  = owp$group.mean.line
+    ), alpha = I(1/2),
+       data  = owp$group.mean.line
   ))
 }
 
