@@ -406,6 +406,12 @@ GetMSwithinSquare <- function(owp) {
   )
 }
 
+GetModelSummary <- function(owp) {
+  model <- lm(score ~ group, data = owp$data)
+  
+  return(summary(model))
+}
+
 # Pepare OWP object
 owp                   <- AdaptVariablesFromGranovaComputations()
 owp$summary           <- GetSummary(owp)
@@ -415,6 +421,7 @@ owp$squares           <- GetSquareParameters(owp)
 owp$colors            <- GetColors()
 owp$ms.between.square <- GetMSbetweenSquare(owp)
 owp$ms.within.square  <- GetMSwithinSquare(owp)
+owp$model.summary     <- GetModelSummary(owp)
 
 ######## Plot Functions Below
 
