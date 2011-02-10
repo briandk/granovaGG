@@ -304,6 +304,9 @@ AdaptVariablesFromGranovaComputations <- function() {
                        square.side.length        = sqrs,
                        sd.within                 = sdw
   )
+  result$residuals <- data.frame(residuals   = residuals,
+                                 within.1.sd = (abs(residuals) < sdw)                           
+  )
   return(result)
 }
 
