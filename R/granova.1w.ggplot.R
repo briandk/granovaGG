@@ -352,15 +352,13 @@ GetGroupMeanLine <- function(owp) {
 }
 
 GetGraphicalParameters <- function(owp) {
-  .contrast.range.distance <- (max(owp$data$contrast) - min(owp$data$contrast))
   .score.range.distance    <- (max(owp$data$score) - min(owp$data$score))
-  .aspect.ratio            <- .contrast.range.distance / .score.range.distance
   .aggregate.breaks        <- c(owp$summary$group.mean, range(owp$data$score))
   .y.range                 <- range(owp$data$score)
   .x.range                 <- c(-.score.range.distance/2, .score.range.distance/2)
+  .percent.offset          <- .score.range.distance / 100
   
   return(list(
-           aspect.ratio     = .aspect.ratio,
            aggregate.breaks = .aggregate.breaks,
            y.range          = .y.range,
            x.range          = .x.range
