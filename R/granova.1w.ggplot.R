@@ -363,7 +363,8 @@ GetGraphicalParameters <- function(owp) {
   return(list(
            aggregate.breaks = .aggregate.breaks,
            y.range          = .y.range,
-           x.range          = .x.range
+           x.range          = .x.range,
+           percent.offset   = .percent.offset
          )
   )
 }
