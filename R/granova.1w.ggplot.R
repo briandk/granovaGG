@@ -500,9 +500,9 @@ Residuals <- function(owp) {
            aes(
              x     = NULL, 
              y     = residuals, 
-             color = factor("Residuals")
+             color = factor(within.1.sd)
            ),
-           data  = owp$data
+           data  = owp$residuals
     )
   )
 }
