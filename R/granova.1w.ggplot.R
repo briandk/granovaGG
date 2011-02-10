@@ -347,13 +347,23 @@ GetGraphicalParameters <- function(owp) {
   )
 }
 
+GetSquareParameters <- function(owp) {
+  return(
+    list(
+      x.center    = min(owp$params$x.range) + 10 * (owp$params$percent.offset),
+      y.center    = max(owp$params$y.range) - 10 * (owp$params$percent.offset),
+      side.length = 10 * owp$params$percent.offset
+    )
+  )
+}
+
 GetMSbetweenSquare <- function(owp) {
   return(
     data.frame(
-      xmin = min(owp$params$x.range) + 5 * (owp$params$percent.offset),
-      xmax = min(owp$params$x.range) + 15  * (owp$params$percent.offset),
-      ymin = max(owp$params$y.range) - 15  * (owp$params$percent.offset),
-      ymax = max(owp$params$y.range) - 5  * (owp$params$percent.offset)
+      xmin = owp$squares$x.center - (owp$squares$side.length / 2),
+      xmax = owp$squares$x.center + (owp$squares$side.length / 2),
+      ymin = owp$squares$y.center - (owp$squares$side.length / 2),
+      ymax = owp$squares$y.center + (owp$squares$side.length / 2)
     )
   )
 }
@@ -410,6 +420,7 @@ owp                   <- AdaptVariablesFromGranovaComputations()
 owp$summary           <- GetSummary(owp)
 owp$group.mean.line   <- GetGroupMeanLine(owp)
 owp$params            <- GetGraphicalParameters(owp)
+owp$squares           <- GetSquareParameters(owp)
 owp$colors            <- GetColors()
 owp$standard.error    <- GetStandardError(owp)
 owp$ms.between.square <- GetMSbetweenSquare(owp)
