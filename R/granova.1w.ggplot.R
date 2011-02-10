@@ -415,13 +415,13 @@ GetModelSummary <- function(owp) {
 }
 
 GetEffectSize <- function(owp) {
-  r.squared   <- owp$model.summary$r.squared
-  effect.size <- (r.squared) / (1 - r.squared)
-  
+  r.squared           <- owp$model.summary$r.squared
+  effect.size         <- (r.squared) / (1 - r.squared)
+  effect.size.rounded <- round(effect.size, digits = 2)
   return(
-    data.frame(label = effect.size,
+    data.frame(label = effect.size.rounded,
                x     = owp$squares$x.center,
-               y     = owp$ms.between.square$ymax + 1 * owp$params$percent.offset
+               y     = owp$ms.between.square$ymax + 2.5 * owp$params$percent.offset
     )
   )
 }
