@@ -579,6 +579,20 @@ EffectSize <- function(owp) {
   )
 }
 
+StandardErrorRibbonForRawData <- function(owp) {
+  return(
+    geom_smooth(
+              aes(
+                x          = contrast,
+                y          = score
+              ), data      = owp$data,
+                 method    = "loess",
+                 level     = 0.99,
+                 n         = 20
+    )
+  )
+}
+
 ColorScale <- function(owp) {
   return(scale_color_manual(value = owp$colors, name = ""))
 }
@@ -654,6 +668,7 @@ p <- p + Residuals(owp)
 p <- p + MSbetweenSquare()
 p <- p + MSwithinSquare()
 p <- p + EffectSize(owp)
+p <- p + StandardErrorRibbonForRawData(owp)
 p <- p + ColorScale(owp)
 p <- p + FillScale()
 p <- p + XLabel()
