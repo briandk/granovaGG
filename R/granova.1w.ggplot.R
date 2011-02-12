@@ -32,7 +32,6 @@ granova.1w.ggplot <- function(data,
                               ylab                     = NULL, 
                               main                     = NULL,
                               plot.theme               = NULL, 
-                              produce.grayscale.output = FALSE, 
                               ...
                              )
 
@@ -402,7 +401,7 @@ GetSquareParameters <- function(owp) {
   )
 }
 
-GetFullColorValues <- function() {
+GetColors <- function() {
   colors <- c(
    brewer.pal(n = 8, name = "Pastel1")[2],
    brewer.pal(n = 8, name = "Pastel1")[1],
@@ -425,20 +424,6 @@ GetFullColorValues <- function() {
   
   return(colors)
   
-}
-
-GetGrayscaleColorValues <- function() {
-  
-}
-
-GetColors <- function() {
-  if (produce.grayscale.output) {
-    GetGrayscaleColorValues()
-  }
-  
-  else {
-    GetFullColorValues()
-  }
 }
 
 GetMSbetweenSquare <- function(owp) {
