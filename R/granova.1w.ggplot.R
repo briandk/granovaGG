@@ -341,7 +341,7 @@ GetGraphicalParameters <- function(owp) {
                                 min(owp$data$score) - (10 * .percent.offset),
                                 max(owp$data$score) + (10 * .percent.offset)
                               )
-  .x.range                 <- c(-.score.range.distance/2, .score.range.distance/2)
+  .x.range                 <- c(-.score.range.distance/2 - (10 * .percent.offset), .score.range.distance/2 + (10 * .percent.offset))
   
   return(list(
            aggregate.x.breaks = .aggregate.x.breaks,
