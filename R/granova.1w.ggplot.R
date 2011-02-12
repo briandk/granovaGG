@@ -582,14 +582,12 @@ EffectSize <- function(owp) {
 
 StandardErrorRibbonForRawData <- function(owp) {
   return(
-    geom_smooth(
+    geom_ribbon(
               aes(
-                x          = contrast,
-                y          = score
-              ), data      = owp$data,
-                 method    = "loess",
-                 level     = 0.99,
-                 n         = 20
+                x          = "contrast",
+                ymin       = "min(owp$data$score)",
+                ymax       = "min(owp$data$score) + owp$summary$standard.deviation"
+              ), alpha     = I(1/2)
     )
   )
 }
