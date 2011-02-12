@@ -402,7 +402,7 @@ GetColors <- function() {
    "steelblue",
    brewer.pal(n = 8, name = "Set1")[2],
    "darkblue",
-   "orange"
+   "darkorange"
   )
   
   names(colors) <- c(
@@ -585,6 +585,7 @@ Residuals <- function(owp) {
              y     = residuals,
              color = factor(within.1.sd.of.grand.mean) 
            ),
+           alpha = I(0.50),
            data  = owp$residuals
     )
   )
