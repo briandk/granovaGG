@@ -538,7 +538,11 @@ JitteredScoresByGroupContrast <- function(owp) {
   
   return( 
     geom_point( 
-      aes(x    = contrast, y = score), 
+      aes(
+        x = contrast, 
+        y = score
+      ), 
+      alpha    = I(1),
       size     = I(2),
       data     = owp$data,
       position = only.jitter.in.x.direction
