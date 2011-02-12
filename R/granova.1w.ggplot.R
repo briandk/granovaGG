@@ -344,11 +344,12 @@ GetGraphicalParameters <- function(owp) {
   .x.range                 <- c(-.score.range.distance/2 - (10 * .percent.offset), .score.range.distance/2 + (10 * .percent.offset))
   
   return(list(
-           aggregate.x.breaks = .aggregate.x.breaks,
-           aggregate.y.breaks = .aggregate.y.breaks,
-           y.range            = .y.range,
-           x.range            = .x.range,
-           percent.offset     = .percent.offset
+           score.range.distance = .score.range.distance,
+           aggregate.x.breaks   = .aggregate.x.breaks,
+           aggregate.y.breaks   = .aggregate.y.breaks,
+           y.range              = .y.range,
+           x.range              = .x.range,
+           percent.offset       = .percent.offset
          )
   )
 }
