@@ -467,7 +467,7 @@ GetEffectSize <- function(owp) {
   )
 }
 
-GetStandardErrorRibbon <- function(owp) {
+GetWithinGroupStandardDeviation <- function(owp) {
   baseline           <- min(owp$params$y.range)
   contrast           <- owp$summary$contrast 
   standard.deviation <- owp$summary$standard.deviation
@@ -491,7 +491,7 @@ owp$ms.between.square     <- GetMSbetweenSquare(owp)
 owp$ms.within.square      <- GetMSwithinSquare(owp)
 owp$model.summary         <- GetModelSummary(owp)
 owp$effect.size           <- GetEffectSize(owp)
-owp$standard.error.ribbon <- GetStandardErrorRibbon(owp)
+owp$standard.deviation    <- GetWithinGroupStandardDeviation(owp)
 
 ######## Plot Functions Below
 
@@ -643,7 +643,7 @@ EffectSize <- function(owp) {
   )
 }
 
-StandardErrorRibbon <- function(owp) {
+WithinGroupStandardDeviation <- function(owp) {
   return(
     geom_ribbon(
               aes(
@@ -651,7 +651,7 @@ StandardErrorRibbon <- function(owp) {
                 ymin       = ymin,
                 ymax       = ymax
               ), alpha     = I(1/4),
-                 data      = owp$standard.error.ribbon
+                 data      = owp$standard.deviation
     )
   )
 }
@@ -731,7 +731,7 @@ p <- p + Residuals(owp)
 p <- p + MSbetweenSquare()
 p <- p + MSwithinSquare()
 p <- p + EffectSize(owp)
-p <- p + StandardErrorRibbon(owp)
+p <- p + WithinGroupStandardDeviation(owp)
 p <- p + ColorScale(owp)
 p <- p + FillScale()
 p <- p + XLabel()
