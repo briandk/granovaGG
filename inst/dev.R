@@ -29,6 +29,4 @@ installGranovaDev <- function() {
 removeCurrentVersionOfGranova()
 installGranovaDev()
 library(granova)
-pdf(file = "../tests/withExpandEquals0.1Argument.pdf", onefile = TRUE)
 demo(granova.1w.ggplot)
-dev.off()
