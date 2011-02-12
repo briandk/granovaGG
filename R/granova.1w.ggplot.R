@@ -562,7 +562,7 @@ MSbetweenSquare <- function() {
               ymin   = ymin,
               ymax   = ymax,
               fill   = factor(paste("MS-between")),
-              color  = factor(paste("MS-between"))
+              color  = NULL
             ), data  = owp$ms.between.square
     )
   )
@@ -577,7 +577,7 @@ MSwithinSquare <- function() {
               ymin   = ymin,
               ymax   = ymax,
               fill   = factor("MS-within"),
-              color  = factor("MS-within")
+              color  = NULL
             ), data  = owp$ms.within.square,
     )
   )
