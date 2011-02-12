@@ -302,10 +302,18 @@ AdaptVariablesFromGranovaComputations <- function() {
                        square.side.length        = sqrs,
                        sd.within                 = sdw
   )
-  result$residuals <- data.frame(residuals                 = residuals,
-                                 within.1.sd.of.grand.mean = abs(residuals - grandmean) < sdw
+  result$residuals <- data.frame(within.group.residuals    = residuals,
+                                 within.1.sd.of.grand.mean = ConvertBooleanValuesToResidualLabels(abs(residuals - grandmean) < sdw)
   )
   return(result)
+}
+
+ConvertBooleanValuesToResidualLabels <- function(boolean.vector) {
+  label.vector                          <- as.character(boolean.vector)
+  label.vector[label.vector == "TRUE"]  <- "Within ± 1 s.d."
+  label.vector[label.vector == "FALSE"] <- "Outside ± 1 s.d."
+  
+  return(label.vector)
 }
 
 GetSummary <- function(owp) {
@@ -412,8 +420,8 @@ GetColors <- function() {
     "Group Means",
     "SE-within",
     "Group Mean Line",
-    "TRUE",
-    "FALSE"
+    "Within ± 1 s.d.",
+    "Outside ± 1 s.d."
   )
   
   return(colors)
@@ -582,7 +590,7 @@ Residuals <- function(owp) {
     geom_rug(
            aes(
              x     = NULL, 
-             y     = residuals,
+             y     = within.group.residuals,
              color = factor(within.1.sd.of.grand.mean) 
            ),
            alpha = I(0.50),
