@@ -601,7 +601,7 @@ StandardErrorRibbonForRawData <- function(owp) {
                 x          = contrast,
                 ymin       = baseline,
                 ymax       = baseline + standard.deviation
-              ), alpha     = I(1/2),
+              ), alpha     = I(1/4),
                  data      = owp$standard.error.ribbon
     )
   )
