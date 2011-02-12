@@ -621,6 +621,19 @@ StandardErrorRibbon <- function(owp) {
   )
 }
 
+StandardErrorPosts <- function(owp) {
+  return(
+    geom_segment(
+               aes(
+                 x    = x,
+                 y    = y,
+                 xend = xend,
+                 yend = yend
+               ), data = owp$standard.error.posts
+    )
+  )
+}
+
 ColorScale <- function(owp) {
   return(scale_color_manual(value = owp$colors, name = ""))
 }
@@ -697,6 +710,7 @@ p <- p + MSbetweenSquare()
 p <- p + MSwithinSquare()
 p <- p + EffectSize(owp)
 p <- p + StandardErrorRibbon(owp)
+p <- p + StandardErrorPosts(owp)
 p <- p + ColorScale(owp)
 p <- p + FillScale()
 p <- p + XLabel()
