@@ -469,7 +469,7 @@ GrandMeanPoint <- function(owp) {
 ScaleX <- function(owp) {
   return(scale_x_continuous(
     breaks = (owp$params$aggregate.x.breaks),
-    labels = round(owp$params$aggregate.x.breaks, digits = 1),
+    labels = signif(owp$params$aggregate.x.breaks, digits = 2),
     limits = owp$params$x.range,
     expand = c(0.1, 0))
   )
@@ -479,7 +479,7 @@ ScaleY <- function(owp) {
   return(
     scale_y_continuous(
       breaks = (owp$params$aggregate.y.breaks),
-      labels = round(owp$params$aggregate.y.breaks, digits = 1),
+      labels = signif(owp$params$aggregate.y.breaks, digits = 2),
       limits = owp$params$y.range,
       expand = c(0.1, 0),
     )
