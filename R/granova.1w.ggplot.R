@@ -508,8 +508,8 @@ ScoresByGroupContrast <- function(owp) {
   return( 
     geom_point( 
       aes(x = contrast, y = score), 
-      size = I(3/2),
-      data = owp$data
+      size  = I(2),
+      data  = owp$data
     )
   )
 }
