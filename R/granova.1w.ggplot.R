@@ -369,7 +369,7 @@ GetColors <- function() {
    brewer.pal(n = 8, name = "Pastel1")[2],
    brewer.pal(n = 8, name = "Pastel1")[1],
    brewer.pal(n = 8, name = "Set1")[3],
-   brewer.pal(n = 8, name = "Set1")[1],
+   brewer.pal(n = 8, name = "Set1")[2],
    "steelblue",
    brewer.pal(n = 8, name = "Set1")[2],
    "darkblue",
