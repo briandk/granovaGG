@@ -13,25 +13,27 @@
 # granova.1w (data=data, group=grouping)
 
 granova.1w.ggplot <- function(data, 
-                              group      = NULL, 
-                              dg         = 2, 
-                              h.rng      = 1.25, 
-                              v.rng      = .2, 
-                              box        = FALSE, 
-                              jj         = 1, 
-                              kx         = 1, 
-                              px         = 1,
-                              size.line  = -2.5, 
-                              top.dot    = .15, 
-                              trmean     = FALSE, 
-                              resid      = FALSE,  
-                              dosqrs     = TRUE, 
-                              ident      = FALSE, 
-                              pt.lab     = NULL, 
-                              xlab       = NULL, 
-                              ylab       = NULL, 
-                              main       = NULL,
-                              plot.theme = NULL, ...
+                              group                    = NULL, 
+                              dg                       = 2, 
+                              h.rng                    = 1.25, 
+                              v.rng                    = .2, 
+                              box                      = FALSE, 
+                              jj                       = 1, 
+                              kx                       = 1, 
+                              px                       = 1,
+                              size.line                = -2.5, 
+                              top.dot                  = .15, 
+                              trmean                   = FALSE, 
+                              resid                    = FALSE,  
+                              dosqrs                   = TRUE, 
+                              ident                    = FALSE, 
+                              pt.lab                   = NULL, 
+                              xlab                     = NULL, 
+                              ylab                     = NULL, 
+                              main                     = NULL,
+                              plot.theme               = NULL, 
+                              produce.grayscale.output = FALSE, 
+                              ...
                              )
 
 {
@@ -400,14 +402,12 @@ GetSquareParameters <- function(owp) {
   )
 }
 
-GetColors <- function() {
-  # Color Brewer Palette: 166, 206, 227; 31, 120, 180; 178, 223, 138; 51, 160, 44; 
+GetFullColorValues <- function() {
   colors <- c(
    brewer.pal(n = 8, name = "Pastel1")[2],
    brewer.pal(n = 8, name = "Pastel1")[1],
    brewer.pal(n = 8, name = "Set1")[3],
    brewer.pal(n = 8, name = "Set1")[2],
-   "steelblue",
    brewer.pal(n = 8, name = "Set1")[2],
    "darkblue",
    "darkorange"
@@ -418,13 +418,27 @@ GetColors <- function() {
     "MS-within",
     "Grand Mean",
     "Group Means",
-    "SE-within",
     "Group Mean Line",
     "Within ± 1 s.d.",
     "Outside ± 1 s.d."
   )
   
   return(colors)
+  
+}
+
+GetGrayscaleColorValues <- function() {
+  
+}
+
+GetColors <- function() {
+  if (produce.grayscale.output) {
+    GetGrayscaleColorValues()
+  }
+  
+  else {
+    GetFullColorValues()
+  }
 }
 
 GetMSbetweenSquare <- function(owp) {
