@@ -367,8 +367,8 @@ GetColors <- function() {
   # Color Brewer Palette: 166, 206, 227; 31, 120, 180; 178, 223, 138; 51, 160, 44; 
   colors <- c(
    brewer.pal(n = 8, name = "Set1")[2],
-   brewer.pal(n = 8, name = "Set1")[3],
    brewer.pal(n = 8, name = "Set1")[1],
+   brewer.pal(n = 8, name = "Set1")[3],
    brewer.pal(n = 8, name = "Set1")[1],
    "steelblue",
    brewer.pal(n = 8, name = "Set1")[2],
@@ -378,9 +378,9 @@ GetColors <- function() {
   
   names(colors) <- c(
     "MS-between",
+    "MS-within",
     "Grand Mean",
     "Group Means",
-    "MS-within",
     "SE-within",
     "Group Mean Line",
     "TRUE",
