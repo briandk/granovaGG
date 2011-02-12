@@ -608,7 +608,7 @@ EffectSize <- function(owp) {
   )
 }
 
-StandardErrorRibbonForRawData <- function(owp) {
+StandardErrorRibbon <- function(owp) {
   return(
     geom_ribbon(
               aes(
@@ -696,7 +696,7 @@ p <- p + Residuals(owp)
 p <- p + MSbetweenSquare()
 p <- p + MSwithinSquare()
 p <- p + EffectSize(owp)
-p <- p + StandardErrorRibbonForRawData(owp)
+p <- p + StandardErrorRibbon(owp)
 p <- p + ColorScale(owp)
 p <- p + FillScale()
 p <- p + XLabel()
