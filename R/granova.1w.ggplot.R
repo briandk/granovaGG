@@ -625,11 +625,13 @@ StandardErrorPosts <- function(owp) {
   return(
     geom_segment(
                aes(
-                 x    = x,
-                 y    = y,
-                 xend = xend,
-                 yend = yend
-               ), data = owp$standard.error.posts
+                 x      = x,
+                 y      = y,
+                 xend   = xend,
+                 yend   = yend
+               ), color = "white",
+                  size  = I(0.1),
+                 data   = owp$standard.error.posts
     )
   )
 }
