@@ -403,8 +403,8 @@ GetSquareParameters <- function(owp) {
 
 GetColors <- function() {
   colors <- c(
-   brewer.pal(n = 8, name = "Pastel1")[2],
-   brewer.pal(n = 8, name = "Pastel1")[1],
+   brewer.pal(n = 8, name = "Paired")[1],
+   brewer.pal(n = 8, name = "Paired")[2],
    brewer.pal(n = 8, name = "Set1")[3],
    brewer.pal(n = 8, name = "Set1")[2],
    brewer.pal(n = 8, name = "Set1")[2],
