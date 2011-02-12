@@ -433,7 +433,7 @@ GetEffectSize <- function(owp) {
 GetStandardErrorRibbon <- function(owp) {
   return(
     data.frame(
-      baseline           = min(owp$data$score),
+      baseline           = min(owp$params$y.range),
       contrast           = owp$summary$contrast,
       standard.deviation = owp$summary$standard.deviation
     )
