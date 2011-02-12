@@ -431,11 +431,14 @@ GetEffectSize <- function(owp) {
 }
 
 GetStandardErrorRibbon <- function(owp) {
+  baseline           <- min(owp$params$y.range)
+  contrast           <- owp$summary$contrast 
+  standard.deviation <- owp$summary$standard.deviation
   return(
     data.frame(
-      baseline           = min(owp$params$y.range),
-      contrast           = owp$summary$contrast,
-      standard.deviation = owp$summary$standard.deviation
+      x    = contrast,
+      ymin = baseline,
+      ymax = baseline + standard.deviation/2
     )
   )
 }
@@ -598,9 +601,9 @@ StandardErrorRibbonForRawData <- function(owp) {
   return(
     geom_ribbon(
               aes(
-                x          = contrast,
-                ymin       = baseline,
-                ymax       = baseline + standard.deviation
+                x          = x,
+                ymin       = ymin,
+                ymax       = ymax
               ), alpha     = I(1/4),
                  data      = owp$standard.error.ribbon
     )
