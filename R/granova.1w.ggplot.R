@@ -356,8 +356,8 @@ GetGraphicalParameters <- function(owp) {
 GetSquareParameters <- function(owp) {
   return(
     list(
-      x.center    = min(owp$params$x.range) + 10 * (owp$params$percent.offset),
-      y.center    = max(owp$params$y.range) - 10 * (owp$params$percent.offset),
+      x.center    = max(owp$params$x.range) - 5 * (owp$params$percent.offset),
+      y.center    = min(owp$params$y.range) + 5 * (owp$params$percent.offset),
       side.length = 10 * owp$params$percent.offset
     )
   )
