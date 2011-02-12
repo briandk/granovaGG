@@ -427,17 +427,28 @@ GetEffectSize <- function(owp) {
   )
 }
 
+GetStandardErrorRibbon <- function(owp) {
+  return(
+    data.frame(
+      baseline           = min(owp$data$score),
+      contrast           = owp$summary$contrast,
+      standard.deviation = owp$summary$standard.deviation
+    )
+  )
+}
+
 # Pepare OWP object
-owp                   <- AdaptVariablesFromGranovaComputations()
-owp$summary           <- GetSummary(owp)
-owp$group.mean.line   <- GetGroupMeanLine(owp)
-owp$params            <- GetGraphicalParameters(owp)
-owp$squares           <- GetSquareParameters(owp)
-owp$colors            <- GetColors()
-owp$ms.between.square <- GetMSbetweenSquare(owp)
-owp$ms.within.square  <- GetMSwithinSquare(owp)
-owp$model.summary     <- GetModelSummary(owp)
-owp$effect.size       <- GetEffectSize(owp)
+owp                       <- AdaptVariablesFromGranovaComputations()
+owp$summary               <- GetSummary(owp)
+owp$group.mean.line       <- GetGroupMeanLine(owp)
+owp$params                <- GetGraphicalParameters(owp)
+owp$squares               <- GetSquareParameters(owp)
+owp$colors                <- GetColors()
+owp$ms.between.square     <- GetMSbetweenSquare(owp)
+owp$ms.within.square      <- GetMSwithinSquare(owp)
+owp$model.summary         <- GetModelSummary(owp)
+owp$effect.size           <- GetEffectSize(owp)
+owp$standard.error.ribbon <- GetStandardErrorRibbon(owp)
 
 ######## Plot Functions Below
 
@@ -584,10 +595,11 @@ StandardErrorRibbonForRawData <- function(owp) {
   return(
     geom_ribbon(
               aes(
-                x          = "contrast",
-                ymin       = "min(owp$data$score)",
-                ymax       = "min(owp$data$score) + owp$summary$standard.deviation"
-              ), alpha     = I(1/2)
+                x          = contrast,
+                ymin       = baseline,
+                ymax       = baseline + standard.deviation
+              ), alpha     = I(1/2),
+                 data      = owp$standard.error.ribbon
     )
   )
 }
