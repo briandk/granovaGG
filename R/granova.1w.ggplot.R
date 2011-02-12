@@ -443,16 +443,6 @@ GetStandardErrorRibbon <- function(owp) {
   )
 }
 
-GetStandardErrorPosts <- function(owp) {
-  return(
-    data.frame(
-      x    = owp$standard.error.ribbon$x,
-      y    = owp$standard.error.ribbon$ymin,
-      xend = owp$standard.error.ribbon$x,
-      yend = owp$standard.error.ribbon$ymax
-    )
-  )
-}
 # Pepare OWP object
 owp                       <- AdaptVariablesFromGranovaComputations()
 owp$summary               <- GetSummary(owp)
@@ -465,7 +455,6 @@ owp$ms.within.square      <- GetMSwithinSquare(owp)
 owp$model.summary         <- GetModelSummary(owp)
 owp$effect.size           <- GetEffectSize(owp)
 owp$standard.error.ribbon <- GetStandardErrorRibbon(owp)
-owp$standard.error.posts  <- GetStandardErrorPosts(owp)
 
 ######## Plot Functions Below
 
@@ -621,21 +610,6 @@ StandardErrorRibbon <- function(owp) {
   )
 }
 
-StandardErrorPosts <- function(owp) {
-  return(
-    geom_segment(
-               aes(
-                 x      = x,
-                 y      = y,
-                 xend   = xend,
-                 yend   = yend
-               ), color = "white",
-                  size  = I(0.1),
-                 data   = owp$standard.error.posts
-    )
-  )
-}
-
 ColorScale <- function(owp) {
   return(scale_color_manual(value = owp$colors, name = ""))
 }
@@ -712,7 +686,6 @@ p <- p + MSbetweenSquare()
 p <- p + MSwithinSquare()
 p <- p + EffectSize(owp)
 p <- p + StandardErrorRibbon(owp)
-p <- p + StandardErrorPosts(owp)
 p <- p + ColorScale(owp)
 p <- p + FillScale()
 p <- p + XLabel()
