@@ -336,9 +336,12 @@ GetGraphicalParameters <- function(owp) {
   .score.range.distance    <- (max(owp$data$score) - min(owp$data$score))
   .aggregate.y.breaks      <- c(owp$summary$group.mean, range(owp$data$score))
   .aggregate.x.breaks      <- c(owp$summary$contrast, 0) 
-  .y.range                 <- range(owp$data$score)
-  .x.range                 <- c(-.score.range.distance/2, .score.range.distance/2)
   .percent.offset          <- .score.range.distance / 100
+  .y.range                 <- c(
+                                min(owp$data$score) - (10 * .percent.offset),
+                                max(owp$data$score) + (10 * .percent.offset)
+                              )
+  .x.range                 <- c(-.score.range.distance/2, .score.range.distance/2)
   
   return(list(
            aggregate.x.breaks = .aggregate.x.breaks,
@@ -492,7 +495,7 @@ ScaleY <- function(owp) {
       breaks = (owp$params$aggregate.y.breaks),
       labels = signif(owp$params$aggregate.y.breaks, digits = 2),
       limits = owp$params$y.range,
-      expand = c(0.1, 0),
+      expand = c(0, 0),
     )
   )
 }
