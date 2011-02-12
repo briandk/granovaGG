@@ -11,6 +11,7 @@ theme_granova_1w <- function(base_size = 12) {
   theme_granova_1w$axis.text.y      <- theme_text(size = 8 , lineheight = 0.9, hjust = 1, colour = "grey20")
   theme_granova_1w$axis.title.x     <- theme_text(size = 10, vjust = 2)
   theme_granova_1w$axis.title.y     <- theme_text(size = 10, angle = 90, vjust = 0.3, hjust = 0.5)
+  theme_granova_1w$panel.border     <- theme_blank()
   theme_granova_1w$panel.grid.minor <- theme_line(colour = NA, size = 0.25)
   theme_granova_1w$panel.grid.major <- theme_line(colour = "grey90", size = 0.1)
   theme_granova_1w$plot.title       <- theme_text(face = "bold", size = 12, vjust = -1)
