@@ -20,6 +20,16 @@ theme_granova_1w <- function(base_size = 12) {
   theme_granova_1w$panel.grid.major <- theme_line(colour = "grey90", size = 0.1)
   theme_granova_1w$plot.title       <- theme_text(face = "bold", size = 10, vjust = -1)
   return(theme_granova_1w)
+}
+  
+theme_granova_ds <- function(base_size = 12) {
+  theme_granova_ds <- theme_granova_1w()
+  
+  theme_granova_ds$legend.key.size <- unit(1.2, "lines")
+  theme_granova_ds$legend.text     <- theme_text(size = base_size * 0.8)
+  
+  return(theme_granova_ds)
+}
   
   # structure(list(
   #   axis.line         = theme_blank(),
@@ -52,4 +62,4 @@ theme_granova_1w <- function(base_size = 12) {
   #   plot.title        = theme_text(size = base_size * 1.2),
   #   plot.margin       = unit(c(1, 1, 0.5, 0.5), "lines")
   # ), class            = "options")
-}
+
