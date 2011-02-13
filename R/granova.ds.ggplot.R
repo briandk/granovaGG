@@ -1,7 +1,7 @@
 granova.ds.ggplot <- function(data       = NULL, 
                               plot.title = "Dependent Sample Scatterplot",
                               conf.level = 0.95,
-                              plot.theme = theme_bw()
+                              plot.theme = NULL
                              ) 
 
 {
@@ -265,7 +265,13 @@ granova.ds.ggplot <- function(data       = NULL,
   }
   
   Theme <- function() {
-    return(plot.theme)
+    if (is.null(plot.theme)) {
+      return(theme_granova_1w())
+    }
+
+    else {
+      return(plot.theme)
+    }
   }
   
   ForceCoordinateAxesToBeEqual <- function() {
