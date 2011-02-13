@@ -266,7 +266,7 @@ granova.ds.ggplot <- function(data       = NULL,
   
   Theme <- function() {
     if (is.null(plot.theme)) {
-      return(theme_granova_1w())
+      return(theme_granova_ds())
     }
 
     else {
