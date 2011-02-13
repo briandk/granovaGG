@@ -737,100 +737,84 @@ BT
 /F1 1 Tf 2 Tr 5.98 0 0 5.98 250.03 222.04 Tm (l) Tj 0 Tr
 ET
 Q q 80.64 73.44 371.52 371.52 re W n
-Q q
 Q
 endstream
 endobj
 7 0 obj
-15323
+15319
+endobj
+3 0 obj
+<<
+/Type /Pages
+/Kids [
+5 0 R
+]
+/Count 1
+/MediaBox [0 0 504 504]
+>>
+endobj
+4 0 obj
+<<
+/ProcSet [/PDF /Text]
+/Font << /F1 9 0 R /F2 10 0 R /F3 11 0 R >>
+/ExtGState << >>
+>>
 endobj
 8 0 obj
 <<
-/Type /Page
-/Parent 3 0 R
-/Contents 9 0 R
-/Resources 4 0 R
+/Type /Encoding
+/BaseEncoding /WinAnsiEncoding
+/Differences [ 45/minus 96/quoteleft
+144/dotlessi /grave /acute /circumflex /tilde /macron /breve /dotaccent
+/dieresis /.notdef /ring /cedilla /.notdef /hungarumlaut /ogonek /caron /space]
 >>
 endobj
 9 0 obj
 <<
-/Length 10 0 R
+/Type /Font
+/Subtype /Type1
+/Name /F1
+/BaseFont /ZapfDingbats
 >>
-stream
-1 J 1 j q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-Q q
-BT
-0.000 0.000 0.000 rg
-/F3 1 Tf 10.00 0.00 -0.00 10.00 108.70 468.02 Tm [(Lead Le) 15 (vels in the Blood of Children)] TJ
-ET
-Q q
-Q q
-Q q
-BT
-0.200 0.200 0.200 rg
-/F2 1 Tf 8.00 0.00 -0.00 8.00 179.74 21.60 Tm (Exposed) Tj
-ET
-Q q
-Q q
-Q q
-BT
-0.200 0.200 0.200 rg
-/F2 1 Tf 0.00 8.00 -8.00 0.00 12.81 234.79 Tm (Control) Tj
-ET
-Q q
-Q q
-Q q
-Q q 20.14 422.85 25.09 0.00 re W n
-Q q
-Q q 20.14 422.85 25.09 0.00 re W n
-Q q
-Q q
-Q q
-Q q 20.14 97.61 25.09 0.00 re W n
-Q q
-Q q 20.14 72.52 25.09 25.09 re W n
-Q q
-Q q 20.14 72.52 25.09 0.00 re W n
-Q q
-Q q 45.23 422.85 0.00 0.00 re W n
-Q q
-Q q 45.23 422.85 0.00 0.00 re W n
-Q q
-Q q 45.23 97.61 0.00 325.24 re W n
-Q q
-Q q 45.23 97.61 0.00 0.00 re W n
-Q q
-Q q 45.23 72.52 0.00 25.09 re W n
-Q q
-Q q 45.23 72.52 0.00 0.00 re W n
-Q q
-Q q 45.23 422.85 325.24 0.00 re W n
-Q q
-Q q 45.23 422.85 325.24 0.00 re W n
+endobj
+10 0 obj <<
+/Type /Font
+/Subtype /Type1
+/Name /F2
+/BaseFont /Helvetica
+/Encoding 8 0 R
+>> endobj
+11 0 obj <<
+/Type /Font
+/Subtype /Type1
+/Name /F3
+/BaseFont /Helvetica-Bold
+/Encoding 8 0 R
+>> endobj
+xref
+0 12
+0000000000 65535 f 
+0000000021 00000 n 
+0000000164 00000 n 
+0000015686 00000 n 
+0000015769 00000 n 
+0000000213 00000 n 
+0000000293 00000 n 
+0000015665 00000 n 
+0000015873 00000 n 
+0000016130 00000 n 
+0000016213 00000 n 
+0000016310 00000 n 
+trailer
+<<
+/Size 12
+/Info 1 0 R
+/Root 2 0 R
+>>
+startxref
+16412
+%%EOF
+2.85 325.24 0.00 re W n
 Q q
 Q q 45.23 97.61 325.24 325.24 re W n
 Q q
