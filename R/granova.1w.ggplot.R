@@ -406,8 +406,8 @@ GetColors <- function() {
    brewer.pal(n = 8, name = "Paired")[1],
    brewer.pal(n = 8, name = "Paired")[2],
    brewer.pal(n = 8, name = "Set1")[3],
-   brewer.pal(n = 8, name = "Set1")[2],
-   brewer.pal(n = 8, name = "Set1")[2],
+   brewer.pal(n = 8, name = "Paired")[8],
+   brewer.pal(n = 8, name = "Paired")[2],
    "darkblue",
    "darkorange"
   )
@@ -577,7 +577,7 @@ GroupMeansByContrast <- function(owp) {
                x     = contrast, 
                y     = group.mean, 
                color = factor("Group Means")
-             ), 
+             ),
                size  = I(3/2),
                data  = owp$summary, 
     )
