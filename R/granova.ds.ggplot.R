@@ -106,7 +106,7 @@ granova.ds.ggplot <- function(data       = NULL,
   }
   
   GetColors <- function(dsp) {
-    return(list(treatment.line = "#542570",
+    return(list(treatment.line = brewer.pal(n = 8, name = "Paired")[2],
                 rugplot        = "black",
                 mean.line      = "#542570",
                 CIBand         = "#33A02C",
