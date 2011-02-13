@@ -592,7 +592,7 @@ Residuals <- function(owp) {
              y     = within.group.residuals,
              color = factor(within.1.sd.of.grand.mean) 
            ),
-           alpha = I(0.50),
+           alpha = I(1),
            data  = owp$residuals
     )
   )
