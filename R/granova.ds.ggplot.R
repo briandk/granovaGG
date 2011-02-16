@@ -146,7 +146,7 @@ granova.ds.ggplot <- function(data       = NULL,
                            slope     = slope,
                            color     = color
                           ),
-                       alpha = I(1/2),
+                       alpha = I(1),
                        size  = I(1),
                        data  = dsp$treatment.line
                       )
