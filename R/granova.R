@@ -23,7 +23,7 @@ GeomRightrug <- proto(Geom, {
 
   objname <- "rightrug"
   
-  desc <- "Marginal rug plots"
+  desc <- "Right Marginal rug plots"
   
   default_stat <- function(.) StatIdentity
   default_aes <- function(.) aes(colour="black", size=0.5, linetype=1, alpha = 1)
