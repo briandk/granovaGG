@@ -24,3 +24,17 @@ granova.1w(poison$RankRateSurvTime, group = poison$Group,
 ylab = "Ranked and Centered Survival Rates",
 main = "One-way ANOVA display, poison data (ignoring 2-way set-up)", 
 res = TRUE)
+
+#Now let's start to change the ranges
+granova.1w(poison$RankRateSurvTime, group = poison$Group, 
+ylab                                      = "Ranked and Centered Survival Rates",
+main                                      = "One-way ANOVA display, poison data (ignoring 2-way set-up)", 
+res                                       = TRUE,
+h.rng                                     = 20)
+
+granova.1w(poison$RankRateSurvTime, group = poison$Group, 
+ylab                                      = "Ranked and Centered Survival Rates",
+main                                      = "One-way ANOVA display, poison data (ignoring 2-way set-up)", 
+res                                       = TRUE,
+v.rng                                     = 1)
+

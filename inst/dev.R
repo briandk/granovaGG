@@ -29,6 +29,6 @@ installGranovaDev <- function() {
 removeCurrentVersionOfGranova()
 installGranovaDev()
 library(granova)
-pdf(file = "../tests/granova.1w.ggplot.pdf", onefile = TRUE)
-demo(granova.1w.ggplot)
+pdf(file = "../tests/granova.1w.pdf", onefile = TRUE)
+demo(granova.1w)
 dev.off()
