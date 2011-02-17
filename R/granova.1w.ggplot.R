@@ -303,8 +303,8 @@ AdaptVariablesFromGranovaComputations <- function() {
                        square.side.length        = sqrs,
                        sd.within                 = sdw
   )
-  result$residuals <- data.frame(within.group.residuals    = residuals,
-                                 within.1.sd.of.grand.mean = 
+  result$residuals <- data.frame(within.group.residuals                   = residuals,
+                                 within.1.sd.of.the.mean.of.all.residuals = 
                                    ConvertBooleanValuesToResidualLabels(abs(residuals - grandmean) < sdw)
   )
   
@@ -592,11 +592,11 @@ GroupMeansByContrast <- function(owp) {
 
 Residuals <- function(owp) {
   return(
-    geom_rightrug(
+    geom_rug(
            aes(
              x     = NULL, 
              y     = within.group.residuals,
-             color = factor(within.1.sd.of.grand.mean) 
+             color = factor(within.1.sd.of.the.mean.of.all.residuals) 
            ),
            alpha = I(1),
            data  = owp$residuals
