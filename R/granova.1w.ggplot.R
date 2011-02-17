@@ -304,8 +304,13 @@ AdaptVariablesFromGranovaComputations <- function() {
                        sd.within                 = sdw
   )
   result$residuals <- data.frame(within.group.residuals    = residuals,
-                                 within.1.sd.of.grand.mean = ConvertBooleanValuesToResidualLabels(abs(residuals - grandmean) < sdw)
+                                 within.1.sd.of.grand.mean = 
+                                   ConvertBooleanValuesToResidualLabels(abs(residuals - grandmean) < sdw)
   )
+  
+  result$params    <- list(horitzontal.range.expansion = h.rng,
+                           vertical.range.expansion    = v.rng
+                      )
   return(result)
 }
 
