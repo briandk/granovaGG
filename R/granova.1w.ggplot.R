@@ -350,12 +350,13 @@ GetGraphicalParameters <- function(owp) {
   .score.range.distance    <- (max(owp$data$score) - min(owp$data$score))
   .aggregate.y.breaks      <- c(owp$summary$group.mean, range(owp$data$score))
   .aggregate.x.breaks      <- c(owp$summary$contrast, 0) 
-  .percent.offset          <- .score.range.distance / 100
+  .vertical.percent          <- .score.range.distance / 100
+  .horizontal.percent      <- (max(owp$summary$contrast) - min(owp$summary$contrast)) / 100
   .y.range                 <- c(
-                                min(owp$data$score) - (10 * .percent.offset),
-                                max(owp$data$score) + (10 * .percent.offset)
+                                min(owp$data$score) - (10 * .vertical.percent),
+                                max(owp$data$score) + (10 * .vertical.percent)
                               )
-  .x.range                 <- c(-.score.range.distance/2 - (10 * .percent.offset), .score.range.distance/2 + (10 * .percent.offset))
+  .x.range                 <- c(-.score.range.distance/2 - (10 * .horizontal.percent), .score.range.distance/2 + (10 * .horizontal.percent))
   
   return(list(
            score.range.distance = .score.range.distance,
@@ -363,7 +364,8 @@ GetGraphicalParameters <- function(owp) {
            aggregate.y.breaks   = .aggregate.y.breaks,
            y.range              = .y.range,
            x.range              = .x.range,
-           percent.offset       = .percent.offset
+           vertical.percent     = .vertical.percent,
+           horizontal.percent   = .horizontal.percent
          )
   )
 }
@@ -382,7 +384,7 @@ GetSmallestDistanceBetweenAdjacentContrasts <- function(contrasts) {
 
 IsSmallestContrastDifferenceSmallerThanOnePercentOfDataResolution <- function(owp) {
   return(
-    abs(GetSmallestDistanceBetweenAdjacentContrasts(owp$summary$contrast)) < owp$params$percent.offset
+    abs(GetSmallestDistanceBetweenAdjacentContrasts(owp$summary$contrast)) < owp$params$horizontal.percent
   )
 }
 
@@ -392,16 +394,17 @@ GetDegreeOfJitter <- function(owp) {
   }
   
   else {
-    return(owp$params$percent.offset)
+    return(owp$params$horizontal.percent)
   }
 }
 
 GetSquareParameters <- function(owp) {
   return(
     list(
-      x.center    = max(owp$params$x.range) - 5 * (owp$params$percent.offset),
-      y.center    = min(owp$params$y.range) + 5 * (owp$params$percent.offset),
-      side.length = 10 * owp$params$percent.offset
+      x.center = max(owp$params$x.range) - 5 * (owp$params$horizontal.percent),
+      y.center = min(owp$params$y.range) + 5 * (owp$params$vertical.percent),
+      height   = 10 * owp$params$vertical.percent,
+      width    = 10 * owp$params$horizontal.percent
     )
   )
 }
@@ -434,10 +437,10 @@ GetColors <- function() {
 GetMSbetweenSquare <- function(owp) {
   return(
     data.frame(
-      xmin = owp$squares$x.center - (owp$squares$side.length / 2),
-      xmax = owp$squares$x.center + (owp$squares$side.length / 2),
-      ymin = owp$squares$y.center - (owp$squares$side.length / 2),
-      ymax = owp$squares$y.center + (owp$squares$side.length / 2)
+      xmin = owp$squares$x.center - (owp$squares$width / 2),
+      xmax = owp$squares$x.center + (owp$squares$width / 2),
+      ymin = owp$squares$y.center - (owp$squares$height / 2),
+      ymax = owp$squares$y.center + (owp$squares$height / 2)
     )
   )
 }
@@ -445,10 +448,10 @@ GetMSbetweenSquare <- function(owp) {
 GetMSwithinSquare <- function(owp) {
   return(
     data.frame(
-      xmin = owp$squares$x.center- (owp$squares$side.length / (2 * sqrt(owp$stats$F.statistic))),
-      xmax = owp$squares$x.center+ (owp$squares$side.length / (2 * sqrt(owp$stats$F.statistic))),
-      ymin = owp$squares$y.center- (owp$squares$side.length / (2 * sqrt(owp$stats$F.statistic))),
-      ymax = owp$squares$y.center+ (owp$squares$side.length / (2 * sqrt(owp$stats$F.statistic)))
+      xmin = owp$squares$x.center- (owp$squares$width / (2 * sqrt(owp$stats$F.statistic))),
+      xmax = owp$squares$x.center+ (owp$squares$width / (2 * sqrt(owp$stats$F.statistic))),
+      ymin = owp$squares$y.center- (owp$squares$height / (2 * sqrt(owp$stats$F.statistic))),
+      ymax = owp$squares$y.center+ (owp$squares$height / (2 * sqrt(owp$stats$F.statistic)))
     )
   )
 }
@@ -466,7 +469,7 @@ GetEffectSize <- function(owp) {
   return(
     data.frame(label = effect.size.rounded,
                x     = owp$squares$x.center,
-               y     = owp$ms.between.square$ymax + 2.5 * owp$params$percent.offset
+               y     = owp$ms.between.square$ymax + (2.5 * owp$params$vertical.percent)
     )
   )
 }
