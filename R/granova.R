@@ -24,7 +24,6 @@ theme_granova_ds <- function(base_size = 12) {
   return(theme_granova_ds)
 }
   
-require("ggplot2")
 GeomRugAlt <- proto(Geom, {
   draw <- function(., data, scales, coordinates, ...) {  
     rugs <- list()

@@ -603,7 +603,6 @@ GroupMeansByContrast <- function(owp) {
 }
 
 Residuals <- function(owp) {    
-  require("ggplot2")
   return(
     geom_rug_alt(
            aes(
