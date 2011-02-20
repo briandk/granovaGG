@@ -347,16 +347,18 @@ GetGroupMeanLine <- function(owp) {
 }
 
 GetGraphicalParameters <- function(owp) {
-  .score.range.distance    <- (max(owp$data$score) - min(owp$data$score))
+  .score.range.distance    <- max(owp$data$score) - min(owp$data$score)
+  .contrast.range.distance <- max(owp$summary$contrast) - min(owp$summary$contrast)
   .aggregate.y.breaks      <- c(owp$summary$group.mean, range(owp$data$score))
   .aggregate.x.breaks      <- c(owp$summary$contrast, 0) 
-  .vertical.percent          <- .score.range.distance / 100
-  .horizontal.percent      <- (max(owp$summary$contrast) - min(owp$summary$contrast)) / 100
+  .vertical.percent        <- .score.range.distance / 100
+  .horizontal.percent      <- .contrast.range.distance / 100
   .y.range                 <- c(
                                 min(owp$data$score) - (10 * .vertical.percent),
                                 max(owp$data$score) + (10 * .vertical.percent)
                               )
-  .x.range                 <- c(-.score.range.distance/2 - (10 * .horizontal.percent), .score.range.distance/2 + (10 * .horizontal.percent))
+  .x.range                 <- c(min(owp$summary$contrast) - (10 * .horizontal.percent), 
+                                max(owp$summary$contrast) + (10 * .horizontal.percent))
   
   return(list(
            score.range.distance = .score.range.distance,
