@@ -316,8 +316,8 @@ AdaptVariablesFromGranovaComputations <- function() {
 
 ConvertBooleanValuesToResidualLabels <- function(boolean.vector) {
   label.vector                          <- as.character(boolean.vector)
-  label.vector[label.vector == "TRUE"]  <- "Within ± 1 s.d."
-  label.vector[label.vector == "FALSE"] <- "Outside ± 1 s.d."
+  label.vector[label.vector == "TRUE"]  <- "Within +/- 1 s.d."
+  label.vector[label.vector == "FALSE"] <- "Outside +/- 1 s.d."
   
   return(label.vector)
 }
@@ -435,8 +435,8 @@ GetColors <- function() {
     "Grand Mean",
     "Group Means",
     "Group Mean Line",
-    "Within ± 1 s.d.",
-    "Outside ± 1 s.d."
+    "Within +/- 1 s.d.",
+    "Outside +/- 1 s.d."
   )
   
   return(colors)
