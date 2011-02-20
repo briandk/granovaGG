@@ -362,8 +362,8 @@ GetGraphicalParameters <- function(owp) {
                                 min(.expanded.score.range) - (10 * .vertical.percent),
                                 max(.expanded.score.range) + (10 * .vertical.percent)
                               )
-  .x.range                 <- c(min(.expanded.contrast.range) - (15 * .horizontal.percent), 
-                                max(.expanded.contrast.range) + (15 * .horizontal.percent))
+  .x.range                 <- c(min(.expanded.contrast.range) - (10 * .horizontal.percent), 
+                                max(.expanded.contrast.range) + (10 * .horizontal.percent))
   .aspect.ratio            <- .contrast.range.distance / .score.range.distance
   
   return(list(
