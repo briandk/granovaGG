@@ -410,8 +410,8 @@ GetDegreeOfJitter <- function(owp) {
 GetSquareParameters <- function(owp) {
   return(
     list(
-      x.center = min(owp$params$x.range) + (5 * (owp$params$horizontal.percent)),
-      y.center = max(owp$params$y.range) - (10 * (owp$params$vertical.percent)),
+      x.center = max(owp$params$x.range) - (5 * (owp$params$horizontal.percent)),
+      y.center = min(owp$params$y.range) + (5 * (owp$params$vertical.percent)),
       height   = 10 * owp$params$vertical.percent,
       width    = 10 * owp$params$horizontal.percent
     )
