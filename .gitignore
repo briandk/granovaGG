@@ -1,8 +1,5 @@
-testplots.pdf
-.Rhistory
 .DS_Store
-Scratchpad.R
-trailsTest.R
+.Rhistory
 .RData
-IgnoredCode
-tests/output
+tests/output/
+temp/
