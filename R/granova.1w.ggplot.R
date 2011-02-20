@@ -736,9 +736,6 @@ Title <- function() {
 }
 
 #Plot OWP object
-GeomRugRight   <- CreateRugRightGeom()
-geom_rug_right <- GeomRugRight$build_accessor()
-
 p <- InitializeGgplot()
 p <- p + GrandMeanLine(owp)
 p <- p + GrandMeanPoint(owp)
