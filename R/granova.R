@@ -31,7 +31,7 @@ GeomRugAlt <- proto(Geom, {
     if (!is.null(data$x)) {
       rugs$x <- with(data, segmentsGrob(
         x0 = unit(x, "native"), x1 = unit(x, "native"), 
-        y0 = unit(max(y) + 0.02, "npc"), y1 = unit(max(y) + 0.05, "npc"),
+        y0 = unit(1 - 0.03, "npc"), y1 = unit(1, "npc"),
         gp = gpar(col = alpha(colour, alpha), lty = linetype, lwd = size * .pt)
       ))
     }  
