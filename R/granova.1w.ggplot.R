@@ -543,7 +543,7 @@ ScaleX <- function(owp) {
     breaks = (owp$params$aggregate.x.breaks),
     labels = signif(owp$params$aggregate.x.breaks, digits = 2),
     limits = owp$params$x.range,
-    expand = c(0, 0))
+    expand = c(0.05, 0))
   )
 }
 
@@ -553,7 +553,7 @@ ScaleY <- function(owp) {
       breaks = (owp$params$aggregate.y.breaks),
       labels = signif(owp$params$aggregate.y.breaks, digits = 2),
       limits = owp$params$y.range,
-      expand = c(0, 0),
+      expand = c(0.05, 0),
     )
   )
 }
