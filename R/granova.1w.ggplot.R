@@ -602,9 +602,9 @@ GroupMeansByContrast <- function(owp) {
   )
 }
 
-Residuals <- function(owp) {
+Residuals <- function(owp) {  
   return(
-    geom_rug(
+    geom_rug_right(
            aes(
              x     = NULL, 
              y     = within.group.residuals,
@@ -736,6 +736,9 @@ Title <- function() {
 }
 
 #Plot OWP object
+GeomRugRight   <- CreateRugRightGeom()
+geom_rug_right <- GeomRugRight$build_accessor()
+
 p <- InitializeGgplot()
 p <- p + GrandMeanLine(owp)
 p <- p + GrandMeanPoint(owp)
