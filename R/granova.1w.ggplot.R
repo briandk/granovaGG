@@ -308,8 +308,8 @@ AdaptVariablesFromGranovaComputations <- function() {
                                    ConvertBooleanValuesToResidualLabels(abs(residuals - grandmean) < sdw)
   )
   
-  result$range.expansion <- list(horitzontal.range.expansion = h.rng,
-                                 vertical.range.expansion    = v.rng
+  result$range.expansion <- list(horizontal.range.expansion = h.rng,
+                                 vertical.range.expansion   = v.rng
                             )
   return(result)
 }
