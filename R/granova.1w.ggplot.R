@@ -349,8 +349,8 @@ GetGroupMeanLine <- function(owp) {
 GetGraphicalParameters <- function(owp) {
   .expanded.contrast.range <- range(owp$summary$contrast) * owp$range.expansion$horizontal.range.expansion
   .score.range             <- range(owp$data$score)
-  .expanded.score.range    <- c(  min(.score.range) - (owp$range$vertical.range.expansion * diff(.score.range)),
-                                  max(.score.range) + (owp$range$vertical.range.expansion * diff(.score.range))
+  .expanded.score.range    <- c(  min(.score.range) - (owp$range$vertical.range.expansion/2 * diff(.score.range)),
+                                  max(.score.range) + (owp$range$vertical.range.expansion/2 * diff(.score.range))
                               )
   .score.range.distance    <- max(.expanded.score.range) - min(.expanded.score.range)
   .contrast.range.distance <- max(.expanded.contrast.range) - min(.expanded.contrast.range)
@@ -359,8 +359,8 @@ GetGraphicalParameters <- function(owp) {
   .vertical.percent        <- .score.range.distance / 100
   .horizontal.percent      <- .contrast.range.distance / 100
   .y.range                 <- c(
-                                min(.expanded.score.range) - (15 * .vertical.percent),
-                                max(.expanded.score.range) + (15 * .vertical.percent)
+                                min(.expanded.score.range) - (10 * .vertical.percent),
+                                max(.expanded.score.range) + (10 * .vertical.percent)
                               )
   .x.range                 <- c(min(.expanded.contrast.range) - (15 * .horizontal.percent), 
                                 max(.expanded.contrast.range) + (15 * .horizontal.percent))
