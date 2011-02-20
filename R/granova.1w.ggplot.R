@@ -602,9 +602,10 @@ GroupMeansByContrast <- function(owp) {
   )
 }
 
-Residuals <- function(owp) {  
+Residuals <- function(owp) {    
+  require("ggplot2")
   return(
-    geom_rug_right(
+    geom_rug_alt(
            aes(
              x     = NULL, 
              y     = within.group.residuals,
