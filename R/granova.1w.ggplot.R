@@ -359,6 +359,7 @@ GetGraphicalParameters <- function(owp) {
                               )
   .x.range                 <- c(min(owp$summary$contrast) - (10 * .horizontal.percent), 
                                 max(owp$summary$contrast) + (10 * .horizontal.percent))
+  .aspect.ratio            <- .contrast.range.distance / .score.range.distance
   
   return(list(
            score.range.distance = .score.range.distance,
@@ -367,7 +368,8 @@ GetGraphicalParameters <- function(owp) {
            y.range              = .y.range,
            x.range              = .x.range,
            vertical.percent     = .vertical.percent,
-           horizontal.percent   = .horizontal.percent
+           horizontal.percent   = .horizontal.percent,
+           aspect.ratio         = .aspect.ratio
          )
   )
 }
@@ -709,7 +711,7 @@ Theme <- function() {
 }
 
 ForceCoordinateAxesToBeEqual <- function(owp) {
-  return(coord_fixed())
+  return(coord_fixed(ratio = owp$params$aspect.ratio))
 }
 
 Title <- function() {
