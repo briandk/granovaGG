@@ -502,14 +502,24 @@ GetWithinGroupStandardDeviation <- function(owp) {
   )
 }
 
+GetBackgroundForGroupSizesAndLabels <- function(owp) {
+  return(data.frame(ymin = max(owp$params$y.range) - 15 * owp$params$vertical.percent,
+                    ymax = max(owp$params$y.range),
+                    xmin = min(owp$params$x.range),
+                    xmax = max(owp$params$x.range)
+         )
+  )
+}
+
 GetGroupSizes  <- function(owp) {
   return(data.frame(
-           y     = max(owp$params$y.range) - 12 * owp$params$vertical.percent,
+           y     = max(owp$params$y.range) - 10 * owp$params$vertical.percent,
            x     = owp$summary$contrast,
            label = owp$summary$group.size,
-           size  = 2,
+           size  = 1.5,
            angle = 90,
-           color = factor("Group Sizes")
+           color = factor("Group Sizes"),
+           hjust = 1
          )
   )
   
@@ -520,9 +530,10 @@ GetGroupLabels <- function(owp) {
            y     = max(owp$params$y.range) - 5 * owp$params$vertical.percent,
            x     = owp$summary$contrast,
            label = owp$summary$group,
-           size  = 2,
+           size  = 1.5,
            angle = 90,
-           color = factor("Group Labels")
+           color = factor("Group Labels"),
+           hjust = 1
          )
   )
 }
@@ -539,6 +550,7 @@ owp$ms.within.square      <- GetMSwithinSquare(owp)
 owp$model.summary         <- GetModelSummary(owp)
 owp$effect.size           <- GetEffectSize(owp)
 owp$standard.deviation    <- GetWithinGroupStandardDeviation(owp)
+owp$label.background      <- GetBackgroundForGroupSizesAndLabels(owp)
 owp$group.labels          <- GetGroupLabels(owp)
 owp$group.sizes           <- GetGroupSizes(owp)
 
@@ -738,6 +750,19 @@ YLabel <- function() {
   }
 }
 
+BackgroundForGroupSizesAndLabels <- function(owp) {
+  return(geom_rect(
+                 aes(ymin  = ymin,
+                     ymax  = ymax,
+                     xmin  = xmin,
+                     xmax  = xmax
+                 ),
+                 fill  = "white",
+                 data  = owp$label.background
+         )
+  )
+}
+
 GroupSizes  <- function(owp) {
   return(geom_text(
            aes(x     = x,
@@ -746,7 +771,7 @@ GroupSizes  <- function(owp) {
                size  = size,
                angle = angle,
                color = color,
-               hjust = 1
+               hjust = hjust
            ),
          data  = owp$group.sizes
          )
@@ -761,7 +786,7 @@ GroupLabels <- function(owp) {
                size  = size,
                angle = angle,
                color = color,
-               hjust = 1
+               hjust = hjust
            ),
          data  = owp$group.labels
          )
@@ -820,6 +845,7 @@ p <- p + ColorScale(owp)
 p <- p + FillScale()
 p <- p + XLabel()
 p <- p + YLabel()
+p <- p + BackgroundForGroupSizesAndLabels(owp)
 p <- p + GroupSizes(owp)
 p <- p + GroupLabels(owp)
 p <- p + RotateXTicks()
