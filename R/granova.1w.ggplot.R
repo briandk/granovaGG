@@ -531,9 +531,7 @@ GetGroupLabels <- function(owp) {
            label = owp$summary$group,
            size  = 2,
            angle = 90,
-           color = factor("Group Labels"),
-           hjust = "left",
-           vjust = "top"
+           color = factor("Group Labels")
          )
   )
 }
@@ -786,10 +784,10 @@ GroupLabels <- function(owp) {
                label = label,
                size  = size,
                angle = angle,
-               color = color,
-               hjust = hjust,
-               vjust = vjust
+               color = color
            ),
+         hjust = "left",
+         vjust = "top",
          data  = owp$group.labels
          )
   )
