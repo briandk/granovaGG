@@ -827,6 +827,10 @@ Title <- function() {
   }
 }
 
+RemoveSizeElementFromLegend <- function() {
+  return(scale_size_continuous(legend = FALSE))
+}
+
 #Plot OWP object
 p <- InitializeGgplot()
 p <- p + GrandMeanLine(owp)
@@ -852,6 +856,7 @@ p <- p + RotateXTicks()
 p <- p + Theme()
 p <- p + ForceCoordinateAxesToBeEqual(owp)
 p <- p + Title()
+p <- p + RemoveSizeElementFromLegend()
 
 return(p)
 }
