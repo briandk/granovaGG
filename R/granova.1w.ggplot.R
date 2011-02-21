@@ -429,7 +429,8 @@ GetColors <- function() {
    brewer.pal(n = 8, name = "Paired")[2],
    "darkblue",
    "darkorange",
-   "grey50"
+   "grey50",
+   brewer.pal(n = 8, name = "Paired")[6]
   )
   
   names(colors) <- c(
@@ -440,7 +441,8 @@ GetColors <- function() {
     "Group Mean Line",
     "Within +/- 1 s.d.",
     "Outside +/- 1 s.d.",
-    "Group Labels"
+    "Group Labels",
+    "Group Sizes"
   )
   
   return(colors)
