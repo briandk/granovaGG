@@ -329,7 +329,8 @@ GetSummary <- function(owp) {
       group.mean         = mean(score),
       contrast           = unique(contrast),
       variance           = var(score),
-      standard.deviation = sd(score)
+      standard.deviation = sd(score),
+      maximum.score      = max(score)
     )
   )
 }
