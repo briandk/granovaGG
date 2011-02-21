@@ -516,10 +516,11 @@ GetGroupSizes  <- function(owp) {
            y     = max(owp$params$y.range) - 10 * owp$params$vertical.percent,
            x     = owp$summary$contrast,
            label = owp$summary$group.size,
-           size  = 1.5,
+           size  = 2,
            angle = 90,
            color = factor("Group Sizes"),
-           hjust = 1
+           hjust = 1,
+           vjust = "center"
          )
   )
   
@@ -530,10 +531,11 @@ GetGroupLabels <- function(owp) {
            y     = max(owp$params$y.range) - 5 * owp$params$vertical.percent,
            x     = owp$summary$contrast,
            label = owp$summary$group,
-           size  = 1.5,
+           size  = 2,
            angle = 90,
            color = factor("Group Labels"),
-           hjust = 1
+           hjust = "left",
+           vjust = "top"
          )
   )
 }
@@ -771,7 +773,8 @@ GroupSizes  <- function(owp) {
                size  = size,
                angle = angle,
                color = color,
-               hjust = hjust
+               hjust = hjust,
+               vjust = vjust
            ),
          data  = owp$group.sizes
          )
@@ -786,7 +789,8 @@ GroupLabels <- function(owp) {
                size  = size,
                angle = angle,
                color = color,
-               hjust = hjust
+               hjust = hjust,
+               vjust = vjust
            ),
          data  = owp$group.labels
          )
