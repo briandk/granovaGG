@@ -427,7 +427,8 @@ GetColors <- function() {
    brewer.pal(n = 8, name = "Paired")[8],
    brewer.pal(n = 8, name = "Paired")[2],
    "darkblue",
-   "darkorange"
+   "darkorange",
+   "grey50"
   )
   
   names(colors) <- c(
@@ -437,7 +438,8 @@ GetColors <- function() {
     "Group Means",
     "Group Mean Line",
     "Within +/- 1 s.d.",
-    "Outside +/- 1 s.d."
+    "Outside +/- 1 s.d.",
+    "Group Labels"
   )
   
   return(colors)
@@ -726,6 +728,7 @@ GroupLabels <- function(owp) {
                label = label,
                size  = size,
                angle = angle,
+               color = color
            ),
          data  = owp$group.labels
          )
