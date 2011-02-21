@@ -602,7 +602,7 @@ GroupMeansByContrast <- function(owp) {
   )
 }
 
-Residuals <- function(owp) {    
+Residuals <- function(owp) {      
   return(
     geom_rug_alt(
            aes(
