@@ -518,9 +518,7 @@ GetGroupSizes  <- function(owp) {
            label = owp$summary$group.size,
            size  = 2,
            angle = 90,
-           color = factor("Group Sizes"),
-           hjust = 1,
-           vjust = "center"
+           color = factor("Group Sizes")
          )
   )
   
@@ -772,10 +770,10 @@ GroupSizes  <- function(owp) {
                label = label,
                size  = size,
                angle = angle,
-               color = color,
-               hjust = hjust,
-               vjust = vjust
+               color = color
            ),
+         hjust = 1,
+         vjust = "center",
          data  = owp$group.sizes
          )
   )
