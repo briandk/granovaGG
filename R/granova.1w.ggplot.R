@@ -497,6 +497,18 @@ GetWithinGroupStandardDeviation <- function(owp) {
   )
 }
 
+GetGroupLabels <- function(owp) {
+  return(data.frame(
+           y     = max(owp$params$y.range) - 5 * owp$params$vertical.percent,
+           x     = owp$summary$contrast,
+           label = owp$summary$group,
+           size  = 2,
+           angle = 90,
+           color = factor("Group Labels")
+         )
+  )
+}
+
 # Pepare OWP object
 owp                       <- AdaptVariablesFromGranovaComputations()
 owp$summary               <- GetSummary(owp)
@@ -509,6 +521,7 @@ owp$ms.within.square      <- GetMSwithinSquare(owp)
 owp$model.summary         <- GetModelSummary(owp)
 owp$effect.size           <- GetEffectSize(owp)
 owp$standard.deviation    <- GetWithinGroupStandardDeviation(owp)
+owp$group.labels          <- GetGroupLabels(owp)
 
 ######## Plot Functions Below
 
@@ -708,12 +721,13 @@ YLabel <- function() {
 
 GroupLabels <- function(owp) {
   return(geom_text(
-           aes(x     = contrast,
-               y     = max(maximum.score),
-               label = group,
-               angle = 90),
-               size  = 3,
-               data  = owp$summary
+           aes(x     = x,
+               y     = y,
+               label = label,
+               size  = size,
+               angle = angle,
+           ),
+         data  = owp$group.labels
          )
   )
 }
