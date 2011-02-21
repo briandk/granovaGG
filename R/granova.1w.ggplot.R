@@ -757,7 +757,7 @@ BackgroundForGroupSizesAndLabels <- function(owp) {
                      xmin  = xmin,
                      xmax  = xmax
                  ),
-                 fill  = "white",
+                 fill  = "steelblue",
                  data  = owp$label.background
          )
   )
