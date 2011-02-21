@@ -706,6 +706,18 @@ YLabel <- function() {
   }
 }
 
+GroupLabels <- function(owp) {
+  return(geom_text(
+           aes(x     = contrast,
+               y     = max(maximum.score),
+               label = group,
+               angle = 90),
+               size  = 3,
+               data  = owp$summary
+         )
+  )
+}
+
 RotateXTicks <- function() {
   return(opts(axis.text.x = theme_text(angle = 90)))
 }
@@ -758,6 +770,7 @@ p <- p + ColorScale(owp)
 p <- p + FillScale()
 p <- p + XLabel()
 p <- p + YLabel()
+p <- p + GroupLabels(owp)
 p <- p + RotateXTicks()
 p <- p + Theme()
 p <- p + ForceCoordinateAxesToBeEqual(owp)
