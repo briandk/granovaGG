@@ -683,7 +683,11 @@ FillScale <- function() {
 
 XLabel <- function() {
   if (is.null(xlab)) {
-    return(xlab("Contrast coefficients based on group means and sizes"))
+    return(
+      xlab(
+        paste("Contrast coefficients based on group means and sizes", "\n", "(F = ", round(F.stat, digits = 2), ")", sep = "")
+      )
+    )
   }
   
   else {
@@ -725,7 +729,7 @@ Title <- function() {
   if (main == classic.granova.1w.title) {
     return(
         opts(
-          title = paste( "One-way ANOVA displaying ", ngroups, " groups ","(F = ", round(F.stat, digits = 2), ")", sep = "")
+          title = paste( "One-way ANOVA displaying ", ngroups, " groups ", sep = "")
         )
     )
   }
