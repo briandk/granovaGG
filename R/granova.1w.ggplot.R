@@ -330,7 +330,8 @@ GetSummary <- function(owp) {
       contrast           = unique(contrast),
       variance           = var(score),
       standard.deviation = sd(score),
-      maximum.score      = max(score)
+      maximum.score      = max(score),
+      group.size         = length(score)
     )
   )
 }
@@ -499,6 +500,19 @@ GetWithinGroupStandardDeviation <- function(owp) {
   )
 }
 
+GetGroupSizes  <- function(owp) {
+  return(data.frame(
+           y     = max(owp$params$y.range) - 12 * owp$params$vertical.percent,
+           x     = owp$summary$contrast,
+           label = owp$summary$group.size,
+           size  = 2,
+           angle = 90,
+           color = factor("Group Sizes")
+         )
+  )
+  
+}
+
 GetGroupLabels <- function(owp) {
   return(data.frame(
            y     = max(owp$params$y.range) - 5 * owp$params$vertical.percent,
@@ -524,6 +538,7 @@ owp$model.summary         <- GetModelSummary(owp)
 owp$effect.size           <- GetEffectSize(owp)
 owp$standard.deviation    <- GetWithinGroupStandardDeviation(owp)
 owp$group.labels          <- GetGroupLabels(owp)
+owp$group.sizes           <- GetGroupSizes(owp)
 
 ######## Plot Functions Below
 
@@ -721,6 +736,21 @@ YLabel <- function() {
   }
 }
 
+GroupSizes  <- function(owp) {
+  return(geom_text(
+           aes(x     = x,
+               y     = y,
+               label = label,
+               size  = size,
+               angle = angle,
+               color = color,
+               hjust = 1
+           ),
+         data  = owp$group.sizes
+         )
+  )
+}
+
 GroupLabels <- function(owp) {
   return(geom_text(
            aes(x     = x,
@@ -788,6 +818,7 @@ p <- p + ColorScale(owp)
 p <- p + FillScale()
 p <- p + XLabel()
 p <- p + YLabel()
+p <- p + GroupSizes(owp)
 p <- p + GroupLabels(owp)
 p <- p + RotateXTicks()
 p <- p + Theme()
