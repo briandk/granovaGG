@@ -728,7 +728,8 @@ GroupLabels <- function(owp) {
                label = label,
                size  = size,
                angle = angle,
-               color = color
+               color = color,
+               hjust = 1
            ),
          data  = owp$group.labels
          )
