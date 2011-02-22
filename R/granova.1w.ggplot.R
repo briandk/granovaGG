@@ -31,7 +31,7 @@ granova.1w.ggplot <- function(data,
                               xlab                     = NULL, 
                               ylab                     = NULL, 
                               main                     = NULL,
-                              plot.theme               = NULL, 
+                              plot.theme               = "theme_granova_1w", 
                               ...
                              )
 
@@ -798,13 +798,9 @@ RotateXTicks <- function() {
 }
 
 Theme <- function() {
-  if (is.null(plot.theme)) {
-    return(theme_granova_1w())
-  }
-  
-  else {
-    return(plot.theme)
-  }
+    return(
+      eval(call(plot.theme))
+    )
 }
 
 ForceCoordinateAxesToBeEqual <- function(owp) {
