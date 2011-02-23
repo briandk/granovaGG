@@ -430,10 +430,21 @@ GetMSbetweenColor <- function(owp) {
   }
 }
 
+GetMSwithinColor <- function(owp) {
+  if (owp$stats$F.statistic > 1) {
+    return(brewer.pal(n = 8, name = "Paired")[2])
+  }
+  
+  else {
+    return(brewer.pal(n = 8, name = "Paired")[5])
+  }
+}
+
+
 GetColors <- function() {
   colors <- c(
    GetMSbetweenColor(owp),
-   brewer.pal(n = 8, name = "Paired")[2],
+   GetMSwithinColor(owp),
    brewer.pal(n = 8, name = "Set1")[3],
    brewer.pal(n = 8, name = "Paired")[8],
    brewer.pal(n = 8, name = "Paired")[2],
