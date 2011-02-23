@@ -471,6 +471,27 @@ GetMSwithinSquare <- function(owp) {
   )
 }
 
+GetOuterSquare <- function(owp) {
+  if (owp$stats$F.statistic > 1) {
+    return("GetMSbetweenSquare(owp)")
+  }
+  
+  if (owp$stats$F.statistic < 1) {
+    return("GetMSwithinSquare(owp)")
+  }
+}
+
+GetInnerSquare <- function(owp) {
+  if (owp$stats$F.statistic < 1) {
+    return("GetMSbetweenSquare(owp)")
+  }
+  
+  if (owp$stats$F.statistic >  1) {
+    return("GetMSwithinSquare(owp)")
+  }
+  
+}
+
 GetModelSummary <- function(owp) {
   model <- lm(score ~ group, data = owp$data)
   
@@ -484,7 +505,7 @@ GetEffectSize <- function(owp) {
   return(
     data.frame(label = effect.size.rounded,
                x     = owp$squares$x.center,
-               y     = owp$ms.between.square$ymax + (2.5 * owp$params$vertical.percent)
+               y     = owp$outer.square$ymax + (2.5 * owp$params$vertical.percent)
     )
   )
 }
@@ -543,8 +564,8 @@ owp$group.mean.line       <- GetGroupMeanLine(owp)
 owp$params                <- GetGraphicalParameters(owp)
 owp$squares               <- GetSquareParameters(owp)
 owp$colors                <- GetColors()
-owp$ms.between.square     <- GetMSbetweenSquare(owp)
-owp$ms.within.square      <- GetMSwithinSquare(owp)
+owp$outer.square          <- GetOuterSquare(owp)
+owp$inner.square          <- GetInnerSquare(owp)
 owp$model.summary         <- GetModelSummary(owp)
 owp$effect.size           <- GetEffectSize(owp)
 owp$standard.deviation    <- GetWithinGroupStandardDeviation(owp)
@@ -659,7 +680,7 @@ Residuals <- function(owp) {
   )
 }
 
-MSbetweenSquare <- function() {
+OuterSquare <- function() {
   return(
     geom_rect(
             aes(
@@ -669,12 +690,12 @@ MSbetweenSquare <- function() {
               ymax   = ymax,
               fill   = factor(paste("MS-between")),
               color  = NULL
-            ), data  = owp$ms.between.square
+            ), data  = owp$outer.square
     )
   )
 }
 
-MSwithinSquare <- function() {
+InnerSquare <- function() {
   return(
     geom_rect(
             aes(
@@ -684,7 +705,7 @@ MSwithinSquare <- function() {
               ymax   = ymax,
               fill   = factor("MS-within"),
               color  = NULL
-            ), data  = owp$ms.within.square,
+            ), data  = owp$inner.square,
     )
   )
 }
@@ -837,8 +858,8 @@ p <- p + JitteredScoresByGroupContrast(owp)
 p <- p + GroupMeanLine(owp)
 p <- p + GroupMeansByContrast(owp)
 p <- p + Residuals(owp)
-p <- p + MSbetweenSquare()
-p <- p + MSwithinSquare()
+p <- p + OuterSquare()
+p <- p + InnerSquare()
 p <- p + EffectSize(owp)
 p <- p + WithinGroupStandardDeviation(owp)
 p <- p + ColorScale(owp)
@@ -854,5 +875,5 @@ p <- p + ForceCoordinateAxesToBeEqual(owp)
 p <- p + Title()
 p <- p + RemoveSizeElementFromLegend()
 
-return(p)
+return(str(owp))
 }
