@@ -420,9 +420,19 @@ GetSquareParameters <- function(owp) {
   )
 }
 
+GetMSbetweenColor <- function(owp) {
+  if (owp$stats$F.statistic > 1) {
+    return(brewer.pal(n = 8, name = "Paired")[1])
+  }
+  
+  else {
+    return(brewer.pal(n = 8, name = "Paired")[6])
+  }
+}
+
 GetColors <- function() {
   colors <- c(
-   brewer.pal(n = 8, name = "Paired")[1],
+   GetMSbetweenColor(owp),
    brewer.pal(n = 8, name = "Paired")[2],
    brewer.pal(n = 8, name = "Set1")[3],
    brewer.pal(n = 8, name = "Paired")[8],
