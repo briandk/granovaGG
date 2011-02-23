@@ -449,45 +449,59 @@ GetColors <- function() {
   
 }
 
-GetMSbetweenSquare <- function(owp) {
+GetAsTheOuterSquare <- function(owp, name.of.square) {
   return(
     data.frame(
-      xmin = owp$squares$x.center - (owp$squares$width / 2),
-      xmax = owp$squares$x.center + (owp$squares$width / 2),
-      ymin = owp$squares$y.center - (owp$squares$height / 2),
-      ymax = owp$squares$y.center + (owp$squares$height / 2)
+      xmin  = owp$squares$x.center - (owp$squares$width / 2),
+      xmax  = owp$squares$x.center + (owp$squares$width / 2),
+      ymin  = owp$squares$y.center - (owp$squares$height / 2),
+      ymax  = owp$squares$y.center + (owp$squares$height / 2),
+      fill  = factor(paste(name.of.square))
     )
   )
 }
 
-GetMSwithinSquare <- function(owp) {
+GetMSbetweenAsTheInnerSquare <- function(owp) {
   return(
     data.frame(
-      xmin = owp$squares$x.center- (owp$squares$width / (2 * sqrt(owp$stats$F.statistic))),
-      xmax = owp$squares$x.center+ (owp$squares$width / (2 * sqrt(owp$stats$F.statistic))),
-      ymin = owp$squares$y.center- (owp$squares$height / (2 * sqrt(owp$stats$F.statistic))),
-      ymax = owp$squares$y.center+ (owp$squares$height / (2 * sqrt(owp$stats$F.statistic)))
+      xmin = owp$squares$x.center - (owp$squares$width  / (2 * sqrt(1 / owp$stats$F.statistic))),
+      xmax = owp$squares$x.center + (owp$squares$width  / (2 * sqrt(1 / owp$stats$F.statistic))),
+      ymin = owp$squares$y.center - (owp$squares$height / (2 * sqrt(1 / owp$stats$F.statistic))),
+      ymax = owp$squares$y.center + (owp$squares$height / (2 * sqrt(1 / owp$stats$F.statistic))),
+      fill = factor(paste("MS-between"))
+    )
+  )
+}
+
+GetMSwithinAsTheInnerSquare <- function(owp) {
+  return(
+    data.frame(
+      xmin = owp$squares$x.center - (owp$squares$width  / (2 * sqrt(owp$stats$F.statistic))),
+      xmax = owp$squares$x.center + (owp$squares$width  / (2 * sqrt(owp$stats$F.statistic))),
+      ymin = owp$squares$y.center - (owp$squares$height / (2 * sqrt(owp$stats$F.statistic))),
+      ymax = owp$squares$y.center + (owp$squares$height / (2 * sqrt(owp$stats$F.statistic))),
+      fill = factor(paste("MS-within"))
     )
   )
 }
 
 GetOuterSquare <- function(owp) {
   if (owp$stats$F.statistic > 1) {
-    return("GetMSbetweenSquare(owp)")
+    return(GetAsTheOuterSquare(owp, "MS-between"))
   }
   
-  if (owp$stats$F.statistic < 1) {
-    return("GetMSwithinSquare(owp)")
+  else {
+    return(GetAsTheOuterSquare(owp, "MS-within"))
   }
 }
 
 GetInnerSquare <- function(owp) {
-  if (owp$stats$F.statistic < 1) {
-    return("GetMSbetweenSquare(owp)")
+  if (owp$stats$F.statistic > 1) {
+    return(GetMSwithinAsTheInnerSquare(owp))
   }
   
-  if (owp$stats$F.statistic >  1) {
-    return("GetMSwithinSquare(owp)")
+  else {
+    return(GetMSbetweenAsTheInnerSquare(owp))
   }
   
 }
@@ -688,7 +702,7 @@ OuterSquare <- function() {
               xmax   = xmax,
               ymin   = ymin,
               ymax   = ymax,
-              fill   = factor(paste("MS-between")),
+              fill   = fill,
               color  = NULL
             ), data  = owp$outer.square
     )
@@ -703,7 +717,7 @@ InnerSquare <- function() {
               xmax   = xmax,
               ymin   = ymin,
               ymax   = ymax,
-              fill   = factor("MS-within"),
+              fill   = fill,
               color  = NULL
             ), data  = owp$inner.square,
     )
@@ -875,5 +889,5 @@ p <- p + ForceCoordinateAxesToBeEqual(owp)
 p <- p + Title()
 p <- p + RemoveSizeElementFromLegend()
 
-return(str(owp))
+return(p)
 }
