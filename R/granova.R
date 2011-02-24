@@ -1,7 +1,7 @@
 theme_granova_1w <- function(base_size = 12) {
   theme_granova_1w                  <- theme_bw()
-  theme_granova_1w$axis.text.x      <- theme_text(size = 8 , lineheight = 0.9, vjust = 1, angle = 90, colour = "grey50")
-  theme_granova_1w$axis.text.y      <- theme_text(size = 8 , lineheight = 0.9, hjust = 1, colour = "grey50")
+  theme_granova_1w$axis.text.x      <- theme_text(size = 8, lineheight = 0.9, vjust = 1, angle = 90, colour = "grey50")
+  theme_granova_1w$axis.text.y      <- theme_text(size = 8, lineheight = 0.9, hjust = 1, colour = "grey50")
   theme_granova_1w$axis.title.x     <- theme_text(size = 8, vjust = 2, colour = "grey20")
   theme_granova_1w$axis.title.y     <- theme_text(size = 8, angle = 90, vjust = 0.3, hjust = 0.5, colour = "grey20")
   
