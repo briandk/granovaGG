@@ -31,7 +31,7 @@ granova.1w.ggplot <- function(data,
                               xlab                     = NULL, 
                               ylab                     = NULL, 
                               main                     = NULL,
-                              plot.theme               = "theme_granova_1w", 
+                              plot.theme               = "theme_granova_1w_gray", 
                               ...
                              )
 
