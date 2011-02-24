@@ -15,6 +15,23 @@ theme_granova_1w <- function(base_size = 12) {
   return(theme_granova_1w)
 }
   
+theme_granova_1w_gray <- function(base_size = 12) {
+  theme_granova_1w_gray             <- theme_gray()
+  theme_granova_1w_gray$axis.text.x      <- theme_text(size = 8, lineheight = 0.9, vjust = 1, angle = 90, colour = "grey50")
+  theme_granova_1w_gray$axis.text.y      <- theme_text(size = 8, lineheight = 0.9, hjust = 1, colour = "grey50")
+  theme_granova_1w_gray$axis.title.x     <- theme_text(size = 8, vjust = 2, colour = "grey20")
+  theme_granova_1w_gray$axis.title.y     <- theme_text(size = 8, angle = 90, vjust = 0.3, hjust = 0.5, colour = "grey20")
+  
+  theme_granova_1w_gray$legend.text      <- theme_text(size = 8)
+  theme_granova_1w_gray$legend.key.size  <- unit(0.5, "lines")
+  
+  theme_granova_1w_gray$panel.border     <- theme_blank()
+  theme_granova_1w_gray$panel.grid.minor <- theme_line(colour = NA, size = 0.25)
+  theme_granova_1w_gray$panel.grid.major <- theme_line(colour = "white", size = 0.1)
+  theme_granova_1w_gray$plot.title       <- theme_text(face = "bold", size = 10, vjust = -1)
+  return(theme_granova_1w_gray)
+}
+
 theme_granova_ds <- function(base_size = 12) {
   theme_granova_ds <- theme_granova_1w()
   
