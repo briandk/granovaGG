@@ -23,7 +23,7 @@ installGranovaDev <- function() {
   install.packages(pkgs    = '../../granova/', 
                    repos   = NULL, 
                    type    = 'source'
-                  )
+  )
 }
 
 removeCurrentVersionOfGranova()
