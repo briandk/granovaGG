@@ -695,7 +695,7 @@ GroupMeansByContrast <- function(owp) {
                y     = group.mean, 
                fill  = factor("Group Means")
              ),
-               size  = I(3/2),
+               size  = I(2),
                shape = 21,
                color = "black",
                data  = owp$summary, 
