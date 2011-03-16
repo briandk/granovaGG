@@ -773,7 +773,10 @@ WithinGroupStandardDeviation <- function(owp) {
 }
 
 ColorScale <- function(owp) {
-  return(scale_color_manual(value = owp$colors, name = ""))
+  return(
+    scale_color_manual(
+      value = owp$colors, name = "")
+  )
 }
 
 FillScale <- function() {
