@@ -693,9 +693,11 @@ GroupMeansByContrast <- function(owp) {
              aes(
                x     = contrast, 
                y     = group.mean, 
-               color = factor("Group Means")
+               fill  = factor("Group Means")
              ),
                size  = I(3/2),
+               shape = 21,
+               color = "black",
                data  = owp$summary, 
     )
   )
