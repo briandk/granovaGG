@@ -32,5 +32,5 @@ library(granova)
 
 # trace(granova.1w.ggplot, browser)
 # pdf(file = "../temp/granova.1w.ggplot.pdf", onefile = TRUE)
-source(file = "../tests/granova-1w-comparison.R", chdir = TRUE, echo = TRUE)
+demo(granova.1w.ggplot)
 #dev.off()
