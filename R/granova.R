@@ -39,10 +39,6 @@ GeomRugAlt <- proto(Geom, {
 
 geom_rug_alt <- GeomRugAlt$build_accessor()
 
-IsClassicTitleEqualToUserSuppliedTitle <- function(classic.granova.title = NULL) {
-  return(main == classic.granova.title)
-}
-
 # theme_gray <- function(base_size = 12) {
 #   structure(list(
 #     axis.line         = theme_blank(),
