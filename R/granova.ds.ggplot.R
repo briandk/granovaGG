@@ -1,5 +1,5 @@
 granova.ds.ggplot <- function(data       = NULL, 
-                              plot.title = "Dependent Sample Scatterplot",
+                              main       = NULL,
                               conf.level = 0.95,
                               plot.theme = NULL
                              ) 
