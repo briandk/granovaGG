@@ -21,6 +21,7 @@ granova.1w.ggplot(mtcars$hp,
   group      = mtcars$gear, 
   resid      = TRUE, 
   h.rng      = 20,
-  plot.theme = "theme_granova_1w"
+  plot.theme = "theme_granova_1w",
+  main       = "test"
 )
 
