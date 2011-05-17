@@ -171,7 +171,7 @@ rng.sts <- range(stats[, 2])
 
 ammt <- (jj/200) * diff(rng.sts)
 stats.vcj<-jitter(stats.vc, am = ammt)
-if(is.null(main))main <- paste('One-way ANOVA displaying',ngroups,'groups')
+# if(is.null(main))main <- paste('One-way ANOVA displaying',ngroups,'groups')
 
 
 #! plot(stats.vcj, yr, pch = 16, cex = pt.size, xlab = "", ylab = "", xlim = rng.h, ylim = rng.vv, axes = F, main = main)
@@ -868,20 +868,30 @@ ForceCoordinateAxesToBeEqual <- function(owp) {
   return(coord_fixed(ratio = owp$params$aspect.ratio))
 }
 
-Title <- function() {
-  classic.granova.1w.title <- paste("One-way ANOVA displaying",ngroups,"groups")
-  
-  if (main == classic.granova.1w.title) {
-    return(
-        opts(
-          title = paste( "One-way ANOVA displaying ", ngroups, " groups ", sep = "")
-        )
-    )
+GetClassicTitle <- function () {
+  return(
+    paste("One-way ANOVA displaying",ngroups,"groups")
+  )
+}
+
+IsClassicTitleEqualToUserSuppliedTitle <- function(classic.granova.title = NULL) {
+  return(main == classic.granova.title)
+}
+
+GetAppropriatePlotTitle <- function() {  
+  if (IsClassicTitleEqualToUserSuppliedTitle(GetClassicTitle())) {
+    return(GetClassicTitle())
   }
   
   else {
     return(opts(title = main))
   }
+}
+
+PlotTitle <- function () {
+  return(
+    opts(title = GetAppropriatePlotTitle())
+  )
 }
 
 RemoveSizeElementFromLegend <- function() {
@@ -912,7 +922,7 @@ p <- p + GroupLabels(owp)
 p <- p + RotateXTicks()
 p <- p + Theme()
 p <- p + ForceCoordinateAxesToBeEqual(owp)
-p <- p + Title()
+p <- p + PlotTitle()
 p <- p + RemoveSizeElementFromLegend()
 
 return(p)

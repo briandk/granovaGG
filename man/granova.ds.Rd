@@ -61,7 +61,7 @@ granova.ds(data, revc = FALSE, sw = 0.4, ne = 0.5, ptpch=c(19,3),
 }
 \references{
 Exploratory Plots for Paired Data, Rosenbaum P., The American Statistician, May 1989, vol. 43, no. 2, pp. 108-9.
-	
+  
 Enhancing Dependent Sample Analyses with Graphics, Pruzek, R. and Helmreich, J., Journal of Statistics Education, March 2009, Vol. 17, no. 1.
   
 http://www.amstat.org/publications/jse/v17n1/helmreich.pdf
@@ -77,12 +77,12 @@ James E. Helmreich \email{James.Helmreich@Marist.edu}
 data(anorexia.sub)
 
 granova.ds(anorexia.sub, revc = TRUE, 
-	main = "Assessment Plot for weights to assess Family Therapy treatment 
-	for Anorexia Patients")
+  main = "Assessment Plot for weights to assess Family Therapy treatment 
+  for Anorexia Patients")
 # If labels for four unusual points at lower left are desired:
 granova.ds(anorexia.sub, revc = TRUE, 
-	main = "Assessment Plot for weights to assess Family Therapy treatment 
-	for Anorexia Patients", ident = TRUE)
+  main = "Assessment Plot for weights to assess Family Therapy treatment 
+  for Anorexia Patients", ident = TRUE)
 
 
 ## See discussion of blood lead graphic in EDSAG, J. Statistics Ed.

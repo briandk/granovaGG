@@ -71,7 +71,7 @@ James E. Helmreich \email{James.Helmreich@Marist.edu}
  
 \seealso{\code{\link{granova.2w}}, \code{\link{granova.contr}}, \code{\link{granova.ds}} }
 \examples{
-	
+  
 data(arousal)
 #Drug A
 granova.1w(arousal[,1:2], h.rng = 1.6, v.rng = 0.5, top.dot = .35)

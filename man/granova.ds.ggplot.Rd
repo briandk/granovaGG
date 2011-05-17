@@ -56,7 +56,7 @@ granova.ds.ggplot(data, plotTitle = "Dependent Sample Scatterplot", conf.level =
 }
 \references{
 Exploratory Plots for Paired Data, Rosenbaum P., The American Statistician, May 1989, vol. 43, no. 2, pp. 108-9.
-	
+  
 Enhancing Dependent Sample Analyses with Graphics, Pruzek, R. and Helmreich, J., Journal of Statistics Education, March 2009, Vol. 17, no. 1.
   
 http://www.amstat.org/publications/jse/v17n1/helmreich.pdf

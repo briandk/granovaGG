@@ -103,8 +103,8 @@ offset<-(((100/length(mnsA))^(1/3)) * 0.02)
 scatter3d(facA.mn.cntrst, yy, facB.mn.cntrst, xlab = colnames(data.A.B)[2], ylab = colnames(data.A.B[1]), 
     zlab = colnames(data.A.B)[3], group = group.factor, fogtype='exp2',fov=55, surface = TRUE, fit = fit, surface.col = c(4,8), ...)
 if(ident){
-	if(is.null(offset)){offset<-((100/length(facA.mn.cntrst))^(1/3)) * 0.02}
-	identify3d(facA.mn.cntrst, yy, facB.mn.cntrst, labels = c(rownames(data.A.B), aaa), offset = offset)}
+  if(is.null(offset)){offset<-((100/length(facA.mn.cntrst))^(1/3)) * 0.02}
+  identify3d(facA.mn.cntrst, yy, facB.mn.cntrst, labels = c(rownames(data.A.B), aaa), offset = offset)}
 
 return(out)
 }

@@ -6,7 +6,7 @@
 }
 \usage{
 granova.contr(data, contrasts, ylab = "Outcome (response)", 
-	xlab = NULL, jj = 1)
+  xlab = NULL, jj = 1)
 }
 \arguments{
   \item{data}{Vector of scores for all equally sized groups, or a data.fame or matrix where each column represents a group.}
@@ -57,12 +57,12 @@ James E. Helmreich \email{James.Helmreich@Marist.edu}
 }
 \seealso{ \code{\link{granova.1w}}, \code{\link{granova.2w}}, \code{\link{granova.ds}} }
 \examples{
-data(arousal)	
+data(arousal)  
 contrasts22 <- data.frame( c(-.5,-.5,.5,.5), 
-	c(-.5,.5,-.5,.5), c(.5,-.5,-.5,.5) )
+  c(-.5,.5,-.5,.5), c(.5,-.5,-.5,.5) )
 names(contrasts22) <- c("Drug.A", "Drug.B", "Drug.A.B")
 granova.contr(arousal, contrasts = contrasts22)
-	
+  
 data(rat)
 dat6 <- matrix(c(1, 1, 1, -1, -1, -1, -1, 1, 0, -1, 1, 0, 1, 1, -2, 
     1, 1, -2, -1, 1, 0, 1, -1, 0, 1, 1, -2, -1, -1, 2), ncol = 5)
@@ -76,7 +76,7 @@ granova.contr(rat[,1],contrasts = contr.poly(6))
 #based on random data 
 data.random <- rt(64, 5)
 granova.contr(data.random, contrasts = contr.helmert(8), 
-	ylab = "Random Data")
+  ylab = "Random Data")
 }
 \keyword{hplot}
 
