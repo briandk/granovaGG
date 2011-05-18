@@ -592,22 +592,6 @@ GetGroupLabels <- function(owp) {
   )
 }
 
-# Pepare OWP object
-owp                       <- AdaptVariablesFromGranovaComputations()
-owp$summary               <- GetSummary(owp)
-owp$group.mean.line       <- GetGroupMeanLine(owp)
-owp$params                <- GetGraphicalParameters(owp)
-owp$squares               <- GetSquareParameters(owp)
-owp$colors                <- GetColors()
-owp$outer.square          <- GetOuterSquare(owp)
-owp$inner.square          <- GetInnerSquare(owp)
-owp$model.summary         <- GetModelSummary(owp)
-owp$effect.size           <- GetEffectSize(owp)
-owp$standard.deviation    <- GetWithinGroupStandardDeviation(owp)
-owp$label.background      <- GetBackgroundForGroupSizesAndLabels(owp)
-owp$group.labels          <- GetGroupLabels(owp)
-owp$group.sizes           <- GetGroupSizes(owp)
-
 ######## Plot Functions Below
 
 InitializeGgplot <- function() {
@@ -897,6 +881,44 @@ PlotTitle <- function () {
 RemoveSizeElementFromLegend <- function() {
   return(scale_size_continuous(legend = FALSE))
 }
+
+
+####### BEGIN UNIT TESTING CODE #######
+ 
+ argList<-list(...);
+ if (is.null(argList$unitTest) == TRUE) {
+   argList$unitTest <- FALSE
+ }
+ 
+ if (argList$unitTest == TRUE) {
+   # WEJD: I don't like this path being hard coded
+   source("../inst/tests/test_granova.1w.ggplot.R", local=TRUE, print.eval=TRUE)
+
+   return();
+ }
+ 
+ ####### END UNIT TESTING CODE #######
+ 
+
+
+
+
+# Pepare OWP object
+owp                       <- AdaptVariablesFromGranovaComputations()
+owp$summary               <- GetSummary(owp)
+owp$group.mean.line       <- GetGroupMeanLine(owp)
+owp$params                <- GetGraphicalParameters(owp)
+owp$squares               <- GetSquareParameters(owp)
+owp$colors                <- GetColors()
+owp$outer.square          <- GetOuterSquare(owp)
+owp$inner.square          <- GetInnerSquare(owp)
+owp$model.summary         <- GetModelSummary(owp)
+owp$effect.size           <- GetEffectSize(owp)
+owp$standard.deviation    <- GetWithinGroupStandardDeviation(owp)
+owp$label.background      <- GetBackgroundForGroupSizesAndLabels(owp)
+owp$group.labels          <- GetGroupLabels(owp)
+owp$group.sizes           <- GetGroupSizes(owp)
+
 
 #Plot OWP object
 p <- InitializeGgplot()
