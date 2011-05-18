@@ -1,7 +1,6 @@
 .DS_Store
 .Rhistory
 .RData
-tests/output/
 temp/
 
 granova.1w.ggplot.pdf
