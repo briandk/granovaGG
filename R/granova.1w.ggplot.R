@@ -883,7 +883,7 @@ RemoveSizeElementFromLegend <- function() {
 }
 
 
-####### BEGIN UNIT TESTING CODE #######
+ ####### BEGIN UNIT TESTING CODE #######
  
  argList<-list(...);
  if (is.null(argList$unitTest) == TRUE) {
@@ -892,7 +892,6 @@ RemoveSizeElementFromLegend <- function() {
  
  if (argList$unitTest == TRUE) {
    # WEJD: I don't like this path being hard coded
-   print(getwd())
    source("test_granova.1w.ggplot.R", local=TRUE, print.eval=TRUE)
 
    return();
