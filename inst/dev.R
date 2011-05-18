@@ -31,7 +31,7 @@ runUnitTests <- function (pathToTestFile) {
   test_file(paste(pathToTestFile))
 }
 
-runUnitTests("tests/01.R")
+runUnitTests("tests/test-1.R")
 
 
 # removeCurrentVersionOfGranova()
