@@ -883,21 +883,29 @@ RemoveSizeElementFromLegend <- function() {
 }
 
 
- ####### BEGIN UNIT TESTING CODE #######
- 
- argList<-list(...);
- if (is.null(argList$unitTest) == TRUE) {
-   argList$unitTest <- FALSE
- }
- 
- if (argList$unitTest == TRUE) {
-   # WEJD: I don't like this path being hard coded
-   source("test_granova.1w.ggplot.R", local=TRUE, print.eval=TRUE)
+  ####### BEGIN UNIT TESTING BOILERPLATE CODE #######
 
-   return();
- }
- 
- ####### END UNIT TESTING CODE #######
+  # GET THE LIST OF OPTIONAL ARGUMENTS TO THIS FUNCTION CALL, IF ANY
+  argList<-list(...);
+
+  # IF THERE IS NO ARGUMENT NAMED unitTest, THEN SET CREATE THAT ARGUMENT AND SET IT TO FALSE
+  if (is.null(argList$unitTest) == TRUE) {
+    argList$unitTest <- FALSE
+  }
+
+
+  # CHECK THE unitTest ARGUMENT TO SEE WHETHER IT'S TRUE OR FALSE 
+  if (argList$unitTest == TRUE) {
+    # WEJD: I don't like this path being hard coded
+
+    # IF IT'S TRUE, THEN RUN THE UNIT TESTS
+    source("test_granova.1w.ggplot.R", local=TRUE, print.eval=TRUE)
+
+    # AND ONCE THE UNIT TESTS HAVE RUN, DON'T CONTINUE RUNNING ANY MORE CODE.
+    return()
+  }
+
+  ####### END UNIT TESTING BOILERPLATE CODE #######
  
 
 
