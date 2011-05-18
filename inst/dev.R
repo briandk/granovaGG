@@ -26,19 +26,6 @@ installGranovaDev <- function() {
   )
 }
 
-runUnitTests <- function (pathToTestFile) {
-  library(testthat)
-  test_file(paste(pathToTestFile))
-}
-
-runUnitTests("tests/test-1.R")
-
-
-# removeCurrentVersionOfGranova()
-# installGranovaDev()
-# library(granova)
-
-# trace(granova.1w.ggplot, browser)
-# pdf(file = "../temp/granova.1w.ggplot.pdf", onefile = TRUE)
-
-#dev.off()
+removeCurrentVersionOfGranova()
+installGranovaDev()
+library(granova)
