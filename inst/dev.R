@@ -29,3 +29,4 @@ installGranovaDev <- function() {
 removeCurrentVersionOfGranova()
 installGranovaDev()
 library(granova)
+demo(granova.contr.ggplot)
