@@ -132,20 +132,7 @@ datlm <- lm(resp ~ contrst)
 
 #Xcon reset to con, but now w/ 'standardized' scaling
  Xcon <- std.contr(con)
-    dimnames(Xcon)[2] <- list((unclass(dimnames(con))[2])[[1]])
-    st.devs <- apply(datagps, 2, sd)
-    st.dev.pooled <- (mean(st.devs^2))^0.5
-    dataSummry <- round(rbind(colMeans(datagps), st.devs), 2)
-    dimnames(dataSummry) <- list(c("Means", "S.D.s"), NULL)
-    dif.cs <- mns.cgps[, 2] - mns.cgps[, 1]
-    st.effect.size <- dif.cs/st.dev.pooled
-    mns.cgps <- cbind(mns.cgps, dif.cs, st.effect.size)
-    dimnames(mns.cgps) <- list(dmm, c("neg", "pos", "diff", "stEftSze"))
-    out <- list(summary(datlm), round(mns.cgps, 2), Xcon, dataSummry, 
-        datagps)
-    names(out) <- c("summary.lm", "means.pos.neg.coeff", "contrasts", 
-        "group.means.sds", "data")
-    on.exit(par(op))
+
     print("*****************")
     print("xind below") 
     print(xind)
