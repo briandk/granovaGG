@@ -84,6 +84,16 @@ GetContrastPlots <- function(ctr) {
   return(ctr)
 }
 
+PreparePlotData <- function (ctr) {
+  return(
+    lapply(
+      X        = 1:ctr$number.of.contrasts, 
+      FUN      = ExtractDataForPlot,
+      matrix   = ctr$scaled.standardized.contrasts,
+      response = ctr$response)
+  ) 
+}
+
 ctr           <- AdaptVariablesFromGranovaComputations()
 
 #! Change to 4x4 plotting, and return to original at end.
