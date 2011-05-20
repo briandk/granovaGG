@@ -140,18 +140,11 @@ ctr <- AdaptVariablesFromGranovaComputations()
 
 
 
-contrst<-Xconss
-datlm <- lm(resp ~ contrst)
+
 
 #Xcon reset to con, but now w/ 'standardized' scaling
 
-    print("*****************")
-    print("xind below") 
-    print(xind)
-    print("Xcons below")
-    print(Xcons)
-    print("Xconss below")
-    print(Xconss)
+  return(ctr)
 
 
  }
