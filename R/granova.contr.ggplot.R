@@ -65,65 +65,65 @@ dimnames(Xcon)[2] <- list((unclass(dimnames(con))[2])[[1]])
 dmm<-dimnames(Xcon)[2][[1]]
 if(is.null(dmm))dmm<-1:ncol(con)
 
-#Change to 4x4 plotting, and return to original at end.
-op <- par(no.readonly = TRUE)
-on.exit(par(op))
-par(mfrow = c(2, 2))
+#! Change to 4x4 plotting, and return to original at end.
+#! op <- par(no.readonly = TRUE)
+#! on.exit(par(op))
+#! par(mfrow = c(2, 2))
 
-# NB different scalings of columns of Xcon.s feasible  AND WORTH CONSIDERING
-    Xconss <- Xcons * npg
-    rgx <- range(Xconss)
-    rgy <- range(resp)
-    rgxd <- abs(diff(rgx))
-    rgyd <- abs(diff(rgx))
-    rgx <- rgx + c(-0.1 * rgxd, 0.1 * rgxd)
-    rgy <- rgy + c(-0.1 * rgyd, 0.1 * rgyd)
+#! NB different scalings of columns of Xcon.s feasible  AND WORTH CONSIDERING
+#!    Xconss <- Xcons * npg
+#!    rgx <- range(Xconss)
+#!    rgy <- range(resp)
+#!    rgxd <- abs(diff(rgx))
+#!    rgyd <- abs(diff(rgx))
+#!    rgx <- rgx + c(-0.1 * rgxd, 0.1 * rgxd)
+#!    rgy <- rgy + c(-0.1 * rgyd, 0.1 * rgyd)
+#!
+#! Note: initialization of mns.cgps, will really be defined in for loop below.
+#! mns.cgps<-matrix(0,ncx,2)
+#! 
+#! for (i in 1:ncx) {
+#!           plot(jitter(Xconss[, i][Xconss[, i] != 0], jj), resp[Xconss[, 
+#!             i] != 0], xlim = rgx, ylim = rgy, xlab = xlab[i], 
+#!             ylab = "", pch = 16, cex = 1)
+#!         title(ylab = ylab)
+#!         title(main = paste("Coefficients vs. Response, Contrast", 
+#!             dmm[i]))
+#!         mnrsp <- mean(resp)
+#!         abline(h = mnrsp, lty = 3, lwd = 0.7, col = "dark red")
+#!         mns.cgps.i <- c(mean(resp[Xconss[, i] < 0]), mean(resp[Xconss[, 
+#!             i] > 0]))
+#!         mns.cgps[i, ] <- mns.cgps.i
+#!         segments(mean(Xconss[, i][Xconss[, i] < 0]), mean(resp[Xconss[, 
+#!             i] < 0]), mean(Xconss[, i][Xconss[, i] > 0]), mean(resp[Xconss[, 
+#!             i] > 0]), lwd = 2, lty = 6, col = 4)
+#!         points(mean(Xconss[, i][Xconss[, i] < 0]), mean(resp[Xconss[, 
+#!             i] < 0]), pch = 1, cex = 2, col = 4)
+#!         points(mean(Xconss[, i][Xconss[, i] > 0]), mean(resp[Xconss[, 
+#!             i] > 0]), pch = 1, cex = 2, col = 4)
+#!         if (i == 4 || i == 8 || i == 12 || i == 16 || i == 20) {
+#!             print("Examine contrast plots & consider printing")
+#!            # pause() is next three lines, taken from DAAG
+#!         if (interactive()){ 
+#!         readline("Pause. Press <Enter> to continue...")
+#!         invisible()}
+#!         }
+#!     }
+#! 
+#! datagps<-matrix(resp,ncol=ngrp)
+#! cM<-colMeans(datagps)
 
-#Note: initialization of mns.cgps, will really be defined in for loop below.
-mns.cgps<-matrix(0,ncx,2)
-
-for (i in 1:ncx) {
-	        plot(jitter(Xconss[, i][Xconss[, i] != 0], jj), resp[Xconss[, 
-            i] != 0], xlim = rgx, ylim = rgy, xlab = xlab[i], 
-            ylab = "", pch = 16, cex = 1)
-        title(ylab = ylab)
-        title(main = paste("Coefficients vs. Response, Contrast", 
-            dmm[i]))
-        mnrsp <- mean(resp)
-        abline(h = mnrsp, lty = 3, lwd = 0.7, col = "dark red")
-        mns.cgps.i <- c(mean(resp[Xconss[, i] < 0]), mean(resp[Xconss[, 
-            i] > 0]))
-        mns.cgps[i, ] <- mns.cgps.i
-        segments(mean(Xconss[, i][Xconss[, i] < 0]), mean(resp[Xconss[, 
-            i] < 0]), mean(Xconss[, i][Xconss[, i] > 0]), mean(resp[Xconss[, 
-            i] > 0]), lwd = 2, lty = 6, col = 4)
-        points(mean(Xconss[, i][Xconss[, i] < 0]), mean(resp[Xconss[, 
-            i] < 0]), pch = 1, cex = 2, col = 4)
-        points(mean(Xconss[, i][Xconss[, i] > 0]), mean(resp[Xconss[, 
-            i] > 0]), pch = 1, cex = 2, col = 4)
-        if (i == 4 || i == 8 || i == 12 || i == 16 || i == 20) {
-            print("Examine contrast plots & consider printing")
-           # pause() is next three lines, taken from DAAG
-        if (interactive()){ 
-        readline("Pause. Press <Enter> to continue...")
-        invisible()}
-        }
-    }
-
-datagps<-matrix(resp,ncol=ngrp)
-cM<-colMeans(datagps)
-
-datagps <- matrix(resp, ncol = ngrp)
-    cM <- colMeans(datagps)
-    plot(jitter(vn, amount = jj/3), resp, xlab = "Group Indicator", 
-        ylab = ylab, pch = 16, col = 1, axes = F)
-    box()
-    lines(x = 1:ngrp, y = cM, lwd = 2, lty = 6, col = 4)
-    points(x = 1:ngrp, y = cM, col = 4, pch = 1, cex = 2)
-    abline(h = mnrsp, lty = 3, col = 4)
-    axis(side = 1, at = c(1:ngrp))
-    axis(side = 2, at = NULL)
-    title(paste("Responses for all groups, each n=", npg))
+#! datagps <- matrix(resp, ncol = ngrp)
+#!     cM <- colMeans(datagps)
+#!     plot(jitter(vn, amount = jj/3), resp, xlab = "Group Indicator", 
+#!         ylab = ylab, pch = 16, col = 1, axes = F)
+#!     box()
+#!     lines(x = 1:ngrp, y = cM, lwd = 2, lty = 6, col = 4)
+#!     points(x = 1:ngrp, y = cM, col = 4, pch = 1, cex = 2)
+#!     abline(h = mnrsp, lty = 3, col = 4)
+#!     axis(side = 1, at = c(1:ngrp))
+#!     axis(side = 2, at = NULL)
+#!     title(paste("Responses for all groups, each n=", npg))
 
 
 
