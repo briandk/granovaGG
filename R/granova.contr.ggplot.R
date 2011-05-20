@@ -70,8 +70,9 @@ AdaptVariablesFromGranovaComputations <- function () {
   return(
       list(
         response                      = data,
-        contrasts                     = contrasts,
-        scaled.standardized.contrasts = Xcons * npg
+        contrast.matrix               = contrasts,
+        scaled.standardized.contrasts = Xcons * npg,
+        number.of.contrasts           = dim(Xcons)[2]
       )
   )
 }
