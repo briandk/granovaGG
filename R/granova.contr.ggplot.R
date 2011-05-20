@@ -77,17 +77,7 @@ AdaptVariablesFromGranovaComputations <- function () {
   )
 }
 
-PrepareContrastPlots <- function(ctr) {
-  contrast.plots <- list(1:ctr$number.of.contrasts)
-  
-  for (i in 1:ctr$number.of.contrasts) {
-    contrast.plots[[i]] <- PrepareContrastPlot(i, ctr)
-  }
-  
-  return(contrast.plots)
-}
-
-ctr <- AdaptVariablesFromGranovaComputations()
+ctr           <- AdaptVariablesFromGranovaComputations()
 
 #! Change to 4x4 plotting, and return to original at end.
 #! op <- par(no.readonly = TRUE)
