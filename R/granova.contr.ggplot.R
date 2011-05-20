@@ -131,7 +131,6 @@ contrst<-Xconss
 datlm <- lm(resp ~ contrst)
 
 #Xcon reset to con, but now w/ 'standardized' scaling
- Xcon <- std.contr(con)
 
     print("*****************")
     print("xind below") 
