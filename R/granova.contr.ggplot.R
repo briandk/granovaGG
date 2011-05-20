@@ -57,6 +57,8 @@ vn <- rep(1:ngrp, ea = npg)
         con <- as.matrix(con)
     }
 Xcon <- xind %*% con
+  print("Xcon below")
+  print(Xcon)
 Xcons <- std.contr(Xcon)
 ncx <- ncol(Xcons)
 dimnames(Xcon)[2] <- list((unclass(dimnames(con))[2])[[1]])
@@ -144,7 +146,13 @@ datlm <- lm(resp ~ contrst)
     names(out) <- c("summary.lm", "means.pos.neg.coeff", "contrasts", 
         "group.means.sds", "data")
     on.exit(par(op))
-    return(out)
+    print("*****************")
+    print("xind below") 
+    print(xind)
+    print("Xcons below")
+    print(Xcons)
+    print("Xconss below")
+    print(Xconss)
 
 
  }
