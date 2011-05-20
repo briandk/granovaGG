@@ -77,6 +77,13 @@ AdaptVariablesFromGranovaComputations <- function () {
   )
 }
 
+GetContrastPlots <- function(ctr) {
+  ctr$contrast.plot.data <- PreparePlotData(ctr)
+  ctr$contrast.plots     <- PrepareContrastPlots(ctr)
+  
+  return(ctr)
+}
+
 ctr           <- AdaptVariablesFromGranovaComputations()
 
 #! Change to 4x4 plotting, and return to original at end.
