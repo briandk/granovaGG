@@ -65,6 +65,19 @@ dimnames(Xcon)[2] <- list((unclass(dimnames(con))[2])[[1]])
 dmm<-dimnames(Xcon)[2][[1]]
 if(is.null(dmm))dmm<-1:ncol(con)
 
+# 'ctr' is shorthand for the ConTRast data object that will hold all the information for plotting
+AdaptVariablesFromGranovaComputations <- function () {
+  return(
+      list(
+        response                      = data,
+        contrasts                     = contrasts,
+        scaled.standardized.contrasts = Xcons * npg
+      )
+  )
+}
+
+ctr <- AdaptVariablesFromGranovaComputations()
+
 #! Change to 4x4 plotting, and return to original at end.
 #! op <- par(no.readonly = TRUE)
 #! on.exit(par(op))
