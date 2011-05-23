@@ -57,8 +57,6 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
           con <- as.matrix(con)
       }
   Xcon <- xind %*% con
-    print("Xcon below")
-    print(Xcon)
   Xcons <- std.contr(Xcon)
   ncx <- ncol(Xcons)
   dimnames(Xcon)[2] <- list((unclass(dimnames(con))[2])[[1]])
