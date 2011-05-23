@@ -67,7 +67,7 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
   AdaptVariablesFromGranovaComputations <- function () {
     return(
         list(
-          response                      = data,
+          response                      = resp,
           contrast.matrix               = contrasts,
           scaled.standardized.contrasts = Xcons * npg,
           number.of.contrasts           = dim(Xcons)[2]
