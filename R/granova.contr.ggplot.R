@@ -1,4 +1,4 @@
-granova.contr <- function(data, contrasts, ylab = "Outcome (response)", xlab = NULL, jj = 1) {
+granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", xlab = NULL, jj = 1) {
 
 # Plots responses by contrasts.
 # 'data' must be vector of scores for all equal size groups.
