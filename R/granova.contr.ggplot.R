@@ -75,20 +75,14 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
     )
   }
 
-  GetContrastPlots <- function(ctr) {
-    ctr$contrast.plot.data <- PreparePlotData(ctr)
-    ctr$contrast.plots     <- PrepareContrastPlots(ctr)
-  
-    return(ctr)
-  }
-
-  PreparePlotData <- function (ctr) {
+  GetContrastPlotData <- function (ctr) {
     return(
       lapply(
-        X        = 1:ctr$number.of.contrasts, 
-        FUN      = ExtractDataForPlot,
-        matrix   = ctr$scaled.standardized.contrasts,
-        response = ctr$response)
+        X         = 1:ctr$number.of.contrasts, 
+        FUN       = ExtractDataForPlot,
+        contrasts = ctr$scaled.standardized.contrasts,
+        response  = ctr$response
+      )
     ) 
   }
 
