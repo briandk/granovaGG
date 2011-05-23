@@ -94,7 +94,24 @@ PreparePlotData <- function (ctr) {
   ) 
 }
 
-ctr           <- AdaptVariablesFromGranovaComputations()
+ExtractDataForPlot <- function (matrix, response) {
+  list.of.data.frames <- NULL
+  for (i in 1:ctr$number.of.contrasts) {
+    non.zero.indicators <- matrix[, i] != 0
+    
+    x.values <- matrix[, i][non.zero.indicators]
+    y.values <- response[non.zero.indicators]
+        
+    # plot.data <- (data.frame(x.values, y.values))
+    # 
+    # list.of.data.frames <- cbind(list.of.data.frames, plot.data)
+  }
+  
+  # return(list.of.data.frames)
+}
+
+ctr                    <- AdaptVariablesFromGranovaComputations()
+ctr$contrast.plot.data <- ExtractDataForPlot(matrix = ctr$scaled.standardized.contrasts, ctr$response)
 
 #! Change to 4x4 plotting, and return to original at end.
 #! op <- par(no.readonly = TRUE)
@@ -162,7 +179,7 @@ ctr           <- AdaptVariablesFromGranovaComputations()
 
 #Xcon reset to con, but now w/ 'standardized' scaling
 
-  return(ctr)
+  return(ctr$response)
 
 
- }
+}
