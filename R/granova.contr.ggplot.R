@@ -86,24 +86,19 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
     ) 
   }
 
-  ExtractDataForPlot <- function (matrix, response) {
-    list.of.data.frames <- NULL
-    for (i in 1:ctr$number.of.contrasts) {
-      non.zero.indicators <- matrix[, i] != 0
-    
-      x.values <- matrix[, i][non.zero.indicators]
+  ExtractDataForPlot <- function (contrasts, response, index) {
+      non.zero.indicators <- contrasts[, index] != 0
+      
+      x.values <- contrasts[, index][non.zero.indicators]
       y.values <- response[non.zero.indicators]
         
-      # plot.data <- (data.frame(x.values, y.values))
-      # 
-      # list.of.data.frames <- cbind(list.of.data.frames, plot.data)
-    }
+      plot.data <- data.frame(x.values, y.values)
   
-    # return(list.of.data.frames)
+    return(plot.data)
   }
 
-  ctr                    <- AdaptVariablesFromGranovaComputations()
-  ctr$contrast.plot.data <- ExtractDataForPlot(matrix = ctr$scaled.standardized.contrasts, ctr$response)
+  ctr                        <- AdaptVariablesFromGranovaComputations()
+  ctr$contrast.plot.data     <- GetContrastPlotData(ctr)
 
   #! Change to 4x4 plotting, and return to original at end.
   #! op <- par(no.readonly = TRUE)
