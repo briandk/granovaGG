@@ -177,7 +177,7 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
 
   #Xcon reset to con, but now w/ 'standardized' scaling
 
-  return(ctr$response)
+  return(ctr)
 
 
 }
