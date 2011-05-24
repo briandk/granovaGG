@@ -97,8 +97,19 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
     return(plot.data)
   }
 
+  GetContrastPlots <- function (ctr) {
+    return(
+      lapply(
+        X             = 1:ctr$number.of.contrasts,
+        FUN           = CreateContrastPlot
+        contrast.data = ctr$contrast.plot.data
+      )
+    )
+  }
+  
   ctr                        <- AdaptVariablesFromGranovaComputations()
   ctr$contrast.plot.data     <- GetContrastPlotData(ctr)
+  ctr$contrast.plots         <- GetContrastPlots(ctr)
 
   #! Change to 4x4 plotting, and return to original at end.
   #! op <- par(no.readonly = TRUE)
