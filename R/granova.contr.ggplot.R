@@ -101,13 +101,13 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
     return(
       lapply(
         X             = 1:ctr$number.of.contrasts,
-        FUN           = CreateContrastPlot,
+        FUN           = ComposeContrastPlot,
         contrast.data = ctr$contrast.plot.data
       )
     )
   }
   
-  CreateContrastPlot <- function(contrast.data, index) {
+  ComposeContrastPlot <- function(contrast.data, index) {
     p <- ggplot()
     p <- p + geom_point(
                aes(x = x.values, y = y.values),
