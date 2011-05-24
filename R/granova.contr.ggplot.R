@@ -88,15 +88,29 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
 
   ExtractDataForPlot <- function (contrasts, response, index) {
       non.zero.indicators <- contrasts[, index] != 0
-      
       x.values <- contrasts[, index][non.zero.indicators]
       y.values <- response[non.zero.indicators]
         
-      raw.data <- data.frame(x.values, y.values)
+      raw.data     <- data.frame(x.values, y.values)
+      summary.data <- GetSummary(raw.data)
   
-    return(raw.data)
+    return(
+        list(
+          raw.data     = raw.data, 
+          summary.data = summary.data
+        )
+    )
   }
 
+  GetSummary <- function(data) {
+    return(
+      ddply(data, .(x.values), summarise,
+        contrast           = unique(x.values),
+        group.mean         = mean(y.values)
+      )
+    )
+  }
+  
   GetContrastPlots <- function (ctr) {
     return(
       lapply(
