@@ -89,15 +89,13 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
   ExtractDataForPlot <- function (contrasts, response, index) {
       non.zero.indicators <- contrasts[, index] != 0
       x.values <- contrasts[, index][non.zero.indicators]
-      y.values <- response[non.zero.indicators]
-        
-      raw.data     <- data.frame(x.values, y.values)
-      summary.data <- GetSummary(raw.data)
+      y.values <- response[non.zero.indicators]   
+      raw.data <- data.frame(x.values, y.values)
   
     return(
         list(
           raw.data     = raw.data, 
-          summary.data = summary.data
+          summary.data = GetSummary(raw.data)
         )
     )
   }
@@ -211,7 +209,7 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
 
   #Xcon reset to con, but now w/ 'standardized' scaling
 
-  return(ctr$contrast.plots[[1]])
+  return(ctr$contrast.plot.data[[2]])
 
 
 }
