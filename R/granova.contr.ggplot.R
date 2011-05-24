@@ -116,26 +116,26 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
       lapply(
         X             = 1:ctr$number.of.contrasts,
         FUN           = ComposeContrastPlot,
-        contrast.data = ctr$contrast.plot.data
+        plot.data     = ctr$contrast.plot.data
       )
     )
   }
   
-  ComposeContrastPlot <- function(contrast.data, index) {
+  ComposeContrastPlot <- function(plot.data, index) {    
     p <- ggplot()
-    p <- p + JitteredResponsesByContrast(contrast.data, index)
+    p <- p + JitteredResponsesByContrast(plot.data[[index]]$raw.data)
     
     return(p)
   }
   
-  JitteredResponsesByContrast <- function (contrast.data, index) {
+  JitteredResponsesByContrast <- function (data) {
     return(
       geom_point(
                aes(
                  x = x.values, 
                  y = y.values
                ),
-               data     = contrast.data[[index]],
+               data     = data,
                position = position_jitter(height = 0, width = 1/100)
       )
     )
