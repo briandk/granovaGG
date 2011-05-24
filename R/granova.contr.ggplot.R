@@ -92,9 +92,9 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
       x.values <- contrasts[, index][non.zero.indicators]
       y.values <- response[non.zero.indicators]
         
-      plot.data <- data.frame(x.values, y.values)
+      raw.data <- data.frame(x.values, y.values)
   
-    return(plot.data)
+    return(raw.data)
   }
 
   GetContrastPlots <- function (ctr) {
