@@ -101,10 +101,20 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
     return(
       lapply(
         X             = 1:ctr$number.of.contrasts,
-        FUN           = CreateContrastPlot
+        FUN           = CreateContrastPlot,
         contrast.data = ctr$contrast.plot.data
       )
     )
+  }
+  
+  CreateContrastPlot <- function(contrast.data, index) {
+    p <- ggplot()
+    p <- p + geom_point(
+               aes(x = x.values, y = y.values),
+               data = contrast.data[[index]],
+               position = position_jitter(height = 0, width = 1/100)
+             )
+    return(p)
   }
   
   ctr                        <- AdaptVariablesFromGranovaComputations()
@@ -177,7 +187,7 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
 
   #Xcon reset to con, but now w/ 'standardized' scaling
 
-  return(ctr)
+  return(ctr$contrast.plots[[1]])
 
 
 }
