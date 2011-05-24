@@ -109,12 +109,22 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
   
   ComposeContrastPlot <- function(contrast.data, index) {
     p <- ggplot()
-    p <- p + geom_point(
-               aes(x = x.values, y = y.values),
-               data = contrast.data[[index]],
-               position = position_jitter(height = 0, width = 1/100)
-             )
+    p <- p + JitteredResponsesByContrast(contrast.data, index)
+    
     return(p)
+  }
+  
+  JitteredResponsesByContrast <- function (contrast.data, index) {
+    return(
+      geom_point(
+               aes(
+                 x = x.values, 
+                 y = y.values
+               ),
+               data     = contrast.data[[index]],
+               position = position_jitter(height = 0, width = 1/100)
+      )
+    )
   }
   
   ctr                        <- AdaptVariablesFromGranovaComputations()
