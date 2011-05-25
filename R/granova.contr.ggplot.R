@@ -378,7 +378,11 @@ granova.contr.ggplot <- function(data,
 
   #Xcon reset to con, but now w/ 'standardized' scaling
 
-  return(ctr$summary.plot)
-
+  return(
+         c(
+            list(ctr$contrast.plots), 
+            list(ctr$summary.plot)
+         )
+  )
 
 }
