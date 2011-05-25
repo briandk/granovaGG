@@ -244,6 +244,7 @@ granova.contr.ggplot <- function(data,
     p <- p + RawScoresByGroup(plot.data$raw.data)
     p <- p + MeansByGroup(plot.data$summary.data)
     p <- p + ConnectGroupResponseMeans(plot.data$summary.data)
+    p <- p + Theme()
     return(p)
   }
   
