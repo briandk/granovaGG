@@ -78,7 +78,8 @@ granova.contr.ggplot <- function(data,
           response                      = resp,
           contrast.matrix               = contrasts,
           scaled.standardized.contrasts = Xcons * npg,
-          number.of.contrasts           = dim(Xcons)[2]
+          number.of.contrasts           = dim(Xcons)[2],
+          number.of.groups              = ngrp
         )
     )
   }
