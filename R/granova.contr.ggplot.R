@@ -206,12 +206,18 @@ granova.contr.ggplot <- function(data,
   }
   
   GetSummaryPlotData <- function(ctr) {
-    plot.data <- as.data.frame(
+    raw.data <- as.data.frame(
                    matrix(ctr$response, ncol = ctr$number.of.groups)
                  )
-    plot.data <- RenameSummaryColumnNames(plot.data)
+    raw.data <- RenameSummaryColumnNames(raw.data)
+    raw.data <- melt(raw.data)
+    summary.data <- GetGroupSummary(raw.data)
     
-    return(plot.data)                   
+    return(list(
+                raw.data     = raw.data,
+                summary.data = summary.data
+          )
+    )                   
   }
   
   RenameSummaryColumnNames <- function(data) {
@@ -223,7 +229,16 @@ granova.contr.ggplot <- function(data,
     return(data)
   }
   
-  ComposeSummaryPlot <- function(plot.data) {
+  GetGroupSummary <- function(data) {
+    return(
+      ddply(data, .(variable), summarise,
+        group              = unique(variable),
+        group.mean         = mean(value)
+      )
+    )
+  }
+  
+  ComposeSummaryPlot <- function(plot.data) {    
     p <- ggplot()
   }
   
