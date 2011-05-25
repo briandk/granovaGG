@@ -211,6 +211,7 @@ granova.contr.ggplot <- function(data,
                  )
     raw.data <- RenameSummaryColumnNames(raw.data)
     raw.data <- melt(raw.data)
+    raw.data$variable <- as.numeric(raw.data$variable)
     summary.data <- GetGroupSummary(raw.data)
     
     return(list(
@@ -242,7 +243,7 @@ granova.contr.ggplot <- function(data,
     p <- ggplot()
     p <- p + RawScoresByGroup(plot.data$raw.data)
     p <- p + MeansByGroup(plot.data$summary.data)
-    
+    p <- p + ConnectGroupResponseMeans(plot.data$summary.data)
     return(p)
   }
   
@@ -269,6 +270,19 @@ granova.contr.ggplot <- function(data,
                data  = data,
                color = brewer.pal(8, "Set1")[2],
                size  = I(3)
+      )
+    )
+  }
+  
+  ConnectGroupResponseMeans <- function(data) {
+    return(
+      geom_line(
+               aes(
+                 x = group, 
+                 y = group.mean
+               ),
+               data  = data,
+               color = brewer.pal(8, "Set1")[2],
       )
     )
   }
