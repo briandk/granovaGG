@@ -136,8 +136,8 @@ granova.contr.ggplot <- function(data,
     p <- p + ConnectContrastMeans(plot.data[[index]]$summary.data)
     p <- p + Theme()
     p <- p + ContrastPlotTitle(index)
-    p <- p + Xlabel(index)
-    p <- p + Ylabel()
+    p <- p + ContrastPlotXLabel(index)
+    p <- p + ContrastPlotYLabel()
     
     return(p)
   }
@@ -194,13 +194,13 @@ granova.contr.ggplot <- function(data,
     )
   }
   
-  Xlabel <- function(index) {
+  ContrastPlotXLabel <- function(index) {
     return(
       xlab(paste("Contrast ", index))
     )
   }
   
-  Ylabel <- function() {
+  ContrastPlotYLabel <- function() {
     return(
       ylab(paste("Response"))
     )
