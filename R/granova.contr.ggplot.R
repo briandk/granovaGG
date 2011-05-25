@@ -122,6 +122,7 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
   ComposeContrastPlot <- function(plot.data, index) {    
     p <- ggplot()
     p <- p + JitteredResponsesByContrast(plot.data[[index]]$raw.data)
+    p <- p + MeansByContrast(plot.data[[index]]$summary.data)
     
     return(p)
   }
@@ -135,6 +136,20 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
                ),
                data     = data,
                position = position_jitter(height = 0, width = 1/100)
+      )
+    )
+  }
+  
+  MeansByContrast <- function(data) {
+    return(
+      geom_point(
+               aes(
+                 x = contrast, 
+                 y = group.mean
+               ),
+               data  = data,
+               color = "#3366FF",
+               size  = I(3)
       )
     )
   }
@@ -209,7 +224,7 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
 
   #Xcon reset to con, but now w/ 'standardized' scaling
 
-  return(ctr$contrast.plot.data[[2]])
+  return(ctr$contrast.plots[[2]])
 
 
 }
