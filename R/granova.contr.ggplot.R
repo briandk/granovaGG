@@ -135,6 +135,7 @@ granova.contr.ggplot <- function(data,
     p <- p + Theme()
     p <- p + PlotTitle(index)
     p <- p + Xlabel(index)
+    p <- p + Ylabel()
     
     return(p)
   }
@@ -194,6 +195,12 @@ granova.contr.ggplot <- function(data,
   Xlabel <- function(index) {
     return(
       xlab(paste("Contrast ", index))
+    )
+  }
+  
+  Ylabel <- function() {
+    return(
+      ylab(paste("Response"))
     )
   }
   
