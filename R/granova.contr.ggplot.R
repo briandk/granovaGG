@@ -162,7 +162,7 @@ granova.contr.ggplot <- function(data,
                  y = group.mean
                ),
                data  = data,
-               color = "#3366FF",
+               color = brewer.pal(8, "Set1")[2],
                size  = I(3)
       )
     )
@@ -176,7 +176,7 @@ granova.contr.ggplot <- function(data,
                  y = group.mean
                ),
                data  = data,
-               color = "#3366FF",
+               color = brewer.pal(8, "Set1")[2],
       )
     )
   }
