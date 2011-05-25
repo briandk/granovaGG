@@ -247,6 +247,8 @@ granova.contr.ggplot <- function(data,
     p <- p + ConnectGroupResponseMeans(plot.data$summary.data)
     p <- p + Theme()
     p <- p + GroupSummaryPlotTitle()
+    p <- p + GroupSummaryXLabel()
+    p <- p + GroupSummaryYLabel()
     return(p)
   }
   
@@ -296,6 +298,13 @@ granova.contr.ggplot <- function(data,
     )
   }
   
+  GroupSummaryXLabel <- function() {
+    return(xlab("Group"))
+  }
+  
+  GroupSummaryYLabel <- function() {
+    return(ylab("Response"))
+  }  
   
   ctr                        <- AdaptVariablesFromGranovaComputations()
   ctr$contrast.plot.data     <- GetContrastPlotData(ctr)
