@@ -132,7 +132,7 @@ granova.contr.ggplot <- function(data,
     p <- ggplot()
     p <- p + JitteredResponsesByContrast(plot.data[[index]]$raw.data)
     p <- p + MeansByContrast(plot.data[[index]]$summary.data)
-    p <- p + ConnectMeansWithLines(plot.data[[index]]$summary.data)
+    p <- p + ConnectContrastMeans(plot.data[[index]]$summary.data)
     p <- p + Theme()
     p <- p + PlotTitle(index)
     p <- p + Xlabel(index)
@@ -168,7 +168,7 @@ granova.contr.ggplot <- function(data,
     )
   }
   
-  ConnectMeansWithLines <- function(data) {
+  ConnectContrastMeans <- function(data) {
     return(
       geom_line(
                aes(
