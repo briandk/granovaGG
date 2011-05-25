@@ -205,9 +205,28 @@ granova.contr.ggplot <- function(data,
     )
   }
   
+  GetSummaryPlotData <- function(ctr) {
+    plot.data <- as.data.frame(
+                   matrix(ctr$response, ncol = ctr$number.of.groups)
+                 )
+    plot.data <- RenameSummaryColumnNames(plot.data)
+    
+    return(plot.data)                   
+  }
+  
+  RenameSummaryColumnNames <- function(data) {
+    colnames(data) <- sapply(
+                        1:ncol(data), 
+                        function(index) {paste(index)}
+                      )
+                      
+    return(data)
+  }
+  
   ctr                        <- AdaptVariablesFromGranovaComputations()
   ctr$contrast.plot.data     <- GetContrastPlotData(ctr)
   ctr$contrast.plots         <- GetContrastPlots(ctr)
+  ctr$summary.plot.data      <- GetSummaryPlotData(ctr)
 
   #! Change to 4x4 plotting, and return to original at end.
   #! op <- par(no.readonly = TRUE)
@@ -275,7 +294,7 @@ granova.contr.ggplot <- function(data,
 
   #Xcon reset to con, but now w/ 'standardized' scaling
 
-  return(ctr$contrast.plots[[2]])
+  return(ctr$summary.plot.data)
 
 
 }
