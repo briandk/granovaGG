@@ -223,10 +223,15 @@ granova.contr.ggplot <- function(data,
     return(data)
   }
   
+  ComposeSummaryPlot <- function(plot.data) {
+    p <- ggplot()
+  }
+  
   ctr                        <- AdaptVariablesFromGranovaComputations()
   ctr$contrast.plot.data     <- GetContrastPlotData(ctr)
   ctr$contrast.plots         <- GetContrastPlots(ctr)
   ctr$summary.plot.data      <- GetSummaryPlotData(ctr)
+  ctr$summary.plot           <- ComposeSummaryPlot(ctr)
 
   #! Change to 4x4 plotting, and return to original at end.
   #! op <- par(no.readonly = TRUE)
