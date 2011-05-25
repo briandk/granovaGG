@@ -133,6 +133,7 @@ granova.contr.ggplot <- function(data,
     p <- p + MeansByContrast(plot.data[[index]]$summary.data)
     p <- p + ConnectMeansWithLines(plot.data[[index]]$summary.data)
     p <- p + Theme()
+    p <- p + PlotTitle(index)
     
     return(p)
   }
@@ -181,6 +182,12 @@ granova.contr.ggplot <- function(data,
       return(
         eval(call(plot.theme))
       )
+  }
+  
+  PlotTitle <- function(index) {
+    return(
+      opts(title = paste("Coefficients vs. Response, Contrast ", index))
+    )
   }
   
   ctr                        <- AdaptVariablesFromGranovaComputations()
