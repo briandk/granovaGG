@@ -123,6 +123,7 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
     p <- ggplot()
     p <- p + JitteredResponsesByContrast(plot.data[[index]]$raw.data)
     p <- p + MeansByContrast(plot.data[[index]]$summary.data)
+    p <- p + ConnectMeansWithLines(plot.data[[index]]$summary.data)
     
     return(p)
   }
@@ -150,6 +151,19 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
                data  = data,
                color = "#3366FF",
                size  = I(3)
+      )
+    )
+  }
+  
+  ConnectMeansWithLines <- function(data) {
+    return(
+      geom_line(
+               aes(
+                 x = contrast, 
+                 y = group.mean
+               ),
+               data  = data,
+               color = "#3366FF",
       )
     )
   }
