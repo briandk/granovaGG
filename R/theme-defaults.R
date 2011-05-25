@@ -40,3 +40,15 @@ theme_granova_ds <- function(base_size = 12) {
   
   return(theme_granova_ds)
 }
+
+theme_granova_contr <- function(base_size = 12) {
+  theme_granova_contr <- theme_bw()
+  theme_granova_contr$axis.text.x      <- theme_text()
+  theme_granova_contr$axis.text.y      <- theme_text(hjust = 1)
+  theme_granova_contr$axis.title.x     <- theme_text(size = 10, vjust = -0.3)
+  theme_granova_contr$axis.title.y     <- theme_text(size = 10, angle = 90, vjust = 0.3, hjust = 0.5)
+  
+  theme_granova_contr$plot.title       <- theme_text(face = "bold", size = base_size, vjust = 1)
+  
+  return(theme_granova_contr)
+}

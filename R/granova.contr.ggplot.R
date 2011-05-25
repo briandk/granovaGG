@@ -3,7 +3,7 @@ granova.contr.ggplot <- function(data,
                                  ylab       = "Outcome (response)", 
                                  xlab       = NULL, 
                                  jj         = 1,
-                                 plot.theme = "theme_bw",
+                                 plot.theme = "theme_granova_contr",
                                  ...
                         ) 
 {
