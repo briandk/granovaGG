@@ -241,6 +241,7 @@ granova.contr.ggplot <- function(data,
   ComposeSummaryPlot <- function(plot.data) {    
     p <- ggplot()
     p <- p + RawScoresByGroup(plot.data$raw.data)
+    p <- p + MeansByGroup(plot.data$summary.data)
     
     return(p)
   }
@@ -254,6 +255,20 @@ granova.contr.ggplot <- function(data,
                ),
                data = data,
                position = position_jitter(height = 0, width = 7/100)
+      )
+    )
+  }
+  
+  MeansByGroup <- function(data) {
+    return(
+      geom_point(
+               aes(
+                 x = group, 
+                 y = group.mean
+               ),
+               data  = data,
+               color = brewer.pal(8, "Set1")[2],
+               size  = I(3)
       )
     )
   }
