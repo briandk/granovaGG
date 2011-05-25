@@ -240,13 +240,29 @@ granova.contr.ggplot <- function(data,
   
   ComposeSummaryPlot <- function(plot.data) {    
     p <- ggplot()
+    p <- p + RawScoresByGroup(plot.data$raw.data)
+    
+    return(p)
+  }
+  
+  RawScoresByGroup <- function(data) {
+    return(
+      geom_point(
+               aes(
+                 x = variable, 
+                 y = value
+               ),
+               data = data,
+               position = position_jitter(height = 0, width = 7/100)
+      )
+    )
   }
   
   ctr                        <- AdaptVariablesFromGranovaComputations()
   ctr$contrast.plot.data     <- GetContrastPlotData(ctr)
   ctr$contrast.plots         <- GetContrastPlots(ctr)
   ctr$summary.plot.data      <- GetSummaryPlotData(ctr)
-  ctr$summary.plot           <- ComposeSummaryPlot(ctr)
+  ctr$summary.plot           <- ComposeSummaryPlot(ctr$summary.plot.data)
 
   #! Change to 4x4 plotting, and return to original at end.
   #! op <- par(no.readonly = TRUE)
@@ -314,7 +330,7 @@ granova.contr.ggplot <- function(data,
 
   #Xcon reset to con, but now w/ 'standardized' scaling
 
-  return(ctr$summary.plot.data)
+  return(ctr$summary.plot)
 
 
 }
