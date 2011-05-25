@@ -1,4 +1,12 @@
-granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", xlab = NULL, jj = 1) {
+granova.contr.ggplot <- function(data, 
+                                 contrasts, 
+                                 ylab       = "Outcome (response)", 
+                                 xlab       = NULL, 
+                                 jj         = 1,
+                                 plot.theme = "theme_bw",
+                                 ...
+                        ) 
+{
 
   # Plots responses by contrasts.
   # 'data' must be vector of scores for all equal size groups.
@@ -124,6 +132,7 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
     p <- p + JitteredResponsesByContrast(plot.data[[index]]$raw.data)
     p <- p + MeansByContrast(plot.data[[index]]$summary.data)
     p <- p + ConnectMeansWithLines(plot.data[[index]]$summary.data)
+    p <- p + Theme()
     
     return(p)
   }
@@ -166,6 +175,12 @@ granova.contr.ggplot <- function(data, contrasts, ylab = "Outcome (response)", x
                color = "#3366FF",
       )
     )
+  }
+  
+  Theme <- function() {
+      return(
+        eval(call(plot.theme))
+      )
   }
   
   ctr                        <- AdaptVariablesFromGranovaComputations()
