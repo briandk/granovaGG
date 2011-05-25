@@ -232,8 +232,8 @@ granova.contr.ggplot <- function(data,
   GetGroupSummary <- function(data) {
     return(
       ddply(data, .(variable), summarise,
-        group              = unique(variable),
-        group.mean         = mean(value)
+        group      = unique(variable),
+        group.mean = mean(value)
       )
     )
   }
