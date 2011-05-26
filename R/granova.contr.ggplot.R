@@ -53,10 +53,10 @@ granova.contr.ggplot <- function(data,
 
   #Generates indicator matrix w/ 1 entry per row, acc. index in vector xx
   indic <- function(xx) {
-          mm <- matrix(0, length(xx), length(unique(xx)))
-          indx <- ifelse(xx == col(mm), 1, 0)
-          indx
-          }
+             mm <- matrix(0, length(xx), length(unique(xx)))
+             indx <- ifelse(xx == col(mm), 1, 0)
+             indx
+  }
         
   vn <- rep(1:ngrp, ea = npg)
       N <- length(resp)
@@ -305,6 +305,8 @@ granova.contr.ggplot <- function(data,
   GroupSummaryYLabel <- function() {
     return(ylab("Response"))
   }  
+  
+  
   
   ctr                        <- AdaptVariablesFromGranovaComputations()
   ctr$contrast.plot.data     <- GetContrastPlotData(ctr)
