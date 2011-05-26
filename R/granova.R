@@ -39,6 +39,13 @@ GeomRugAlt <- proto(Geom, {
 
 geom_rug_alt <- GeomRugAlt$build_accessor()
 
+vplayout <- function(x, y) {
+ return(
+   viewport(layout.pos.row = x, 
+            layout.pos.col = y
+   )
+}
+
 # theme_gray <- function(base_size = 12) {
 #   structure(list(
 #     axis.line         = theme_blank(),
