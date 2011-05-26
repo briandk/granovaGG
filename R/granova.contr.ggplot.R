@@ -306,14 +306,24 @@ granova.contr.ggplot <- function(data,
     return(ylab("Response"))
   }  
   
-  
+  CollateOutputPlots <- function(ctr) {
+    output <- list(NULL)
+    
+    for (i in 1:ctr$number.of.contrasts) {
+      output[[i]] <- ctr$contrast.plots[[i]]
+    }
+    output[[ctr$number.of.contrasts + 1]] <- ctr$summary.plot  
+    
+    return(output)
+  }
   
   ctr                        <- AdaptVariablesFromGranovaComputations()
   ctr$contrast.plot.data     <- GetContrastPlotData(ctr)
   ctr$contrast.plots         <- GetContrastPlots(ctr)
   ctr$summary.plot.data      <- GetSummaryPlotData(ctr)
   ctr$summary.plot           <- ComposeSummaryPlot(ctr$summary.plot.data)
-
+  ctr$output                 <- CollateOutputPlots(ctr)
+  
   #! Change to 4x4 plotting, and return to original at end.
   #! op <- par(no.readonly = TRUE)
   #! on.exit(par(op))
@@ -380,11 +390,6 @@ granova.contr.ggplot <- function(data,
 
   #Xcon reset to con, but now w/ 'standardized' scaling
 
-  return(
-         c(
-            list(ctr$contrast.plots), 
-            list(ctr$summary.plot)
-         )
-  )
+  return(ctr$output)
 
 }
