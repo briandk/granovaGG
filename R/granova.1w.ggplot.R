@@ -731,7 +731,7 @@ granova.1w.ggplot <- function(data,
     )
   }
 
-  EffectSize <- function(owp) {
+  SquaresText <- function(owp) {
     return(
       geom_text(
               aes(
@@ -946,7 +946,7 @@ granova.1w.ggplot <- function(data,
   p <- p + Residuals(owp)
   p <- p + OuterSquare()
   p <- p + InnerSquare()
-  p <- p + EffectSize(owp)
+  p <- p + SquaresText(owp)
   p <- p + WithinGroupVariation(owp)
   p <- p + BaselineWithinGroupVariation(owp)
   p <- p + ColorScale(owp)
