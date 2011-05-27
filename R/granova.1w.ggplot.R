@@ -533,16 +533,27 @@ granova.1w.ggplot <- function(data,
     return(summary(model))
   }
 
-  GetEffectSize <- function(owp) {
-    r.squared           <- owp$model.summary$r.squared
-    effect.size         <- (r.squared) / (1 - r.squared)
-    effect.size.rounded <- round(effect.size, digits = 2)
+  GetSquaresText <- function(owp) {
+    f.statistic         <- owp$model.summary$fstatistic["value"]
+    f.statistic.rounded <- round(f.statistic, digits = 2)
     return(
-      data.frame(label = effect.size.rounded,
-                 x     = owp$squares$x.center,
-                 y     = owp$outer.square$ymax + (2.5 * owp$params$vertical.percent)
+      data.frame(label     = f.statistic.rounded,
+                 x         = owp$squares$x.center,
+                 y         = owp$outer.square$ymax + (2.5 * owp$params$vertical.percent),
+                 text.size = GetSquaresTextSize(f.statistic.rounded)
       )
     )
+  }
+  
+  GetSquaresTextSize <- function(number) {
+    if (number < 10) {
+      return(5)
+    }
+    
+    else {
+      return(4)
+    }
+    
   }
 
   GetWithinGroupVariation <- function(owp) {
@@ -927,7 +938,7 @@ granova.1w.ggplot <- function(data,
   owp$outer.square          <- GetOuterSquare(owp)
   owp$inner.square          <- GetInnerSquare(owp)
   owp$model.summary         <- GetModelSummary(owp)
-  owp$effect.size           <- GetEffectSize(owp)
+  owp$squares.text          <- GetSquaresText(owp)
   owp$standard.deviation    <- GetWithinGroupVariation(owp)
   owp$label.background      <- GetBackgroundForGroupSizesAndLabels(owp)
   owp$group.labels          <- GetGroupLabels(owp)
