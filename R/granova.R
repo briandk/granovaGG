@@ -53,9 +53,7 @@ LayoutFourPlotsPerPage <- function(list.of.plots) {
   for (plot.num in 1:length(list.of.plots)) {
     SetupFourPlotPage(plot.num)
     PrintPlots(list.of.plots, plot.num)
-    if (plot.num %% 4 == 0 && interactive()) {
-      readline("Examine the contrast plots and consider printing. When you're done, press <Return>")
-    }
+    DisplayEndOfPageMessage(plot.num)
   }
   return()
 }
@@ -74,6 +72,12 @@ PrintPlots <- function(list.of.plots, plot.num) {
   return(
     print(list.of.plots[[plot.num]], vp = vplayout(row, col))
   )
+}
+
+DisplayEndOfPageMessage <- function(plot.num) {
+  if (plot.num %% 4 == 0 && interactive()) {
+    readline("Examine the contrast plots and consider printing. When you're done, press <Return>")
+  }
 }
 
 # theme_gray <- function(base_size = 12) {
