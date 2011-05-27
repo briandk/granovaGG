@@ -30,7 +30,7 @@ granova.1w.ggplot <- function(data,
                               pt.lab                   = NULL, 
                               xlab                     = NULL, 
                               ylab                     = NULL, 
-                              main                     = NULL,
+                              main                     = "default_granova_title",
                               plot.theme               = "theme_granova_1w_gray", 
                               ...
                              )
@@ -858,24 +858,14 @@ granova.1w.ggplot <- function(data,
     )
   }
 
-  IsClassicTitleEqualToUserSuppliedTitle <- function(classic.granova.title = NULL) {
-    return(main == classic.granova.title)
-  }
-
-  GetAppropriatePlotTitle <- function() {  
-    if (IsClassicTitleEqualToUserSuppliedTitle(GetClassicTitle())) {
-      return(GetClassicTitle())
+  PlotTitle <- function () {
+    if (main == "default_granova_title") {
+      return(opts(title = GetClassicTitle()))
     }
-  
+    
     else {
       return(opts(title = main))
     }
-  }
-
-  PlotTitle <- function () {
-    return(
-      opts(title = GetAppropriatePlotTitle())
-    )
   }
 
   RemoveSizeElementFromLegend <- function() {
