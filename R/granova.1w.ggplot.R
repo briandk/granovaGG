@@ -742,16 +742,17 @@ granova.1w.ggplot <- function(data,
     )
   }
 
-  SquaresText <- function(owp) {
+  SquaresText <- function(owp) {    
     return(
       geom_text(
               aes(
-                x = x,
-                y = y,
+                x     = x,
+                y     = y,
                 label = label
               ),
               color = "grey20",
-              data  = owp$effect.size
+              size  = owp$squares.text$text.size,
+              data  = owp$squares.text
       )
     )
   }
