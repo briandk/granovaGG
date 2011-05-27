@@ -50,22 +50,25 @@ vplayout <- function(x, y) {
 }
 
 LayoutFourPlotsPerPage <- function(list.of.ggplots) {
-  grid.newpage()
-  pushViewport(viewport(layout = grid.layout(2, 2)))
   for (plot.num in 1:length(list.of.ggplots)) {
-
+    SetupFourPlotPage(plot.num)
+    
     row <- ceiling( (plot.num + 2) /2) %% 2 + 1
     col <- ((plot.num + 1) %% 2) + 1
 
-    print(list.of.ggplots[plot.num], vp = vplayout(row, col))
-    print(c(row, col))
-    if (plot.num %% 4 == 0) {
-      readline("STOP")
-      grid.newpage()
+    print(list.of.ggplots[[plot.num]], vp = vplayout(row, col))
+    if (plot.num %% 4 == 0 && interactive()) {
+      readline("Examine the contrast plots and consider printing. When you're done, press <Return>")
     }
-
   }
   return()
+}
+
+SetupFourPlotPage <- function(index) {
+  if (index %% 4 == 1) {
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(2, 2)))
+  }
 }
 
 # theme_gray <- function(base_size = 12) {
