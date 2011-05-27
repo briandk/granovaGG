@@ -3,7 +3,7 @@ granova.ds(blood_lead)
 granova.ds.ggplot(
   data       = blood_lead, 
   conf.level = 0.95, 
-  plot.title = "Lead Levels in the Blood of Children"
+  main = "Lead Levels in the Blood of Children"
 ) 
 
 data(anorexia.sub)
@@ -12,20 +12,20 @@ anorexia.sub$caseid <- 1:length(anorexia.sub[ , 1])
 
 granova.ds.ggplot(
   data       = anorexia.sub, 
-  plot.title = "Effect of Therapy on Anorexic Patients",
-  plot.theme = theme_bw()
+  main = "Effect of Therapy on Anorexic Patients",
+  plot.theme = "theme_granova_1w"
 ) 
 
 granova.ds.ggplot(
   data       = anorexia.sub, 
   conf.level = 0.95, 
-  plot.title = "Effect of Therapy on Anorexic Patients"
+  main = "Effect of Therapy on Anorexic Patients"
 ) 
 
 # Once again, but with case labels.
 p <- granova.ds.ggplot(
   data       = anorexia.sub, 
-  plot.title = "Effect of Therapy on Anorexic Patients",
+  main = "Effect of Therapy on Anorexic Patients",
 ) 
 
 caseLabels <- geom_text(
