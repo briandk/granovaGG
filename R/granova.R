@@ -49,10 +49,10 @@ vplayout <- function(x, y) {
   )
 }
 
-LayoutFourPlotsPerPage <- function(list.of.ggplots) {
-  for (plot.num in 1:length(list.of.ggplots)) {
+LayoutFourPlotsPerPage <- function(list.of.plots) {
+  for (plot.num in 1:length(list.of.plots)) {
     SetupFourPlotPage(plot.num)
-    PrintPlots(list.of.ggplots, plot.num)
+    PrintPlots(list.of.plots, plot.num)
     if (plot.num %% 4 == 0 && interactive()) {
       readline("Examine the contrast plots and consider printing. When you're done, press <Return>")
     }
@@ -67,12 +67,12 @@ SetupFourPlotPage <- function(index) {
   }
 }
 
-PrintPlots <- function(list.of.ggplots, plot.num) {
+PrintPlots <- function(list.of.plots, plot.num) {
   row <- ceiling( (plot.num + 2) /2) %% 2 + 1
   col <- ((plot.num + 1) %% 2) + 1
   
   return(
-    print(list.of.ggplots[[plot.num]], vp = vplayout(row, col))
+    print(list.of.plots[[plot.num]], vp = vplayout(row, col))
   )
 }
 
