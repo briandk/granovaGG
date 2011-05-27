@@ -1,7 +1,7 @@
 granova.ds.ggplot <- function(data       = NULL, 
                               main       = NULL,
                               conf.level = 0.95,
-                              plot.theme = NULL
+                              plot.theme = "theme_bw"
                              ) 
 
 {
@@ -261,17 +261,7 @@ granova.ds.ggplot <- function(data       = NULL,
   }
 
   Title <- function() {
-    return(opts(title = plot.title))
-  }
-  
-  Theme <- function() {
-    if (is.null(plot.theme)) {
-      return(theme_granova_ds())
-    }
-
-    else {
-      return(plot.theme)
-    }
+    return(opts(title = main))
   }
   
   ForceCoordinateAxesToBeEqual <- function() {
@@ -285,7 +275,7 @@ granova.ds.ggplot <- function(data       = NULL,
   p <- p + Shadows(dsp)
   p <- p + Trails(dsp)
   p <- p + RawData(dsp)
-  p <- p + Theme()
+  p <- p + Theme(plot.theme)
   p <- p + IdentityLine()
   p <- p + RugPlot(dsp)
   p <- p + Crossbow(dsp)

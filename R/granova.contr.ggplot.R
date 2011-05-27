@@ -134,7 +134,7 @@ granova.contr.ggplot <- function(data,
     p <- p + JitteredResponsesByContrast(plot.data[[index]]$raw.data)
     p <- p + MeansByContrast(plot.data[[index]]$summary.data)
     p <- p + ConnectContrastMeans(plot.data[[index]]$summary.data)
-    p <- p + Theme()
+    p <- p + Theme(plot.theme)
     p <- p + ContrastPlotTitle(index)
     p <- p + ContrastPlotXLabel(index)
     p <- p + ContrastPlotYLabel()
@@ -180,12 +180,6 @@ granova.contr.ggplot <- function(data,
                color = brewer.pal(8, "Set1")[2],
       )
     )
-  }
-  
-  Theme <- function() {
-      return(
-        eval(call(plot.theme))
-      )
   }
   
   ContrastPlotTitle <- function(index) {
@@ -245,7 +239,7 @@ granova.contr.ggplot <- function(data,
     p <- p + RawScoresByGroup(plot.data$raw.data)
     p <- p + MeansByGroup(plot.data$summary.data)
     p <- p + ConnectGroupResponseMeans(plot.data$summary.data)
-    p <- p + Theme()
+    p <- p + Theme(plot.theme)
     p <- p + GroupSummaryPlotTitle()
     p <- p + GroupSummaryXLabel()
     p <- p + GroupSummaryYLabel()

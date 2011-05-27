@@ -870,12 +870,6 @@ granova.1w.ggplot <- function(data,
     return(opts(axis.text.x = theme_text(angle = 90)))
   }
 
-  Theme <- function() {
-      return(
-        eval(call(plot.theme))
-      )
-  }
-
   ForceCoordinateAxesToBeEqual <- function(owp) {
     return(coord_fixed(ratio = owp$params$aspect.ratio))
   }
@@ -969,7 +963,7 @@ granova.1w.ggplot <- function(data,
   p <- p + GroupSizes(owp)
   p <- p + GroupLabels(owp)
   p <- p + RotateXTicks()
-  p <- p + Theme()
+  p <- p + Theme(plot.theme)
   p <- p + ForceCoordinateAxesToBeEqual(owp)
   p <- p + PlotTitle()
   p <- p + RemoveSizeElementFromLegend()

@@ -80,6 +80,12 @@ DisplayEndOfPageMessage <- function(plot.num) {
   }
 }
 
+Theme <- function(plot.theme) {
+    return(
+      eval(call(plot.theme))
+    )
+}
+
 # theme_gray <- function(base_size = 12) {
 #   structure(list(
 #     axis.line         = theme_blank(),

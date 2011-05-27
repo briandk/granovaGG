@@ -27,5 +27,6 @@ random.data <- data.frame(response = rnorm(n = 100), group = rep(1:10, each = 10
 
 granova.1w.ggplot(random.data$response,
   group = random.data$group,
-  resid = TRUE
+  resid = TRUE,
+  plot.theme = "theme_granova_1w_gray"
 )

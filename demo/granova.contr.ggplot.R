@@ -25,5 +25,5 @@ LayoutFourPlotsPerPage(z)
 data.random <- rt(64, 5)
 LayoutFourPlotsPerPage(
   granova.contr.ggplot(data.random, contrasts = contr.helmert(8), 
-  ylab = "Random Data")
+  ylab = "Random Data", plot.theme = "theme_granova_1w_gray")
 )
