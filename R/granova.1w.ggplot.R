@@ -759,6 +759,21 @@ granova.1w.ggplot <- function(data,
     )
   }
 
+  BaselineWithinGroupVariation <- function(owp) {
+    return(
+      geom_linerange(
+                aes(
+                  x      = x,
+                  ymin   = ymin,
+                  ymax   = min(ymax)
+                ), color = "grey",
+                   size  = I(2),
+                   data  = owp$standard.deviation
+      )
+    )
+    
+  }
+  
   ColorScale <- function(owp) {
     return(
       scale_color_manual(
@@ -933,6 +948,7 @@ granova.1w.ggplot <- function(data,
   p <- p + InnerSquare()
   p <- p + EffectSize(owp)
   p <- p + WithinGroupVariation(owp)
+  p <- p + BaselineWithinGroupVariation(owp)
   p <- p + ColorScale(owp)
   p <- p + FillScale()
   p <- p + XLabel()
