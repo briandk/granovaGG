@@ -747,13 +747,14 @@ granova.1w.ggplot <- function(data,
 
   WithinGroupVariation <- function(owp) {
     return(
-      geom_ribbon(
+      geom_linerange(
                 aes(
-                  x          = x,
-                  ymin       = ymin,
-                  ymax       = ymax
-                ), alpha     = I(1/4),
-                   data      = owp$standard.deviation
+                  x      = x,
+                  ymin   = ymin,
+                  ymax   = ymax
+                ), color = "grey30",
+                   size  = I(2),
+                   data  = owp$standard.deviation
       )
     )
   }
