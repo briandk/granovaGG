@@ -545,7 +545,7 @@ granova.1w.ggplot <- function(data,
     )
   }
 
-  GetWithinGroupStandardDeviation <- function(owp) {
+  GetWithinGroupVariation <- function(owp) {
     baseline           <- min(owp$params$y.range)
     contrast           <- owp$summary$contrast 
     standard.deviation <- owp$summary$standard.deviation
@@ -745,7 +745,7 @@ granova.1w.ggplot <- function(data,
     )
   }
 
-  WithinGroupStandardDeviation <- function(owp) {
+  WithinGroupVariation <- function(owp) {
     return(
       geom_ribbon(
                 aes(
@@ -912,7 +912,7 @@ granova.1w.ggplot <- function(data,
   owp$inner.square          <- GetInnerSquare(owp)
   owp$model.summary         <- GetModelSummary(owp)
   owp$effect.size           <- GetEffectSize(owp)
-  owp$standard.deviation    <- GetWithinGroupStandardDeviation(owp)
+  owp$standard.deviation    <- GetWithinGroupVariation(owp)
   owp$label.background      <- GetBackgroundForGroupSizesAndLabels(owp)
   owp$group.labels          <- GetGroupLabels(owp)
   owp$group.sizes           <- GetGroupSizes(owp)
@@ -931,7 +931,7 @@ granova.1w.ggplot <- function(data,
   p <- p + OuterSquare()
   p <- p + InnerSquare()
   p <- p + EffectSize(owp)
-  p <- p + WithinGroupStandardDeviation(owp)
+  p <- p + WithinGroupVariation(owp)
   p <- p + ColorScale(owp)
   p <- p + FillScale()
   p <- p + XLabel()
