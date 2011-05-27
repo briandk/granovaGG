@@ -8,13 +8,11 @@ granova.1w.ggplot(poison$SurvTime,
 granova.1w.ggplot(poison$RateSurvTime, 
   group = poison$Group, 
   resid = TRUE, 
-  v.rng = 0
 )
 
 granova.1w.ggplot(mtcars$hp, 
   group = mtcars$cyl, 
   resid = TRUE, 
-  h.rng = 1
 )
 
 granova.1w.ggplot(mtcars$hp, 
@@ -25,3 +23,9 @@ granova.1w.ggplot(mtcars$hp,
   main       = "test"
 )
 
+random.data <- data.frame(response = rnorm(n = 100), group = rep(1:10, each = 10))
+
+granova.1w.ggplot(random.data$response,
+  group = random.data$group,
+  resid = TRUE
+)
