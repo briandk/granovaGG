@@ -580,7 +580,7 @@ granova.1w.ggplot <- function(data,
 
   GetGroupSizes  <- function(owp) {
     return(data.frame(
-             y     = max(owp$params$y.range) - 10 * owp$params$vertical.percent,
+             y     = max(owp$params$y.range) - (3 * owp$params$vertical.percent),
              x     = owp$summary$contrast,
              label = owp$summary$group.size,
              size  = 2,
@@ -593,7 +593,7 @@ granova.1w.ggplot <- function(data,
 
   GetGroupLabels <- function(owp) {
     return(data.frame(
-             y     = max(owp$params$y.range) - 5 * owp$params$vertical.percent,
+             y     = max(owp$params$y.range) - (10 * owp$params$vertical.percent),
              x     = owp$summary$contrast,
              label = owp$summary$group,
              size  = 2,
