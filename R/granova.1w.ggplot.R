@@ -691,7 +691,7 @@ granova.1w.ggplot <- function(data,
                  fill  = factor("Group Means")
                ),
                  size  = I(2),
-                 shape = 21,
+                 shape = 24,
                  color = "black",
                  data  = owp$summary, 
       )
