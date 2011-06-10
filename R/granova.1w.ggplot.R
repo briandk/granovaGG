@@ -369,14 +369,15 @@ granova.1w.ggplot <- function(data,
     .aspect.ratio            <- .contrast.range.distance / .score.range.distance
   
     return(list(
-             score.range.distance = .score.range.distance,
-             aggregate.x.breaks   = .aggregate.x.breaks,
-             aggregate.y.breaks   = .aggregate.y.breaks,
-             y.range              = .y.range,
-             x.range              = .x.range,
-             vertical.percent     = .vertical.percent,
-             horizontal.percent   = .horizontal.percent,
-             aspect.ratio         = .aspect.ratio
+             expanded.contrast.range = .expanded.contrast.range,
+             score.range.distance    = .score.range.distance,
+             aggregate.x.breaks      = .aggregate.x.breaks,
+             aggregate.y.breaks      = .aggregate.y.breaks,
+             y.range                 = .y.range,
+             x.range                 = .x.range,
+             vertical.percent        = .vertical.percent,
+             horizontal.percent      = .horizontal.percent,
+             aspect.ratio            = .aspect.ratio
            )
     )
   }
@@ -896,7 +897,17 @@ granova.1w.ggplot <- function(data,
     return(scale_size_continuous(legend = FALSE))
   }
 
-
+  VerticalGridLines <- function(owp) {
+    return(
+      geom_vline(
+        xintercept = seq(from = owp$params$expanded.contrast.range[1],
+                           to = owp$params$expanded.contrast.range[2],
+                           length.out = 33
+                    )
+      )
+    )
+  }
+  
   # Pepare OWP object
   owp                       <- AdaptVariablesFromGranovaComputations()
   owp$summary               <- GetSummary(owp)
@@ -941,6 +952,7 @@ granova.1w.ggplot <- function(data,
   p <- p + ForceCoordinateAxesToBeEqual(owp)
   p <- p + PlotTitle()
   p <- p + RemoveSizeElementFromLegend()
+  p <- p + VerticalGridLines(owp)
 
   return(p)
 }
