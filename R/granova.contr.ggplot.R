@@ -112,9 +112,9 @@ granova.contr.ggplot <- function(data,
 
   GetSummary <- function(data) {
     return(
-      ddply(data, .(x.values), summarise,
-        contrast           = unique(x.values),
-        group.mean         = mean(y.values)
+      ddply(data, .(x.values > 0), summarise,
+        contrasts          = mean(x.values),
+        responses          = mean(y.values)
       )
     )
   }
@@ -132,8 +132,8 @@ granova.contr.ggplot <- function(data,
   ComposeContrastPlot <- function(plot.data, index) {    
     p <- ggplot()
     p <- p + JitteredResponsesByContrast(plot.data[[index]]$raw.data)
-    p <- p + MeansByContrast(plot.data[[index]]$summary.data)
-    p <- p + ConnectContrastMeans(plot.data[[index]]$summary.data)
+    p <- p + EffectsOfContrasts(plot.data[[index]]$summary.data)
+    p <- p + ConnectEffectMeans(plot.data[[index]]$summary.data)
     p <- p + Theme(plot.theme)
     p <- p + ContrastPlotTitle(index)
     p <- p + ContrastPlotXLabel(index)
@@ -155,12 +155,12 @@ granova.contr.ggplot <- function(data,
     )
   }
   
-  MeansByContrast <- function(data) {
+  EffectsOfContrasts <- function(data) {
     return(
       geom_point(
                aes(
-                 x = contrast, 
-                 y = group.mean
+                 x = contrasts, 
+                 y = responses
                ),
                data  = data,
                color = brewer.pal(8, "Set1")[2],
@@ -170,12 +170,12 @@ granova.contr.ggplot <- function(data,
     )
   }
   
-  ConnectContrastMeans <- function(data) {
+  ConnectEffectMeans <- function(data) {
     return(
       geom_line(
                aes(
-                 x = contrast, 
-                 y = group.mean
+                 x = contrasts, 
+                 y = responses
                ),
                data  = data,
                color = brewer.pal(8, "Set1")[2],
