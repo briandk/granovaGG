@@ -1,13 +1,12 @@
 data(poison)
 ##Note violation of constant variance across groups in following graphic.
 granova.1w.ggplot(poison$SurvTime,     
-  group = poison$Group, 
-  resid = TRUE
+  group = poison$Group
 )
 
 granova.1w.ggplot(poison$RateSurvTime, 
   group = poison$Group, 
-  resid = TRUE, 
+  resid = FALSE, 
 )
 
 granova.1w.ggplot(mtcars$hp, 

@@ -699,17 +699,19 @@ granova.1w.ggplot <- function(data,
   }
 
   Residuals <- function(owp) {      
-    return(
-      geom_rug_alt(
-             aes(
-               x     = NULL, 
-               y     = within.group.residuals,
-               color = factor(within.1.sd.of.the.mean.of.all.residuals) 
-             ),
-             alpha = I(1),
-             data  = owp$residuals
+    if (resid == TRUE) {
+      return(
+        geom_rug_alt(
+               aes(
+                 x     = NULL, 
+                 y     = within.group.residuals,
+                 color = factor(within.1.sd.of.the.mean.of.all.residuals) 
+               ),
+               alpha = I(1),
+               data  = owp$residuals
+        )
       )
-    )
+    }
   }
 
   OuterSquare <- function() {
