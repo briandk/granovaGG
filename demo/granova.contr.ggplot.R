@@ -4,7 +4,7 @@ contrasts22 <- data.frame( c(-.5,-.5,.5,.5),
 names(contrasts22) <- c("Drug.A", "Drug.B", "Drug.A.B")
 
 x <- granova.contr.ggplot(arousal, contrasts = contrasts22)
-x[[1]]
+x
   
 data(rat)
 dat6 <- matrix(c(1, 1, 1, -1, -1, -1, -1, 1, 0, -1, 1, 0, 1, 1, -2, 
@@ -20,6 +20,7 @@ LayoutFourPlotsPerPage(y)
 #Polynomial Contrasts 
 z <- granova.contr.ggplot(rat[,1],contrasts = contr.poly(6))
 LayoutFourPlotsPerPage(z)
+granova.contr(rat[, 1], contrasts = contr.poly(6))
 
 #based on random data 
 data.random <- rt(64, 5)
