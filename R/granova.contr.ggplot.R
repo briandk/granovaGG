@@ -131,6 +131,7 @@ granova.contr.ggplot <- function(data,
   
   ComposeContrastPlot <- function(plot.data, index) {    
     p <- ggplot()
+    p <- p + MeanResponse(plot.data[[index]]$raw.data)
     p <- p + JitteredResponsesByContrast(plot.data[[index]]$raw.data)
     p <- p + EffectsOfContrasts(plot.data[[index]]$summary.data)
     p <- p + ConnectEffectMeans(plot.data[[index]]$summary.data)
@@ -140,6 +141,18 @@ granova.contr.ggplot <- function(data,
     p <- p + ContrastPlotYLabel()
         
     return(p)
+  }
+  
+  MeanResponse <- function(data) {
+    return(
+      geom_hline(
+        aes(yintercept = mean(y.values)), 
+        color = brewer.pal(8, "Set1")[1],
+        data  = data,
+        alpha = 0.3,
+        size  = 0.3
+      )
+    )
   }
   
   JitteredResponsesByContrast <- function (data) {
