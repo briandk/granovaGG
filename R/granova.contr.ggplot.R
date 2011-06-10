@@ -139,6 +139,8 @@ granova.contr.ggplot <- function(data,
     p <- p + ContrastPlotXLabel(index)
     p <- p + ContrastPlotYLabel()
     
+    print(plot.data[[index]]$raw.data)
+    
     return(p)
   }
   
