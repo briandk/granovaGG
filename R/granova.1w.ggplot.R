@@ -450,9 +450,7 @@ granova.1w.ggplot <- function(data,
      brewer.pal(n = 8, name = "Paired")[8],
      brewer.pal(n = 8, name = "Paired")[2],
      "darkblue",
-     "darkorange",
-     "grey50",
-     brewer.pal(n = 8, name = "Paired")[6]
+     "darkorange"
     )
   
     names(colors) <- c(
@@ -462,9 +460,7 @@ granova.1w.ggplot <- function(data,
       "Group Means",
       "Group Mean Line",
       "Within +/- 1 s.d.",
-      "Outside +/- 1 s.d.",
-      "Group Labels",
-      "Group Sizes"
+      "Outside +/- 1 s.d."
     )
   
     return(colors)
@@ -585,8 +581,7 @@ granova.1w.ggplot <- function(data,
              x     = owp$summary$contrast,
              label = owp$summary$group.size,
              size  = 2,
-             angle = 90,
-             color = factor("Group Sizes")
+             angle = 90
            )
     )
   
@@ -598,8 +593,7 @@ granova.1w.ggplot <- function(data,
              x     = owp$summary$contrast,
              label = owp$summary$group,
              size  = 2,
-             angle = 90,
-             color = factor("Group Labels")
+             angle = 90
            )
     )
   }
@@ -843,9 +837,9 @@ granova.1w.ggplot <- function(data,
                  y     = y,
                  label = label,
                  size  = size,
-                 angle = angle,
-                 color = color
+                 angle = angle
              ),
+           color = brewer.pal(n = 8, name = "Paired")[6],
            hjust = 1,
            vjust = "center",
            data  = owp$group.sizes
@@ -859,9 +853,9 @@ granova.1w.ggplot <- function(data,
                  y     = y,
                  label = label,
                  size  = size,
-                 angle = angle,
-                 color = color
+                 angle = angle
              ),
+           color = "grey50",
            hjust = "left",
            vjust = "top",
            data  = owp$group.labels
