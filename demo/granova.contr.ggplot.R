@@ -15,16 +15,16 @@ y <- granova.contr.ggplot(rat[,1], contrasts = dat6, ylab = "Rat Weight Gain",
   "Type 1 & 2 vs Type 3", "Interaction of Amount and Type 1 & 2", 
   "Interaction of Amount and  Type (1, 2), 3"))
 
-LayoutFourPlotsPerPage(y)
+(y)
 
 #Polynomial Contrasts 
 z <- granova.contr.ggplot(rat[,1],contrasts = contr.poly(6))
-LayoutFourPlotsPerPage(z)
+(z)
 granova.contr(rat[, 1], contrasts = contr.poly(6))
 
 #based on random data 
 data.random <- rt(64, 5)
 LayoutFourPlotsPerPage(
   granova.contr.ggplot(data.random, contrasts = contr.helmert(8), 
-  ylab = "Random Data", plot.theme = "theme_granova_1w_gray")
+  ylab = "Random Data")
 )
