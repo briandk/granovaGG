@@ -265,7 +265,7 @@ granova.contr.ggplot <- function(data,
     return(
       geom_point(
                aes(
-                 x = variable, 
+                 x = as.factor(variable), 
                  y = value
                ),
                data = data,
