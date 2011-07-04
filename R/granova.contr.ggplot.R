@@ -42,6 +42,12 @@ granova.contr.ggplot <- function(data,
       
       return(standardized.contrasts)
   }
+  
+  indic <- function(xx) {
+             mm <- matrix(0, length(xx), length(unique(xx)))
+             indx <- ifelse(xx == col(mm), 1, 0)
+             indx
+  }
 
   AdaptVariablesFromGranovaComputations <- function () {
     return(
