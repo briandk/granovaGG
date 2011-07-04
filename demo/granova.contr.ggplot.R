@@ -5,7 +5,7 @@ names(contrasts22) <- c("Drug.A", "Drug.B", "Drug.A.B")
 
 granova.contr.ggplot(arousal, contrasts = contrasts22)
 granova.contr(arousal, contrasts = contrasts22)
-  
+
 # data(rat)
 # dat6 <- matrix(c(1, 1, 1, -1, -1, -1, -1, 1, 0, -1, 1, 0, 1, 1, -2, 
 #     1, 1, -2, -1, 1, 0, 1, -1, 0, 1, 1, -2, -1, -1, 2), ncol = 5)
