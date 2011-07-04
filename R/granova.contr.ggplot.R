@@ -17,7 +17,7 @@ granova.contr.ggplot <- function(data,
 
   # 'ctr' is shorthand for the ConTRast data object that will hold all the information for plotting
   FormatResponseData <- function(data) {
-    if (dim(resp)[2] > 1) {
+    if (dim(data)[2] > 1) {
       data <- stack(as.data.frame(data))[, 1]
     }
     
