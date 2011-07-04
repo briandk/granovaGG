@@ -15,67 +15,19 @@ granova.contr.ggplot <- function(data,
   # Basic lm (regression) results are provided; orthogonal contrasts are ideal (but not essential).
   # 'jj' controls jitter.
 
-  jj<-.1*jj
-
-  resp <- data
-  con  <- contrasts
-  ngrp <- nrow(con)
-
-  if(!is.null(dim(resp))){
-  	if(dim(resp)[2] > 1){resp <- stack(as.data.frame(data))[,1]}}
-  npg <- length(resp)/ngrp
-
-  con.tstr <- svd(con, nv=0, nu=0)$d
-  if(min(con.tstr) < sqrt(.Machine$double.eps)){
-      stop('Contrasts matrix is singular; it must be non-singular')}
-
-  # The following two functions are used below.
-
-  #Generates a 'standardized contrast vector'; positive & abs(negative) values sum to 1
-  #cont assumed to consist of contrast(s) vector/matrix w/ mean zero; otherwise stops
-      std.contr <- function(cont, tol = sqrt(.Machine$double.eps)^0.6) {
-          if (!is.matrix(cont)) {
-              cont <- as.matrix(cont)
-          }
-          if (sum(abs(colMeans(cont))) > tol) {
-              stop("Input vector/matrix must have mean zero (for each column)")
-          }
-          if (ncol(cont) == 1) {
-              cont <- matrix(cont, ncol = 1)
-          }
-          dg <- apply(abs(cont), 2, sum)
-          if (length(dg) == 1) {
-              dg <- as.matrix(dg)
-          }
-          s.cont <- round(2 * cont %*% diag(1/dg), 3)
-          s.cont
-      }
-
-  #Generates indicator matrix w/ 1 entry per row, acc. index in vector xx
-  indic <- function(xx) {
-             mm <- matrix(0, length(xx), length(unique(xx)))
-             indx <- ifelse(xx == col(mm), 1, 0)
-             indx
-  }
-        
-  vn <- rep(1:ngrp, ea = npg)
-      N <- length(resp)
-      xind <- indic(vn)
-      if (!is.matrix(con)) {
-          con <- as.matrix(con)
-      }
-  Xcon <- xind %*% con
-  Xcons <- std.contr(Xcon)
-  ncx <- ncol(Xcons)
-  dimnames(Xcon)[2] <- list((unclass(dimnames(con))[2])[[1]])
-  dmm<-dimnames(Xcon)[2][[1]]
-  if(is.null(dmm))dmm<-1:ncol(con)
-
   # 'ctr' is shorthand for the ConTRast data object that will hold all the information for plotting
+  FormatResponseData <- function(data) {
+    if (dim(resp)[2] > 1) {
+      data <- stack(as.data.frame(data))[, 1]
+    }
+    
+    return(data)
+  }
+  
   AdaptVariablesFromGranovaComputations <- function () {
     return(
         list(
-          response                      = resp,
+          response                      = FormatResponseData(resp),
           contrast.matrix               = contrasts,
           scaled.standardized.contrasts = Xcons * npg,
           number.of.contrasts           = dim(Xcons)[2],
