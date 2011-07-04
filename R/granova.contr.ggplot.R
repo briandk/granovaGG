@@ -38,8 +38,9 @@ granova.contr.ggplot <- function(data,
       if (length(dg) == 1) {
           dg <- as.matrix(dg)
       }
-      s.contrasts <- round(2 * contrasts %*% diag(1/dg), 3)
-      s.contrasts
+      standardized.contrasts <- round(2 * contrasts %*% diag(1/dg), 3)
+      
+      return(standardized.contrasts)
   }
 
   AdaptVariablesFromGranovaComputations <- function () {
