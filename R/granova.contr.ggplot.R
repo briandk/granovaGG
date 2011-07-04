@@ -50,14 +50,24 @@ granova.contr.ggplot <- function(data,
   }
 
   AdaptVariablesFromGranovaComputations <- function () {
+    
+    response            <- FormatResponseData(data)
+    contrasts           <- as.matrix(contrasts)
+    number.of.groups    <- nrow(contrasts)
+    responses.per.group <- length(response)/number.of.groups
+    group.identifiers   <- rep(1:number.of.groups, ea = responses.per.group)
+    indicator.matrix    <- indic(group.identifiers)
+    indicated.contrasts <- indicator.matrix %*% contrasts
+    standardized.contrasts <- std.contr(indicated.contrasts)
+    
     return(
         list(
-          response                      = FormatResponseData(resp),
+          response                      = response,
           contrast.matrix               = contrasts,
-          scaled.standardized.contrasts = Xcons * npg,
-          number.of.contrasts           = dim(Xcons)[2],
-          number.of.groups              = ngrp,
-          number.per.group              = npg
+          scaled.standardized.contrasts = standardized.contrasts * responses.per.group,
+          number.of.contrasts           = dim(standardized.contrasts)[2],
+          number.of.groups              = number.of.groups,
+          response.per.group            = responses.per.group
         )
     )
   }
