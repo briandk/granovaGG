@@ -24,6 +24,24 @@ granova.contr.ggplot <- function(data,
     return(data)
   }
   
+  std.contr <- function(cont, tol = sqrt(.Machine$double.eps)^0.6) {
+      if (!is.matrix(cont)) {
+          cont <- as.matrix(cont)
+      }
+      if (sum(abs(colMeans(cont))) > tol) {
+          stop("Input vector/matrix must have mean zero (for each column)")
+      }
+      if (ncol(cont) == 1) {
+          cont <- matrix(cont, ncol = 1)
+      }
+      dg <- apply(abs(cont), 2, sum)
+      if (length(dg) == 1) {
+          dg <- as.matrix(dg)
+      }
+      s.cont <- round(2 * cont %*% diag(1/dg), 3)
+      s.cont
+  }
+
   AdaptVariablesFromGranovaComputations <- function () {
     return(
         list(
