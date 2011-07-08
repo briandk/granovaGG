@@ -137,7 +137,7 @@ granova.contr.ggplot <- function(data,
         aes(yintercept = mean(y.values)), 
         color = brewer.pal(8, "Set1")[1],
         data  = data,
-        alpha = 0.3,
+        alpha = 0.5,
         size  = 0.3
       )
     )
