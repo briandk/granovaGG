@@ -17,11 +17,12 @@ granova.contr.ggplot <- function(data,
 
   # 'ctr' is shorthand for the ConTRast data object that will hold all the information for plotting
   FormatResponseData <- function(data) {
-    if (dim(data)[2] > 1) {
-      data <- stack(as.data.frame(data))[, 1]
+    number.of.columns <- dim(data)[2]
+    if (is.null(number.of.columns)) {
+      return(data)
     }
     
-    return(data)
+    return(stack(as.data.frame(data))[, 1])
   }
   
   std.contr <- function(contrasts, tolerance = sqrt(.Machine$double.eps)^0.6) {
