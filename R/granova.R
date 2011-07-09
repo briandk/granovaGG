@@ -109,3 +109,9 @@ OverlapWarning <- function(data, tolerance) {
   
   return(c(first, inner, last))
 }
+
+FirstElementOverlaps <- function(data, tolerance) {
+  return(
+    abs(data[1] - data[2]) < tolerance
+  )
+}
