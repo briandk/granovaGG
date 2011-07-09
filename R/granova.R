@@ -132,3 +132,10 @@ LastElementOverlaps <- function(data, tolerance) {
     abs(data[last.index] - data[(last.index) - 1]) < tolerance
   )
 }
+
+NeighborOverlaps <- function(data, tolerance, index) {
+  left.overlap  <- abs(data[index] - data[(index - 1)]) < tolerance
+  right.overlap <- abs(data[index] - data[(index + 1)]) < tolerance
+  
+  return(left.overlap | right.overlap)
+}
