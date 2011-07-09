@@ -192,8 +192,11 @@ granova.contr.ggplot <- function(data,
   }
   
   ContrastPlotXLabel <- function(ctr, index) {
-    contrast.name <- dimnames(ctr$contrast.matrix)[[2]][index]
+    if (is.null(dimnames(ctr$contrast.matrix))) {
+      return(xlab(paste("Contrast ", index)))
+    }
     
+    contrast.name <- dimnames(ctr$contrast.matrix)[[2]][index]
     return(
       xlab(paste("Contrast ", contrast.name))
     )
