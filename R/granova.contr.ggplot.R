@@ -68,7 +68,7 @@ granova.contr.ggplot <- function(data,
           scaled.standardized.contrasts = standardized.contrasts * responses.per.group,
           number.of.contrasts           = dim(standardized.contrasts)[2],
           number.of.groups              = number.of.groups,
-          response.per.group            = responses.per.group
+          responses.per.group            = responses.per.group
         )
     )
   }
@@ -243,7 +243,7 @@ granova.contr.ggplot <- function(data,
     p <- p + MeansByGroup(plot.data$summary.data)
     p <- p + ConnectGroupResponseMeans(plot.data$summary.data)
     p <- p + Theme(plot.theme)
-    p <- p + GroupSummaryPlotTitle()
+    p <- p + GroupSummaryPlotTitle(ctr)
     p <- p + GroupSummaryXLabel()
     p <- p + GroupSummaryYLabel()
     return(p)
@@ -291,9 +291,9 @@ granova.contr.ggplot <- function(data,
     )
   }
   
-  GroupSummaryPlotTitle <- function(index) {
+  GroupSummaryPlotTitle <- function(ctr) {
     return(
-      opts(title = paste("Responses for all groups, each n = ", ctr$number.per.group))
+      opts(title = paste("Responses for all groups, each n = ", ctr$responses.per.group))
     )
   }
   
