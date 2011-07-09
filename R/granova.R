@@ -125,3 +125,10 @@ InnerElementsOverlap <- function(data, tolerance) {
          )
   )
 }
+
+LastElementOverlaps <- function(data, tolerance) {
+  last.index <- length(data)
+  return(
+    abs(data[last.index] - data[(last.index) - 1]) < tolerance
+  )
+}
