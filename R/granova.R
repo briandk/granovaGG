@@ -115,3 +115,13 @@ FirstElementOverlaps <- function(data, tolerance) {
     abs(data[1] - data[2]) < tolerance
   )
 }
+
+InnerElementsOverlap <- function(data, tolerance) {
+  return(sapply(
+           X         = 2:(length(data) - 1),
+           FUN       = NeighborOverlaps,
+           data      = data,
+           tolerance = tolerance
+         )
+  )
+}
