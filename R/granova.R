@@ -86,6 +86,18 @@ Theme <- function(plot.theme) {
     )
 }
 
+GetContrastName <- function(ctr, index) {
+  if (is.null(dimnames(ctr$contrast.matrix))) {
+    contrast.name <- paste(index)
+  }
+  else {
+    provided.contrast.name <- dimnames(ctr$contrast.matrix)[[2]][index]
+    contrast.name <- paste(provided.contrast.name)
+  }
+  
+  return(paste("Contrast ", contrast.name))
+}
+
 # theme_gray <- function(base_size = 12) {
 #   structure(list(
 #     axis.line         = theme_blank(),

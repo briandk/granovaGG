@@ -124,7 +124,7 @@ granova.contr.ggplot <- function(data,
     p <- p + EffectsOfContrasts(plot.data[[index]]$summary.data)
     p <- p + ConnectEffectMeans(plot.data[[index]]$summary.data)
     p <- p + Theme(plot.theme)
-    p <- p + ContrastPlotTitle(index)
+    p <- p + ContrastPlotTitle(ctr, index)
     p <- p + ContrastPlotXLabel(ctr, index)
     p <- p + ContrastPlotYLabel()
         
@@ -185,26 +185,21 @@ granova.contr.ggplot <- function(data,
     )
   }
   
-  ContrastPlotTitle <- function(index) {
+  ContrastPlotTitle <- function(ctr, index) {
     return(
-      opts(title = paste("Coefficients vs. Response, Contrast ", index))
+        opts(title = paste("Coefficients vs. Response, ", GetContrastName(ctr, index)))
     )
   }
   
   ContrastPlotXLabel <- function(ctr, index) {
-    if (is.null(dimnames(ctr$contrast.matrix))) {
-      return(xlab(paste("Contrast ", index)))
-    }
-    
-    contrast.name <- dimnames(ctr$contrast.matrix)[[2]][index]
     return(
-      xlab(paste("Contrast ", contrast.name))
+        xlab(paste(GetContrastName(ctr, index)))
     )
   }
   
   ContrastPlotYLabel <- function() {
     return(
-      ylab(paste("Response"))
+        ylab(paste("Outcome (Response)"))
     )
   }
   
