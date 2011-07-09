@@ -101,3 +101,11 @@ GetContrastName <- function(ctr, index) {
 ReorderDataByColumn <- function(x, column) {
   return(x[order(x[[column]]), ])
 }
+
+OverlapWarning <- function(data, tolerance) {
+  first <- FirstElementOverlaps(data, tolerance)
+  inner <- InnerElementsOverlap(data, tolerance)
+  last  <- LastElementOverlaps(data, tolerance)
+  
+  return(c(first, inner, last))
+}
