@@ -125,7 +125,7 @@ granova.contr.ggplot <- function(data,
     p <- p + ConnectEffectMeans(plot.data[[index]]$summary.data)
     p <- p + Theme(plot.theme)
     p <- p + ContrastPlotTitle(index)
-    p <- p + ContrastPlotXLabel(index)
+    p <- p + ContrastPlotXLabel(ctr, index)
     p <- p + ContrastPlotYLabel()
         
     return(p)
@@ -191,9 +191,11 @@ granova.contr.ggplot <- function(data,
     )
   }
   
-  ContrastPlotXLabel <- function(index) {
+  ContrastPlotXLabel <- function(ctr, index) {
+    contrast.name <- dimnames(ctr$contrast.matrix)[[2]][index]
+    
     return(
-      xlab(paste("Contrast ", index))
+      xlab(paste("Contrast ", contrast.name))
     )
   }
   
