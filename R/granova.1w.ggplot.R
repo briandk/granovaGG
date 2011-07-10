@@ -845,10 +845,10 @@ granova.1w.ggplot <- function(data,
              aes(x     = x,
                  y     = y,
                  label = label,
-                 size  = size,
                  angle = angle
              ),
-           color = brewer.pal(n = 8, name = "Paired")[6],
+           size  = 2,
+           color = "grey50",
            hjust = 1,
            vjust = "center",
            data  = owp$group.sizes
