@@ -597,6 +597,13 @@ granova.1w.ggplot <- function(data,
            )
     )
   }
+  
+  AddOverplotWarning <- function(data, variable, tolerance) {
+    ordered.data <- ReorderDataByColumn(data, variable)
+    overplotted  <- OverlapWarning(ordered.data[[variable]], tolerance)
+    
+    return(data.frame(ordered.data, overplotted))
+  }
 
   ######## Plot Functions Below
 
@@ -907,6 +914,7 @@ granova.1w.ggplot <- function(data,
   owp$summary               <- GetSummary(owp)
   owp$group.mean.line       <- GetGroupMeanLine(owp)
   owp$params                <- GetGraphicalParameters(owp)
+  owp$overplot              <- AddOverplotWarning(owp$summary, "contrast", 2*owp$params$horizontal.percent)
   owp$squares               <- GetSquareParameters(owp)
   owp$colors                <- GetColors()
   owp$outer.square          <- GetOuterSquare(owp)
