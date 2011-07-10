@@ -874,6 +874,24 @@ granova.1w.ggplot <- function(data,
     }
   }
 
+  OverplottedGroupLabels <- function(owp) {
+    if (TRUE %in% owp$group.labels$overplotted) {
+      return(geom_text(
+               aes(x     = x,
+                   y     = y,
+                   label = label,
+                   size  = size,
+                   angle = angle
+               ),
+             color = brewer.pal(n = 8, name = "Paired")[6],
+             hjust = "left",
+             vjust = "top",
+             data  = subset(owp$group.labels, overplotted == TRUE)
+             )
+      )
+    }
+  }
+  
   RotateXTicks <- function() {
     return(opts(axis.text.x = theme_text(angle = 90)))
   }
@@ -955,6 +973,7 @@ granova.1w.ggplot <- function(data,
   p <- p + BackgroundForGroupSizesAndLabels(owp)
   p <- p + GroupSizes(owp)
   p <- p + NonOverplottedGroupLabels(owp)
+  p <- p + OverplottedGroupLabels(owp)
   p <- p + RotateXTicks()
   p <- p + Theme(plot.theme)
   p <- p + ForceCoordinateAxesToBeEqual(owp)
