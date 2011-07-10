@@ -577,11 +577,12 @@ granova.1w.ggplot <- function(data,
 
   GetGroupSizes  <- function(owp) {
     return(data.frame(
-             y     = max(owp$params$y.range) - (3 * owp$params$vertical.percent),
-             x     = owp$summary$contrast,
-             label = owp$summary$group.size,
-             size  = 2,
-             angle = 90
+             y           = max(owp$params$y.range) - (3 * owp$params$vertical.percent),
+             x           = owp$overplot$contrast,
+             label       = owp$overplot$group.size,
+             overplotted = owp$overplot$overplotted,
+             size        = 2,
+             angle       = 90
            )
     )
   
