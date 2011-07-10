@@ -891,7 +891,7 @@ granova.1w.ggplot <- function(data,
   }
   
   GetGroupLabelSize <- function() {
-    return(4)
+    return(3)
   }
   
   RotateXTicks <- function() {
