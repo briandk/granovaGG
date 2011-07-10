@@ -909,6 +909,19 @@ granova.1w.ggplot <- function(data,
     )
   }
   
+  ### Warning Function Below
+  
+  PrintOverplotWarning <- function(owp) {
+    if (TRUE %in% owp$overplot$overplotted) {
+      overplotted.groups <- subset(owp$overplot, 
+                                   overplotted == TRUE,
+                                   select = c("group", "group.mean", "contrast")
+                            )
+      warning("The following groups are likely to be overplotted")
+      print(overplotted.groups)
+    }
+  }
+  
   # Pepare OWP object
   owp                       <- AdaptVariablesFromGranovaComputations()
   owp$summary               <- GetSummary(owp)
@@ -955,6 +968,8 @@ granova.1w.ggplot <- function(data,
   p <- p + PlotTitle()
   p <- p + RemoveSizeElementFromLegend()
   p <- p + VerticalGridLines(owp)
+  
+  PrintOverplotWarning(owp)
 
   return(p)
 }
