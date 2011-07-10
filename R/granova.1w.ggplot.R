@@ -856,20 +856,22 @@ granova.1w.ggplot <- function(data,
     )
   }
 
-  GroupLabels <- function(owp) {
-    return(geom_text(
-             aes(x     = x,
-                 y     = y,
-                 label = label,
-                 size  = size,
-                 angle = angle
-             ),
-           color = "grey50",
-           hjust = "left",
-           vjust = "top",
-           data  = owp$group.labels
-           )
-    )
+  NonOverplottedGroupLabels <- function(owp) {
+    if (FALSE %in% owp$group.labels$overplotted) {
+      return(geom_text(
+               aes(x     = x,
+                   y     = y,
+                   label = label,
+                   size  = size,
+                   angle = angle
+               ),
+             color = "grey50",
+             hjust = "left",
+             vjust = "top",
+             data  = subset(owp$group.labels, overplotted == FALSE)
+             )
+      )
+    }
   }
 
   RotateXTicks <- function() {
@@ -952,7 +954,7 @@ granova.1w.ggplot <- function(data,
   p <- p + YLabel()
   p <- p + BackgroundForGroupSizesAndLabels(owp)
   p <- p + GroupSizes(owp)
-  p <- p + GroupLabels(owp)
+  p <- p + NonOverplottedGroupLabels(owp)
   p <- p + RotateXTicks()
   p <- p + Theme(plot.theme)
   p <- p + ForceCoordinateAxesToBeEqual(owp)
