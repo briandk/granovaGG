@@ -926,7 +926,7 @@ granova.1w.ggplot <- function(data,
                                    overplotted == TRUE,
                                    select = c("group", "group.mean", "contrast")
                             )
-      warning("The following groups are likely to be overplotted")
+      print("The following groups are likely to be overplotted")
       print(overplotted.groups)
     }
   }
