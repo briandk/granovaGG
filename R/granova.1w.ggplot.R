@@ -897,17 +897,6 @@ granova.1w.ggplot <- function(data,
   RemoveSizeElementFromLegend <- function() {
     return(scale_size_continuous(legend = FALSE))
   }
-
-  VerticalGridLines <- function(owp) {
-    return(
-      geom_vline(
-        xintercept = seq(from = owp$params$expanded.contrast.range[1],
-                           to = owp$params$expanded.contrast.range[2],
-                           length.out = 33
-                    )
-      )
-    )
-  }
   
   ### Warning Function Below
   
@@ -967,7 +956,6 @@ granova.1w.ggplot <- function(data,
   p <- p + ForceCoordinateAxesToBeEqual(owp)
   p <- p + PlotTitle()
   p <- p + RemoveSizeElementFromLegend()
-  p <- p + VerticalGridLines(owp)
   
   PrintOverplotWarning(owp)
 
