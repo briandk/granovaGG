@@ -581,7 +581,6 @@ granova.1w.ggplot <- function(data,
              x           = owp$overplot$contrast,
              label       = owp$overplot$group.size,
              overplotted = owp$overplot$overplotted,
-             size        = 2,
              angle       = 90
            )
     )
@@ -594,7 +593,6 @@ granova.1w.ggplot <- function(data,
              x           = owp$overplot$contrast,
              label       = owp$overplot$group,
              overplotted = owp$overplot$overplotted,
-             size        = 2,
              angle       = 90
            )
     )
@@ -862,9 +860,9 @@ granova.1w.ggplot <- function(data,
                aes(x     = x,
                    y     = y,
                    label = label,
-                   size  = size,
                    angle = angle
                ),
+             size  = 4,
              color = "grey50",
              hjust = "left",
              vjust = "top",
@@ -880,9 +878,9 @@ granova.1w.ggplot <- function(data,
                aes(x     = x,
                    y     = y,
                    label = label,
-                   size  = size,
                    angle = angle
                ),
+             size  = 4,
              color = brewer.pal(n = 8, name = "Paired")[6],
              hjust = "left",
              vjust = "top",
