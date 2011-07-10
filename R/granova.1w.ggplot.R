@@ -62,10 +62,7 @@ granova.1w.ggplot <- function(data,
   yy <- data
 
   #Setting graph to square
-  #! op <- par(no.readonly = TRUE)
-  #! on.exit(par(op))
-  #! par(pty='s')
-
+      
   mtdff <- is.data.frame(yy)
   ln.yy<-(length(names(yy))>1)
   if(mtdff){
@@ -147,9 +144,7 @@ granova.1w.ggplot <- function(data,
   #third is weighted (by group size) mean, then mean, var, sd.
 
   stats <- cbind(tabc,stats[,1]-grandmean, tabc.dm * stats[,1],stats)
-  #! pt.size<-1
-  #! if(max(stats[,1] >= 20))pt.size <- .7
-
+    
   #Creating x, y ranges for graph
   #Parameters h.rng, v.rng, jj for horizontal, vertical and jitter enabled.
 
@@ -174,48 +169,27 @@ granova.1w.ggplot <- function(data,
   # if(is.null(main))main <- paste('One-way ANOVA displaying',ngroups,'groups')
 
 
-  #! plot(stats.vcj, yr, pch = 16, cex = pt.size, xlab = "", ylab = "", xlim = rng.h, ylim = rng.vv, axes = F, main = main)
-  #! if(box)box(lwd = 1.5)
-
+    
   #Reordering the stats matrix by the mean of each group
   statsro<-stats[order(stats[,4]),]
 
   #Labels vertical dotted lines through groups with group sizes, names
-  #! mtext(side = 3,text = paste(as.character(statsro[,1])), at = statsro[,2], las = 2, 
-  #!         line = size.line, cex.axis = .85*px, cex = .7*kx, col = 'darkred')
-  #! 
-  #! mtext(side = 3,text = paste(rownames(statsro)), at = statsro[,2], las = 2, 
-  #!         line = size.line+.9, cex.axis = .85*px, cex = .7*kx, col = 'black')
-  #! mtext(side = 3, text = " Group Sizes:", adj=0, line = size.line, cex=.65*kx, col = 'darkred')
-  #! mtext(side = 3, text = "|", at = statsro[,2], las=1, adj = 0, line = size.line-.9, cex.axis = .85*px, cex = .7*kx)
-
+              
 
   #Adds green dot and horizontal green dashed line for grandmean
-  #! points(0, grandmean, pch = 16, cex = 1.7*kx,col=3) 
-  #! abline(h=grandmean,lty=3,lwd=2,col=3)
-
+    
   #Bottom axis values for contrast coefficients
-  #! axis(side = 1, at = round(statsro[,2],2), las = 2, cex.axis=.6*px)
-  #! axis(side = 1, at = 0, line=.75, cex.axis=.75*px)
-
+    
   #Leftside axis has grandmean value and max min plotted; Bob: might reset digits to dg instead of dg-1
-  #! axis(side = 2, at = round(grandmean, dg-1), cex=.55*kx)
-  #! axis(side = 2, at = round(range(yr), dg-1), cex=.55*kx)
-
+    
   #Rightside axis is labeled with group means
-  #! axis(side = 4, at = round(stats[,4],dg-1), las=2, cex.axis = .7*px)
-
+  
   #Horizontal and vertical lines at each group mean; line through group means
   #abline(h=stats[,4],lty=2,lwd=.4,col=grey(.1))
-  #! segments(stats[,2],stats[,4],10^10,stats[,4],lty=2,lwd=.6,col=gray(.7))
-  #! for(i in 1:ngroups)lines(rep(stats[i,2],2),c(rng.vv[1]- .1* diff(range(yr)), max(yr)+top.dot*diff(range(yr))),lty=3,lwd=1,col=grey(.8))
-  #! lines(stats[,2],stats[,4],lwd=1.6,col=4)
-
+      
 
   #Red filled triangles at group means
-  #! points(stats[,2],stats[,4],pch=2,cex=1.45*kx)
-  #! points(stats[,2],stats[,4],pch=17,cex=1.3*kx,col='red')
-
+    
   #Calculation of squares etc.
   r.xy.sqd<-cor(yr,stats.vc)^2
   SS.tot<-(length(yr)-1)*var(yr)
@@ -228,49 +202,27 @@ granova.1w.ggplot <- function(data,
   residuals<-round(yr-stats.vc,3)
 
   #Rug plot of residuals
-  #! if(resid)rug(residuals,side=4,ti=.02,lwd=1.3,col=4)
-
+  
   #sdw is standard deviation within, ie of residuals.
   sdw<-sd(residuals)*sqrt((length(yr)-1)/df.w)
 
   #This interval based on pooled standard error within.
   grandmean.pm.sdw<-c(grandmean-sdw,grandmean+sdw) 
   grandmean.pm.sewR<-round(grandmean.pm.sdw,dg-1)
-  #! axis(side=2,at=grandmean.pm.sewR,col=4,cex.axis=.7*px)
-  #! mtext(c('gm-sdw','gm+sdw'),at=grandmean.pm.sdw,side=2,line=2.1,col=4,cex=.7*kx) 
-
-  #! abline(h=grandmean.pm.sdw,lty=3,lwd=1,col='blue')
-  F.stat <- MS.b/MS.w
+    
+    F.stat <- MS.b/MS.w
 
   #x and y labels
-  #! if(!is.null(xlab))title(xlab=xlab,cex=.5*kx)
-  #! else{title(xlab = "Contrast coefficients based on group means and sizes",cex=.4*kx)}
-  #! if(!is.null(ylab))title(ylab=ylab,cex=.5*kx,line=3.7)
-  #! else{title(ylab = "Dependent variable (response)",cex=.5*kx,line=3.7)}
-
-  #Legends 
-  #! legend(x="bottomleft", legend = c("Group Means","Grand Mean"), 
-  #!         col = c(2,3), pch = c(17,16), cex = .8*kx, bty = "n")
-  #! 
-  #! if(dosqrs){legend(x = "bottomright", legend = c("MS-within", 
-  #!         "MS-between", paste("F-statistic = ", round(F.stat,2))), 
-  #!         col = c(4,2,1), pch = c(0,0,-1), cex = .8*kx, bty = "n")
-  #! }else{legend(x = "bottomright", legend = c(paste("F-statistic = ", round(F.stat,2))), 
-  #!         col = 1, pch = -1, cex = .8*kx, bty = "n")
-  #!         }
         
+  #Legends 
+                          
   p.F <- 1 - pf(F.stat, df.b,df.w)
   sqrF<-sqrt(F.stat)
   sqrs<-2*sqrt(MS.w)/rng.rt
-  #! if(dosqrs)symbols(0,grandmean,squares=sqrs,lwd=2,inches=F,fg='blue',lty=1,,add=T,cex=.8)
-  #! if(dosqrs)symbols(0,grandmean,squares=sqrs*sqrt(F.stat),lwd=2,inches=F,fg='red',lty=1,,add=T,cex=.8)
-
+    
   #Trimmed means marked and outputted if 'trmean = TRUE'
   trmd.mn<-tapply(yr,list(groupf), mean, tr=.2)
-  #! if(trmean){points(statsro[,2], trmd.mn[order(stats[, 4])], pch=4, cex=1.8, col='darkgreen') 
-  #!           legend(x = "bottom", legend = "20% trimmed means", col = 'darkgreen', pch = 4, cex = .8*kx, bty = "n")  
-  #!          }
-
+      
   gsum<-array(c(grandmean, df.b, df.w, MS.b, MS.w, F.stat, p.F, round(r.xy.sqd,3)))
   dimnames(gsum)<-list(c('Grandmean', 'df.bet', 'df.with', 'MS.bet', 'MS.with', 'F.stat', 'F.prob', 'SS.bet/SS.tot'))
   stats.out<-cbind(statsro[,1:4],round(as.matrix(trmd.mn[order(stats[,4])]),2),statsro[,5:6])
