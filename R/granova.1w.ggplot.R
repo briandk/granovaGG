@@ -60,8 +60,6 @@ granova.1w.ggplot <- function(data,
   # Please address questions, or make suggestions for improvements, to: rmpruzek@yahoo.com or james.helmreich@marist.edu
 
   yy <- data
-
-  #Setting graph to square
       
   mtdff <- is.data.frame(yy)
   ln.yy<-(length(names(yy))>1)
@@ -166,30 +164,10 @@ granova.1w.ggplot <- function(data,
 
   ammt <- (jj/200) * diff(rng.sts)
   stats.vcj<-jitter(stats.vc, am = ammt)
-  # if(is.null(main))main <- paste('One-way ANOVA displaying',ngroups,'groups')
-
-
     
   #Reordering the stats matrix by the mean of each group
   statsro<-stats[order(stats[,4]),]
 
-  #Labels vertical dotted lines through groups with group sizes, names
-              
-
-  #Adds green dot and horizontal green dashed line for grandmean
-    
-  #Bottom axis values for contrast coefficients
-    
-  #Leftside axis has grandmean value and max min plotted; Bob: might reset digits to dg instead of dg-1
-    
-  #Rightside axis is labeled with group means
-  
-  #Horizontal and vertical lines at each group mean; line through group means
-  #abline(h=stats[,4],lty=2,lwd=.4,col=grey(.1))
-      
-
-  #Red filled triangles at group means
-    
   #Calculation of squares etc.
   r.xy.sqd<-cor(yr,stats.vc)^2
   SS.tot<-(length(yr)-1)*var(yr)
@@ -200,8 +178,6 @@ granova.1w.ggplot <- function(data,
   MS.w<-SS.w/df.w
   MS.b<-SS.bet/df.b
   residuals<-round(yr-stats.vc,3)
-
-  #Rug plot of residuals
   
   #sdw is standard deviation within, ie of residuals.
   sdw<-sd(residuals)*sqrt((length(yr)-1)/df.w)
@@ -211,10 +187,6 @@ granova.1w.ggplot <- function(data,
   grandmean.pm.sewR<-round(grandmean.pm.sdw,dg-1)
     
     F.stat <- MS.b/MS.w
-
-  #x and y labels
-        
-  #Legends 
                           
   p.F <- 1 - pf(F.stat, df.b,df.w)
   sqrF<-sqrt(F.stat)
