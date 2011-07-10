@@ -862,7 +862,7 @@ granova.1w.ggplot <- function(data,
                    label = label,
                    angle = angle
                ),
-             size  = 4,
+             size  = GetGroupLabelSize(),
              color = "grey50",
              hjust = "left",
              vjust = "top",
@@ -880,7 +880,7 @@ granova.1w.ggplot <- function(data,
                    label = label,
                    angle = angle
                ),
-             size  = 4,
+             size  = GetGroupLabelSize(),
              color = brewer.pal(n = 8, name = "Paired")[6],
              hjust = "left",
              vjust = "top",
@@ -888,6 +888,10 @@ granova.1w.ggplot <- function(data,
              )
       )
     }
+  }
+  
+  GetGroupLabelSize <- function() {
+    return(4)
   }
   
   RotateXTicks <- function() {
