@@ -64,13 +64,24 @@ granova.1w.ggplot <- function(data,
   CoerceHigherDimensionalDataToMatrix <- function(data) {
     if (is.data.frame(data)) {
       if (length(names(data)) > 1) {
-        data <- as.matrix(data)
+        data <- CoerceToMatrix(data)
       }
     }
     
     return(data)
   }
   
+  CoerceToMatrix <- function(x) {
+    error.message <- "It looks like you've tried to pass in higher-dimension data AND a separate group indicator.
+    If your data contains columns of equal numbers of observations, try re-calling granova.1w 
+    on your data while setting group = NULL"
+    
+    if (!is.null(group)) {
+      message(error.message)
+    }
+    return(as.matrix(x))
+  }
+
   yy <- CoerceHigherDimensionalDataToMatrix(yy)
   
   #Testing input data type
