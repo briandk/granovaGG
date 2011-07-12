@@ -492,14 +492,14 @@ granova.1w.ggplot <- function(data,
   }
 
   GetWithinGroupVariation <- function(owp) {
-    baseline           <- min(owp$params$y.range)
-    contrast           <- owp$summary$contrast 
-    standard.deviation <- owp$summary$standard.deviation
+    lower.bound           <- min(owp$params$y.range)
+    contrast              <- owp$summary$contrast 
+    standard.deviation    <- owp$summary$standard.deviation
     return(
       data.frame(
         x    = contrast,
-        ymin = baseline,
-        ymax = baseline + RescaleVariationData(standard.deviation)
+        ymin = lower.bound,
+        ymax = lower.bound + RescaleVariationData(standard.deviation)
       )
     )
   }
