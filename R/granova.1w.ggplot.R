@@ -715,7 +715,7 @@ granova.1w.ggplot <- function(data,
                   ymax   = ymax
                 ), color = "grey30",
                    size  = I(2),
-                   data  = owp$standard.deviation
+                   data  = owp$variation
       )
     )
   }
@@ -729,7 +729,7 @@ granova.1w.ggplot <- function(data,
                   ymax   = min(ymax)
                 ), color = "grey",
                    size  = I(2),
-                   data  = owp$standard.deviation
+                   data  = owp$variation
       )
     )
     
@@ -892,7 +892,7 @@ granova.1w.ggplot <- function(data,
   owp$inner.square          <- GetInnerSquare(owp)
   owp$model.summary         <- GetModelSummary(owp)
   owp$squares.text          <- GetSquaresText(owp)
-  owp$standard.deviation    <- GetWithinGroupVariation(owp)
+  owp$variation    <- GetWithinGroupVariation(owp)
   owp$label.background      <- GetBackgroundForGroupSizesAndLabels(owp)
   owp$group.labels          <- GetGroupLabels(owp)
   owp$group.sizes           <- GetGroupSizes(owp)
@@ -928,5 +928,5 @@ granova.1w.ggplot <- function(data,
   p <- p + RemoveSizeElementFromLegend()
   PrintOverplotWarning(owp)
 
-  return(p)
+  return(owp$variation)
 }
