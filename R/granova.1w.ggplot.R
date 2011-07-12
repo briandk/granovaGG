@@ -495,11 +495,13 @@ granova.1w.ggplot <- function(data,
     lower.bound           <- min(owp$params$y.range)
     contrast              <- owp$summary$contrast 
     standard.deviation    <- owp$summary$standard.deviation
+    root.mean.square.variation <- sqrt(mean(owp$summary$variance))
     return(
       data.frame(
-        x    = contrast,
-        ymin = lower.bound,
-        ymax = lower.bound + RescaleVariationData(standard.deviation)
+        x                  = contrast,
+        ymin               = lower.bound,
+        ymax               = lower.bound + RescaleVariationData(standard.deviation),
+        baseline.variation = lower.bound + RescaleVariationData(root.mean.square.variation)
       )
     )
   }
