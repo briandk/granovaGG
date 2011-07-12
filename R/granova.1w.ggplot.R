@@ -499,11 +499,16 @@ granova.1w.ggplot <- function(data,
       data.frame(
         x    = contrast,
         ymin = baseline,
-        ymax = baseline + standard.deviation/2
+        ymax = baseline + RescaleVariationData(standard.deviation)
       )
     )
   }
 
+  RescaleVariationData <- function(data) {
+    scale.factor <- 1/2
+    return(scale.factor * data)
+  }
+  
   GetBackgroundForGroupSizesAndLabels <- function(owp) {
     return(data.frame(ymin = max(owp$params$y.range) - 15 * owp$params$vertical.percent,
                       ymax = max(owp$params$y.range),
