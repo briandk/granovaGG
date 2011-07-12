@@ -60,15 +60,6 @@ LayoutFourPlotsPerPage <- function(list.of.plots) {
   LayoutHoldoverPlots(list.of.plots, holdover.plots)
 }
 
-LayoutProperPlots <- function(list.of.plots, proper.plots) {
-  for (i in 1:proper.plots) {
-    grid.arrange(list.of.plots[[i]],
-                 list.of.pllots[[i+1]]
-                 list.of.pllots[[i+2]]
-                 list.of.pllots[[i+3]]
-    )
-    i <- i + 4
-  }
 }
 
 SetupFourPlotPage <- function(index) {
