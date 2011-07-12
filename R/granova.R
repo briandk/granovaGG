@@ -60,7 +60,6 @@ LayoutFourPlotsPerPage <- function(list.of.plots) {
   LayoutHoldoverPlots(list.of.plots, holdover.plots)
 }
 
-}
 
 SetupFourPlotPage <- function(index) {
   if (index %% 4 == 1) {
