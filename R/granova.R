@@ -50,12 +50,14 @@ vplayout <- function(x, y) {
 }
 
 LayoutFourPlotsPerPage <- function(list.of.plots) {
-  for (plot.num in 1:length(list.of.plots)) {
-    SetupFourPlotPage(plot.num)
-    PrintPlots(list.of.plots, plot.num)
-    DisplayEndOfPageMessage(plot.num)
+  total.plots     <- length(list.of.plots)
+  holdover.plots  <- total.plots %% 4
+  proper.plots    <- total.plots - holdover.plots
+  
+  if (proper.plots > 0) {
+    LayoutProperPlots(list.of.plots, proper.plots)
   }
-  return()
+  LayoutHoldoverPlots(list.of.plots, holdover.plots)
 }
 
 SetupFourPlotPage <- function(index) {
