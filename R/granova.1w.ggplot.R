@@ -729,14 +729,10 @@ granova.1w.ggplot <- function(data,
 
   BaselineWithinGroupVariation <- function(owp) {
     return(
-      geom_linerange(
-                aes(
-                  x      = x,
-                  ymin   = ymin,
-                  ymax   = min(ymax)
-                ), color = "grey",
-                   size  = I(2),
-                   data  = owp$variation
+      geom_hline(aes(yintercept = baseline.variation),
+        color = "white",
+        size  = I(1/2),
+        data  = owp$variation
       )
     )
     
@@ -935,5 +931,5 @@ granova.1w.ggplot <- function(data,
   p <- p + RemoveSizeElementFromLegend()
   PrintOverplotWarning(owp)
 
-  return(owp$variation)
+  return(p)
 }
