@@ -1,6 +1,7 @@
 data(arousal)
 #Drug A
-granova.1w.ggplot(arousal[,1], group = arousal[,2])
+granova.1w.ggplot(arousal[,1:2], group = arousal[,2])
+granova.1w.ggplot(arousal[,1:2])
 
 data(poison)
 ##Note violation of constant variance across groups in following graphic.
