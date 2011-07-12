@@ -61,15 +61,18 @@ granova.1w.ggplot <- function(data,
 
   yy <- data
       
-  mtdff <- is.data.frame(yy)
-  ln.yy<-(length(names(yy))>1)
-  if(mtdff){
-    # data is a data.frame
-    if(ln.yy){ 
-      yy <- as.matrix(yy)
+  CoerceHigherDimensionalDataToMatrix <- function(data) {
+    if (is.data.frame(data)) {
+      if (length(names(data)) > 1) {
+        data <- as.matrix(data)
+      }
     }
+    
+    return(data)
   }
-
+  
+  yy <- CoerceHigherDimensionalDataToMatrix(yy)
+  
   #Testing input data type
   mtx <- is.matrix(yy)
   if (!mtx) {
