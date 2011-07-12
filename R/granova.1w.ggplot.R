@@ -537,8 +537,15 @@ granova.1w.ggplot <- function(data,
   }
   
   AddOverplotInformation <- function(data, variable, tolerance) {
+    more.than.two.groups <- length(data[[variable]]) > 2
     ordered.data <- ReorderDataByColumn(data, variable)
-    overplotted  <- OverlapWarning(ordered.data[[variable]], tolerance)
+
+    if (more.than.two.groups) {
+      overplotted  <- OverlapWarning(ordered.data[[variable]], tolerance)
+    }
+    else {
+      overplotted <- rep(FALSE, times = length(data[[variable]]))
+    }
     
     return(data.frame(ordered.data, overplotted))
   }
@@ -868,7 +875,7 @@ granova.1w.ggplot <- function(data,
                                    overplotted == TRUE,
                                    select = c("group", "group.mean", "contrast")
                             )
-      print("The following groups are likely to be overplotted")
+      message("The following groups are likely to be overplotted")
       print(overplotted.groups)
     }
   }
