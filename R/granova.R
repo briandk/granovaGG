@@ -50,8 +50,16 @@ vplayout <- function(x, y) {
 }
 
 LayoutFourPlotsPerPage <- function(list.of.plots) {
+  args.list <- c(
+                 list.of.plots,
+                 list(
+                   nrow = 2, 
+                   ncol = 2
+                 )
+               )
+  
   do.call(
-    "grid.arrange", list.of.plots
+    grid.arrange, args.list
   )
 }
 
