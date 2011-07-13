@@ -4,6 +4,7 @@ granova.contr.ggplot <- function(data,
                                  xlab       = NULL, 
                                  jj         = 1,
                                  plot.theme = "theme_granova_contr",
+                                 print.four.plots.per.page = FALSE,
                                  ...
                         ) 
 {
@@ -316,12 +317,20 @@ granova.contr.ggplot <- function(data,
     return(output)
   }
   
+  OptionalPlotPrinting <- function(output) {
+    if (print.four.plots.per.page) {
+      LayoutFourPlotsPerPage(output)
+    }
+  }
+  
   ctr                        <- AdaptVariablesFromGranovaComputations()
   ctr$contrast.plot.data     <- GetContrastPlotData(ctr)
   ctr$contrast.plots         <- GetContrastPlots(ctr)
   ctr$summary.plot.data      <- GetSummaryPlotData(ctr)
   ctr$summary.plot           <- ComposeSummaryPlot(ctr$summary.plot.data)
   ctr$output                 <- CollateOutputPlots(ctr)
+  OptionalPlotPrinting(ctr$output)
+  
 
   return(ctr$output)
 
