@@ -14,10 +14,11 @@ granova.contr.ggplot(arousal, contrasts = contrasts22) -> gg
 # 
 # (y)
 # 
-# #Polynomial Contrasts 
-# z <- granova.contr.ggplot(rat[,1],contrasts = contr.poly(6))
-# (z)
-# granova.contr(rat[, 1], contrasts = contr.poly(6))
+#Polynomial Contrasts 
+data(rat)
+gg <- granova.contr.ggplot(rat[,1],contrasts = contr.poly(6))
+do.call("grid.arrange", list(gg, "nrow = 2"))
+
 # 
 # #based on random data 
 # data.random <- rt(64, 5)
