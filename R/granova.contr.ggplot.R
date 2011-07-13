@@ -188,7 +188,7 @@ granova.contr.ggplot <- function(data,
   
   ContrastPlotTitle <- function(ctr, index) {
     return(
-        opts(title = paste("Coefficients vs. Response, ", GetContrastName(ctr, index)))
+        opts(title = paste("Coefficients vs. Response\n", GetContrastName(ctr, index)))
     )
   }
   
@@ -294,7 +294,7 @@ granova.contr.ggplot <- function(data,
   
   GroupSummaryPlotTitle <- function(ctr) {
     return(
-      opts(title = paste("Responses for all groups, each n = ", ctr$responses.per.group))
+      opts(title = paste("Responses for all groups\n", "each n = ", ctr$responses.per.group))
     )
   }
   
