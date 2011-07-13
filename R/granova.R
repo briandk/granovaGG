@@ -50,14 +50,13 @@ vplayout <- function(x, y) {
 }
 
 LayoutFourPlotsPerPage <- function(list.of.plots) {
-  total.plots     <- length(list.of.plots)
-  holdover.plots  <- total.plots %% 4
-  proper.plots    <- total.plots - holdover.plots
-  
-  if (proper.plots > 0) {
-    LayoutProperPlots(list.of.plots, proper.plots)
-  }
-  LayoutHoldoverPlots(list.of.plots, holdover.plots)
+  do.call(
+    "grid.arrange", list.of.plots
+  )
+}
+
+ArrangeInFourByFour <- function(list.of.plots) {
+  grid.arrange(list.of.plots, nrow = 2, ncol = 2)
 }
 
 
