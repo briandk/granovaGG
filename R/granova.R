@@ -64,6 +64,22 @@ LayoutFourPlotPages <- function(plot.list, pages) {
   }
 }
 
+LayoutRemainderPlots <- function(plot.list, remainder.plots) {
+  if (remainder.plots > 0) {
+    remainder.start <- length(plot.list) - remainder.plots + 1
+    remainder.end   <- length(plot.list)
+    args.list       <- lapply(X   = remainder.start : remainder.end,
+                              FUN = GetListElementByIndex,
+                              x   = plot.list
+                       )
+             
+    args.list <- c(args.list, list(nrow = 2, ncol = 2))
+    do.call(grid.arrange, args.list)
+  }
+}
+
+GetListElementByIndex <- function(x, index) {
+  return(x[[index]])
 }
 
 
