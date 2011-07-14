@@ -42,11 +42,12 @@ GeomRugAlt <- proto(
 geom_rug_alt <- GeomRugAlt$build_accessor()
 
 LayoutFourPlotsPerPage <- function(list.of.plots) {
-  args.list <- c(
-                 list.of.plots,
-                 list(
-                   nrow = 2, 
-                   ncol = 2
+  four.plot.pages <- floor(length(list.of.plots) / 4)
+  remainder.plots <- length(list.of.plots) %% 4 # a %% b is notation for a modulo b
+
+  LayoutFourPlotPages(list.of.plots, four.plot.pages)
+  LayoutRemainderPlots(list.of.plots, remainder.plots)
+}
                  )
                )
   
