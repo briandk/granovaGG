@@ -4,7 +4,7 @@ granova.contr.ggplot <- function(data,
                                  xlab       = NULL, 
                                  jj         = 1,
                                  plot.theme = "theme_granova_contr",
-                                 print.four.plots.per.page = FALSE,
+                                 print.four.plots.per.page = TRUE,
                                  ...
                         ) 
 {
