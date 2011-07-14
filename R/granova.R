@@ -75,15 +75,6 @@ SetupFourPlotPage <- function(index) {
   }
 }
 
-PrintPlots <- function(list.of.plots, plot.num) {
-  row <- ceiling( (plot.num + 2) /2) %% 2 + 1
-  col <- ((plot.num + 1) %% 2) + 1
-  
-  return(
-    print(list.of.plots[[plot.num]], vp = vplayout(row, col))
-  )
-}
-
 DisplayEndOfPageMessage <- function(plot.num) {
   if (plot.num %% 4 == 0 && interactive()) {
     readline("Examine the contrast plots and consider printing. When you're done, press <Return>")
