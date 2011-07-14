@@ -48,12 +48,22 @@ LayoutFourPlotsPerPage <- function(list.of.plots) {
   LayoutFourPlotPages(list.of.plots, four.plot.pages)
   LayoutRemainderPlots(list.of.plots, remainder.plots)
 }
+
+LayoutFourPlotPages <- function(plot.list, pages) {
+  i <- 1
+  while (i < 4 * pages) {
+    args.list <- list(plot.list[[i]],
+                      plot.list[[i+1]],
+                      plot.list[[i+2]],
+                      plot.list[[i+3]]
                  )
-               )
-  
-  do.call(
-    grid.arrange, args.list
-  )
+    args.list <- c(args.list, list(nrow = 2, ncol = 2))
+    do.call(grid.arrange, args.list)
+    DisplayEndOfPageMessage()
+    i <- i + 4
+  }
+}
+
 }
 
 DisplayEndOfPageMessage <- function(plot.num) {
