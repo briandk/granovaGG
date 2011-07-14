@@ -727,6 +727,20 @@ granova.1w.ggplot <- function(data,
     )
   }
 
+  MaxWithinGroupVariation <- function(owp) {
+    return(
+      geom_linerange(
+                aes(
+                  x      = x,
+                  ymin   = ymin,
+                  ymax   = max(ymax)
+                ), color = "grey",
+                   size  = I(2),
+                   data  = owp$variation
+      )
+    )
+  }
+  
   BaselineWithinGroupVariation <- function(owp) {
     return(
       geom_hline(aes(yintercept = baseline.variation),
@@ -911,6 +925,7 @@ granova.1w.ggplot <- function(data,
   p <- p + GroupMeanLine(owp)
   p <- p + GroupMeansByContrast(owp)
   p <- p + Residuals(owp)
+  p <- p + MaxWithinGroupVariation(owp)
   p <- p + WithinGroupVariation(owp)
   p <- p + BaselineWithinGroupVariation(owp)
   p <- p + OuterSquare()
