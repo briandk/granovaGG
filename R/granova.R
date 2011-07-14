@@ -66,8 +66,10 @@ LayoutFourPlotPages <- function(plot.list, pages) {
 
 }
 
-DisplayEndOfPageMessage <- function(plot.num) {
-  if (plot.num %% 4 == 0 && interactive()) {
+
+
+DisplayEndOfPageMessage <- function() {
+  if (interactive()) {
     readline("Examine the contrast plots and consider printing. When you're done, press <Return>")
   }
 }
