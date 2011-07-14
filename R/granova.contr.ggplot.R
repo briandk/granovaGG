@@ -200,7 +200,7 @@ granova.contr.ggplot <- function(data,
   
   ContrastPlotYLabel <- function() {
     return(
-        ylab(paste("Outcome (Response)"))
+        ylab(paste(ylab))
     )
   }
   
@@ -304,7 +304,7 @@ granova.contr.ggplot <- function(data,
   }
   
   GroupSummaryYLabel <- function() {
-    return(ylab("Response"))
+    return(ylab(ylab))
   }  
   
   CollateOutputPlots <- function(ctr) {

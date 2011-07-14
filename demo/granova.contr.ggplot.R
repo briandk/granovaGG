@@ -3,7 +3,7 @@ contrasts22 <- data.frame( c(-.5,-.5,.5,.5),
   c(-.5,.5,-.5,.5), c(.5,-.5,-.5,.5) )
 names(contrasts22) <- c("Drug.A", "Drug.B", "Drug.A.B")
 
-granova.contr.ggplot(arousal, contrasts = contrasts22, print.four.plots.per.page = TRUE)
+granova.contr.ggplot(arousal, contrasts = contrasts22, print.four.plots.per.page = TRUE, ylab = "Test 1")
 granova.contr(arousal, contrasts = contrasts22)
 # granova.contr(arousal, contrasts = contrasts22)
 # 
