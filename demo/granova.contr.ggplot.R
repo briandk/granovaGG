@@ -18,7 +18,7 @@ granova.contr(arousal, contrasts = contrasts22)
 #Polynomial Contrasts 
 data(rat)
 granova.contr(rat[,1], contrasts = contr.poly(6))
-granova.contr.ggplot(rat[,1], contrasts = contr.poly(6), print.four.plots.per.page = FALSE)
+granova.contr.ggplot(rat[,1], contrasts = contr.poly(6))
 
 # 
 # #based on random data 
