@@ -41,14 +41,6 @@ GeomRugAlt <- proto(
 
 geom_rug_alt <- GeomRugAlt$build_accessor()
 
-vplayout <- function(x, y) {
-  return(
-    viewport(layout.pos.row = x, 
-             layout.pos.col = y
-    )
-  )
-}
-
 LayoutFourPlotsPerPage <- function(list.of.plots) {
   args.list <- c(
                  list.of.plots,
