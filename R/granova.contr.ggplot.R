@@ -18,8 +18,8 @@ granova.contr.ggplot <- function(data,
 
   # 'ctr' is shorthand for the ConTRast data object that will hold all the information for plotting
   FormatResponseData <- function(data) {
-    number.of.columns <- dim(data)[2]
-    if (is.null(number.of.columns)) {
+    is.data.one.dimensional <- is.null(dim(data)[2])
+    if (is.data.one.dimensional) {
       return(data)
     }
     
