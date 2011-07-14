@@ -324,15 +324,27 @@ granova.contr.ggplot <- function(data,
     }
   }
   
+  GetOutput <- function(ctr) {
+    four.plot.message <- "Since you selected four plots per page to print, no output was returned"
+    if (print.four.plots.per.page) {
+      message(four.plot.message)
+      LayoutFourPlotsPerPage(ctr$output)
+      output <- NULL
+    }
+    
+    else {
+      output <- ctr$output
+    }
+    return(output)
+  }
+  
   ctr                        <- AdaptVariablesFromGranovaComputations()
   ctr$contrast.plot.data     <- GetContrastPlotData(ctr)
   ctr$contrast.plots         <- GetContrastPlots(ctr)
   ctr$summary.plot.data      <- GetSummaryPlotData(ctr)
   ctr$summary.plot           <- ComposeSummaryPlot(ctr$summary.plot.data)
   ctr$output                 <- CollateOutputPlots(ctr)
-  OptionalPlotPrinting(ctr$output)
-  
-
-  return(ctr$output)
+    
+  return(GetOutput(ctr))
 
 }
