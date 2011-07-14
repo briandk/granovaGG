@@ -240,6 +240,7 @@ granova.contr.ggplot <- function(data,
   
   ComposeSummaryPlot <- function(plot.data) {    
     p <- ggplot()
+    p <- p + MeanResponse(plot.data$raw.data$value)
     p <- p + RawScoresByGroup(plot.data$raw.data)
     p <- p + MeansByGroup(plot.data$summary.data)
     p <- p + ConnectGroupResponseMeans(plot.data$summary.data)
