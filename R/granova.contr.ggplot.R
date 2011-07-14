@@ -300,7 +300,7 @@ granova.contr.ggplot <- function(data,
   }
   
   GroupSummaryXLabel <- function() {
-    return(xlab("Group"))
+    return(xlab("Group Indicator"))
   }
   
   GroupSummaryYLabel <- function() {
