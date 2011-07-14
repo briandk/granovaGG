@@ -67,14 +67,6 @@ ArrangeInFourByFour <- function(list.of.plots) {
   grid.arrange(list.of.plots, nrow = 2, ncol = 2)
 }
 
-
-SetupFourPlotPage <- function(index) {
-  if (index %% 4 == 1) {
-    grid.newpage()
-    pushViewport(viewport(layout = grid.layout(2, 2)))
-  }
-}
-
 DisplayEndOfPageMessage <- function(plot.num) {
   if (plot.num %% 4 == 0 && interactive()) {
     readline("Examine the contrast plots and consider printing. When you're done, press <Return>")
