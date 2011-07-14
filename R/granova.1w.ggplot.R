@@ -745,7 +745,7 @@ granova.1w.ggplot <- function(data,
     return(
       geom_hline(aes(yintercept = baseline.variation),
         color = "white",
-        size  = I(1/2),
+        size  = I(1/4),
         data  = owp$variation
       )
     )
