@@ -273,7 +273,7 @@ granova.contr.ggplot <- function(data,
                data  = data,
                color = brewer.pal(8, "Set1")[2],
                size  = I(3),
-               alpha = 1/2
+               alpha = 1
       )
     )
   }
@@ -287,7 +287,7 @@ granova.contr.ggplot <- function(data,
                ),
                data  = data,
                color = brewer.pal(8, "Set1")[2],
-               alpha = 1/2
+               alpha = 1
       )
     )
   }
