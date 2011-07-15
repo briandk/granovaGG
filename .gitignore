@@ -3,5 +3,6 @@
 .RData
 temp/
 .history
+.Rapp
 
 granova.1w.ggplot.pdf
