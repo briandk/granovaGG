@@ -721,7 +721,7 @@ granova.1w.ggplot <- function(data,
                   ymin   = ymin,
                   ymax   = ymax
                 ), color = "grey30",
-                   size  = I(2),
+                   size  = GetWithinGroupVariationSize(),
                    data  = owp$variation
       )
     )
@@ -735,10 +735,14 @@ granova.1w.ggplot <- function(data,
                   ymin   = ymin,
                   ymax   = max(ymax)
                 ), color = "grey",
-                   size  = I(2),
+                   size  = GetWithinGroupVariationSize(),
                    data  = owp$variation
       )
     )
+  }
+  
+  GetWithinGroupVariationSize <- function () {
+    return(1)
   }
   
   BaselineWithinGroupVariation <- function(owp) {
