@@ -1,7 +1,7 @@
 granova.ds.ggplot <- function(data       = NULL, 
                               main       = "Dependent Sample Assessment Plot",
                               conf.level = 0.95,
-                              plot.theme = "theme_bw"
+                              plot.theme = "theme_granova_ds"
                              ) 
 
 {
