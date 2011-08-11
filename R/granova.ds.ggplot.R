@@ -106,7 +106,7 @@ granova.ds.ggplot <- function(data       = NULL,
   }
   
   GetColors <- function(dsp) {
-    return(list(treatment.line = brewer.pal(n = 8, name = "Paired")[2],
+    return(list(treatment.line = "#542570",
                 rugplot        = "black",
                 mean.line      = "#542570",
                 CIBand         = "#33A02C",
@@ -146,8 +146,9 @@ granova.ds.ggplot <- function(data       = NULL,
                            slope     = slope,
                            color     = color
                           ),
-                       alpha = I(1),
+                       alpha = 0.9,
                        size  = I(1),
+                       linetype = "dashed",
                        data  = dsp$treatment.line
                       )
           )
