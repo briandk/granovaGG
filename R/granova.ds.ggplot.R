@@ -161,7 +161,8 @@ granova.ds.ggplot <- function(data       = NULL,
   IdentityLine <- function() {
     return(geom_abline(slope     = 1, 
                        intercept = 0,
-                       alpha     = I(3/4)
+                       alpha     = 0.75,
+                       size      = 1
                       )
           )
   }
