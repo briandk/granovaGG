@@ -188,6 +188,7 @@ granova.ds.ggplot <- function(data       = NULL,
     return(geom_vline(xintercept = mean(GetXs(dsp$data)),
                       color      = dsp$colors$mean.line,
                       size       = dsp$params$mean.line.size,
+                      linetype   = "dashed",
                       alpha      = I(1/2)
                      ) 
           )
@@ -197,6 +198,7 @@ granova.ds.ggplot <- function(data       = NULL,
     return(geom_hline(yintercept = mean(GetYs(dsp$data)),
                       color      = dsp$colors$mean.line,
                       size       = dsp$params$mean.line.size,
+                      linetype   = "dashed",
                       alpha      = I(1/2)
                      ) 
           )
