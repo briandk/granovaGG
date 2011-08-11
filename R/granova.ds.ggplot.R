@@ -238,6 +238,7 @@ granova.ds.ggplot <- function(data       = NULL,
                          ),
                       data  = dsp$shadow, 
                       size  = dsp$params$point.size,
+                      shape = 16,
                       alpha = I(1/4) 
                      )
           )
