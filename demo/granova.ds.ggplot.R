@@ -2,8 +2,7 @@ data(blood_lead)
 granova.ds(blood_lead)
 granova.ds.ggplot(
   data       = blood_lead, 
-  conf.level = 0.95, 
-  main = "Lead Levels in the Blood of Children"
+  conf.level = 0.95 
 ) 
 
 data(anorexia.sub)
