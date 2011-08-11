@@ -42,7 +42,7 @@ granova.ds.ggplot <- function(data       = NULL,
     .extrema               <- c(max(.aggregate.data.range), min(.aggregate.data.range))    
     .square.data.range     <- max(.extrema) - min(.extrema)
     .southwest.padding     <- (65/100) * .square.data.range
-    .north.east.padding    <- (25/100) * .square.data.range
+    .north.east.padding    <- (15/100) * .square.data.range
     .lower.graphical.bound <- min(.extrema) - .southwest.padding
     .upper.graphical.bound <- max(.extrema) + .north.east.padding
     .bounds                <- c(.lower.graphical.bound, .upper.graphical.bound)
