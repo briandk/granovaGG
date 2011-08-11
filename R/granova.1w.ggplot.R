@@ -742,7 +742,7 @@ granova.1w.ggplot <- function(data,
   }
   
   GetWithinGroupVariationSize <- function () {
-    return(1)
+    return(1.5)
   }
   
   BaselineWithinGroupVariation <- function(owp) {
