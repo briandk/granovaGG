@@ -35,7 +35,7 @@ theme_granova_1w_gray <- function(base_size = 12) {
 theme_granova_ds <- function(base_size = 12) {
   theme_granova_ds <- theme_bw()
   
-  theme_granova_ds$axis.title.x    <- theme_text(size = base_size, vjust = 6)
+  theme_granova_ds$axis.title.x    <- theme_text(size = base_size, vjust = 6, hjust = 0.55)
   
   theme_granova_ds$legend.key.size <- unit(1, "lines")
   theme_granova_ds$legend.text     <- theme_text(size = 8, lineheight = 8)
