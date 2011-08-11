@@ -176,10 +176,10 @@ granova.ds.ggplot <- function(data       = NULL,
   }
 
   RugPlot <- function(dsp) {
-    return(geom_rug(size  = I(1/2),
-                    alpha = I(1/3),
-                    color = dsp$colors$rugplot,
-                    data  = dsp$data
+    return(geom_rug_alt(size  = I(1/2),
+                        alpha = I(1/3),
+                        color = dsp$colors$rugplot,
+                        data  = dsp$data
                    )  
           )
   }
