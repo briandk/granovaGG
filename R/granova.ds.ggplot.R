@@ -54,7 +54,7 @@ granova.ds.ggplot <- function(data       = NULL,
                 bounds            = .bounds,  
                 shadow.offset     = .shadow.offset,
                 anchor            = .crossbow.anchor,
-                point.size        = I(2),
+                point.size        = I(3),
                 mean.line.size    = I(1/2)      
                )
           )
