@@ -39,6 +39,7 @@ theme_granova_ds <- function(base_size = 12) {
   
   theme_granova_ds$legend.key.size <- unit(1, "lines")
   theme_granova_ds$legend.text     <- theme_text(size = 8, lineheight = 8)
+  theme_granova_ds$plot.title      <- theme_text(face = "bold", size = 12, vjust = -4, hjust = 0.55)
   
   return(theme_granova_ds)
 }
