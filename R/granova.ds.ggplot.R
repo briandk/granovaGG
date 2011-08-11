@@ -146,10 +146,10 @@ granova.ds.ggplot <- function(data       = NULL,
                            slope     = slope,
                            color     = color
                           ),
-                       alpha = 0.9,
-                       size  = I(1),
+                       alpha    = 0.5,
+                       size     = I(1),
                        linetype = "dashed",
-                       data  = dsp$treatment.line
+                       data     = dsp$treatment.line
                       )
           )
   }
