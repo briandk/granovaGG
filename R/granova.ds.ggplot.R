@@ -1,5 +1,5 @@
 granova.ds.ggplot <- function(data       = NULL, 
-                              main       = NULL,
+                              main       = "Dependent Sample Assessment Plot",
                               conf.level = 0.95,
                               plot.theme = "theme_bw"
                              ) 
