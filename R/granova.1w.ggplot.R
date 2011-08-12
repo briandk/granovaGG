@@ -275,6 +275,13 @@ granova.1w.ggplot <- function(data,
     )
   }
 
+  PrintGroupSummary <- function(data) {
+    output <- subset(data, select = -maximum.score)
+    message("\nBelow are by-group summary statistics of your input data")
+    
+    return(print(output))
+  }
+  
   GetGroupMeanLine <- function(owp) {
     return(
       data.frame(
@@ -897,7 +904,7 @@ granova.1w.ggplot <- function(data,
                                    overplotted == TRUE,
                                    select = c("group", "group.mean", "contrast")
                             )
-      message("The following groups are likely to be overplotted")
+      message("\nThe following groups are likely to be overplotted")
       print(overplotted.groups)
     }
   }
@@ -918,6 +925,7 @@ granova.1w.ggplot <- function(data,
   owp$label.background      <- GetBackgroundForGroupSizesAndLabels(owp)
   owp$group.labels          <- GetGroupLabels(owp)
   owp$group.sizes           <- GetGroupSizes(owp)
+  PrintGroupSummary(owp$summary)
 
 
   #Plot OWP object
@@ -951,5 +959,5 @@ granova.1w.ggplot <- function(data,
   p <- p + RemoveSizeElementFromLegend()
   PrintOverplotWarning(owp)
 
-  return(owp$summary)
+  return(p)
 }
