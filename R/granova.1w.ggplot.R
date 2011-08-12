@@ -254,8 +254,8 @@ granova.1w.ggplot <- function(data,
 
   ConvertBooleanValuesToResidualLabels <- function(boolean.vector) {
     label.vector                          <- as.character(boolean.vector)
-    label.vector[label.vector == "TRUE"]  <- "Within +/- 1 s.d."
-    label.vector[label.vector == "FALSE"] <- "Outside +/- 1 s.d."
+    label.vector[label.vector == "TRUE"]  <- "Within 1 SDpooled"
+    label.vector[label.vector == "FALSE"] <- "Outside 1 SDpooled"
   
     return(label.vector)
   }
@@ -405,8 +405,8 @@ granova.1w.ggplot <- function(data,
       "Grand Mean",
       "Group Means",
       "Group Mean Line",
-      "Within +/- 1 s.d.",
-      "Outside +/- 1 s.d."
+      "Within 1 SDpooled",
+      "Outside 1 SDpooled"
     )
   
     return(colors)
