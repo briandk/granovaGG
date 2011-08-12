@@ -265,6 +265,7 @@ granova.1w.ggplot <- function(data,
       ddply(owp$data, .(group), summarise,
         group              = unique(group),
         group.mean         = mean(score),
+        trimmed.mean       = mean(score, trim = 0.2),
         contrast           = unique(contrast),
         variance           = var(score),
         standard.deviation = sd(score),
@@ -950,5 +951,5 @@ granova.1w.ggplot <- function(data,
   p <- p + RemoveSizeElementFromLegend()
   PrintOverplotWarning(owp)
 
-  return(p)
+  return(owp$summary)
 }
