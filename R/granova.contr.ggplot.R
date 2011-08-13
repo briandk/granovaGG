@@ -69,7 +69,7 @@ granova.contr.ggplot <- function(data,
           scaled.standardized.contrasts = standardized.contrasts * responses.per.group,
           number.of.contrasts           = dim(standardized.contrasts)[2],
           number.of.groups              = number.of.groups,
-          responses.per.group            = responses.per.group
+          responses.per.group           = responses.per.group
         )
     )
   }
