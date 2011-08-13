@@ -96,12 +96,12 @@ Theme <- function(plot.theme) {
     )
 }
 
-GetContrastName <- function(ctr, index) {
-  if (is.null(dimnames(ctr$contrast.matrix))) {
+GetContrastName <- function(contrast.data, index) {
+  if (is.null(dimnames(contrast.data))) {
     contrast.name <- paste(index)
   }
   else {
-    provided.contrast.name <- dimnames(ctr$contrast.matrix)[[2]][index]
+    provided.contrast.name <- dimnames(contrast.data)[[2]][index]
     contrast.name <- paste(provided.contrast.name)
   }
   

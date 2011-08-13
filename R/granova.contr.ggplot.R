@@ -188,13 +188,13 @@ granova.contr.ggplot <- function(data,
   
   ContrastPlotTitle <- function(ctr, index) {
     return(
-        opts(title = paste("Coefficients vs. Response\n", GetContrastName(ctr, index)))
+        opts(title = paste("Coefficients vs. Response\n", GetContrastName(ctr$contrast.matrix, index)))
     )
   }
   
   ContrastPlotXLabel <- function(ctr, index) {
     return(
-        xlab(paste(GetContrastName(ctr, index)))
+        xlab(paste(GetContrastName(ctr$contrast.matrix, index)))
     )
   }
   
