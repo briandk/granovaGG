@@ -822,7 +822,7 @@ granova.1w.ggplot <- function(data,
            size  = 2,
            color = "grey50",
            hjust = 1,
-           vjust = "center",
+           vjust = 0.5,
            data  = owp$group.sizes
            )
     )
@@ -838,8 +838,8 @@ granova.1w.ggplot <- function(data,
                ),
              size  = GetGroupLabelSize(),
              color = "grey50",
-             hjust = "left",
-             vjust = "top",
+             hjust = 0.5,
+             vjust = 0.5,
              data  = subset(owp$group.labels, overplotted == FALSE)
              )
       )
@@ -856,8 +856,8 @@ granova.1w.ggplot <- function(data,
                ),
              size  = GetGroupLabelSize(),
              color = brewer.pal(n = 8, name = "Paired")[6],
-             hjust = "left",
-             vjust = "top",
+             hjust = 0.5,
+             vjust = 0.5,
              data  = subset(owp$group.labels, overplotted == TRUE)
              )
       )
