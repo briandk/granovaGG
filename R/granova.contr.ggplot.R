@@ -343,12 +343,6 @@ granova.contr.ggplot <- function(data,
     print(model.summary)
   }
   
-  PrintPositiveAndNegativeCoefficientMeansByContrast <- function(contrast.plot.data) {
-    output <- GetSummaryDataByContrast(contrast.plot.data)
-    output <- RenameSummaryRows(output)
-    print(output)
-  }
-  
   GetSummaryDataByContrast <- function(x, pooled.standard.deviation) {
     ExtractData <- function(x) {
       summary.data <- x$summary.data
