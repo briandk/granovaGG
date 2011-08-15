@@ -237,12 +237,13 @@ granova.contr.ggplot <- function(data,
   }
   
   GetGroupSummary <- function(data) {
-    return(
-      ddply(data, .(variable), summarise,
-        group      = unique(variable),
-        group.mean = mean(value)
-      )
-    )
+    output <- ddply(data, .(variable), summarise,
+                group      = unique(variable),
+                group.mean = mean(value),
+                standard.deviation = sd(value)
+             )
+    output <- transform(output, pooled.standard.deviation = mean(standard.deviation^2)^0.5)
+    return(subset(output, select = -variable))
   }
   
   ComposeSummaryPlot <- function(plot.data) {    
