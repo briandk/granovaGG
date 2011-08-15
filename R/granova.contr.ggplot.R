@@ -85,6 +85,13 @@ granova.contr.ggplot <- function(data,
     ) 
   }
 
+  GetLinearModel <- function(ctr) {
+    Contrast <- ctr$scaled.standardized.contrasts
+    Response <- ctr$response
+    
+    return(lm(Response ~ Contrast))
+  }
+  
   ExtractDataForPlot <- function (contrasts, response, index) {
       non.zero.indicators <- contrasts[, index] != 0
       x.values <- contrasts[, index][non.zero.indicators]
@@ -324,6 +331,12 @@ granova.contr.ggplot <- function(data,
     }
   }
   
+  PrintLinearModelSummary <- function(model) {
+    model.summary <- summary(model)
+    message("\nLinear Model Summary")
+    print(model.summary)
+  }
+  
   GetOutput <- function(ctr) {
     four.plot.message <- "Since you selected four plots per page to print, no output was returned"
     if (print.four.plots.per.page) {
@@ -339,11 +352,13 @@ granova.contr.ggplot <- function(data,
   }
   
   ctr                        <- AdaptVariablesFromGranovaComputations()
+  ctr$linear.model           <- GetLinearModel(ctr)
   ctr$contrast.plot.data     <- GetContrastPlotData(ctr)
   ctr$contrast.plots         <- GetContrastPlots(ctr)
   ctr$summary.plot.data      <- GetSummaryPlotData(ctr)
   ctr$summary.plot           <- ComposeSummaryPlot(ctr$summary.plot.data)
   ctr$output                 <- CollateOutputPlots(ctr)
+  PrintLinearModelSummary(ctr$linear.model)
     
   return(GetOutput(ctr))
 
