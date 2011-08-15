@@ -332,6 +332,11 @@ granova.contr.ggplot <- function(data,
     }
   }
   
+  PrintOutput <- function() {
+    PrintLinearModelSummary(ctr$linear.model)
+    PrintSummaryDataByContrast(ctr)
+  }
+  
   PrintLinearModelSummary <- function(model) {
     model.summary <- summary(model)
     message("\nLinear Model Summary")
@@ -385,8 +390,7 @@ granova.contr.ggplot <- function(data,
   ctr$summary.plot.data      <- GetSummaryPlotData(ctr)
   ctr$summary.plot           <- ComposeSummaryPlot(ctr$summary.plot.data)
   ctr$output                 <- CollateOutputPlots(ctr)
-  PrintLinearModelSummary(ctr$linear.model)
-  PrintSummaryDataByContrast(ctr)
+  PrintOutput()
     
   return(GetOutput(ctr))
 
