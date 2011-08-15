@@ -353,7 +353,15 @@ granova.contr.ggplot <- function(data,
       stEftSze <- (pos - neg) / pooled.standard.deviation
       return(data.frame(neg, pos, diff, stEftSze))
     }
-    return(ldply(x, .fun = ExtractData))
+    output <- ldply(x, .fun = ExtractData)
+    output <- ForceRowNamesToBeContrastNumbers(output)
+    return(output)
+  }
+  
+  ForceRowNamesToBeContrastNumbers <- function(x) {
+    dimnames(x)[[1]] <- sapply(1:(dim(x)[[1]]), function(x) {paste("Contrast", x, sep="")})
+    
+    return(x)
   }
   
   PrintSummaryDataByContrast <- function(ctr) {
