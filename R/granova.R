@@ -105,7 +105,7 @@ GetContrastName <- function(contrast.data, index) {
     contrast.name <- paste(provided.contrast.name)
   }
   
-  return(paste("Contrast ", contrast.name))
+  return(paste("Contrast ", contrast.name, sep=""))
 }
 
 ReorderDataByColumn <- function(x, column) {
