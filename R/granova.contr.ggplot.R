@@ -337,6 +337,12 @@ granova.contr.ggplot <- function(data,
     print(model.summary)
   }
   
+  PrintPositiveAndNegativeCoefficientMeansByContrast <- function(contrast.plot.data) {
+    output <- GetSummaryDataByContrast(contrast.plot.data)
+    output <- RenameSummaryRows(output)
+    print(output)
+  }
+  
   GetOutput <- function(ctr) {
     four.plot.message <- "Since you selected four plots per page to print, no output was returned"
     if (print.four.plots.per.page) {
@@ -360,6 +366,6 @@ granova.contr.ggplot <- function(data,
   ctr$output                 <- CollateOutputPlots(ctr)
   PrintLinearModelSummary(ctr$linear.model)
     
-  return(GetOutput(ctr))
+  return(ctr$contrast.plot.data)
 
 }
