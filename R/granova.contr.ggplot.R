@@ -335,6 +335,7 @@ granova.contr.ggplot <- function(data,
   PrintOutput <- function() {
     PrintLinearModelSummary(ctr$linear.model)
     PrintSummaryDataByContrast(ctr)
+    PrintSummaryDataByGroup(ctr)
   }
   
   PrintLinearModelSummary <- function(model) {
@@ -359,6 +360,9 @@ granova.contr.ggplot <- function(data,
     message("\n(Weighted) means, mean differences, and standardized effect size")
     print(
       GetSummaryDataByContrast(ctr$contrast.plot.data, ctr$summary.plot.data$summary.data$pooled.standard.deviation[1]), digits = 3)
+  }
+  
+  PrintSummaryDataByGroup <- function(ctr) {
     message("\nSummary statistics by group")
     print(ctr$summary.plot.data$summary.data, digits = 4)
   }
