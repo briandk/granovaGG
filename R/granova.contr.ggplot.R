@@ -344,14 +344,14 @@ granova.contr.ggplot <- function(data,
     print(output)
   }
   
-  GetSummaryDataByContrast <- function(x) {
-    ExtractData <- function(x) {
+  GetSummaryDataByContrast <- function(x, pooled.standard.deviation) {
+    ExtractData <- function(x, group.standard.deviations) {
       summary.data <- x$summary.data
       neg <- summary.data$responses[summary.data$contrasts <= 0]
       pos <- summary.data$responses[summary.data$contrasts > 0]
       diff <- pos - neg
-      stEftSze <- NULL
-      return(data.frame(neg, pos))
+      stEftSze <- (pos - neg) / pooled.standard.deviation
+      return(data.frame(neg, pos, diff, stEftSze))
     }
     return(ldply(x, .fun = ExtractData))
   }
