@@ -356,6 +356,14 @@ granova.contr.ggplot <- function(data,
     return(ldply(x, .fun = ExtractData))
   }
   
+  PrintSummaryDataByContrast <- function(ctr) {
+    message("\n(Weighted) means, mean differences, and standardized effect size")
+    print(
+      GetSummaryDataByContrast(ctr$contrast.plot.data, ctr$summary.plot.data$summary.data$pooled.standard.deviation[1]), digits = 3)
+    message("\nSummary statistics by group")
+    print(ctr$summary.plot.data$summary.data, digits = 3)
+  }
+  
   GetOutput <- function(ctr) {
     four.plot.message <- "Since you selected four plots per page to print, no output was returned"
     if (print.four.plots.per.page) {
@@ -378,7 +386,8 @@ granova.contr.ggplot <- function(data,
   ctr$summary.plot           <- ComposeSummaryPlot(ctr$summary.plot.data)
   ctr$output                 <- CollateOutputPlots(ctr)
   PrintLinearModelSummary(ctr$linear.model)
+  PrintSummaryDataByContrast(ctr)
     
-  return(ctr$contrast.plot.data)
+  return(GetOutput(ctr))
 
 }
