@@ -382,7 +382,7 @@ granova.contr.ggplot <- function(data,
   }
   
   GetOutput <- function(ctr) {
-    four.plot.message <- "Since you selected four plots per page to print, no output was returned"
+    four.plot.message <- "Since you selected four plots per page to print, no output will be returned"
     if (print.four.plots.per.page) {
       message(four.plot.message)
       LayoutFourPlotsPerPage(ctr$output)
