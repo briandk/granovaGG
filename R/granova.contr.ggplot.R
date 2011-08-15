@@ -345,7 +345,7 @@ granova.contr.ggplot <- function(data,
   }
   
   GetSummaryDataByContrast <- function(x, pooled.standard.deviation) {
-    ExtractData <- function(x, group.standard.deviations) {
+    ExtractData <- function(x) {
       summary.data <- x$summary.data
       neg <- summary.data$responses[summary.data$contrasts <= 0]
       pos <- summary.data$responses[summary.data$contrasts > 0]
@@ -361,7 +361,7 @@ granova.contr.ggplot <- function(data,
     print(
       GetSummaryDataByContrast(ctr$contrast.plot.data, ctr$summary.plot.data$summary.data$pooled.standard.deviation[1]), digits = 3)
     message("\nSummary statistics by group")
-    print(ctr$summary.plot.data$summary.data, digits = 3)
+    print(ctr$summary.plot.data$summary.data, digits = 4)
   }
   
   GetOutput <- function(ctr) {
