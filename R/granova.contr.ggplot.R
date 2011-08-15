@@ -343,6 +343,18 @@ granova.contr.ggplot <- function(data,
     print(output)
   }
   
+  GetSummaryDataByContrast <- function(x) {
+    ExtractData <- function(x) {
+      summary.data <- x$summary.data
+      neg <- summary.data$responses[summary.data$contrasts <= 0]
+      pos <- summary.data$responses[summary.data$contrasts > 0]
+      diff <- pos - neg
+      stEftSze <- NULL
+      return(data.frame(neg, pos))
+    }
+    return(ldply(x, .fun = ExtractData))
+  }
+  
   GetOutput <- function(ctr) {
     four.plot.message <- "Since you selected four plots per page to print, no output was returned"
     if (print.four.plots.per.page) {
