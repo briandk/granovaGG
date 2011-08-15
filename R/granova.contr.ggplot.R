@@ -336,6 +336,7 @@ granova.contr.ggplot <- function(data,
     PrintLinearModelSummary(ctr$linear.model)
     PrintSummaryDataByContrast(ctr)
     PrintSummaryDataByGroup(ctr)
+    PrintContrasts(ctr)
   }
   
   PrintLinearModelSummary <- function(model) {
@@ -373,6 +374,11 @@ granova.contr.ggplot <- function(data,
   PrintSummaryDataByGroup <- function(ctr) {
     message("\nSummary statistics by group")
     print(ctr$summary.plot.data$summary.data, digits = 4)
+  }
+  
+  PrintContrasts <- function(ctr) {
+    message("\nThe contrasts you specified")
+    print(ctr$contrast.matrix)
   }
   
   GetOutput <- function(ctr) {
