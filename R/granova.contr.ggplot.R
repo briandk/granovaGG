@@ -378,7 +378,7 @@ granova.contr.ggplot <- function(data,
   
   PrintContrasts <- function(ctr) {
     message("\nThe contrasts you specified")
-    print(ctr$contrast.matrix)
+    print(ctr$contrast.matrix, digits = 3)
   }
   
   GetOutput <- function(ctr) {
