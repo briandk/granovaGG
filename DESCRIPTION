@@ -8,9 +8,9 @@ Author: Robert M. Pruzek <RMPruzek@yahoo.com>
         James E. Helmreich <James.Helmreich@Marist.edu>
         Jason Bryer <jason@bryer.org>
 Maintainer: Brian A. Danielak <brian@briandk.com>
-Depends: R (>= 2.12.0), car, ggplot2 (>= 0.8.9), RColorBrewer, gridExtra
+Depends: R (>= 2.12.0), ggplot2 (>= 0.8.9), RColorBrewer, gridExtra
 Suggests: mgcv, rgl, tcltk, MASS
-Collate: granova.R InnerFunctions.R theme-defaults.R granova.1w.R granova.2w.R granova.contr.R granova.ds.R granova.1w.ggplot.R granova.contr.ggplot.R granova.ds.ggplot.R
+Collate: granova.R theme-defaults.R granova.1w.R granova.2w.R granova.contr.R granova.ds.R granova.1w.ggplot.R granova.contr.ggplot.R granova.ds.ggplot.R
 Description: This small collection of functions provides what we call
         elemental graphics for display of anova results. The term
         elemental derives from the fact that each function is aimed at
