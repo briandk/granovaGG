@@ -1,3 +1,1 @@
-export(GeomRugAlt, LayoutFourPlotsPerPage, granova.1w, granova.2w, granova.ds, granova.contr, granovagg.1w, granovagg.ds, granovagg.contr)
-importFrom(car, scatter3d, identify3d)
 import(ggplot2)
