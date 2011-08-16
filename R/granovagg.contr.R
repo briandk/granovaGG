@@ -1,4 +1,4 @@
-granova.contr.ggplot <- function(data, 
+granovagg.contr <- function(data, 
                                  contrasts, 
                                  ylab       = "Outcome (response)", 
                                  xlab       = NULL, 
