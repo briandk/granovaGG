@@ -8,7 +8,7 @@ granovagg.1w <- function(data,
                          main       = "default_granova_title",
                          plot.theme = "theme_granova_1w", 
                          ...
-                             )
+                )
 
 {
   # Graphic corresponds to conventional one-way ANOVA, either vector or matrix input; plots grouped data from yy.
