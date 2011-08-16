@@ -1,6 +1,5 @@
 granovagg.1w <- function(data, 
                          group      = NULL, 
-                         dg         = 2, 
                          h.rng      = 1.25, 
                          v.rng      = .2, 
                          box        = FALSE, 
