@@ -43,7 +43,8 @@
 #' @param ylab Character; vertical axis label, default = NULL. 
 #' @param main Character; main label, top of graphic; can be supplied by user,
 #'   default = NULL, which leads to printing of generic title for graphic.
-#' @param plot.theme argument indicating a ggplot2 theme to apply to the graphic; defaults to a customized theme created for the one-way graphic
+#' @param plot.theme argument indicating a ggplot2 theme to apply to the
+#'   graphic; defaults to a customized theme created for the one-way graphic
 #' @param ... Optional arguments to be passed to \code{ggplot}
 #' @return Returns a list with two components: \item{grandsum}{Contains the
 #'   basic ANOVA statistics: the grandmean, the degrees of freedom and mean
@@ -60,6 +61,7 @@
 #'   \code{\link{granovagg.ds}}
 #' @references Fundamentals of Exploratory Analysis of Variance, Hoaglin D.,
 #'   Mosteller F. and Tukey J. eds., Wiley, 1991.
+#' @export
 #' @keywords hplot htest
 #' @examples NULL
 granovagg.1w <- function(data, 
