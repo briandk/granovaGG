@@ -1,10 +1,13 @@
-Package: granova
-Version: 2.0
-Date: 2010-11-04
-Title: Graphical Analysis of Variance
-Author: Robert M. Pruzek <RMPruzek@yahoo.com> and James E. Helmreich
-        <James.Helmreich@Marist.edu>
-Maintainer: James E. Helmreich <James.Helmreich@Marist.edu>
+Package: granovaGG
+Version: 1.0
+Date: 2011-08-16
+Title: Graphical Analysis of Variance Using ggplot2
+Author: Robert M. Pruzek <RMPruzek@yahoo.com> 
+        Brian A. Danielak <brian@briandk.com>
+        William E.J. Doane <wil@drdoane.com>
+        James E. Helmreich <James.Helmreich@Marist.edu>
+        Jason Bryer <jason@bryer.org>
+Maintainer: Brian A. Danielak <brian@briandk.com>
 Depends: R (>= 2.12.0), car, ggplot2 (>= 0.8.9), RColorBrewer, gridExtra
 Suggests: mgcv, rgl, tcltk, MASS
 Collate: granova.R InnerFunctions.R theme-defaults.R granova.1w.R granova.2w.R granova.contr.R granova.ds.R granova.1w.ggplot.R granova.contr.ggplot.R granova.ds.ggplot.R
