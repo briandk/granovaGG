@@ -1,5 +1,5 @@
-\name{granova.ds.ggplot}
-\alias{granova.ds.ggplot}
+\name{granovagg.ds}
+\alias{granovagg.ds}
 \title{Granova for Display of Dependent Sample Data Using ggplot2}
 \description{Plots dependent sample data beginning from a scatterplot for the X,Y pairs; proceeds to 
     display difference scores as point projections; also X and Y means, as well as the mean of the 
@@ -7,7 +7,7 @@
     a 95\% confidence interval for the mean difference as well as the t-statistic and degrees of freedom.
 }
 \usage{
-granova.ds.ggplot(data, plotTitle = "Dependent Sample Scatterplot", conf.level = 0.95, plotTheme = theme_bw())
+granovagg.ds(data, plotTitle = "Dependent Sample Scatterplot", conf.level = 0.95, plotTheme = theme_bw())
 }
 \arguments{
   \item{data}{is an n X 2 dataframe or matrix. First column defines X (intially for horzontal axis), the second defines Y. }
