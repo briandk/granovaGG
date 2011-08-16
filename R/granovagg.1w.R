@@ -12,7 +12,7 @@
 # dumbGroupingVector <- c(1, 2, 3)
 # granova.1w (data=data, group=grouping)
 
-granova.1w.ggplot <- function(data, 
+granovagg.1w <- function(data, 
                               group                    = NULL, 
                               dg                       = 2, 
                               h.rng                    = 1.25, 

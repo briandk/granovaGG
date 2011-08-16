@@ -13,7 +13,7 @@ If you're looking for the current stable, base-graphics version of granova, you'
 Absolutely. To see examples of some of the [ggplot2][ggplot2]-based `granova` functions, check out:
 
 1.  A [presentation][Feb2011Presentation] Brian Danielak gave at the DC UseR group in February, 2011.
-2.  A [presentation][2011July14Presentation] on some of the latest updates to `granova.1w.ggplot` and `granova.contr.ggplot`
+2.  A [presentation][2011July14Presentation] on some of the latest updates to `granovagg.1w` and `granova.contr.ggplot`
 
 ## How can I install the development version of granova on my system?
 There are at least two ways to do this:
