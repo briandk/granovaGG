@@ -1,3 +1,89 @@
+#' Graphic display for one-way ANOVA
+#' 
+#' Graphic to display data for a one-way analysis of variance, and also to
+#' help understand how ANOVA works, how the F statistic is generated for the
+#' data in hand, etc. The graphic may be called 'elemental' or 'natural'
+#' because it is built upon the key question that drives one-way ANOVA.
+#' 
+#' The central idea of the graphic is to use the fact that a one way analysis
+#' of variance F statistic is the ratio of two variances each of which can
+#' usefully be presented graphically. In particular, the sum of squares
+#' between (among) can be represented as the sum of products of so-called
+#' effects (each being a group mean minus the grand mean) and the group means;
+#' when these effects are themselves plotted against the group means a
+#' straight line necessarily ensues. The group means are plotted as triangles
+#' along this line. Data points (jittered) for groups are displayed (vertical
+#' axis) with respect to respective group means.  One-way ANOVA residuals can
+#' be displayed (set resid=TRUE) as a rug plot (on right margin); the standard
+#' deviation of the residuals, when squared, is just the mean square within.
+#' The conventional F statistic is just a ratio of the between to the within
+#' mean squares, or variances, each of which corresponds to areas of squares
+#' in the graphic. Use of effects to locate the groups in the order of the
+#' observed means, from left to right (by increasing size) yields this
+#' 'elemental' graphic for this commonly used statistical method.
+#' 
+#' Groups need not be of the same sizes, nor do data need to reflect any
+#' particular distributional characteristics. Skewness, outliers, clustering
+#' of data points, and various other features of the data may be seen in this
+#' graphic, possibly identified using point labels.
+#' 
+#' @param data Dataframe or vector. If a dataframe, the two or more columns
+#'   are taken to be groups of equal size (whence \code{group} is NULL).  If
+#'   \code{data} is a vector, \code{group} must be a vector, perhaps a factor,
+#'   that indicates groups (unequal group sizes allowed with this option).
+#' @param group Group indicator, generally a factor in case \code{data} is a
+#'   vector.
+#' @param dg Numeric; sets number of decimal points in output display, default
+#'   = 2.
+#' @param h.rng Numeric; controls the horizontal spread of groups, default =
+#'   1.25
+#' @param v.rng Numeric; controls the vertical spread of points, default =
+#'   0.25.
+#' @param box Logical; provides a bounding box (actually a square) to the
+#'   graph; default FALSE.
+#' @param jj Numeric; sets horizontal jittering level of points; when pairs of
+#'   ordered means are close to one another, try jj < 1; default = 1.
+#' @param kx Numeric; controls relative sizes of \code{cex}, default = 1.0
+#' @param px Numeric; controls relative sizes of \code{cex.axis}, default =
+#' 1.0 @param size.line Numeric; controls vertical location of group size and
+#' name
+#'   labels, default = -2.5.
+#' @param top.dot Numeric; controls hight of end of vertical dotted lines
+#'   through groups; default = .15.
+#' @param trmean Logical; marks 20% trimmed means for each group (as green
+#'   cross) and prints out those values in output window, default = FALSE.
+#' @param resid Logical; displays marginal distribution of residuals (as a
+#'   'rug') on right side (wrt grand mean), default = FALSE.
+#' @param dosqrs Logical; ensures plot of squares (for variances); when FALSE
+#'   or the number of groups is 2, squares will be suppressed, default = TRUE.
+#' @param ident Logical; allows user to identify specific points on the plot,
+#'   default = FALSE.
+#' @param pt.lab Character vector; allows user to provide labels for points,
+#'   else the rownames of xdata are used (if defined), or if not labels are
+#'   1:N (for N the total number of all data points), default = NULL.
+#' @param xlab Character; horizontal axis label, default = NULL. @param ylab
+#' Character; vertical axis label, default = NULL. @param main Character; main
+#' label, top of graphic; can be supplied by user,
+#'   default = NULL, which leads to printing of generic title for graphic.
+#' @param ... Optional arguments to be passed to \code{identify}, for example
+#'   \code{offset}
+#' @return Returns a list with two components: \item{grandsum}{Contains the
+#'   basic ANOVA statistics: the grandmean, the degrees of freedom and mean
+#'   sums of squares between and within groups, the F statistic, F probability
+#'   and the ratio between the sum of squares between groups and the total sum
+#'   of squares.} \item{stats}{Contains a table of statistics by group: the
+#'   size of each group, the contrast coefficients used in plotting the
+#'   groups, the weighted means, means, and 20% trimmed means, and the group
+#'   variances and standard deviations.}
+#' @author Robert M. Pruzek \email{RMPruzek@@yahoo.com},
+#' 
+#' James E. Helmreich \email{James.Helmreich@@Marist.edu}
+#' @seealso \code{\link{granovagg.contr}},
+#'   \code{\link{granovagg.ds}}
+#' @references Fundamentals of Exploratory Analysis of Variance, Hoaglin D.,
+#'   Mosteller F. and Tukey J. eds., Wiley, 1991.
+#' @keywords hplot htest
+#' @examples
 granovagg.1w <- function(data, 
                          group      = NULL, 
                          h.rng      = 1.25, 
