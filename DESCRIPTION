@@ -2,10 +2,10 @@ Package: granovaGG
 Version: 1.0
 Date: 2011-08-16
 Title: Graphical Analysis of Variance Using ggplot2
-Author: Robert M. Pruzek <RMPruzek@yahoo.com> 
-        Brian A. Danielak <brian@briandk.com>
-        William E.J. Doane <wil@drdoane.com>
-        James E. Helmreich <James.Helmreich@Marist.edu>
+Author: Robert M. Pruzek <RMPruzek@yahoo.com>, 
+        Brian A. Danielak <brian@briandk.com>,
+        William E.J. Doane <wil@drdoane.com>,
+        James E. Helmreich <James.Helmreich@Marist.edu>, and
         Jason Bryer <jason@bryer.org>
 Maintainer: Brian A. Danielak <brian@briandk.com>
 Depends: R (>= 2.12.0), ggplot2 (>= 0.8.9), RColorBrewer, gridExtra, MASS
