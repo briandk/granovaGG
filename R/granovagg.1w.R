@@ -1,17 +1,3 @@
-# CASE 1: data is a df
-# R> w <- c(9,2,3,1)
-# R> x <- c(1,2,3,4)
-# R> y <- c(5,6,7,8)
-# R> z <- c(9,0,1,2)
-# R> df <- data.frame(w=w, x=x, y=y, z=z)
-# R> granova.1w(data=df)
-
-# CASE 2: data is a vector
-# data <- c(1,2,3,4,5,6,7,8,9)
-# grouping <- c(1,1,1,2,2,3,3,3,3)
-# dumbGroupingVector <- c(1, 2, 3)
-# granova.1w (data=data, group=grouping)
-
 granovagg.1w <- function(data, 
                               group                    = NULL, 
                               dg                       = 2, 
