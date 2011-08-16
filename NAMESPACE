@@ -1,1 +1,2 @@
+export(granovagg.1w)
 import(ggplot2)
