@@ -29,5 +29,5 @@ installGranovaDev <- function() {
 removeCurrentVersionOfGranova()
 installGranovaDev()
 library(granovaGG)
-demo(granovagg.1w)
+?granovagg.1w
 warnings()
