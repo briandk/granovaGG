@@ -21,8 +21,8 @@ Suggests:
     tcltk,
     MASS
 Collate:
-    'granova.R'
     'theme-defaults.R'
+    'shared-functions.R'
     'granovagg.1w.R'
     'granovagg.contr.R'
     'granovagg.ds.R'

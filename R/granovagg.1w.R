@@ -61,6 +61,8 @@
 #'   \code{\link{granovagg.ds}}
 #' @references Fundamentals of Exploratory Analysis of Variance, Hoaglin D.,
 #'   Mosteller F. and Tukey J. eds., Wiley, 1991.
+#' @include shared-functions.R 
+#' @include theme-defaults.R
 #' @export
 #' @keywords hplot htest
 #' @examples NULL
