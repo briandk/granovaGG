@@ -26,7 +26,7 @@ Collate:
     'granovagg.1w.R'
     'granovagg.contr.R'
     'granovagg.ds.R'
-    'help.R'
+    'granovaGG.R'
 Description: This small collection of functions provides
     what we call elemental graphics for display of anova
     results. The term elemental derives from the fact that

@@ -1,26 +1,26 @@
 isGranovaInstalled <- function() {
-  return("granova" %in% .packages(all.available = TRUE))  
+  return("granovaGG" %in% .packages(all.available = TRUE))  
 }
 
 isGranovaAttached <- function() {
-  return(("package:granova" %in% search()))
+  return(("package:granovaGG" %in% search()))
 }
 
 removeCurrentVersionOfGranova <- function() {
   if (isGranovaInstalled()) {
     
     if (isGranovaAttached()) {
-      print("Detaching granova package")
-      detach(package:granova)
+      print("Detaching granovaGG package")
+      detach(package:granovaGG)
     }  
     
-    print("Removing granova package")
-    remove.packages("granova", lib = .libPaths())
+    print("Removing granovaGG package")
+    remove.packages("granovaGG", lib = .libPaths())
   }
 }
 
 installGranovaDev <- function() {
-  install.packages(pkgs    = '../../granova/', 
+  install.packages(pkgs    = '../../granovaGG/', 
                    repos   = NULL, 
                    type    = 'source'
   )
@@ -28,6 +28,6 @@ installGranovaDev <- function() {
 
 removeCurrentVersionOfGranova()
 installGranovaDev()
-library(granova)
-demo(granovagg.contr)
+library(granovaGG)
+demo(granovagg.1w)
 warnings()
