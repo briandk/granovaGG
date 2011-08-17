@@ -54,11 +54,15 @@
 #'   size of each group, the contrast coefficients used in plotting the
 #'   groups, the weighted means, means, and 20% trimmed means, and the group
 #'   variances and standard deviations.}
-#' @author Robert M. Pruzek \email{RMPruzek@@yahoo.com},
-#' Brian A. Danielak \email{brian@@briandk.com}
-#' James E. Helmreich \email{James.Helmreich@@Marist.edu}
 #' @seealso \code{\link{granovagg.contr}},
 #'   \code{\link{granovagg.ds}}
+#'
+#' @author Robert M. Pruzek \email{RMPruzek@@yahoo.com}
+#' @author Brian A. Danielak \email{brian@@briandk.com}
+#' @author William E. J. Doane \email{wil@@drdoane.com}
+#' @author James E. Helmreich \email{James.Helmreich@@Marist.edu}
+#'
+#' @author Jason Bryer \email{jason@@bryer.org}
 #' @references Fundamentals of Exploratory Analysis of Variance, Hoaglin D.,
 #'   Mosteller F. and Tukey J. eds., Wiley, 1991.
 #' @include shared-functions.R 

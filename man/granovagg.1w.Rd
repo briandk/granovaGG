@@ -99,9 +99,15 @@
 NULL
 }
 \author{
-  Robert M. Pruzek \email{RMPruzek@yahoo.com}, Brian A.
-  Danielak \email{brian@briandk.com} James E. Helmreich
-  \email{James.Helmreich@Marist.edu}
+  Robert M. Pruzek \email{RMPruzek@yahoo.com}
+
+  Brian A. Danielak \email{brian@briandk.com}
+
+  William E. J. Doane \email{wil@drdoane.com}
+
+  James E. Helmreich \email{James.Helmreich@Marist.edu}
+
+  Jason Bryer \email{jason@bryer.org}
 }
 \references{
   Fundamentals of Exploratory Analysis of Variance, Hoaglin
