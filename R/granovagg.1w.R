@@ -265,11 +265,11 @@ granovagg.1w <- function(data,
   "Wt'd Mean",'Mean', "Trim'd Mean" , 'Var.','St. Dev.'))
   out<-list(grandsum = round(gsum, 1), stats = round(stats.out, 1))
 
-  if(ident){
+  if(FALSE){
            if(is.null(pt.lab) & !mtx & !is.null(rownames(yy))){pt.lab<-rownames(yy)}
            if(is.null(pt.lab) & !mtx & is.null(rownames(yy))){pt.lab<-1:length(yy)}
            if(is.null(pt.lab) & mtx){pt.lab<-paste(rep(1:dim(yy)[1],dim(yy)[2]),",", rep(1:dim(yy)[2],ea = dim(yy)[1]), sep="")}
-           identify(stats.vcj,yr,labels = pt.lab, ...)
+           FALSEify(stats.vcj,yr,labels = pt.lab, ...)
            }
 
 
