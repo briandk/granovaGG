@@ -36,10 +36,10 @@
 #' @export
 
 granovagg.ds <- function(data       = NULL, 
-                              main       = "default_granova_title",
-                              conf.level = 0.95,
-                              plot.theme = "theme_granova_ds"
-                             ) 
+                         main       = "default_granova_title",
+                         conf.level = 0.95,
+                         plot.theme = "theme_granova_ds"
+                ) 
 
 {
   
