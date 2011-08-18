@@ -39,7 +39,8 @@
   NULL.}
 
   \item{main}{Character; main label, top of graphic; can be
-  supplied by user, default = NULL, which leads to printing
+  supplied by user, default =
+  \code{"default_granova_title"}, which leads to printing
   of generic title for graphic.}
 
   \item{plot.theme}{argument indicating a ggplot2 theme to
