@@ -44,6 +44,7 @@
 #'   t-statistic} \item{pval.t}{P-value for two sided t-test of null hypothesis
 #'   that population mean(D) does not equal zero.}
 #' @examples NULL
+#' @export
 
 granovagg.ds <- function(data       = NULL, 
                               main       = "Dependent Sample Assessment Plot",
