@@ -3,7 +3,7 @@
 #' Plots dependent sample data beginning from a scatterplot for the X,Y pairs;
 #' proceeds to display difference scores as point projections; also X and Y
 #' means, as well as the mean of the difference scores. Also prints various
-#' summary statistics including: effect size, means for X and Y, a 95%
+#' summary statistics including: effect size, means for X and Y, a 95\%
 #' confidence interval for the mean difference as well as the t-statistic and
 #' degrees of freedom.
 #' 
@@ -18,7 +18,7 @@
 #' horizontal lines), and rug plots are shown for the distributions of X (at
 #' the top of graphic) and Y (on the right side). Several summary statistics
 #' are plotted as well, to facilitate both description and inference; see
-#' below. The 95% confidence interval for the population mean difference is
+#' below. The 95\% confidence interval for the population mean difference is
 #' also shown graphically.  Because all data points are plotted relative to the
 #' identity line, and summary results are shown graphically, clusters, data
 #' trends, outliers, and possible uses of transformations are readily seen,
@@ -26,48 +26,24 @@
 #' 
 #' @param data is an n X 2 dataframe or matrix. First column defines X
 #'   (intially for horzontal axis), the second defines Y.
-#' @param revc reverses X,Y specifications.
-#' @param sw extends axes toward lower left, effectively moving data points to
-#'   the southwest.
-#' @param ne extends axes toward upper right, effectively moving data points to
-#'   northeast. Making both sw and ne smaller moves points farther apart, while
-#'   making both larger moves data points closer together.
-#' @param ptpch controls the pch of the (X,Y) points and of differences score
-#'   points.
-#' @param ptcex controls the cex of the (X,Y) points and of differences score
-#'   points.
-#' @param labcex controls size of axes labels.
-#' @param ident logical, default FALSE. Allows user to identify individual
-#'   points.
-#' @param colors vector defining colors of six components of the plot: (X,Y)
-#'   points, horizontal and vertical dashed lines representing means of the two
-#'   groups, light dashed diagonal lines connecting (X,Y) points and
-#'   projections differences dotplot, differences arranged as a dotplot, heavy
-#'   dashed diagonal line representing the mean of differences, confidence
-#'   interval.
-#' @param pt.lab optional character vector defining labels for points.  Only
-#'   used if ident is TRUE.  If NULL, rownames(data) are used if available; if
-#'   not 1:n is used.
 #' @param xlab optional label (as character) for horizontal axis. If not
 #'   defined, axis labels are taken from colnames of data.
 #' @param ylab optional label (as character) for vertical axis.
 #' @param main optional main title (as character); if not supplied by user
 #'   generic title is provided.
-#' @param sub optional subtile (as character).
-#' @param par.orig returns par to original settings; if multipanel plots it is
-#'   advisable to specify FALSE.
 #' @return A list is returned with the following components:
 #'   \item{mean(X)}{Mean of X values} \item{mean(Y)}{Mean of Y values}
 #'   \item{mean(D=X-Y)}{Mean of differences D = X - Y} \item{SD(D)}{Standard
 #'   deviation of differences D} \item{ES(D)}{Effect Size for differences D:
 #'   mean(D)/SD(D)} \item{r(X,Y)}{Correlation based on X,Y pairs}
-#'   \item{r(x+y,D)}{Correlation based on X+Y,D pairs} \item{LL 95%CI}{Lower
-#'   bound for 95% confidence interval for population mean(D)} \item{UL
-#'   95%CI}{Upper bound for 95% confidence interval for population mean(D)}
+#'   \item{r(x+y,D)}{Correlation based on X+Y,D pairs} \item{LL 95\%CI}{Lower
+#'   bound for 95\% confidence interval for population mean(D)} \item{UL
+#'   95\%CI}{Upper bound for 95\% confidence interval for population mean(D)}
 #'   \item{t(D-bar)}{t-statistic associated w/ test of hypothesis that
 #'   population mean(D) = 0.0} \item{df.t}{Degrees of freedom for the
 #'   t-statistic} \item{pval.t}{P-value for two sided t-test of null hypothesis
 #'   that population mean(D) does not equal zero.}
+#' @examples NULL
 
 granovagg.ds <- function(data       = NULL, 
                               main       = "Dependent Sample Assessment Plot",
