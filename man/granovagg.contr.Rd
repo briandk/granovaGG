@@ -21,6 +21,17 @@
   \item{plot.theme}{argument indicating a ggplot2 theme to
   apply to the graphic; defaults to a customized theme
   created for the contrast graphic}
+
+  \item{print.four.plots.per.page}{If \code{TRUE}, the
+  function lays out four plots per page and sends each page
+  to the graphics device. When running R interactively,
+  you'll have an opportunity to review each page before
+  seeing the next page. Also, when
+  \code{print.four.plots.per.page} is \code{TRUE}, the
+  function won't return any output. When
+  \code{print.four.plots.per.page} is set to \code{FALSE},
+  the function returns a list of #' ggplot objects, one
+  element per plot.}
 }
 \value{
   If \code{print.four.plots.per.page} is set to
