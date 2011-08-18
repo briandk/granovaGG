@@ -47,8 +47,7 @@
   apply to the graphic; defaults to a customized theme
   created for the one-way graphic}
 
-  \item{...}{Optional arguments to be passed to
-  \code{ggplot}}
+  \item{...}{Optional arguments to/from other functions}
 }
 \value{
   Returns a plot object of class \code{ggplot}. The

@@ -53,6 +53,7 @@
 #'   each page to the graphics device. When running R interactively, you'll have an opportunity to review each page
 #'   before seeing the next page. Also, when \code{print.four.plots.per.page} is \code{TRUE}, the function won't 
 #'   return any output. When \code{print.four.plots.per.page} is set to \code{FALSE}, the function returns a list of #'   ggplot objects, one element per plot.
+#' @param ... Optional arguments to/from other functions.
 #' @return If \code{print.four.plots.per.page} is set to \code{FALSE}, the function returns
 #'   a list of ggplot objects, one element per plot. That allows you to index any individual plot
 #'   or plots, then modify them as you wish. When \code{print.four.plots.per.page} is set to \code{FALSE}

@@ -32,6 +32,8 @@
   \code{print.four.plots.per.page} is set to \code{FALSE},
   the function returns a list of #' ggplot objects, one
   element per plot.}
+
+  \item{...}{Optional arguments to/from other functions.}
 }
 \value{
   If \code{print.four.plots.per.page} is set to

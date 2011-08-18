@@ -4,7 +4,7 @@
 \usage{
   granovagg.ds(data = NULL, main = "default_granova_title",
   xlab = NULL, ylab = NULL, conf.level = 0.95, plot.theme =
-  "theme_granova_ds")
+  "theme_granova_ds", ...)
 }
 \arguments{
   \item{data}{is an n X 2 dataframe or matrix. First column
@@ -31,6 +31,8 @@
   \item{plot.theme}{argument indicating a ggplot2 theme to
   apply to the graphic; defaults to a customized theme
   created for the dependent sample graphic}
+
+  \item{...}{Optional arguments to/from other functions}
 }
 \value{
   Returns a plot object of class \code{ggplot}.

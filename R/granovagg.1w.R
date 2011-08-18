@@ -47,7 +47,7 @@
 #'   default = \code{"default_granova_title"}, which leads to printing of generic title for graphic.
 #' @param plot.theme argument indicating a ggplot2 theme to apply to the
 #'   graphic; defaults to a customized theme created for the one-way graphic
-#' @param ... Optional arguments to be passed to \code{ggplot}
+#' @param ... Optional arguments to/from other functions
 #' @return Returns a plot object of class \code{ggplot}. The function also provides printed output including by-group 
 #'   statistical summaries and information about groups that might be overplotted (if applicable): 
 #'      \item{group}{group names}
