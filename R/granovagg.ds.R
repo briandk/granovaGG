@@ -31,6 +31,8 @@
 #' @param main optional main title (as character); can be supplied by user. The default value is
 #'   \code{"default_granova_title"}, which leads to printing of a generic title for graphic.
 #' @return Returns a plot object of class \code{ggplot}. 
+#' @param plot.theme argument indicating a ggplot2 theme to apply to the
+#'   graphic; defaults to a customized theme created for the dependent sample graphic
 #' @examples NULL
 #' @export
 
