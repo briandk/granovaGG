@@ -50,17 +50,18 @@
   \code{ggplot}}
 }
 \value{
-  Returns a list with two components:
-  \item{grandsum}{Contains the basic ANOVA statistics: the
-  grandmean, the degrees of freedom and mean sums of
-  squares between and within groups, the F statistic, F
-  probability and the ratio between the sum of squares
-  between groups and the total sum of squares.}
-  \item{stats}{Contains a table of statistics by group: the
-  size of each group, the contrast coefficients used in
-  plotting the groups, the weighted means, means, and 20%
-  trimmed means, and the group variances and standard
-  deviations.}
+  Returns a plot object of class \code{ggplot}. The
+  function also provides printed output including by-group
+  statistical summaries and information about groups that
+  might be overplotted (if applicable): \item{group}{group
+  names} \item{group means}{means for each group}
+  \item{trimmed.mean}{20\% trimmed group means}
+  \item{contrast}{Contrasts (group main effects)}
+  \item{variance}{variances}
+  \item{standard.deviation}{standard deviations}
+  \item{group.size}{group sizes} \item{overplotting
+  information}{Information about groups that, due to their
+  close means, may be overplotted}
 }
 \description{
   Graphic to display data for a one-way analysis of
