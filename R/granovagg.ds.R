@@ -1,73 +1,74 @@
-#' Graphic Display of Contrast Effect of ANOVA
+#' Granova for Display of Dependent Sample Data
 #' 
-#' Provides graphic displays that shows data and effects for a priori contrasts
-#' in ANOVA contexts; also corresponding numerical results.
+#' Plots dependent sample data beginning from a scatterplot for the X,Y pairs;
+#' proceeds to display difference scores as point projections; also X and Y
+#' means, as well as the mean of the difference scores. Also prints various
+#' summary statistics including: effect size, means for X and Y, a 95%
+#' confidence interval for the mean difference as well as the t-statistic and
+#' degrees of freedom.
 #' 
-#' Function provides graphic displays of contrast effects for prespecified
-#' contrasts in ANOVA. Data points are displayed as relevant for each contrast
-#' based on comparing groups according to the positive and negative contrast
-#' coefficients for each contrast on the horizontal axis, against response
-#' values on the vertical axis. Data points corresponding to groups not being
-#' compared in any contrast (coefficients of zero) are ignored. For each
-#' contrast (generally as part of a 2 x 2 panel) a line segment is given that
-#' compares the (weighted) mean of the response variable for the negative
-#' coefficients versus the positive coefficients. Standardized contrasts are
-#' used, wherein the sum of (magnitudes) of negative coefficients is unity; and
-#' the same for positive coefficients. If a line is `notably' different from
-#' horizontal (i.e. slope of zero), a `notable' effect has been identified;
-#' however, the question of statistical significance generally depends on a
-#' sound context-based estimate of standard error for the corresponding effect.
-#' This means that while summary aov numerical results and test statistics are
-#' presented (see below), the appropriateness of the default standard error
-#' generally requires the analyst's judgment. The response values are to be
-#' input in (a stacked) form, i.e. as a vector, for all cells (cf. arg. ylab).
-#' The matrix of contrast vectors \code{contrasts} must have G rows (the number
-#' of groups), and a number of columns equal to the number of prespecified
-#' contrasts, at most G-1. If the number of columns of \code{contrasts} is G-1,
-#' then the number per group, or cell size, is taken to be
-#' \code{length(data)/G}, where \code{G = nrow(contrasts)}.
+#' Paired X & Y values are plotted as scatterplot. The identity reference line
+#' (for Y=X) is drawn. Since the better data view often entails having X's >
+#' Y's the revc argument facilitates reversal of the X, Y specifications.
+#' Parallel projections of data points to (a lower-left) line segment show how
+#' each point relates to its X-Y = D difference; blue `crosses' are used to
+#' display the distribution of difference scores and the mean difference is
+#' displayed as a heavy dashed (red) line, parallel to the identity reference
+#' line. Means for X and Y are also plotted (as thin dashed vertical and
+#' horizontal lines), and rug plots are shown for the distributions of X (at
+#' the top of graphic) and Y (on the right side). Several summary statistics
+#' are plotted as well, to facilitate both description and inference; see
+#' below. The 95% confidence interval for the population mean difference is
+#' also shown graphically.  Because all data points are plotted relative to the
+#' identity line, and summary results are shown graphically, clusters, data
+#' trends, outliers, and possible uses of transformations are readily seen,
+#' possibly to be accommodated.
 #' 
-#' If the number of columns of \code{contrasts} is less than G-1 then the user
-#' must stipulate \code{npg}, the number in each group or cell.  The function
-#' is designed for the case when all cell sizes are the same, and may be most
-#' helpful when the a priori contrasts are mutually orthogonal (e.g., in power
-#' of 2 designs, or their fractional counterparts; also when specific row or
-#' column comparisons, or their interactions (see the example below based on
-#' rat weight gain data)). It is not essential that contrasts be mutually
-#' orthogonal; but mutual linear independence is required. (When factor levels
-#' correspond to some underlying continuum a standard application might use
-#' \code{con = contr.poly(G)}, for G the number of groups; consider also
-#' \code{contr.helmert(G)}.)  The final plot in each application shows the data
-#' for all groups or cells in the design, where groups are simply numbered from
-#' 1:G, for G the number of groups, on the horizontal axis, versus the response
-#' values on the vertical axis.
-#' 
-#' @param data Vector of scores for all equally sized groups, or a data.fame or
-#'   matrix where each column represents a group.
-#' @param contrasts Matrix of column contrasts with dimensions (number of
-#'   groups [G]) x (number of contrasts) [generally (G x G-1)].
-#' @param ylab Character; y axis lable.
-#' @param xlab Character vector of length number of contrast columns.  To name
-#'   the specific contrast being made in all but last panel of graphic.
-#'   Default = \code{NULL}
-#' @param jj Numeric; controls \code{\link{jitter}} and confers the possibility
-#'   of controlling the amount of jitter in the panel plots for the contrasts
-#'   Default is 1.
-#' @return Two sets of numerical results are presented: Weighted cell means for
-#'   positive and negative coefficients for each a priori contrast, and summary
-#'   results from \code{lm}.  \item{summary.lm}{Summary results for a linear
-#'   model analysis based on the R function \code{lm} (When effects are simple,
-#'   as in an equal n's power of 2 design, mean differences will generally
-#'   correspond to the linear regression coefficients as seen in the \code{lm}
-#'   summary results.)} \item{means.pos.neg.coeff}{table showing the (weighted)
-#'   means for positive and negative coefficients for each (row) contrast, and
-#'   for each row, the difference between these means in the final column}
-#'   \item{means.pos.neg.coeff}{Table showing the (weighted) means for positive
-#'   and negative coefficients for each (row) contrast, and for each row, the
-#'   difference between these means, and the standardized effect size in the
-#'   final column.} \item{contrasts}{Contrast matrix used.}
-#'   \item{group.means.sds}{Group means and standard deviations.}
-#'   \item{data}{Input data in matrix form.}
+#' @param data is an n X 2 dataframe or matrix. First column defines X
+#'   (intially for horzontal axis), the second defines Y.
+#' @param revc reverses X,Y specifications.
+#' @param sw extends axes toward lower left, effectively moving data points to
+#'   the southwest.
+#' @param ne extends axes toward upper right, effectively moving data points to
+#'   northeast. Making both sw and ne smaller moves points farther apart, while
+#'   making both larger moves data points closer together.
+#' @param ptpch controls the pch of the (X,Y) points and of differences score
+#'   points.
+#' @param ptcex controls the cex of the (X,Y) points and of differences score
+#'   points.
+#' @param labcex controls size of axes labels.
+#' @param ident logical, default FALSE. Allows user to identify individual
+#'   points.
+#' @param colors vector defining colors of six components of the plot: (X,Y)
+#'   points, horizontal and vertical dashed lines representing means of the two
+#'   groups, light dashed diagonal lines connecting (X,Y) points and
+#'   projections differences dotplot, differences arranged as a dotplot, heavy
+#'   dashed diagonal line representing the mean of differences, confidence
+#'   interval.
+#' @param pt.lab optional character vector defining labels for points.  Only
+#'   used if ident is TRUE.  If NULL, rownames(data) are used if available; if
+#'   not 1:n is used.
+#' @param xlab optional label (as character) for horizontal axis. If not
+#'   defined, axis labels are taken from colnames of data.
+#' @param ylab optional label (as character) for vertical axis.
+#' @param main optional main title (as character); if not supplied by user
+#'   generic title is provided.
+#' @param sub optional subtile (as character).
+#' @param par.orig returns par to original settings; if multipanel plots it is
+#'   advisable to specify FALSE.
+#' @return A list is returned with the following components:
+#'   \item{mean(X)}{Mean of X values} \item{mean(Y)}{Mean of Y values}
+#'   \item{mean(D=X-Y)}{Mean of differences D = X - Y} \item{SD(D)}{Standard
+#'   deviation of differences D} \item{ES(D)}{Effect Size for differences D:
+#'   mean(D)/SD(D)} \item{r(X,Y)}{Correlation based on X,Y pairs}
+#'   \item{r(x+y,D)}{Correlation based on X+Y,D pairs} \item{LL 95%CI}{Lower
+#'   bound for 95% confidence interval for population mean(D)} \item{UL
+#'   95%CI}{Upper bound for 95% confidence interval for population mean(D)}
+#'   \item{t(D-bar)}{t-statistic associated w/ test of hypothesis that
+#'   population mean(D) = 0.0} \item{df.t}{Degrees of freedom for the
+#'   t-statistic} \item{pval.t}{P-value for two sided t-test of null hypothesis
+#'   that population mean(D) does not equal zero.}
+
 granovagg.ds <- function(data       = NULL, 
                               main       = "Dependent Sample Assessment Plot",
                               conf.level = 0.95,
