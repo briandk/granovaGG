@@ -371,7 +371,8 @@ granovagg.1w <- function(data,
              x.range                 = .x.range,
              vertical.percent        = .vertical.percent,
              horizontal.percent      = .horizontal.percent,
-             aspect.ratio            = .aspect.ratio
+             aspect.ratio            = .aspect.ratio,
+             contrast.range.distance = .contrast.range.distance
            )
     )
   }
