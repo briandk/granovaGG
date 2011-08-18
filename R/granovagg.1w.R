@@ -88,7 +88,7 @@ granovagg.1w <- function(data,
   # If yy is matrix, columns are taken to be groups of equal size (so 'group' is NULL).
   # If yy is a vector, 'group' must be a vector, perhaps a factor, indicating groups.
   # Group data sets are initially reordered according to sizes of their means, low (left) to high (right).
-  # Argument 'dg' sets number of decimal points in output display (& can have fundamental importance).
+  # Argument '1' sets number of decimal points in output display (& can have fundamental importance).
   # Arguments 'h.rng' and 'v.rng' control (resp.) the horizontal spread of groups and the vertical spread group points.
   # Argument 'box' places a box around graph (default FALSE).
   # Argument 'jj' sets horiz. jittering level of points; when pairs of ordered means are close to one another, try jj < 1.
@@ -246,7 +246,7 @@ granovagg.1w <- function(data,
 
   #This interval based on pooled standard error within.
   grandmean.pm.sdw<-c(grandmean-sdw,grandmean+sdw) 
-  grandmean.pm.sewR<-round(grandmean.pm.sdw,dg-1)
+  grandmean.pm.sewR<-round(grandmean.pm.sdw,1-1)
     
     F.stat <- MS.b/MS.w
                           
@@ -263,7 +263,7 @@ granovagg.1w <- function(data,
 
   dimnames(stats.out)[2]<-list(c('Size','Contrast Coef',
   "Wt'd Mean",'Mean', "Trim'd Mean" , 'Var.','St. Dev.'))
-  out<-list(grandsum = round(gsum, dg), stats = round(stats.out, dg))
+  out<-list(grandsum = round(gsum, 1), stats = round(stats.out, 1))
 
   if(ident){
            if(is.null(pt.lab) & !mtx & !is.null(rownames(yy))){pt.lab<-rownames(yy)}
