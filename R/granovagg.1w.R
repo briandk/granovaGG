@@ -73,7 +73,8 @@
 granovagg.1w <- function(data, 
                          group      = NULL, 
                          h.rng      = 1.25, 
-                         v.rng      = .2, 
+                         v.rng      = .2,
+                         jj         = NULL, 
                          resid      = FALSE,  
                          xlab       = NULL, 
                          ylab       = NULL, 
@@ -223,7 +224,7 @@ granovagg.1w <- function(data,
   rng.sts <- range(stats[, 2])
 
 
-  ammt <- (jj/200) * diff(rng.sts)
+  ammt <- (1/200) * diff(rng.sts)
   stats.vcj<-jitter(stats.vc, am = ammt)
     
   #Reordering the stats matrix by the mean of each group
@@ -394,13 +395,16 @@ granovagg.1w <- function(data,
   }
 
   GetDegreeOfJitter <- function(owp) {
-    if (IsSmallestContrastDifferenceSmallerThanOnePercentOfDataResolution(owp)) {
-      return(GetSmallestDistanceBetweenAdjacentContrasts(owp$summary$contrast))
+    result <- owp$params$horizontal.percent
+    
+    if (!is.null(jj)) {
+      result <- (jj / 200) * owp$params$contrast.range.distance
+    } 
+    else if (IsSmallestContrastDifferenceSmallerThanOnePercentOfDataResolution(owp)) {
+        result <- GetSmallestDistanceBetweenAdjacentContrasts(owp$summary$contrast)
     }
-  
-    else {
-      return(owp$params$horizontal.percent)
-    }
+    
+    return(result)
   }
 
   GetSquareParameters <- function(owp) {
