@@ -37,6 +37,7 @@
 
 granovagg.ds <- function(data       = NULL, 
                          main       = "default_granova_title",
+                         xlab       = NULL,
                          conf.level = 0.95,
                          plot.theme = "theme_granova_ds"
                 ) 
@@ -302,6 +303,15 @@ granovagg.ds <- function(data       = NULL,
     return(scale_color_manual(value = colors, name = ""))
   }
 
+  XLabel <- function(dsp) {
+    result <- colnames(dsp$data)
+    if(!is.null(xlab)) {
+      result <- xlab
+    }
+    
+    return(xlab(result))
+  }
+  
   Title <- function() {
     if (main == "default_granova_title") {
       return(opts(title = "Dependent Sample Assessment Plot"))
@@ -332,6 +342,7 @@ granovagg.ds <- function(data       = NULL,
   p <- p + ScaleX(dsp) + ScaleY(dsp)
   p <- p + ForceCoordinateAxesToBeEqual()
   p <- p + Title()
+  p <- p + XLabel(dsp)
 
   return(p)
 
