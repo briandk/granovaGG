@@ -84,7 +84,7 @@
 #' @export
 granovagg.contr <- function(data, 
                             contrasts, 
-                            ylab       = "Outcome (response)", 
+                            ylab       = "default_y_label",
                             plot.theme = "theme_granova_contr",
                             print.four.plots.per.page = TRUE,
                             ...
@@ -216,7 +216,7 @@ granovagg.contr <- function(data,
     p <- p + Theme(plot.theme)
     p <- p + ContrastPlotTitle(ctr, index)
     p <- p + ContrastPlotXLabel(ctr, index)
-    p <- p + ContrastPlotYLabel()
+    p <- p + YLabel()
         
     return(p)
   }
@@ -287,10 +287,13 @@ granovagg.contr <- function(data,
     )
   }
   
-  ContrastPlotYLabel <- function() {
-    return(
-        ylab(paste(ylab))
-    )
+  YLabel <- function() {
+    result <- ylab
+    if (ylab == "default_y_label") {
+      result <- "Outcome (Response)"
+    }
+    
+    return(ylab(paste(result)))
   }
   
   GetSummaryPlotData <- function(ctr) {
@@ -337,7 +340,7 @@ granovagg.contr <- function(data,
     p <- p + Theme(plot.theme)
     p <- p + GroupSummaryPlotTitle(ctr)
     p <- p + GroupSummaryXLabel()
-    p <- p + GroupSummaryYLabel()
+    p <- p + YLabel()
     return(p)
   }
   
@@ -392,11 +395,7 @@ granovagg.contr <- function(data,
   GroupSummaryXLabel <- function() {
     return(xlab("Group Indicator"))
   }
-  
-  GroupSummaryYLabel <- function() {
-    return(ylab(ylab))
-  }  
-  
+
   CollateOutputPlots <- function(ctr) {
     output <- list(NULL)
     

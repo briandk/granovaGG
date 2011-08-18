@@ -2,8 +2,8 @@
 \alias{granovagg.contr}
 \title{Graphic Display of Contrast Effect of ANOVA}
 \usage{
-  granovagg.contr(data, contrasts, ylab = "Outcome
-  (response)", plot.theme = "theme_granova_contr",
+  granovagg.contr(data, contrasts, ylab =
+  "default_y_label", plot.theme = "theme_granova_contr",
   print.four.plots.per.page = TRUE, ...)
 }
 \arguments{
