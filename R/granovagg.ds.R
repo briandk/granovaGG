@@ -314,7 +314,13 @@ granovagg.ds <- function(data       = NULL,
   }
 
   Title <- function() {
-    return(opts(title = main))
+    if (main == "default_granova_title") {
+      return(opts(title = "Dependent Sample Assessment Plot"))
+    }
+    
+    else {
+      return(opts(title = main))
+    }
   }
   
   ForceCoordinateAxesToBeEqual <- function() {
