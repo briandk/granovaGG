@@ -70,6 +70,12 @@
 #'      summary results.)} 
 #'   \item{Contrasts}{The contrast matrix you specified.}
 #'
+#' @author Robert M. Pruzek \email{RMPruzek@@yahoo.com}
+#' @author Brian A. Danielak \email{brian@@briandk.com}
+#' @author William E. J. Doane \email{wil@@drdoane.com}
+#' @author James E. Helmreich \email{James.Helmreich@@Marist.edu}
+#' @author Jason Bryer \email{jason@@bryer.org}
+#'
 #' @seealso \code{\link{granovagg.1w}},
 #'   \code{\link{granovagg.ds}}
 #' @keywords hplot
