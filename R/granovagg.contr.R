@@ -47,6 +47,8 @@
 #' @param contrasts Matrix of column contrasts with dimensions (number of
 #'   groups [G]) x (number of contrasts) [generally (G x G-1)].
 #' @param ylab Character; y axis label. Defaults to a generic granova title.
+#' @param plot.theme argument indicating a ggplot2 theme to apply to the
+#'   graphic; defaults to a customized theme created for the contrast graphic
 #' @return If \code{print.four.plots.per.page} is set to \code{FALSE}, the function returns
 #'   a list of ggplot objects, one element per plot. That allows you to index any individual plot
 #'   or plots, then modify them as you wish. When \code{print.four.plots.per.page} is set to \code{FALSE}

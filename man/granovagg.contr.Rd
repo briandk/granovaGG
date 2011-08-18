@@ -17,6 +17,10 @@
 
   \item{ylab}{Character; y axis label. Defaults to a
   generic granova title.}
+
+  \item{plot.theme}{argument indicating a ggplot2 theme to
+  apply to the graphic; defaults to a customized theme
+  created for the contrast graphic}
 }
 \value{
   If \code{print.four.plots.per.page} is set to
