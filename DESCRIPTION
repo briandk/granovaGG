@@ -13,8 +13,7 @@ Depends:
     ggplot2 (>= 0.8.9),
     RColorBrewer,
     gridExtra,
-    MASS,
-    granova
+    MASS
 Suggests:
     mgcv,
     rgl,
