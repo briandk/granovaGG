@@ -50,21 +50,22 @@
 #' @param xlab Character vector of length number of contrast columns.  To name
 #'   the specific contrast being made in all but last panel of graphic.
 #'   Default = \code{NULL}
-#' @return Two sets of numerical results are presented: Weighted cell means for
-#'   positive and negative coefficients for each a priori contrast, and summary
-#'   results from \code{lm}.  \item{summary.lm}{Summary results for a linear
+#' @return If \code{print.four.plots.per.page} is set to \code{FALSE}, the function returns
+#'   a list of ggplot objects, one element per plot. That allows you to index any individual plot
+#'   or plots, then modify them as you wish. When \code{print.four.plots.per.page} is set to \code{FALSE}
+#'   (the default), the function prints four plots per page on a graphical device but returns \code{NULL}.
+#'   
+#'   The function also provides printed output: 
+#'   \item{Weighted Means}{Table showing the (weighted) means for positive
+#'   and negative coefficients for each (row) contrast, and for each row, the
+#'   difference between these means, and the standardized effect size in the
+#'   final column.}
+#'   \item{summary.lm}{Summary results for a linear
 #'   model analysis based on the R function \code{lm} (When effects are simple,
 #'   as in an equal n's power of 2 design, mean differences will generally
 #'   correspond to the linear regression coefficients as seen in the \code{lm}
-#'   summary results.)} \item{means.pos.neg.coeff}{table showing the (weighted)
-#'   means for positive and negative coefficients for each (row) contrast, and
-#'   for each row, the difference between these means in the final column}
-#'   \item{means.pos.neg.coeff}{Table showing the (weighted) means for positive
-#'   and negative coefficients for each (row) contrast, and for each row, the
-#'   difference between these means, and the standardized effect size in the
-#'   final column.} \item{contrasts}{Contrast matrix used.}
-#'   \item{group.means.sds}{Group means and standard deviations.}
-#'   \item{data}{Input data in matrix form.}
+#'   summary results.)} 
+#'   \item{Contrasts}{The contrast matrix you specified.}
 #'
 #' @seealso \code{\link{granovagg.1w}},
 #'   \code{\link{granovagg.ds}}
