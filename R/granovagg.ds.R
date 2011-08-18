@@ -22,22 +22,24 @@
 #' 
 #' @param data is an n X 2 dataframe or matrix. First column defines X
 #'   (intially for horzontal axis), the second defines Y.
-#' @param xlab optional label (as character) for horizontal axis. If not
-#'   defined, axis labels are taken from colnames of data.
-#' @param ylab optional label (as character) for vertical axis.
 #' @param main optional main title (as character); can be supplied by user. The default value is
 #'   \code{"default_granova_title"}, which leads to printing of a generic title for graphic.
-#' @return Returns a plot object of class \code{ggplot}. 
+#' @param xlab optional label (as character) for horizontal axis. If not
+#'   defined, axis labels are taken from colnames of data.
+#' @param ylab optional label (as character) for vertical axis. If not
+#'   defined, axis labels are taken from colnames of data.
 #' @param conf.level The confidence level at which to perform a dependent sample t-test. 
 #'   Defaults to \code{0.95} (95\% Confidence)
 #' @param plot.theme argument indicating a ggplot2 theme to apply to the
 #'   graphic; defaults to a customized theme created for the dependent sample graphic
+#' @return Returns a plot object of class \code{ggplot}. 
 #' @examples NULL
 #' @export
 
 granovagg.ds <- function(data       = NULL, 
                          main       = "default_granova_title",
                          xlab       = NULL,
+                         ylab       = NULL,
                          conf.level = 0.95,
                          plot.theme = "theme_granova_ds"
                 ) 
@@ -312,6 +314,15 @@ granovagg.ds <- function(data       = NULL,
     return(xlab(result))
   }
   
+  YLabel <- function(dsp) {
+    result <- colnames(dsp$data)
+    if(!is.null(ylab)) {
+      result <- ylab
+    }
+    
+    return(ylab(result))
+  }
+  
   Title <- function() {
     if (main == "default_granova_title") {
       return(opts(title = "Dependent Sample Assessment Plot"))
@@ -343,6 +354,7 @@ granovagg.ds <- function(data       = NULL,
   p <- p + ForceCoordinateAxesToBeEqual()
   p <- p + Title()
   p <- p + XLabel(dsp)
+  p <- p + YLabel(dsp)
 
   return(p)
 

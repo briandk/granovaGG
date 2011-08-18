@@ -3,7 +3,7 @@
 \title{Granova for Display of Dependent Sample Data}
 \usage{
   granovagg.ds(data = NULL, main = "default_granova_title",
-  xlab = NULL, conf.level = 0.95, plot.theme =
+  xlab = NULL, ylab = NULL, conf.level = 0.95, plot.theme =
   "theme_granova_ds")
 }
 \arguments{
@@ -11,17 +11,18 @@
   defines X (intially for horzontal axis), the second
   defines Y.}
 
+  \item{main}{optional main title (as character); can be
+  supplied by user. The default value is
+  \code{"default_granova_title"}, which leads to printing
+  of a generic title for graphic.}
+
   \item{xlab}{optional label (as character) for horizontal
   axis. If not defined, axis labels are taken from colnames
   of data.}
 
   \item{ylab}{optional label (as character) for vertical
-  axis.}
-
-  \item{main}{optional main title (as character); can be
-  supplied by user. The default value is
-  \code{"default_granova_title"}, which leads to printing
-  of a generic title for graphic.}
+  axis. If not defined, axis labels are taken from colnames
+  of data.}
 
   \item{conf.level}{The confidence level at which to
   perform a dependent sample t-test. Defaults to
