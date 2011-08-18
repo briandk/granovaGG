@@ -50,9 +50,6 @@
 #' @param xlab Character vector of length number of contrast columns.  To name
 #'   the specific contrast being made in all but last panel of graphic.
 #'   Default = \code{NULL}
-#' @param jj Numeric; controls \code{\link{jitter}} and confers the possibility
-#'   of controlling the amount of jitter in the panel plots for the contrasts
-#'   Default is 1.
 #' @return Two sets of numerical results are presented: Weighted cell means for
 #'   positive and negative coefficients for each a priori contrast, and summary
 #'   results from \code{lm}.  \item{summary.lm}{Summary results for a linear
@@ -78,7 +75,6 @@ granovagg.contr <- function(data,
                                  contrasts, 
                                  ylab       = "Outcome (response)", 
                                  xlab       = NULL, 
-                                 jj         = 1,
                                  plot.theme = "theme_granova_contr",
                                  print.four.plots.per.page = TRUE,
                                  ...

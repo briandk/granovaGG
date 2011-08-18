@@ -3,7 +3,7 @@
 \title{Graphic Display of Contrast Effect of ANOVA}
 \usage{
   granovagg.contr(data, contrasts, ylab = "Outcome
-  (response)", xlab = NULL, jj = 1, plot.theme =
+  (response)", xlab = NULL, plot.theme =
   "theme_granova_contr", print.four.plots.per.page = TRUE,
   ...)
 }
@@ -21,11 +21,6 @@
   \item{xlab}{Character vector of length number of contrast
   columns.  To name the specific contrast being made in all
   but last panel of graphic. Default = \code{NULL}}
-
-  \item{jj}{Numeric; controls \code{\link{jitter}} and
-  confers the possibility of controlling the amount of
-  jitter in the panel plots for the contrasts Default is
-  1.}
 }
 \value{
   Two sets of numerical results are presented: Weighted
