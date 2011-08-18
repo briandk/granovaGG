@@ -3,7 +3,8 @@
 \title{Granova for Display of Dependent Sample Data}
 \usage{
   granovagg.ds(data = NULL, main = "default_granova_title",
-  conf.level = 0.95, plot.theme = "theme_granova_ds")
+  xlab = NULL, conf.level = 0.95, plot.theme =
+  "theme_granova_ds")
 }
 \arguments{
   \item{data}{is an n X 2 dataframe or matrix. First column
