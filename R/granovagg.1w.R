@@ -86,29 +86,6 @@ granovagg.1w <- function(data,
                 )
 
 {
-  # Graphic corresponds to conventional one-way ANOVA, either vector or matrix input; plots grouped data from yy.
-  # If yy is matrix, columns are taken to be groups of equal size (so 'group' is NULL).
-  # If yy is a vector, 'group' must be a vector, perhaps a factor, indicating groups.
-  # Group data sets are initially reordered according to sizes of their means, low (left) to high (right).
-  # Argument '1' sets number of decimal points in output display (& can have fundamental importance).
-  # Arguments 'h.rng' and 'v.rng' control (resp.) the horizontal spread of groups and the vertical spread group points.
-  # Argument 'box' places a box around graph (default FALSE).
-  # Argument 'jj' sets horiz. jittering level of points; when pairs of ordered means are close to one another, try jj < 1.
-  # Arguments 'k' and 'p' (numeric) control relative sizes of 'cex' and 'cex.axis' respectively. 
-  # Argument 'size.line' is numeric; controls vertical location of group size and name labels, default = -2.5.
-  # Argument 'trmean = TRUE' (default FALSE) marks 20% trimmed means for each group, and prints out those values in the output window.
-  # Argument 'resid = TRUE' (default FALSE) gives marginal distribution of residuals (as a 'rug') on right side (wrt grand mean).
-  # Argument 'dosqrs = TRUE' (default) overlays blue & red boxes to represent within & between mean squares;
-  # sides correspond to twice the corresponding standard deviations, so areas of the squares correspond to (4 times) the mean squares.
-  # Argument 'dosqrs = TRUE' (default) ensures inclusion of the squares; but (say, # of groups = 2) the squares can be suppressed
-  # Argument 'ident' allows user to identify specific points on the plot
-  # Argument 'pt.lab' allows user to provide labels for points, else the rownames of xdata are used (if defined), or if not labels are 1:n.
-  # in which case the t-statistic replaces F (see below); also if # of groups = 2, the standardized effect size is printed.
-  # The F statistic is reflected by the RATIO of the areas of red box to the blue box;
-  # and if there are only two groups, the standardized effect is printed.
-  # Finally, a wide variety of numerical summary statistics are generated to complement graphic results; see grandsum & stats.
-  # Please address questions, or make suggestions for improvements, to: rmpruzek@@yahoo.com or james.helmreich@@marist.edu
-
   yy <- data
       
   CoerceHigherDimensionalDataToMatrix <- function(data) {
