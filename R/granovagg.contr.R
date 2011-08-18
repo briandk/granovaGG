@@ -54,14 +54,14 @@
 #'   
 #'   The function also provides printed output: 
 #'   \item{Weighted Means}{Table showing the (weighted) means for positive
-#'   and negative coefficients for each (row) contrast, and for each row, the
-#'   difference between these means, and the standardized effect size in the
-#'   final column.}
+#'      and negative coefficients for each (row) contrast, and for each row, the
+#'      difference between these means, and the standardized effect size in the
+#'      final column.}
 #'   \item{summary.lm}{Summary results for a linear
-#'   model analysis based on the R function \code{lm} (When effects are simple,
-#'   as in an equal n's power of 2 design, mean differences will generally
-#'   correspond to the linear regression coefficients as seen in the \code{lm}
-#'   summary results.)} 
+#'      model analysis based on the R function \code{lm} (When effects are simple,
+#'      as in an equal n's power of 2 design, mean differences will generally
+#'      correspond to the linear regression coefficients as seen in the \code{lm}
+#'      summary results.)} 
 #'   \item{Contrasts}{The contrast matrix you specified.}
 #'
 #' @seealso \code{\link{granovagg.1w}},
@@ -70,12 +70,12 @@
 #' @examples NULL
 #' @export
 granovagg.contr <- function(data, 
-                                 contrasts, 
-                                 ylab       = "Outcome (response)", 
-                                 plot.theme = "theme_granova_contr",
-                                 print.four.plots.per.page = TRUE,
-                                 ...
-                        ) 
+                            contrasts, 
+                            ylab       = "Outcome (response)", 
+                            plot.theme = "theme_granova_contr",
+                            print.four.plots.per.page = TRUE,
+                            ...
+                   ) 
 {
 
   # Plots responses by contrasts.
