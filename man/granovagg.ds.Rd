@@ -37,10 +37,7 @@
   Plots dependent sample data beginning from a scatterplot
   for the X,Y pairs; proceeds to display difference scores
   as point projections; also X and Y means, as well as the
-  mean of the difference scores. Also prints various
-  summary statistics including: effect size, means for X
-  and Y, a 95\% confidence interval for the mean difference
-  as well as the t-statistic and degrees of freedom.
+  mean of the difference scores.
 }
 \details{
   Paired X & Y values are plotted as scatterplot. The

@@ -2,10 +2,7 @@
 #' 
 #' Plots dependent sample data beginning from a scatterplot for the X,Y pairs;
 #' proceeds to display difference scores as point projections; also X and Y
-#' means, as well as the mean of the difference scores. Also prints various
-#' summary statistics including: effect size, means for X and Y, a 95\%
-#' confidence interval for the mean difference as well as the t-statistic and
-#' degrees of freedom.
+#' means, as well as the mean of the difference scores.
 #' 
 #' Paired X & Y values are plotted as scatterplot. The identity reference line
 #' (for Y=X) is drawn. 
@@ -32,7 +29,7 @@
 #'   \code{"default_granova_title"}, which leads to printing of a generic title for graphic.
 #' @return Returns a plot object of class \code{ggplot}. 
 #' @param conf.level The confidence level at which to perform a dependent sample t-test. 
-#' Defaults to \code{0.95} (95\% Confidence)
+#'   Defaults to \code{0.95} (95\% Confidence)
 #' @param plot.theme argument indicating a ggplot2 theme to apply to the
 #'   graphic; defaults to a customized theme created for the dependent sample graphic
 #' @examples NULL
