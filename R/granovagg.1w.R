@@ -37,6 +37,8 @@
 #'   1.25
 #' @param v.rng Numeric; controls the vertical spread of points, default =
 #'   0.25.
+#' @param jj Numeric; sets horiz. jittering level of points; when pairs of ordered means are close to one another, try
+#'   jj < 1.
 #' @param resid Logical; displays marginal distribution of residuals (as a
 #'   'rug') on right side (wrt grand mean), default = FALSE.
 #' @param xlab Character; horizontal axis label, default = NULL. 

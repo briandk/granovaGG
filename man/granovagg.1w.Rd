@@ -3,9 +3,9 @@
 \title{Graphic display for one-way ANOVA}
 \usage{
   granovagg.1w(data, group = NULL, h.rng = 1.25, v.rng =
-  0.2, resid = FALSE, xlab = NULL, ylab = NULL, main =
-  "default_granova_title", plot.theme = "theme_granova_1w",
-  ...)
+  0.2, jj = NULL, resid = FALSE, xlab = NULL, ylab = NULL,
+  main = "default_granova_title", plot.theme =
+  "theme_granova_1w", ...)
 }
 \arguments{
   \item{data}{Dataframe or vector. If a dataframe, the two
@@ -23,6 +23,10 @@
 
   \item{v.rng}{Numeric; controls the vertical spread of
   points, default = 0.25.}
+
+  \item{jj}{Numeric; sets horiz. jittering level of points;
+  when pairs of ordered means are close to one another, try
+  jj < 1.}
 
   \item{resid}{Logical; displays marginal distribution of
   residuals (as a 'rug') on right side (wrt grand mean),
