@@ -65,7 +65,6 @@
 #' @author Brian A. Danielak \email{brian@@briandk.com}
 #' @author William E. J. Doane \email{wil@@drdoane.com}
 #' @author James E. Helmreich \email{James.Helmreich@@Marist.edu}
-#'
 #' @author Jason Bryer \email{jason@@bryer.org}
 #' @references Fundamentals of Exploratory Analysis of Variance, Hoaglin D.,
 #'   Mosteller F. and Tukey J. eds., Wiley, 1991.

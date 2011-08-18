@@ -33,6 +33,11 @@
 #' @param plot.theme argument indicating a ggplot2 theme to apply to the
 #'   graphic; defaults to a customized theme created for the dependent sample graphic
 #' @return Returns a plot object of class \code{ggplot}. 
+#' @author Robert M. Pruzek \email{RMPruzek@@yahoo.com}
+#' @author Brian A. Danielak \email{brian@@briandk.com}
+#' @author William E. J. Doane \email{wil@@drdoane.com}
+#' @author James E. Helmreich \email{James.Helmreich@@Marist.edu}
+#' @author Jason Bryer \email{jason@@bryer.org}
 #' @examples NULL
 #' @export
 
