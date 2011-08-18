@@ -22,6 +22,10 @@
   \code{"default_granova_title"}, which leads to printing
   of a generic title for graphic.}
 
+  \item{conf.level}{The confidence level at which to
+  perform a dependent sample t-test. Defaults to
+  \code{0.95} (95\% Confidence)}
+
   \item{plot.theme}{argument indicating a ggplot2 theme to
   apply to the graphic; defaults to a customized theme
   created for the dependent sample graphic}
