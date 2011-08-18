@@ -1,3 +1,4 @@
 export(granovagg.1w)
+export(granovagg.contr)
 export(granovagg.ds)
 import(ggplot2)
