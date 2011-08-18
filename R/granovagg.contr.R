@@ -46,10 +46,7 @@
 #'   matrix where each column represents a group.
 #' @param contrasts Matrix of column contrasts with dimensions (number of
 #'   groups [G]) x (number of contrasts) [generally (G x G-1)].
-#' @param ylab Character; y axis lable.
-#' @param xlab Character vector of length number of contrast columns.  To name
-#'   the specific contrast being made in all but last panel of graphic.
-#'   Default = \code{NULL}
+#' @param ylab Character; y axis label. Defaults to a generic granova title.
 #' @return If \code{print.four.plots.per.page} is set to \code{FALSE}, the function returns
 #'   a list of ggplot objects, one element per plot. That allows you to index any individual plot
 #'   or plots, then modify them as you wish. When \code{print.four.plots.per.page} is set to \code{FALSE}
@@ -75,7 +72,6 @@
 granovagg.contr <- function(data, 
                                  contrasts, 
                                  ylab       = "Outcome (response)", 
-                                 xlab       = NULL, 
                                  plot.theme = "theme_granova_contr",
                                  print.four.plots.per.page = TRUE,
                                  ...

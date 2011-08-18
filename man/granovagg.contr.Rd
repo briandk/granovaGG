@@ -3,9 +3,8 @@
 \title{Graphic Display of Contrast Effect of ANOVA}
 \usage{
   granovagg.contr(data, contrasts, ylab = "Outcome
-  (response)", xlab = NULL, plot.theme =
-  "theme_granova_contr", print.four.plots.per.page = TRUE,
-  ...)
+  (response)", plot.theme = "theme_granova_contr",
+  print.four.plots.per.page = TRUE, ...)
 }
 \arguments{
   \item{data}{Vector of scores for all equally sized
@@ -16,11 +15,8 @@
   dimensions (number of groups [G]) x (number of contrasts)
   [generally (G x G-1)].}
 
-  \item{ylab}{Character; y axis lable.}
-
-  \item{xlab}{Character vector of length number of contrast
-  columns.  To name the specific contrast being made in all
-  but last panel of graphic. Default = \code{NULL}}
+  \item{ylab}{Character; y axis label. Defaults to a
+  generic granova title.}
 }
 \value{
   If \code{print.four.plots.per.page} is set to
