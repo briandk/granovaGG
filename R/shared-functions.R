@@ -1,3 +1,7 @@
+#' Alternate Rug Plot for ggplot2
+#'
+#' This alternate rug plot geom simply plots the rug tufts on the top and right (instead of the bottom and left)
+#' @export
 GeomRugAlt <- proto(
   Geom, {
     draw <- function(., data, scales, coordinates, ...) {  
