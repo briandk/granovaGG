@@ -39,7 +39,7 @@
 #' @author William E. J. Doane \email{wil@@drdoane.com}
 #' @author James E. Helmreich \email{James.Helmreich@@Marist.edu}
 #' @author Jason Bryer \email{jason@@bryer.org}
-#' @examples NULL
+#' @example demo/granovagg.ds.R
 #' @export
 
 granovagg.ds <- function(data       = NULL, 
