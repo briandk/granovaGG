@@ -72,7 +72,7 @@
 #' @include theme-defaults.R
 #' @export
 #' @keywords hplot htest
-#' @examples NULL
+#' @example /demo/granovagg.1w.R
 granovagg.1w <- function(data, 
                          group      = NULL, 
                          h.rng      = 1.25, 
