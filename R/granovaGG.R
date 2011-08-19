@@ -70,9 +70,9 @@ NULL
 #' 
 #' \describe{
 #' 
-#' \item{list("Prewt")}{Pretreatment weight of subject, in pounds.}
+#' \item{Prewt}{Pretreatment weight of subject, in pounds.}
 #' 
-#' \item{list("Postwt")}{Postreatment weight of subject, in pounds.}
+#' \item{Postwt}{Postreatment weight of subject, in pounds.}
 #' 
 #' }
 #' @references Venables, W. N. and Ripley, B. D. (2002) Modern Applied
@@ -100,13 +100,13 @@ NULL
 #' 
 #' \describe{
 #' 
-#' \item{list("Placebo")}{Rats receiving a placebo treatment.}
+#' \item{Placebo}{Rats receiving a placebo treatment.}
 #' 
-#' \item{list("Drug.A")}{Rats receiving only drug A.}
+#' \item{Drug.A}{Rats receiving only drug A.}
 #' 
-#' \item{list("Drug.B")}{Rats receiving only drug B.}
+#' \item{Drug.B}{Rats receiving only drug B.}
 #' 
-#' \item{list("Drug.A.B")}{Rats receiving both drug A and drug B.}
+#' \item{Drug.A.B}{Rats receiving both drug A and drug B.}
 #' 
 #' }
 #' @source Richard Lowry. Concepts & Applications of Inferential Statistics.
@@ -133,9 +133,9 @@ NULL
 #' 
 #' \describe{
 #' 
-#' \item{list("Exposed")}{Blood lead level of exposed child, mg/dl.}
+#' \item{Exposed}{Blood lead level of exposed child, mg/dl.}
 #' 
-#' \item{list("Control")}{Blood lead level of exposed child, mg/dl.}
+#' \item{Control}{Blood lead level of exposed child, mg/dl.}
 #' 
 #' }
 #' @references See discussion in Section 2.5 of Enhancing Dependent Sample
@@ -158,12 +158,12 @@ NULL
 #' @docType data
 #' @format This data frame was originally \code{poison.data} from the package
 #'   \code{BHH2}, but as presented here has added columns; no NAs. \describe{
-#'   \item{list("Poison")}{Factor with three levels I, II, and III.}
-#'   \item{list("Treatment")}{Factor with four levels, A, B, C, and D.}
-#'   \item{list("Group")}{Factor with 12 levels, 1:12.}
-#'   \item{list("SurvTime")}{Numeric; survival time.}
-#'   \item{list("RateSurvTime")}{Numeric; inverse of SurvTime}
-#'   \item{list("RankRateSurvTime")}{Numeric; \code{RateSurvTime} scores have
+#'   \item{Poison}{Factor with three levels I, II, and III.}
+#'   \item{Treatment}{Factor with four levels, A, B, C, and D.}
+#'   \item{Group}{Factor with 12 levels, 1:12.}
+#'   \item{SurvTime}{Numeric; survival time.}
+#'   \item{RateSurvTime}{Numeric; inverse of SurvTime}
+#'   \item{RankRateSurvTime}{Numeric; \code{RateSurvTime} scores have
 #'   been converted to ranks, and then rescaled to have the same median as and
 #'   a spread comparable to \code{RateSurvTime}} }
 #' @references Box G. E. P, Hunter, J. S. and Hunter, W. C. (2005). Statistics
@@ -190,11 +190,11 @@ NULL
 #' 
 #' \describe{
 #' 
-#' \item{list("Weight.Gain")}{Weight gain (grams) of rats fed the diets.}
+#' \item{Weight.Gain}{Weight gain (grams) of rats fed the diets.}
 #' 
-#' \item{list("Diet.Amount")}{Amount of protein in diet: 1 = High, 2 = Low.}
+#' \item{Diet.Amount}{Amount of protein in diet: 1 = High, 2 = Low.}
 #' 
-#' \item{list("Diet.Type")}{Type of protein in diet: 1 = Beef, 2 = Pork, 3 =
+#' \item{Diet.Type}{Type of protein in diet: 1 = Beef, 2 = Pork, 3 =
 #'   Cereal.}
 #' 
 #' }

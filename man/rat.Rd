@@ -7,11 +7,11 @@ NAs.
 
 \describe{
 
-\item{list("Weight.Gain")}{Weight gain (grams) of rats fed the diets.}
+\item{Weight.Gain}{Weight gain (grams) of rats fed the diets.}
 
-\item{list("Diet.Amount")}{Amount of protein in diet: 1 = High, 2 = Low.}
+\item{Diet.Amount}{Amount of protein in diet: 1 = High, 2 = Low.}
 
-\item{list("Diet.Type")}{Type of protein in diet: 1 = Beef, 2 = Pork, 3 =
+\item{Diet.Type}{Type of protein in diet: 1 = Beef, 2 = Pork, 3 =
 Cereal.}
 
 }}

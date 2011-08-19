@@ -7,9 +7,9 @@ NAs.
 
 \describe{
 
-\item{list("Prewt")}{Pretreatment weight of subject, in pounds.}
+\item{Prewt}{Pretreatment weight of subject, in pounds.}
 
-\item{list("Postwt")}{Postreatment weight of subject, in pounds.}
+\item{Postwt}{Postreatment weight of subject, in pounds.}
 
 }}
 \source{

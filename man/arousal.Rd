@@ -8,13 +8,13 @@ NAs.
 
 \describe{
 
-\item{list("Placebo")}{Rats receiving a placebo treatment.}
+\item{Placebo}{Rats receiving a placebo treatment.}
 
-\item{list("Drug.A")}{Rats receiving only drug A.}
+\item{Drug.A}{Rats receiving only drug A.}
 
-\item{list("Drug.B")}{Rats receiving only drug B.}
+\item{Drug.B}{Rats receiving only drug B.}
 
-\item{list("Drug.A.B")}{Rats receiving both drug A and drug B.}
+\item{Drug.A.B}{Rats receiving both drug A and drug B.}
 
 }}
 \source{

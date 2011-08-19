@@ -8,9 +8,9 @@ NAs.
 
 \describe{
 
-\item{list("Exposed")}{Blood lead level of exposed child, mg/dl.}
+\item{Exposed}{Blood lead level of exposed child, mg/dl.}
 
-\item{list("Control")}{Blood lead level of exposed child, mg/dl.}
+\item{Control}{Blood lead level of exposed child, mg/dl.}
 
 }}
 \source{
