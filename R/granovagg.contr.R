@@ -80,7 +80,7 @@
 #' @seealso \code{\link{granovagg.1w}},
 #'   \code{\link{granovagg.ds}}
 #' @keywords hplot
-#' @examples NULL
+#' @example demo/granovagg.contr.R
 #' @export
 granovagg.contr <- function(data, 
                             contrasts, 
