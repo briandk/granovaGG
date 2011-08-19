@@ -6,6 +6,6 @@
   on the top and right (instead of the bottom and left)
 }
 \seealso{
-  \code{\link{geom_rug},
+  \code{\link{geom_rug}}
 }
 

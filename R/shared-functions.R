@@ -2,7 +2,7 @@
 #'
 #' This alternate rug plot geom simply plots the rug tufts on the top and right (instead of the bottom and left)
 #' @export
-#' @seealso \code{\link{geom_rug},
+#' @seealso \code{\link{geom_rug}}
 GeomRugAlt <- proto(
   Geom, {
     draw <- function(., data, scales, coordinates, ...) {  
