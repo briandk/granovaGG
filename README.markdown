@@ -73,9 +73,9 @@ There are three ways to get granovaGG. Which way you choose depends on how adven
 ### I want a relatively stable release, but I don't have time to wait for CRAN
 1. First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't, you can do it in R:
 
-```r
-        install.packages(pkgs="devtools", dependencies=TRUE)
-```    
+    ```r
+    install.packages(pkgs="devtools", dependencies=TRUE)
+    ```    
 2. Then, use the `install_github()` function to fetch our hardy code from the master branch:
 
 ```r
