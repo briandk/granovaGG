@@ -29,7 +29,7 @@ And, if you already have legacy granova code but would like to use the new ggplo
 
 So, suppose you have some code that uses three classic functions:
 
-```r
+```R
 granova.contr(arousal, contrasts = contrasts22)
 granova.ds(blood_lead)
 granova.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
