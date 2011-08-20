@@ -29,10 +29,12 @@ And, if you already have legacy granova code but would like to use the new ggplo
 
 So, suppose you have some code that uses three classic functions:
 
-    granova.contr(arousal, contrasts = contrasts22)
-    granova.ds(blood_lead)
-    granova.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
-    
+```r
+granova.contr(arousal, contrasts = contrasts22)
+granova.ds(blood_lead)
+granova.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
+```
+
 You can pipe the same code through granovaGG adding a "gg" after the "granova" part of the function call:
 
     granovagg.contr(arousal, contrasts = contrasts22)
