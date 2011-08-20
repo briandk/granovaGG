@@ -1,13 +1,44 @@
 ## Welcome
-You're at the development home for the Graphical Analysis of Variance (granova) package for [R]!
+You're at the development home for the Graphical Analysis of Variance using ggplot2 (granovaGG) package for [R]!
 
 ## What does this package do?
-The package `granova` is designed to produce statistical graphics driven by the fundamental questions of analysis of variance. The graphics `granova` creates can offer far more visual information than a traditional tabular model summary or significance test. For an example of how granova can enhance analysis, see [Pruzek and Helmreich (2009)].
+The package `granovaGG` is designed to produce statistical graphics driven by the fundamental questions of analysis of variance. The graphics `granova` creates can offer far more visual information than a traditional tabular model summary or significance test. For an example of how granovaGG can enhance analysis, see [Pruzek and Helmreich (2009)].
 
-## How is this package different from granova on CRAN?
-This github repository serves as the home of active development on `granova`. It's where we're trying out new things, like re-engineering some of the graphics to take advantage of [ggplot2] graphics.
+## Isn't there already a `granova` package on CRAN?
+Yes.
 
-If you're looking for the current stable, base-graphics version of granova, you'll want to head to [CRAN][granovaClassic]. If you're looking to test-drive the latest [ggplot2][ggplot2] implementations of some `granova` functions, you're in the right place.
+## So what's the difference between `granova` and `granovaGG`?
+There are several, actually.
+
+First, the current version of [`granova`][granovaClassic] on CRAN uses R's base graphics to produce plots. `granovaGG`, on the other hand, uses an R package called [`ggplot2`][ggplot2], which offers a much greater degree of expressiveness and extensibility.
+
+Second, 3-D functionality for creating an elemental graphic for 2-way ANOVA is only in `granova`; `granovaGG` doesn't have it.
+
+In short, `granovaGG` offers ggplot2-based versions of three of the four core functions in `granova`:
+
+  *  `granova.1w`
+  *  `granova.contr`
+  *  `granova.ds` 
+
+## Do I have to choose between `granova` and `granovaGG`?
+Absolutely not. You can have your `granova` cake with `granovaGG` icing.
+
+The packages are currently designed to work side-by-side, which means you can load them both and get the most out of their respective strengths.
+
+And, if you already have legacy `granova` code but would like to use the new ggplot2-based functions in `granovaGG`, the transition is easy: just add two letters to your function call.
+
+So, suppose you have some code that uses three classic functions:
+
+    granova.contr(arousal, contrasts = contrasts22)
+    granova.ds(blood_lead)
+    granova.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
+    
+You can pipe the same code through `granovaGG` adding a "gg" after the "granova" part of the function call:
+
+    granovagg.contr(arousal, contrasts = contrasts22)
+    granovagg.ds(blood_lead)
+    granovagg.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
+
 
 ## Can I see what some sample graphics look like?
 Absolutely. To see examples of some of the [ggplot2][ggplot2]-based `granova` functions, check out:
@@ -15,27 +46,52 @@ Absolutely. To see examples of some of the [ggplot2][ggplot2]-based `granova` fu
 1.  A [presentation][Feb2011Presentation] Brian Danielak gave at the DC UseR group in February, 2011.
 2.  A [presentation][2011July14Presentation] on some of the latest updates to `granovagg.1w` and `granovagg.contr`
 
-## How can I install the development version of granova on my system?
-There are at least two ways to do this:
+## How can I install the development version of granovaGG on my system?
+There are three ways to get `granovaGG`. Which way you choose depends on how adventurous you are and how much stability you want.
 
-1.  [Install Using Git][gitGranovaInstall]
-2.  Instead of Step 1 in the [directions above][gitGranovaInstall], just download the latest version by [clicking the Downloads button][gitDownload]. 
+### I've got icewater in my veins I want bleeding-edge code
+1. First, make sure you've got Hadley Wickham's excellent [`devtools`] package installed. If you haven't, you can do it in R:
+    
+        install.packages(pkgs="devtools", dependencies=TRUE)
+
+2. Then, use the `install_github()` function to fetch our spooky experimental code from the development branch
+
+        library("devtools")
+        install_github(repo="granovaGG", username="briandk", branch="dev")
+        
+3. Sign the imaginary waiver that says we're not responsible if granovaGG steals your cat
+
+4. [Report your bugs][issueTracker] and [share stories of inspiration on the wiki][wiki]
+        
+### I want a relatively stable release, but I don't have time to wait for CRAN
+1. First, make sure you've got Hadley Wickham's excellent [`devtools`] package installed. If you haven't, you can do it in R:
+    
+        install.packages(pkgs="devtools", dependencies=TRUE)
+        
+2. Then, use the `install_github()` function to fetch our hardy code from the master branch:
+
+        library("devtools")
+        install_github(repo="granovaGG", username="briandk", branch="master")
+
+### If you want a stable, official release from CRAN
+You'll have to wait a bit. We haven't yet submitted to CRAN, but we hope you'll come back and see us again soon :-)
 
 ## How do I remove the experimental version?
-There are at least two ways to do this:
 
-1.   If you want to go back to [granova 2.0][granovaClassic], just use R's package manager to re-install that package from CRAN.
-2.   If you want to remove `granova` entirely, run: 
+If you want to remove `granova` entirely, run: 
 
-    `remove.packages("granova", lib = .libPaths())`
+    remove.packages("granovaGG", lib = .libPaths())
+
+*If you're removing `granovaGG` because of something buggy, be sure to [report it][issueTracker] so we can get right on fixing it.*
     
 ## How can I provide feedback?
 *  If you want to request something, or report a bug, use the [Issue Tracker][issueTracker]
 *  If you'd like to contact us directly, we'd love to hear from you:
-  *  [Robert M. Pruzek](mailto:rpruzek@uamail.albany.edu)
-  *  [James E. Helmreich](mailto:James.Helmreich@marist.edu)
-  *  [Brian A. Danielak](mailto:briandk@umd.edu)
-  *  [William E.J. Doane](mailto:wil@drdoane.com)
+    *  [Robert M. Pruzek](mailto:rpruzek@uamail.albany.edu)
+    *  [James E. Helmreich](mailto:James.Helmreich@marist.edu)
+    *  [Brian A. Danielak](mailto:briandk@umd.edu)
+    *  [William E.J. Doane](mailto:wil@drdoane.com)
+    *  [Jason Bryer](mailto:jason@bryer.org)
 
 
 
@@ -47,4 +103,5 @@ There are at least two ways to do this:
 [2011July14Presentation]:http://dl.dropbox.com/u/382638/DanielakGranovaRevision20110714.pdf
 [gitGranovaInstall]: http://cl.ly/090m3t2g0a1c25111p2n
 [gitDownload]: http://cl.ly/1x0y402p3e1p413Z172N
-[issueTracker]: https://github.com/briandk/granova/issues
+[issueTracker]: https://github.com/briandk/granovaGG/issues
+[wiki]: https://github.com/briandk/granovaGG/wiki
