@@ -61,8 +61,10 @@ There are three ways to get granovaGG. Which way you choose depends on how adven
 
 2. Then, use the `install_github()` function to fetch our spooky experimental code from the development branch
 
+```r
         library("devtools")
         install_github(repo="granovaGG", username="briandk", branch="dev")
+```
         
 3. Sign the imaginary waiver that says we're not responsible if granovaGG steals your cat
 
@@ -70,13 +72,16 @@ There are three ways to get granovaGG. Which way you choose depends on how adven
         
 ### I want a relatively stable release, but I don't have time to wait for CRAN
 1. First, make sure you've got Hadley Wickham's excellent [devtools] package installed. If you haven't, you can do it in R:
-    
+
+```r
         install.packages(pkgs="devtools", dependencies=TRUE)
-        
+```    
 2. Then, use the `install_github()` function to fetch our hardy code from the master branch:
 
+```r
         library("devtools")
         install_github(repo="granovaGG", username="briandk", branch="master")
+```
 
 ### I want a stable, official release from CRAN
 You'll have to wait a bit. We haven't yet submitted to CRAN, but we hope you'll come back and see us again soon :-)
@@ -85,7 +90,9 @@ You'll have to wait a bit. We haven't yet submitted to CRAN, but we hope you'll 
 
 If you want to remove granovaGG entirely, run: 
 
+```r
     remove.packages("granovaGG", lib = .libPaths())
+```r
 
 *If you're removing `granovaGG` because of something buggy, be sure to [report it][issueTracker] so we can get right on fixing it.*
     
