@@ -53,7 +53,7 @@ Absolutely. To see examples of granovaGG output, check out:
 There are three ways to get granovaGG. Which way you choose depends on how adventurous you are and how much stability you want. *Choose your path wisely:*
 
 ### I've got icewater in my veins I want bleeding-edge code
-First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't, you can do it in R:
+First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't got it, you can get it in R:
 
 ```r
 install.packages(pkgs="devtools", dependencies=TRUE)
@@ -68,10 +68,10 @@ install_github(repo="granovaGG", username="briandk", branch="dev")
         
 Lastly, sign the imaginary waiver that says we're not responsible if granovaGG steals your cat
 
-4. [Report your bugs][issueTracker] and [share stories of inspiration on the wiki][wiki]
+*Don't forget to [Report your bugs][issueTracker] and [share stories of inspiration on the wiki][wiki]*
         
 ### I want a relatively stable release, but I don't have time to wait for CRAN
-First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't, you can do it in R:
+First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't got it, you can get it in R:
 
 ```r
 install.packages(pkgs="devtools", dependencies=TRUE)
