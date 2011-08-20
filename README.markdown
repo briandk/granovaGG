@@ -53,7 +53,7 @@ Absolutely. To see examples of granovaGG output, check out:
 There are three ways to get granovaGG. Which way you choose depends on how adventurous you are and how much stability you want. *Choose your path wisely:*
 
 ### I've got icewater in my veins I want bleeding-edge code
-1. First, make sure you've got Hadley Wickham's excellent [devtools] package installed. If you haven't, you can do it in R:
+1. First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't, you can do it in R:
 
 ```r
     install.packages(pkgs="devtools", dependencies=TRUE)
@@ -71,7 +71,7 @@ There are three ways to get granovaGG. Which way you choose depends on how adven
 4. [Report your bugs][issueTracker] and [share stories of inspiration on the wiki][wiki]
         
 ### I want a relatively stable release, but I don't have time to wait for CRAN
-1. First, make sure you've got Hadley Wickham's excellent [devtools] package installed. If you haven't, you can do it in R:
+1. First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't, you can do it in R:
 
 ```r
         install.packages(pkgs="devtools", dependencies=TRUE)
@@ -117,3 +117,4 @@ If you want to remove granovaGG entirely, run:
 [gitDownload]: http://cl.ly/1x0y402p3e1p413Z172N
 [issueTracker]: https://github.com/briandk/granovaGG/issues
 [wiki]: https://github.com/briandk/granovaGG/wiki
+[devtools]: http://cran.r-project.org/web/packages/devtools/index.html
