@@ -54,9 +54,11 @@ There are three ways to get granovaGG. Which way you choose depends on how adven
 
 ### I've got icewater in my veins I want bleeding-edge code
 1. First, make sure you've got Hadley Wickham's excellent [devtools] package installed. If you haven't, you can do it in R:
+
 ```r
-        install.packages(pkgs="devtools", dependencies=TRUE)
+    install.packages(pkgs="devtools", dependencies=TRUE)
 ```
+
 2. Then, use the `install_github()` function to fetch our spooky experimental code from the development branch
 
         library("devtools")
