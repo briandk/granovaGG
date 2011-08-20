@@ -5,7 +5,7 @@ You're at the development home for the Graphical Analysis of Variance using ggpl
 The package granovaGG is designed to produce statistical graphics driven by the fundamental questions of analysis of variance. The graphics granovaGG creates can offer far more visual information than a traditional tabular model summary or significance test. For an example of how granovaGG can enhance analysis, see [Pruzek and Helmreich (2009)].
 
 ## Isn't there already a granova package on CRAN?
-Yes.
+[Yes.][granovaClassic]
 
 ## So what's the difference between granova and granovaGG?
 There are several, actually.
