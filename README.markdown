@@ -76,12 +76,10 @@ There are three ways to get granovaGG. Which way you choose depends on how adven
 install.packages(pkgs="devtools", dependencies=TRUE)
 ```    
 2. Then, use the `install_github()` function to fetch our hardy code from the master branch:
-
 ```r
-        library("devtools")
-        install_github(repo="granovaGG", username="briandk", branch="master")
+library("devtools")
+install_github(repo="granovaGG", username="briandk", branch="master")
 ```
-
 ### I want a stable, official release from CRAN
 You'll have to wait a bit. We haven't yet submitted to CRAN, but we hope you'll come back and see us again soon :-)
 
