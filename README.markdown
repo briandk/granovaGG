@@ -66,9 +66,7 @@ library("devtools")
 install_github(repo="granovaGG", username="briandk", branch="dev")
 ```
         
-Lastly, sign the imaginary waiver that says we're not responsible if granovaGG steals your cat
-
-*Don't forget to [Report your bugs][issueTracker] and [share stories of inspiration on the wiki][wiki]*
+Lastly, sign the imaginary waiver that says we're not responsible if granovaGG steals your cat *And, don't forget to [Report your bugs][issueTracker] and [share stories of inspiration on the wiki][wiki]*
         
 ### I want a relatively stable release, but I don't have time to wait for CRAN
 First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't got it, you can get it in R:
