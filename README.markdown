@@ -2,17 +2,17 @@
 You're at the development home for the Graphical Analysis of Variance using ggplot2 (granovaGG) package for [R]!
 
 ## What does this package do?
-The package `granovaGG` is designed to produce statistical graphics driven by the fundamental questions of analysis of variance. The graphics `granova` creates can offer far more visual information than a traditional tabular model summary or significance test. For an example of how granovaGG can enhance analysis, see [Pruzek and Helmreich (2009)].
+The package granovaGG is designed to produce statistical graphics driven by the fundamental questions of analysis of variance. The graphics granovaGG creates can offer far more visual information than a traditional tabular model summary or significance test. For an example of how granovaGG can enhance analysis, see [Pruzek and Helmreich (2009)].
 
-## Isn't there already a `granova` package on CRAN?
+## Isn't there already a granova package on CRAN?
 Yes.
 
-## So what's the difference between `granova` and `granovaGG`?
+## So what's the difference between granova and granovaGG?
 There are several, actually.
 
-First, the current version of [`granova`][granovaClassic] on CRAN uses R's base graphics to produce plots. `granovaGG`, on the other hand, uses an R package called [`ggplot2`][ggplot2], which offers a much greater degree of expressiveness and extensibility.
+First, the current version of [granova][granovaClassic] on CRAN uses R's base graphics to produce plots. `granovaGG`, on the other hand, uses an R package called [ggplot2][ggplot2], which offers a much greater degree of expressiveness and extensibility.
 
-Second, 3-D functionality for creating an elemental graphic for 2-way ANOVA is only in `granova`; `granovaGG` doesn't have it.
+Second, 3-D functionality for creating an elemental graphic for 2-way ANOVA is only in granova; granovaGG doesn't have it.
 
 In short, `granovaGG` offers ggplot2-based versions of three of the four core functions in `granova`:
 
@@ -20,12 +20,12 @@ In short, `granovaGG` offers ggplot2-based versions of three of the four core fu
   *  `granova.contr`
   *  `granova.ds` 
 
-## Do I have to choose between `granova` and `granovaGG`?
-Absolutely not. You can have your `granova` cake with `granovaGG` icing.
+## Do I have to choose between granova and granovaGG?
+Absolutely not. You can have your granova cake with granovaGG icing!
 
 The packages are currently designed to work side-by-side, which means you can load them both and get the most out of their respective strengths.
 
-And, if you already have legacy `granova` code but would like to use the new ggplot2-based functions in `granovaGG`, the transition is easy: just add two letters to your function call.
+And, if you already have legacy granova code but would like to use the new ggplot2-based functions in granovaGG, the transition is easy: just add two letters to your function call.
 
 So, suppose you have some code that uses three classic functions:
 
@@ -33,7 +33,7 @@ So, suppose you have some code that uses three classic functions:
     granova.ds(blood_lead)
     granova.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
     
-You can pipe the same code through `granovaGG` adding a "gg" after the "granova" part of the function call:
+You can pipe the same code through granovaGG adding a "gg" after the "granova" part of the function call:
 
     granovagg.contr(arousal, contrasts = contrasts22)
     granovagg.ds(blood_lead)
@@ -41,16 +41,16 @@ You can pipe the same code through `granovaGG` adding a "gg" after the "granova"
 
 
 ## Can I see what some sample graphics look like?
-Absolutely. To see examples of some of the [ggplot2][ggplot2]-based `granova` functions, check out:
+Absolutely. To see examples of granovaGG output, check out:
 
 1.  A [presentation][Feb2011Presentation] Brian Danielak gave at the DC UseR group in February, 2011.
 2.  A [presentation][2011July14Presentation] on some of the latest updates to `granovagg.1w` and `granovagg.contr`
 
 ## How can I install the development version of granovaGG on my system?
-There are three ways to get `granovaGG`. Which way you choose depends on how adventurous you are and how much stability you want.
+There are three ways to get granovaGG. Which way you choose depends on how adventurous you are and how much stability you want. *Choose your path wisely:*
 
 ### I've got icewater in my veins I want bleeding-edge code
-1. First, make sure you've got Hadley Wickham's excellent [`devtools`] package installed. If you haven't, you can do it in R:
+1. First, make sure you've got Hadley Wickham's excellent [devtools] package installed. If you haven't, you can do it in R:
     
         install.packages(pkgs="devtools", dependencies=TRUE)
 
@@ -64,7 +64,7 @@ There are three ways to get `granovaGG`. Which way you choose depends on how adv
 4. [Report your bugs][issueTracker] and [share stories of inspiration on the wiki][wiki]
         
 ### I want a relatively stable release, but I don't have time to wait for CRAN
-1. First, make sure you've got Hadley Wickham's excellent [`devtools`] package installed. If you haven't, you can do it in R:
+1. First, make sure you've got Hadley Wickham's excellent [devtools] package installed. If you haven't, you can do it in R:
     
         install.packages(pkgs="devtools", dependencies=TRUE)
         
@@ -73,12 +73,12 @@ There are three ways to get `granovaGG`. Which way you choose depends on how adv
         library("devtools")
         install_github(repo="granovaGG", username="briandk", branch="master")
 
-### If you want a stable, official release from CRAN
+### I want a stable, official release from CRAN
 You'll have to wait a bit. We haven't yet submitted to CRAN, but we hope you'll come back and see us again soon :-)
 
 ## How do I remove the experimental version?
 
-If you want to remove `granova` entirely, run: 
+If you want to remove granovaGG entirely, run: 
 
     remove.packages("granovaGG", lib = .libPaths())
 
