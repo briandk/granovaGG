@@ -29,7 +29,7 @@ And, if you already have legacy granova code but would like to use the new ggplo
 
 So, suppose you have some code that uses three classic functions:
 
-```R
+```r
 granova.contr(arousal, contrasts = contrasts22)
 granova.ds(blood_lead)
 granova.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
@@ -37,10 +37,11 @@ granova.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
 
 You can pipe the same code through granovaGG adding a "gg" after the "granova" part of the function call:
 
-    granovagg.contr(arousal, contrasts = contrasts22)
-    granovagg.ds(blood_lead)
-    granovagg.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
-
+```r
+granovagg.contr(arousal, contrasts = contrasts22)
+granovagg.ds(blood_lead)
+granovagg.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
+```
 
 ## Can I see what some sample graphics look like?
 Absolutely. To see examples of granovaGG output, check out:
@@ -53,9 +54,9 @@ There are three ways to get granovaGG. Which way you choose depends on how adven
 
 ### I've got icewater in my veins I want bleeding-edge code
 1. First, make sure you've got Hadley Wickham's excellent [devtools] package installed. If you haven't, you can do it in R:
-    
+```r
         install.packages(pkgs="devtools", dependencies=TRUE)
-
+```
 2. Then, use the `install_github()` function to fetch our spooky experimental code from the development branch
 
         library("devtools")
