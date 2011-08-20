@@ -56,14 +56,14 @@ There are three ways to get granovaGG. Which way you choose depends on how adven
 First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't got it, you can get it in R:
 
 ```r
-install.packages(pkgs="devtools", dependencies=TRUE)
+    install.packages(pkgs="devtools", dependencies=TRUE)
 ```
 
 Then, use the `install_github()` function to fetch our spooky experimental code from the development branch
 
 ```r
-library("devtools")
-install_github(repo="granovaGG", username="briandk", branch="dev")
+    library("devtools")
+    install_github(repo="granovaGG", username="briandk", branch="dev")
 ```
         
 Lastly, sign the imaginary waiver that says we're not responsible if granovaGG steals your cat *And, don't forget to [Report your bugs][issueTracker] and [share stories of inspiration on the wiki][wiki]*
@@ -72,13 +72,13 @@ Lastly, sign the imaginary waiver that says we're not responsible if granovaGG s
 First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't got it, you can get it in R:
 
 ```r
-install.packages(pkgs="devtools", dependencies=TRUE)
+    install.packages(pkgs="devtools", dependencies=TRUE)
 ```    
 Then, use the `install_github()` function to fetch our hardy code from the master branch:
 
 ```r
-library("devtools")
-install_github(repo="granovaGG", username="briandk", branch="master")
+    library("devtools")
+    install_github(repo="granovaGG", username="briandk", branch="master")
 ```
 
 ### I want a stable, official release from CRAN
