@@ -53,30 +53,30 @@ Absolutely. To see examples of granovaGG output, check out:
 There are three ways to get granovaGG. Which way you choose depends on how adventurous you are and how much stability you want. *Choose your path wisely:*
 
 ### I've got icewater in my veins I want bleeding-edge code
-1. First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't, you can do it in R:
+First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't, you can do it in R:
 
 ```r
-    install.packages(pkgs="devtools", dependencies=TRUE)
+install.packages(pkgs="devtools", dependencies=TRUE)
 ```
 
-2. Then, use the `install_github()` function to fetch our spooky experimental code from the development branch
+Then, use the `install_github()` function to fetch our spooky experimental code from the development branch
 
 ```r
-        library("devtools")
-        install_github(repo="granovaGG", username="briandk", branch="dev")
+library("devtools")
+install_github(repo="granovaGG", username="briandk", branch="dev")
 ```
         
-3. Sign the imaginary waiver that says we're not responsible if granovaGG steals your cat
+Lastly, sign the imaginary waiver that says we're not responsible if granovaGG steals your cat
 
 4. [Report your bugs][issueTracker] and [share stories of inspiration on the wiki][wiki]
         
 ### I want a relatively stable release, but I don't have time to wait for CRAN
-1. First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't, you can do it in R:
+First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't, you can do it in R:
 
 ```r
 install.packages(pkgs="devtools", dependencies=TRUE)
 ```    
-2. Then, use the `install_github()` function to fetch our hardy code from the master branch:
+Then, use the `install_github()` function to fetch our hardy code from the master branch:
 
 ```r
 library("devtools")
