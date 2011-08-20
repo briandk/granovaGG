@@ -92,7 +92,7 @@ If you want to remove granovaGG entirely, run:
 
 ```r
     remove.packages("granovaGG", lib = .libPaths())
-```r
+```
 
 *If you're removing `granovaGG` because of something buggy, be sure to [report it][issueTracker] so we can get right on fixing it.*
     
