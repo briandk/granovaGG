@@ -313,7 +313,7 @@ granovagg.ds <- function(data       = NULL,
   }
 
   XLabel <- function(dsp) {
-    result <- colnames(dsp$data)
+    result <- colnames(dsp$data)[1]
     if(!is.null(xlab)) {
       result <- xlab
     }
@@ -322,7 +322,7 @@ granovagg.ds <- function(data       = NULL,
   }
   
   YLabel <- function(dsp) {
-    result <- colnames(dsp$data)
+    result <- colnames(dsp$data)[2]
     if(!is.null(ylab)) {
       result <- ylab
     }
