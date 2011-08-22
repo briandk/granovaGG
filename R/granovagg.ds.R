@@ -156,11 +156,11 @@ granovagg.ds <- function(data       = NULL,
   }
   
   GetCIBand <- function(dsp) {
-    return(data.frame(cx.end = ((dsp$params$anchor + dsp$stats$lower.treatment.effect) / 2) - 3 * (dsp$params$shadow.offset),
-                      cy.end = ((dsp$params$anchor - dsp$stats$lower.treatment.effect) / 2) - 3 * (dsp$params$shadow.offset),
-                      cx     = ((dsp$params$anchor + dsp$stats$upper.treatment.effect) / 2) - 3 * (dsp$params$shadow.offset),
-                      cy     = ((dsp$params$anchor - dsp$stats$upper.treatment.effect) / 2) - 3 * (dsp$params$shadow.offset),
-                      color  = factor(paste(100 * conf.level, "% CI", " (t = ", round(dsp$stats$t.statistic, digits = 2), ")", sep =""))
+    return(data.frame(x.end = ((dsp$params$anchor + dsp$stats$lower.treatment.effect) / 2) - 3 * (dsp$params$shadow.offset),
+                      y.end = ((dsp$params$anchor - dsp$stats$lower.treatment.effect) / 2) - 3 * (dsp$params$shadow.offset),
+                      x     = ((dsp$params$anchor + dsp$stats$upper.treatment.effect) / 2) - 3 * (dsp$params$shadow.offset),
+                      y     = ((dsp$params$anchor - dsp$stats$upper.treatment.effect) / 2) - 3 * (dsp$params$shadow.offset),
+                      color = factor(paste(100 * conf.level, "% CI", " (t = ", round(dsp$stats$t.statistic, digits = 2), ")", sep =""))
                      )
           )
     
@@ -300,8 +300,8 @@ granovagg.ds <- function(data       = NULL,
   CIBand <- function(dsp) {
     return(geom_segment(aes(x     = cx,
                             y     = cy,
-                            xend  = cx.end,
-                            yend  = cy.end,                        
+                            xend  = x.end,
+                            yend  = y.end,                        
                             color = color
                            ), 
                         size = I(2),
