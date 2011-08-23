@@ -306,8 +306,8 @@ granovagg.ds <- function(data       = NULL,
   }
 
   CIBand <- function(dsp) {
-    return(geom_segment(aes(x     = cx,
-                            y     = cy,
+    return(geom_segment(aes(x     = x,
+                            y     = y,
                             xend  = x.end,
                             yend  = y.end,                        
                             color = color
