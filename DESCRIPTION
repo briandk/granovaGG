@@ -9,7 +9,7 @@ Author: Robert M. Pruzek <RMPruzek@yahoo.com>, Brian A.
     <jason@bryer.org>
 Maintainer: Brian A. Danielak <brian@briandk.com>
 Depends:
-    R (>= 2.12.0),
+    R (>= 2.13.0),
     ggplot2 (>= 0.8.9),
     RColorBrewer,
     gridExtra,
