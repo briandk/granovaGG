@@ -174,6 +174,13 @@ granovagg.ds <- function(data       = NULL,
           )
   }
 
+  GetCrossElementCoordinates <- function(dsp) {
+    crossbow <- dsp$crossbow
+    ci.band  <- subset(dsp$CIBand, select = -color)
+    output   <- rbind(crossbow, ci.band)
+    return(output)
+  }
+
   GetTrails <- function(dsp) {
     return(data.frame(x.trail.start = GetXs(dsp$data), 
                       y.trail.start = GetYs(dsp$data),
@@ -200,6 +207,7 @@ granovagg.ds <- function(data       = NULL,
   dsp$shadows        <- GetShadows(dsp)
   dsp$crossbow       <- GetCrossbow(dsp)
   dsp$CIBand         <- GetCIBand(dsp)
+  dsp$cross.elements <- GetCrossElementCoordinates(dsp)
   dsp$treatment.line <- GetTreatmentLine(dsp)
   dsp$trails         <- GetTrails(dsp)
   dsp$colors         <- GetColors(dsp)
