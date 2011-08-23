@@ -24,6 +24,7 @@
 #'   (intially for horzontal axis), the second defines Y.
 #' @param main optional main title (as character); can be supplied by user. The default value is
 #'   \code{"default_granova_title"}, which leads to printing of a generic title for graphic.
+#' @param revc reverses X,Y specifications
 #' @param xlab optional label (as character) for horizontal axis. If not
 #'   defined, axis labels are taken from colnames of data.
 #' @param ylab optional label (as character) for vertical axis. If not
@@ -42,7 +43,8 @@
 #' @example demo/granovagg.ds.R
 #' @export
 
-granovagg.ds <- function(data       = NULL, 
+granovagg.ds <- function(data       = NULL,
+                         revc       = FALSE, 
                          main       = "default_granova_title",
                          xlab       = NULL,
                          ylab       = NULL,
@@ -53,10 +55,26 @@ granovagg.ds <- function(data       = NULL,
 
 {
   
-  GetAndCheckData <- function(data) {
+  GetData <- function(data) {
+    output <- CheckData(data)
+    output <- ReverseXAndY(data)
+    return(output)
+  }
+  
+  CheckData <- function(data) {
     IsDataNull(data)
     IsDataInTwoColumnFormat(data)
     return(EnsureDataIsADataFrame(data))
+  }
+  
+  ReverseXAndY <- function(data) {
+    output <- data
+    if (revc) {
+      output[, 1] <- data[, 2]
+      output[, 2] <- data[, 1]
+      names(output) <- names(data)[2:1]
+    }
+    return(output)
   }
   
   IsDataNull <- function(data) {
@@ -208,7 +226,7 @@ granovagg.ds <- function(data       = NULL,
           )         
   }
 
-  dsp                <- list(data = GetAndCheckData(data))
+  dsp                <- list(data = GetData(data))
   dsp$effect         <- GetEffect(dsp)
   dsp$stats          <- GetStats(dsp, conf.level)
   dsp$params         <- GetGraphicsParams(dsp)

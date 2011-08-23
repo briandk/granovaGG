@@ -2,9 +2,9 @@
 \alias{granovagg.ds}
 \title{Granova for Display of Dependent Sample Data}
 \usage{
-  granovagg.ds(data = NULL, main = "default_granova_title",
-  xlab = NULL, ylab = NULL, conf.level = 0.95, plot.theme =
-  "theme_granova_ds", ...)
+  granovagg.ds(data = NULL, revc = FALSE, main =
+  "default_granova_title", xlab = NULL, ylab = NULL,
+  conf.level = 0.95, plot.theme = "theme_granova_ds", ...)
 }
 \arguments{
   \item{data}{is an n X 2 dataframe or matrix. First column
@@ -15,6 +15,8 @@
   supplied by user. The default value is
   \code{"default_granova_title"}, which leads to printing
   of a generic title for graphic.}
+
+  \item{revc}{reverses X,Y specifications}
 
   \item{xlab}{optional label (as character) for horizontal
   axis. If not defined, axis labels are taken from colnames
