@@ -26,7 +26,9 @@
 
   \item{jj}{Numeric; sets horiz. jittering level of points;
   when pairs of ordered means are close to one another, try
-  jj < 1.}
+  \code{jj < 1}. By default, \code{jj} is divided by 200
+  and passed as the \code{width} parameter to
+  \code{\link{jitter}}.}
 
   \item{resid}{Logical; displays marginal distribution of
   residuals (as a 'rug') on right side (wrt grand mean),
