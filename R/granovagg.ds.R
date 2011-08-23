@@ -181,6 +181,14 @@ granovagg.ds <- function(data       = NULL,
     return(output)
   }
 
+  EnsureCrossElementsAppearInVisualBounds <- function(dsp) {
+    minimum <- min(dsp$params$bounds,
+                   dsp$cross.elements$x,
+                   dsp$cross.elements$y.end
+               )
+    return(c(minimum - dsp$params$shadow.offset, max(dsp$params$bounds)))
+  }
+  
   GetTrails <- function(dsp) {
     return(data.frame(x.trail.start = GetXs(dsp$data), 
                       y.trail.start = GetYs(dsp$data),
@@ -208,6 +216,7 @@ granovagg.ds <- function(data       = NULL,
   dsp$crossbow       <- GetCrossbow(dsp)
   dsp$CIBand         <- GetCIBand(dsp)
   dsp$cross.elements <- GetCrossElementCoordinates(dsp)
+  dsp$params$bounds  <- EnsureCrossElementsAppearInVisualBounds(dsp)
   dsp$treatment.line <- GetTreatmentLine(dsp)
   dsp$trails         <- GetTrails(dsp)
   dsp$colors         <- GetColors(dsp)
