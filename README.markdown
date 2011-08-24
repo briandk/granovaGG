@@ -48,6 +48,7 @@ Absolutely. To see examples of granovaGG output, check out:
 
 1.  A [presentation][Feb2011Presentation] Brian Danielak gave at the DC UseR group in February, 2011.
 2.  A [presentation][2011July14Presentation] on some of the latest updates to `granovagg.1w` and `granovagg.contr`
+3.  A [blog post][DoaneBlog] by William E. J. Doane describing the Dependent Sample plots.
 
 ## How can I install the development version of granovaGG on my system?
 There are three ways to get granovaGG. Which way you choose depends on how adventurous you are and how much stability you want. *Choose your path wisely:*
@@ -93,14 +94,73 @@ If you want to remove granovaGG entirely, run:
 ```
 
 *If you're removing `granovaGG` because of something buggy, be sure to [report it][issueTracker] so we can get right on fixing it.*
-    
+
+## What can I do to troubleshoot issues I'm having with granovaGG?
+
+Many problems in R are caused by (a) version incompatibilities in one of the dependent packages or (b) old/mismatched versions of functions loaded in the current workspace.
+
+Here are several steps you can try (one at a time) in order to bring your system up to date with the latest version of granovaGG. Try each troubleshooting step and reinstall granovaGG after each.
+
+### 1. Update all installed packages
+
+```r
+    update.packages()
+```
+
+### 2. Detach granovaGG
+
+```r
+    detach("package:granovaGG")
+
+    # confirm that there are no granovaGG remenents in your workspace
+    search()
+    ls()
+```
+
+If you find any granovaGG functions in your environment, try
+
+```r
+    rm(list = ls(pattern = "granovagg*"))
+```
+
+### 3. Detach granovaGG and restart R
+
+R can and does cache some package information for efficiency's sake. Unfortunately, when you're rapidly installing/uninstalling development versions of a package, this cache can cause unexpected effects (old versions of functions being called, e.g.).
+
+```r
+    detach("package:granovaGG")
+
+    # confirm that there are no granovaGG remenents in your workspace
+    search()
+    ls()
+
+    quit()
+```
+
+### 4. Uninstall granovaGG and restart R
+
+R can and does cache some package information for efficiency's sake. Unfortunately, when you're rapidly installing/uninstalling development versions of a package, this cache can cause unexpected effects (old versions of functions being called, e.g.).
+
+```r
+    remove.packages("granovaGG", lib = .libPaths())
+    rm(list = ls(pattern = "granovagg*"))
+
+    # confirm that there are no granovaGG remenents in your workspace
+    search()
+    ls()
+
+    quit()
+```
+
+
+
 ## How can I provide feedback?
 *  If you want to request something, or report a bug, use the [Issue Tracker][issueTracker]
 *  If you'd like to contact us directly, we'd love to hear from you:
     *  [Robert M. Pruzek](mailto:rpruzek@uamail.albany.edu)
+    *  [Brian A. Danielak](mailto:BrianDK@umd.edu)
+    *  [William E.J. Doane](mailto:wdoane@Bennington.edu)
     *  [James E. Helmreich](mailto:James.Helmreich@marist.edu)
-    *  [Brian A. Danielak](mailto:briandk@umd.edu)
-    *  [William E.J. Doane](mailto:wil@drdoane.com)
     *  [Jason Bryer](mailto:jason@bryer.org)
 
 
@@ -110,7 +170,8 @@ If you want to remove granovaGG entirely, run:
 [granovaClassic]: http://cran.r-project.org/web/packages/granova/index.html
 [ggplot2]: http://cran.r-project.org/web/packages/ggplot2/index.html
 [Feb2011Presentation]: http://www.google.com/url?q=http%3A%2F%2Fdl.dropbox.com%2Fu%2F382638%2FBrian-Danielak-granova.pdf&sa=D&sntz=1&usg=AFQjCNGAu0dsFF_GaDjVzLv52fqRScVDSA
-[2011July14Presentation]:http://dl.dropbox.com/u/382638/DanielakGranovaRevision20110714.pdf
+[2011July14Presentation]: http://dl.dropbox.com/u/382638/DanielakGranovaRevision20110714.pdf
+[DoaneBlog]: http://DrDoane.com/2011/08/198/
 [gitGranovaInstall]: http://cl.ly/090m3t2g0a1c25111p2n
 [gitDownload]: http://cl.ly/1x0y402p3e1p413Z172N
 [issueTracker]: https://github.com/briandk/granovaGG/issues
