@@ -1,4 +1,4 @@
-#' Graphic Display of Contrast Effect of ANOVA
+#' Elemental Graphic Display for Contrast Effect of ANOVA
 #' 
 #' Provides graphic displays that shows data and effects for a priori contrasts
 #' in ANOVA contexts; also corresponding numerical results.

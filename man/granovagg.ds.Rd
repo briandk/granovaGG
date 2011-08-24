@@ -1,6 +1,6 @@
 \name{granovagg.ds}
 \alias{granovagg.ds}
-\title{Granova for Display of Dependent Sample Data}
+\title{Elemental Graphic for Display of Dependent Sample Data}
 \usage{
   granovagg.ds(data = NULL, revc = FALSE, main =
   "default_granova_title", xlab = NULL, ylab = NULL,

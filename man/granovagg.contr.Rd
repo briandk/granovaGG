@@ -1,6 +1,6 @@
 \name{granovagg.contr}
 \alias{granovagg.contr}
-\title{Graphic Display of Contrast Effect of ANOVA}
+\title{Elemental Graphic Display for Contrast Effect of ANOVA}
 \usage{
   granovagg.contr(data, contrasts, ylab =
   "default_y_label", plot.theme = "theme_granova_contr",

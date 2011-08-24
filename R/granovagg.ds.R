@@ -1,4 +1,4 @@
-#' Granova for Display of Dependent Sample Data
+#' Elemental Graphic for Display of Dependent Sample Data
 #' 
 #' Plots dependent sample data beginning from a scatterplot for the X,Y pairs;
 #' proceeds to display difference scores as point projections; also X and Y

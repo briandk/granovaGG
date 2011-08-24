@@ -1,6 +1,6 @@
 \name{granovagg.1w}
 \alias{granovagg.1w}
-\title{Graphic display for one-way ANOVA}
+\title{Elemental Graphic Display for One-Way ANOVA}
 \usage{
   granovagg.1w(data, group = NULL, h.rng = 1.25, v.rng =
   0.2, jj = NULL, dg = 2, resid = FALSE, xlab = NULL, ylab

@@ -1,4 +1,4 @@
-#' Graphic display for one-way ANOVA
+#' Elemental Graphic Display for One-Way ANOVA
 #' 
 #' Graphic to display data for a one-way analysis of variance, and also to
 #' help understand how ANOVA works, how the F statistic is generated for the
