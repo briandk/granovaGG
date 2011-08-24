@@ -53,6 +53,9 @@
 #'   each page to the graphics device. When running R interactively, you'll have an opportunity to review each page
 #'   before seeing the next page. Also, when \code{print.four.plots.per.page} is \code{TRUE}, the function won't 
 #'   return any output. When \code{print.four.plots.per.page} is set to \code{FALSE}, the function returns a list of #'   ggplot objects, one element per plot.
+#' @param jj Numeric; controls \code{\link{jitter}} and allows you to control the 
+#'   degree of jitter in the contrast plots. \code{jj} is divided by 100 and passed as the \code{amount} 
+#'   parameter to \code{\link{jitter}}. 
 #' @param ... Optional arguments to/from other functions.
 #' @return If \code{print.four.plots.per.page} is set to \code{FALSE}, the function returns
 #'   a list of ggplot objects, one element per plot. That allows you to index any individual plot
@@ -87,6 +90,7 @@ granovagg.contr <- function(data,
                             ylab       = "default_y_label",
                             plot.theme = "theme_granova_contr",
                             print.four.plots.per.page = TRUE,
+                            jj = 1,
                             ...
                    ) 
 {
@@ -106,6 +110,11 @@ granovagg.contr <- function(data,
     }
     
     return(stack(as.data.frame(data))[, 1])
+  }
+  
+  GetDegreeOfJitter <- function(jj) {
+    result <- jj / 100
+    return(result)
   }
   
   std.contr <- function(contrasts, tolerance = sqrt(.Machine$double.eps)^0.6) {
@@ -241,7 +250,7 @@ granovagg.contr <- function(data,
                  y = y.values
                ),
                data     = data,
-               position = position_jitter(height = 0, width = 1/100)
+               position = position_jitter(height = 0, width = GetDegreeOfJitter(jj))
       )
     )
   }
@@ -352,7 +361,7 @@ granovagg.contr <- function(data,
                  y = value
                ),
                data = data,
-               position = position_jitter(height = 0, width = 7/100)
+               position = position_jitter(height = 0, width = 3 * GetDegreeOfJitter(jj))
       )
     )
   }

@@ -4,7 +4,7 @@
 \usage{
   granovagg.contr(data, contrasts, ylab =
   "default_y_label", plot.theme = "theme_granova_contr",
-  print.four.plots.per.page = TRUE, ...)
+  print.four.plots.per.page = TRUE, jj = 1, ...)
 }
 \arguments{
   \item{data}{Vector of scores for all equally sized
@@ -32,6 +32,11 @@
   \code{print.four.plots.per.page} is set to \code{FALSE},
   the function returns a list of #' ggplot objects, one
   element per plot.}
+
+  \item{jj}{Numeric; controls \code{\link{jitter}} and
+  allows you to control the degree of jitter in the
+  contrast plots. \code{jj} is divided by 100 and passed as
+  the \code{amount} parameter to \code{\link{jitter}}.}
 
   \item{...}{Optional arguments to/from other functions.}
 }
