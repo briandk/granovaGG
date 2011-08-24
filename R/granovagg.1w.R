@@ -37,7 +37,8 @@
 #'   1.25
 #' @param v.rng Numeric; controls the vertical spread of points, default =
 #'   0.25.
-#' @param jj Numeric; sets horiz. jittering level of points; when pairs of ordered means are close to one another, the degree of jitter will default to the smallest difference between two adjacent contrasts.
+#' @param jj Numeric; sets horiz. jittering level of points. When \code{jj = NULL} (the default behavior), the degree of jitter will take on a sensible value. In addition, if pairs of ordered means are close to one another and \code{jj = NULL}, the degree of jitter will default to the smallest difference between two adjacent contrasts.
+#' @param dg Numeric; sets number of decimal points in output display, default = 2
 #' @param resid Logical; displays marginal distribution of residuals (as a
 #'   'rug') on right side (wrt grand mean), default = FALSE.
 #' @param xlab Character; horizontal axis label, default = NULL. 
@@ -76,7 +77,8 @@ granovagg.1w <- function(data,
                          group      = NULL, 
                          h.rng      = 1.25, 
                          v.rng      = .2,
-                         jj         = NULL, 
+                         jj         = NULL,
+                         dg         = 2, 
                          resid      = FALSE,  
                          xlab       = NULL, 
                          ylab       = NULL, 
@@ -302,11 +304,15 @@ granovagg.1w <- function(data,
     )
   }
 
-  PrintGroupSummary <- function(data) {
-    output <- subset(data, select = -maximum.score)
+  PrintGroupSummary <- function(data, digits.to.round) {
+    groups <- subset(data, select = group)
+    stats  <- subset(data, select = c(-group, -maximum.score))    
+    rounded.stats <- round(stats, digits = digits.to.round)
     message("\nBelow are by-group summary statistics of your input data")
     
-    return(print(output))
+    return(
+       print(cbind(groups, rounded.stats))
+    )
   }
   
   GetGroupMeanLine <- function(owp) {
@@ -929,11 +935,15 @@ granovagg.1w <- function(data,
   
   ### Warning Function Below
   
-  PrintOverplotWarning <- function(owp) {
+  PrintOverplotWarning <- function(owp, digits.to.round) {
     if (TRUE %in% owp$overplot$overplotted) {
       overplotted.groups <- subset(owp$overplot, 
                                    overplotted == TRUE,
                                    select = c("group", "group.mean", "contrast")
+                            )
+      overplotted.groups <- transform(overplotted.groups, 
+                                      group.mean = round(group.mean, digits = digits.to.round),
+                                      contrast   = round(contrast, digits = digits.to.round)
                             )
       message("\nThe following groups are likely to be overplotted")
       print(overplotted.groups)
@@ -956,7 +966,7 @@ granovagg.1w <- function(data,
   owp$label.background      <- GetBackgroundForGroupSizesAndLabels(owp)
   owp$group.labels          <- GetGroupLabels(owp)
   owp$group.sizes           <- GetGroupSizes(owp)
-  PrintGroupSummary(owp$summary)
+  PrintGroupSummary(owp$summary, dg)
 
 
   #Plot OWP object
@@ -988,7 +998,7 @@ granovagg.1w <- function(data,
   p <- p + ForceCoordinateAxesToBeEqual(owp)
   p <- p + PlotTitle()
   p <- p + RemoveSizeElementFromLegend()
-  PrintOverplotWarning(owp)
+  PrintOverplotWarning(owp, dg)
 
   return(p)
 }

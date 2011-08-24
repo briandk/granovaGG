@@ -3,8 +3,8 @@
 \title{Graphic display for one-way ANOVA}
 \usage{
   granovagg.1w(data, group = NULL, h.rng = 1.25, v.rng =
-  0.2, jj = NULL, resid = FALSE, xlab = NULL, ylab = NULL,
-  main = "default_granova_title", plot.theme =
+  0.2, jj = NULL, dg = 2, resid = FALSE, xlab = NULL, ylab
+  = NULL, main = "default_granova_title", plot.theme =
   "theme_granova_1w", ...)
 }
 \arguments{
@@ -24,10 +24,15 @@
   \item{v.rng}{Numeric; controls the vertical spread of
   points, default = 0.25.}
 
-  \item{jj}{Numeric; sets horiz. jittering level of points;
-  when pairs of ordered means are close to one another, the
-  degree of jitter will default to the smallest difference
-  between two adjacent contrasts.}
+  \item{jj}{Numeric; sets horiz. jittering level of points.
+  When \code{jj = NULL} (the default behavior), the degree
+  of jitter will take on a sensible value. In addition, if
+  pairs of ordered means are close to one another and
+  \code{jj = NULL}, the degree of jitter will default to
+  the smallest difference between two adjacent contrasts.}
+
+  \item{dg}{Numeric; sets number of decimal points in
+  output display, default = 2}
 
   \item{resid}{Logical; displays marginal distribution of
   residuals (as a 'rug') on right side (wrt grand mean),
