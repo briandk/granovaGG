@@ -25,10 +25,9 @@
   points, default = 0.25.}
 
   \item{jj}{Numeric; sets horiz. jittering level of points;
-  when pairs of ordered means are close to one another, try
-  \code{jj < 1}. By default, \code{jj} is divided by 200
-  and passed as the \code{amount} parameter to
-  \code{\link{jitter}}.}
+  when pairs of ordered means are close to one another, the
+  degree of jitter will default to the smallest difference
+  between two adjacent contrasts.}
 
   \item{resid}{Logical; displays marginal distribution of
   residuals (as a 'rug') on right side (wrt grand mean),
