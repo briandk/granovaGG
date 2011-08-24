@@ -57,7 +57,7 @@ granovagg.ds <- function(data       = NULL,
   
   GetData <- function(data) {
     output <- CheckData(data)
-    output <- ReverseXAndY(data)
+    output <- ReverseXAndY(output)
     return(output)
   }
   
