@@ -112,7 +112,9 @@ GetContrastName <- function(contrast.data, index) {
   return(paste("Contrast ", contrast.name, sep=""))
 }
 
-ReorderDataByColumn <- function(x, column) {
+# ReorderDataByColumn reorders a data structure according to the values in "column"
+# For example, "sort the data on all these cars according to their highway mileage"
+ReorderDataByColumn <- function(x, column) { 
   return(x[order(x[[column]]), ])
 }
 
