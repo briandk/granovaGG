@@ -102,11 +102,13 @@ Many problems in R are caused by (a) version incompatibilities in one of the dep
 Here are several steps you can try (one at a time) in order to bring your system up to date with the latest version of granovaGG. Try each troubleshooting step and reinstall granovaGG after each.
 
 ### 1. Update all installed packages
+
 ```r
     update.packages()
 ```
 
 ### 2. Detach granovaGG
+
 ```r
     detach("package:granovaGG")
 
@@ -116,6 +118,7 @@ Here are several steps you can try (one at a time) in order to bring your system
 ```
 
 If you find any granovaGG functions in your environment, try
+
 ```r
     rm(list = ls(pattern = "granovagg*"))
 ```
@@ -123,6 +126,7 @@ If you find any granovaGG functions in your environment, try
 ### 3. Detach granovaGG and restart R
 
 R can and does cache some package information for efficiency's sake. Unfortunately, when you're rapidly installing/uninstalling development versions of a package, this cache can cause unexpected effects (old versions of functions being called, e.g.).
+
 ```r
     detach("package:granovaGG")
 
@@ -136,6 +140,7 @@ R can and does cache some package information for efficiency's sake. Unfortunate
 ### 4. Uninstall granovaGG and restart R
 
 R can and does cache some package information for efficiency's sake. Unfortunately, when you're rapidly installing/uninstalling development versions of a package, this cache can cause unexpected effects (old versions of functions being called, e.g.).
+
 ```r
     remove.packages("granovaGG", lib = .libPaths())
     rm(list = ls(pattern = "granovagg*"))
