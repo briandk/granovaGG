@@ -71,40 +71,46 @@
 }
 \description{
   Graphic to display data for a one-way analysis of
-  variance, and also to help understand how ANOVA works,
-  how the F statistic is generated for the data in hand,
+  variance -- that is for unstructured groups. Also to help understand 
+  how data play out in the context of the basic one-way model,
+  how the F statistic is generated for the data at hand,
   etc. The graphic may be called 'elemental' or 'natural'
-  because it is built upon the key question that drives
-  one-way ANOVA.
+  because it is built upon the central question that drives
+  one-way ANOVA (see details below).
 }
 \details{
-  The central idea of the graphic is to use the fact that a
-  one way analysis of variance F statistic is the ratio of
-  two variances each of which can usefully be presented
-  graphically. In particular, the sum of squares between
-  (among) can be represented as the sum of products of
-  so-called effects (each being a group mean minus the
-  grand mean) and the group means; when these effects are
-  themselves plotted against the group means a straight
-  line necessarily ensues. The group means are plotted as
-  triangles along this line. Data points (jittered) for
-  groups are displayed (vertical axis) with respect to
-  respective group means.  One-way ANOVA residuals can be
-  displayed (set resid=TRUE) as a rug plot (on right
-  margin); the standard deviation of the residuals, when
-  squared, is just the mean square within. The conventional
-  F statistic is just a ratio of the between to the within
-  mean squares, or variances, each of which corresponds to
-  areas of squares in the graphic. Use of effects to locate
-  the groups in the order of the observed means, from left
-  to right (by increasing size) yields this 'elemental'
-  graphic for this commonly used statistical method.
-
-  Groups need not be of the same sizes, nor do data need to
-  reflect any particular distributional characteristics.
-  Skewness, outliers, clustering of data points, and
-  various other features of the data may be seen in this
-  graphic, possibly identified using point labels.
+  The central idea of the one-way graphic is to show how the comparison
+  of groups, viz. their means, entails a particular linear combination (L.C.)
+  of the group means. In particular, we use the fact that the numerator of 
+  the one-way F statistic, the mean square between (MS.B), is a linear combination
+  of the group means when each weight in the linear combination is a
+  simple function of the differences between a group mean and the grand
+  mean. This L.C. can be written as a sum of products of the form 
+  MS.B = (1/df.B) n<j> (M<j> - M..) M<j>. The denominator of the F-statistic
+  can then be seen as a 'scaling factor', the MS.W, defined as the (weighted)
+  average of the variances of the J groups (j = 1 ... J).
+  The differences (M<j> - M..) are themselves the 'effects' in such an analysis;
+  thus, when these effects are plotted against the group means (the horizontal and
+  vertical axes) a straight line necessarily ensues. Group means are plotted as
+  triangles along this line. Once the means have been plotted, the data points 
+  (jittered) for the groups are displayed (vertical axis) with respect to the
+  respective contrasts. Since the group means are just the fitted values in
+  one-way ANOVA, and the deviations of the scores within groups are the residuals
+  (subsetted by groups), the graphic can be seen as showing fitted vs. residual
+  values for the line that shows the locus of group means -- from the smallest 
+  on the left) the the largest (on the right). If desired, the aggregate of all
+  such residuals can be plotted (as a rug plot) on the right margin of the 
+  graphic, except that these residuals are centered on the grand mean (large green
+  dot in 'middle' of graphic) instead of zero. The use of effects to locate
+  the groups in the order of the observed means, from left to right yields what we
+  term an 'elemental' graphic because it base on the question that drives the one-way 
+  ANOVA. Note that groups need not be of the same sizes, nor do data need to
+  reflect any particular distributional characteristics. Skewness, outliers, 
+  clustering of data points, and various other features of the data may readily be 
+  seen in this graphic. Finally, the gray bars (one for each group) at the bottom
+  of the graphic show the relative sizes of the standard deviations of the groups
+  with referene to the square root of the MS.W (corresponding to the thin white
+  line that runs horizontally across these bars).
 }
 \examples{
 data(arousal)
