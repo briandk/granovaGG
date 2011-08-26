@@ -83,27 +83,27 @@
   of groups, viz. their means, entails a particular linear combination (L.C.)
   of the group means. In particular, we use the fact that the numerator of 
   the one-way F statistic, the mean square between (MS.B), is a linear combination
-  of the group means when each weight in the linear combination is a
+  of the group means where each weight in the linear combination is a
   simple function of the differences between a group mean and the grand
   mean. This L.C. can be written as a sum of products of the form 
   MS.B = (1/df.B) n<j> (M<j> - M..) M<j>. The denominator of the F-statistic
   can then be seen as a 'scaling factor', the MS.W, defined as the (weighted)
-  average of the variances of the J groups (j = 1 ... J).
+  average of the variances of the J groups (j = 1 ... J). [The n<j>'s are group sizes.]
   The differences (M<j> - M..) are themselves the 'effects' in such an analysis;
-  thus, when these effects are plotted against the group means (the horizontal and
+  when these effects are plotted against the group means (the horizontal and
   vertical axes) a straight line necessarily ensues. Group means are plotted as
   triangles along this line. Once the means have been plotted, the data points 
   (jittered) for the groups are displayed (vertical axis) with respect to the
   respective contrasts. Since the group means are just the fitted values in
   one-way ANOVA, and the deviations of the scores within groups are the residuals
   (subsetted by groups), the graphic can be seen as showing fitted vs. residual
-  values for the line that shows the locus of group means -- from the smallest 
+  values for the line that shows the locus of ordered group means -- from the smallest 
   on the left) the the largest (on the right). If desired, the aggregate of all
   such residuals can be plotted (as a rug plot) on the right margin of the 
   graphic, except that these residuals are centered on the grand mean (large green
   dot in 'middle' of graphic) instead of zero. The use of effects to locate
-  the groups in the order of the observed means, from left to right yields what we
-  term an 'elemental' graphic because it base on the question that drives the one-way 
+  the groups in the order of the observed means yields what we term an 'elemental' 
+  graphic because it is based on the central question that drives one-way 
   ANOVA. Note that groups need not be of the same sizes, nor do data need to
   reflect any particular distributional characteristics. Skewness, outliers, 
   clustering of data points, and various other features of the data may readily be 
