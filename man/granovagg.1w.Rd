@@ -71,45 +71,58 @@
 }
 \description{
   Graphic to display data for a one-way analysis of
-  variance -- that is for unstructured groups. Also to help understand 
-  how data play out in the context of the basic one-way model,
-  how the F statistic is generated for the data at hand,
-  etc. The graphic may be called 'elemental' or 'natural'
-  because it is built upon the central question that drives
-  one-way ANOVA (see details below).
+  variance -- that is for unstructured groups. Also to help
+  understand how data play out in the context of the basic
+  one-way model, how the F statistic is generated for the
+  data at hand, etc. The graphic may be called 'elemental'
+  or 'natural' because it is built upon the central
+  question that drives one-way ANOVA (see details below).
 }
 \details{
-  The one-way ANOVA graphic shows how the comparison of unstructured
-  groups, viz. their means, entails a particular linear combination (L.C.)
-  of the group means. In particular, we use the fact that the numerator of 
-  the one-way F statistic, the mean square between (MS.B), is a linear combination
-  of the group means; each weight -- one for each group -- in the L.C. is (principally) 
-  a function of the difference between the group's mean and the grand
-  mean, viz., (M<j> - M..) where M<j> denotes the jth group's mean, and M.. denotes
-  the grand mean. The L.C. can be written as a sum of products of the form 
-  MS.B = (1/df.B)(n<j> (M<j> - M..) M<j>). The denominator of the F-statistic, MS.W 
-  (mean square within), can be described as a 'scaling factor'. It is just the (weighted)
-  average of the variances of the J groups (j = 1 ... J). (n<j>'s are group sizes.)
-  The differences (M<j> - M..) are themselves the 'effects' in the analysis.
-  When the effects are plotted against the group means (the horizontal and
-  vertical axes) a straight line necessarily ensues. Group means are plotted as
-  triangles along this line. Once the means have been plotted, the data points 
-  (jittered) for the groups are displayed (vertical axis) with respect to the
-  respective contrasts. Since the group means are just the fitted values in
-  one-way ANOVA, and the deviations of the scores within groups are the residuals
-  (subsetted by groups), the graphic can be seen as showing fitted vs. residual
-  values for the line that shows the locus of ordered group means -- from the smallest 
-  on the left) the the largest (on the right). If desired, the aggregate of all
-  such residuals can be plotted (as a rug plot) on the right margin of the 
-  graphic centered on the grand mean (large green dot in 'middle'). The use of 
-  effects to locate groups this way yields what we term an 'elemental' 
-  graphic because it is based on the central question that drives one-way 
-  ANOVA. Note that groups need not have the same size, nor do data need to
-  reflect any particular distributional characteristics. Finally, the gray bars 
-  (one for each group) at the bottom of the graphic show the relative sizes of 
-  the group standard deviations with referene to the 'average' group s.d. (more precisely,
-  the square root of the MS.W). This 'average' corresponds to the thin white
-  line that runs horizontally across these bars.
+  The one-way ANOVA graphic shows how the comparison of
+  unstructured groups, viz. their means, entails a
+  particular linear combination (L.C.) of the group means.
+  In particular, we use the fact that the numerator of the
+  one-way F statistic, the mean square between (MS.B), is a
+  linear combination of the group means; each weight -- one
+  for each group -- in the L.C. is (principally) a function
+  of the difference between the group's mean and the grand
+  mean, viz., (M_{j} - M..) where M_{j} denotes the jth
+  group's mean, and M.. denotes the grand mean. The L.C.
+  can be written as a sum of products of the form MS.B =
+  (1/df.B)(n_{j} (M_{j} - M..) M_{j}). The denominator of
+  the F-statistic, MS.W (mean square within), can be
+  described as a 'scaling factor'. It is just the
+  (weighted) average of the variances of the J groups (j =
+  1 ... J). (n_{j}'s are group sizes.) The differences
+  (M_{j} - M..) are themselves the 'effects' in the
+  analysis. When the effects are plotted against the group
+  means (the horizontal and vertical axes) a straight line
+  necessarily ensues. Group means are plotted as triangles
+  along this line. Once the means have been plotted, the
+  data points (jittered) for the groups are displayed
+  (vertical axis) with respect to the respective contrasts.
+  Since the group means are just the fitted values in
+  one-way ANOVA, and the deviations of the scores within
+  groups are the residuals (subsetted by groups), the
+  graphic can be seen as showing fitted vs. residual values
+  for the line that shows the locus of ordered group means
+  -- from the smallest on the left) the the largest (on the
+  right). If desired, the aggregate of all such residuals
+  can be plotted (as a rug plot) on the right margin of the
+  graphic centered on the grand mean (large green dot in
+  'middle'). The use of effects to locate groups this way
+  yields what we term an 'elemental' graphic because it is
+  based on the central question that drives one-way ANOVA.
+
+  Note that groups need not have the same size, nor do data
+  need to reflect any particular distributional
+  characteristics. Finally, the gray bars (one for each
+  group) at the bottom of the graphic show the relative
+  sizes of the group standard deviations with referene to
+  the 'average' group s.d. (more precisely, the square root
+  of the MS.W). This 'average' corresponds to the thin
+  white line that runs horizontally across these bars.
 }
 \examples{
 data(arousal)
