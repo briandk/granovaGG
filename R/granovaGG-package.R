@@ -44,7 +44,7 @@
 #' @author Jason Bryer \email{jason@@bryer.org}
 #' 
 #' @import ggplot2
-#' @name granovaGG
+#' @name granovaGG-package
 #' @aliases granovaGG-package granovaGG
 #' @docType package
 #' @seealso

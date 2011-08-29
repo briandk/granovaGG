@@ -1,7 +1,8 @@
 \docType{package}
-\name{granovaGG}
+\name{granovaGG-package}
 \alias{"granovaGG-package"}
 \alias{granovaGG}
+\alias{granovaGG-package}
 \title{Elemental Graphics for Analysis of Variance Using ggplot2}
 \description{
   This small collection of functions provides what we call
