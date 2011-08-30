@@ -1,0 +1,16 @@
+granovaGG v 1.0
+---------------
+
+NEW FEATURES
+
+* ggplot2 implementations of three of the four graphical analysis of variance functions:
+  
+    * .1w - elemental graphic for the one-way analysis of variance
+    * .contr - elemental graphic for observing contrast effects in one-way analysis of variance
+    * .ds - elemental graphic for dependent sample assessment
+  
+* Since the core functions can return ggplot2 objects (or a list of them, in the case of .contr)
+  you can use the extensibility of ggplot2's grammar of graphics to customize your plots
+  
+* geom_rug_alt - an alternate ggplot2 geom for creating rugs whose tufts appear on the top and right
+  of a graph, instead of the default bottom and left sides produced by geom_rug
