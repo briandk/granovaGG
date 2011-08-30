@@ -2,9 +2,9 @@
 \alias{granovagg.1w}
 \title{Elemental Graphic Display for One-Way ANOVA}
 \usage{
-  granovagg.1w(data, group = NULL, h.rng = 1.25, v.rng =
-  0.2, jj = NULL, dg = 2, resid = FALSE, xlab = NULL, ylab
-  = NULL, main = "default_granova_title", plot.theme =
+  granovagg.1w(data, group = NULL, h.rng = 1, v.rng = 1, jj
+  = NULL, dg = 2, resid = FALSE, xlab = NULL, ylab = NULL,
+  main = "default_granova_title", plot.theme =
   "theme_granova_1w", ...)
 }
 \arguments{
@@ -19,10 +19,10 @@
   \code{data} is a vector.}
 
   \item{h.rng}{Numeric; controls the horizontal spread of
-  groups, default = 1.25}
+  groups, default = 1}
 
   \item{v.rng}{Numeric; controls the vertical spread of
-  points, default = 0.25.}
+  points, default = 1.}
 
   \item{jj}{Numeric; sets horiz. jittering level of points.
   \code{jj} gets passed as the \code{amount} parameter to

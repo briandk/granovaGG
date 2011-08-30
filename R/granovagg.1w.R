@@ -49,9 +49,9 @@
 #' @param group Group indicator, generally a factor in case \code{data} is a
 #'   vector.
 #' @param h.rng Numeric; controls the horizontal spread of groups, default =
-#'   1.25
+#'   1
 #' @param v.rng Numeric; controls the vertical spread of points, default =
-#'   0.25.
+#'   1.
 #' @param jj Numeric; sets horiz. jittering level of points. \code{jj} gets passed as the 
 #'   \code{amount} parameter to \code{\link{jitter}}. 
 #'   When \code{jj = NULL} (the default behavior), the degree of jitter will take on a sensible value. 
@@ -97,8 +97,8 @@
 #' @example /demo/granovagg.1w.R
 granovagg.1w <- function(data, 
                          group      = NULL, 
-                         h.rng      = 1.25, 
-                         v.rng      = .2,
+                         h.rng      = 1, 
+                         v.rng      = 1,
                          jj         = NULL,
                          dg         = 2, 
                          resid      = FALSE,  
@@ -297,8 +297,8 @@ granovagg.1w <- function(data,
                                      ConvertBooleanValuesToResidualLabels(abs(residuals - grandmean) < sdw)
     )
   
-    result$range.expansion <- list(horizontal.range.expansion = h.rng,
-                                   vertical.range.expansion   = v.rng
+    result$range.expansion <- list(horizontal.range.expansion = 1.25 * h.rng,
+                                   vertical.range.expansion   = 0.2 * v.rng
                               )
     return(result)
   }
