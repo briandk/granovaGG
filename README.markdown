@@ -157,8 +157,8 @@ R can and does cache some package information for efficiency's sake. Unfortunate
 ## How can I provide feedback?
 *  If you want to request something, or report a bug, use the [Issue Tracker][issueTracker]
 *  If you'd like to contact us directly, we'd love to hear from you:
-    *  [Robert M. Pruzek](mailto:rpruzek@uamail.albany.edu)
     *  [Brian A. Danielak](mailto:BrianDK@umd.edu)
+    *  [Robert M. Pruzek](mailto:rpruzek@uamail.albany.edu)
     *  [William E.J. Doane](mailto:wdoane@Bennington.edu)
     *  [James E. Helmreich](mailto:James.Helmreich@marist.edu)
     *  [Jason Bryer](mailto:jason@bryer.org)

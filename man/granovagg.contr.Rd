@@ -144,15 +144,13 @@ granovagg.contr(data.random, contrasts = contr.helmert(8),
   ylab = "Random Data")
 }
 \author{
-  Robert M. Pruzek \email{RMPruzek@yahoo.com}
+  Brian A. Danielak \email{brian@briandk.com}\cr Robert M.
+  Pruzek \email{RMPruzek@yahoo.com}
 
-  Brian A. Danielak \email{brian@briandk.com}
-
-  William E. J. Doane \email{wil@drdoane.com}
-
-  James E. Helmreich \email{James.Helmreich@Marist.edu}
-
-  Jason Bryer \email{jason@bryer.org}
+  with contributions by:\cr William E. J. Doane
+  \email{wil@drdoane.com}\cr James E. Helmreich
+  \email{James.Helmreich@Marist.edu}\cr Jason Bryer
+  \email{jason@bryer.org}
 }
 \seealso{
   \code{\link{granovagg.1w}}, \code{\link{granovagg.ds}}

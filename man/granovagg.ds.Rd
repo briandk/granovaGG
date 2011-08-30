@@ -87,14 +87,12 @@ granovagg.ds(blood_lead, sw = .1,
    Blood Lead Levels of Matched Pairs of Children")
 }
 \author{
-  Robert M. Pruzek \email{RMPruzek@yahoo.com}
+  Brian A. Danielak \email{brian@briandk.com}\cr Robert M.
+  Pruzek \email{RMPruzek@yahoo.com}
 
-  Brian A. Danielak \email{brian@briandk.com}
-
-  William E. J. Doane \email{wil@drdoane.com}
-
-  James E. Helmreich \email{James.Helmreich@Marist.edu}
-
-  Jason Bryer \email{jason@bryer.org}
+  with contributions by:\cr William E. J. Doane
+  \email{wil@drdoane.com}\cr James E. Helmreich
+  \email{James.Helmreich@Marist.edu}\cr Jason Bryer
+  \email{jason@bryer.org}
 }
 

@@ -35,11 +35,15 @@
 #'   graphic; defaults to a customized theme created for the dependent sample graphic
 #' @param ... Optional arguments to/from other functions
 #' @return Returns a plot object of class \code{ggplot}. 
-#' @author Robert M. Pruzek \email{RMPruzek@@yahoo.com}
-#' @author Brian A. Danielak \email{brian@@briandk.com}
-#' @author William E. J. Doane \email{wil@@drdoane.com}
-#' @author James E. Helmreich \email{James.Helmreich@@Marist.edu}
-#' @author Jason Bryer \email{jason@@bryer.org}
+#'
+#' @author Brian A. Danielak \email{brian@@briandk.com}\cr 
+#'   Robert M. Pruzek \email{RMPruzek@@yahoo.com}
+#'
+#' with contributions by:\cr
+#'   William E. J. Doane \email{wil@@drdoane.com}\cr 
+#'   James E. Helmreich \email{James.Helmreich@@Marist.edu}\cr 
+#'   Jason Bryer \email{jason@@bryer.org}
+#'
 #' @example demo/granovagg.ds.R
 #' @export
 

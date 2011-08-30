@@ -74,12 +74,14 @@
 #'      summary results.)} 
 #'   \item{Contrasts}{The contrast matrix you specified.}
 #'
-#' @author Robert M. Pruzek \email{RMPruzek@@yahoo.com}
-#' @author Brian A. Danielak \email{brian@@briandk.com}
-#' @author William E. J. Doane \email{wil@@drdoane.com}
-#' @author James E. Helmreich \email{James.Helmreich@@Marist.edu}
-#' @author Jason Bryer \email{jason@@bryer.org}
+#' @author Brian A. Danielak \email{brian@@briandk.com}\cr 
+#'   Robert M. Pruzek \email{RMPruzek@@yahoo.com}
 #'
+#' with contributions by:\cr
+#'   William E. J. Doane \email{wil@@drdoane.com}\cr 
+#'   James E. Helmreich \email{James.Helmreich@@Marist.edu}\cr 
+#'   Jason Bryer \email{jason@@bryer.org}
+#' 
 #' @seealso \code{\link{granovagg.1w}},
 #'   \code{\link{granovagg.ds}}
 #' @keywords hplot

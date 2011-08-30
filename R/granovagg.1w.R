@@ -76,11 +76,14 @@
 #' @seealso \code{\link{granovagg.contr}},
 #'   \code{\link{granovagg.ds}}
 #'
-#' @author Robert M. Pruzek \email{RMPruzek@@yahoo.com}
-#' @author Brian A. Danielak \email{brian@@briandk.com}
-#' @author William E. J. Doane \email{wil@@drdoane.com}
-#' @author James E. Helmreich \email{James.Helmreich@@Marist.edu}
-#' @author Jason Bryer \email{jason@@bryer.org}
+#' @author Brian A. Danielak \email{brian@@briandk.com}\cr 
+#'   Robert M. Pruzek \email{RMPruzek@@yahoo.com}
+#'
+#' with contributions by:\cr
+#'   William E. J. Doane \email{wil@@drdoane.com}\cr 
+#'   James E. Helmreich \email{James.Helmreich@@Marist.edu}\cr 
+#'   Jason Bryer \email{jason@@bryer.org}
+#'
 #' @references Fundamentals of Exploratory Analysis of Variance, Hoaglin D.,
 #'   Mosteller F. and Tukey J. eds., Wiley, 1991.
 #' @include shared-functions.R 

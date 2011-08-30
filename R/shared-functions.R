@@ -3,6 +3,15 @@
 #' This alternate rug plot geom simply plots the rug tufts on the top and right (instead of the bottom and left)
 #' @export
 #' @seealso \code{\link{geom_rug}}
+#'
+#' @author Brian A. Danielak \email{brian@@briandk.com}\cr 
+#'   Robert M. Pruzek \email{RMPruzek@@yahoo.com}
+#'
+#' with contributions by:\cr
+#'   William E. J. Doane \email{wil@@drdoane.com}\cr 
+#'   James E. Helmreich \email{James.Helmreich@@Marist.edu}\cr 
+#'   Jason Bryer \email{jason@@bryer.org}
+
 GeomRugAlt <- proto(
   Geom, {
     draw <- function(., data, scales, coordinates, ...) {  

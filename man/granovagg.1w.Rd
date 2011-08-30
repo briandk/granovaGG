@@ -153,15 +153,13 @@ main = "One-way ANOVA display, poison data (ignoring 2-way set-up)",
 res = TRUE)
 }
 \author{
-  Robert M. Pruzek \email{RMPruzek@yahoo.com}
+  Brian A. Danielak \email{brian@briandk.com}\cr Robert M.
+  Pruzek \email{RMPruzek@yahoo.com}
 
-  Brian A. Danielak \email{brian@briandk.com}
-
-  William E. J. Doane \email{wil@drdoane.com}
-
-  James E. Helmreich \email{James.Helmreich@Marist.edu}
-
-  Jason Bryer \email{jason@bryer.org}
+  with contributions by:\cr William E. J. Doane
+  \email{wil@drdoane.com}\cr James E. Helmreich
+  \email{James.Helmreich@Marist.edu}\cr Jason Bryer
+  \email{jason@bryer.org}
 }
 \references{
   Fundamentals of Exploratory Analysis of Variance, Hoaglin
