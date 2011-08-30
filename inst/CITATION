@@ -1,0 +1,16 @@
+citHeader("To cite granovaGG in publications, please use:")
+
+bibentry(
+  bibtype     = "Manual",
+  author      = c(person(c("Brian A."), "Danielak", role = c("aut", "cre")),
+                  person(c("Robert W."), "Pruzek", role = "aut"),
+                  person(c("William E. J."), "Doane", role = "ctb"),
+                  person(c("James E."), "Helmreich", role = "ctb"),
+                  person(c("Jason"), "Bryer", role = "ctb")
+                 ),
+  title       = "granovaGG: Elemental Graphics for Analysis of Variance using ggplot2",
+  year        = "2011",
+  url         = "http://github.com/briandk/granovaGG",
+  note        = "R package version 1.0",
+  textVersion = "Danielak, B. A., Pruzek, R. M., Doane, W. E. J., Helmreich, J. E., & Bryer, J. (2011). granovaGG: Elemental Graphics for Analysis of Variance using ggplot2. R package version 1.0. http://github.com/briandk/granovaGG"
+)
