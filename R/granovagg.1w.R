@@ -52,7 +52,11 @@
 #'   1.25
 #' @param v.rng Numeric; controls the vertical spread of points, default =
 #'   0.25.
-#' @param jj Numeric; sets horiz. jittering level of points. When \code{jj = NULL} (the default behavior), the degree of jitter will take on a sensible value. In addition, if pairs of ordered means are close to one another and \code{jj = NULL}, the degree of jitter will default to the smallest difference between two adjacent contrasts.
+#' @param jj Numeric; sets horiz. jittering level of points. \code{jj} gets passed as the 
+#'   \code{amount} parameter to \code{\link{jitter}}. 
+#'   When \code{jj = NULL} (the default behavior), the degree of jitter will take on a sensible value. 
+#'   In addition, if pairs of ordered means are close to one another and \code{jj = NULL}, 
+#'   the degree of jitter will default to the smallest difference between two adjacent contrasts.
 #' @param dg Numeric; sets number of decimal points in output display, default = 2
 #' @param resid Logical; displays marginal distribution of residuals (as a
 #'   'rug') on right side (wrt grand mean), default = FALSE.
