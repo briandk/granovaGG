@@ -63,7 +63,13 @@ First, make sure you've got Hadley Wickham's excellent [devtools][devtools] pack
 Then, use the `install_github()` function to fetch our spooky experimental code from the development branch
 
 ```r
-    library("devtools")
+    library(devtools)
+    
+    # If you've already installed granovaGG, then detach and remove the current local version
+    detach("package:granovaGG")
+    remove.packages("granovaGG", lib = .libPaths())
+    
+    # ...and then install the latest development version
     install_github(repo="granovaGG", username="briandk", branch="dev")
 ```
         
@@ -78,7 +84,13 @@ First, make sure you've got Hadley Wickham's excellent [devtools][devtools] pack
 Then, use the `install_github()` function to fetch our hardy code from the master branch:
 
 ```r
-    library("devtools")
+    library(devtools)
+
+    # If you've already installed granovaGG, then detach and remove the current local version
+    detach("package:granovaGG")
+    remove.packages("granovaGG", lib = .libPaths())
+    
+    # ...and then install the latest stable version
     install_github(repo="granovaGG", username="briandk", branch="master")
 ```
 
@@ -90,6 +102,7 @@ You'll have to wait a bit. We haven't yet submitted to CRAN, but we hope you'll 
 If you want to remove granovaGG entirely, run: 
 
 ```r
+    detach("package:granovaGG")
     remove.packages("granovaGG", lib = .libPaths())
 ```
 
