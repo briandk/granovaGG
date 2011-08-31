@@ -2,10 +2,10 @@ citHeader("To cite granovaGG in publications, please use:")
 
 bibentry(
   bibtype     = "Manual",
-  author      = c(person(c("Brian A."), "Danielak", role = c("aut", "cre")),
-                  person(c("Robert W."), "Pruzek", role = "aut"),
-                  person(c("William E. J."), "Doane", role = "ctb"),
-                  person(c("James E."), "Helmreich", role = "ctb"),
+  author      = c(person(c("Brian", "A."), "Danielak", role = c("aut", "cre")),
+                  person(c("Robert", "W."), "Pruzek", role = "aut"),
+                  person(c("William", "E. J."), "Doane", role = "ctb"),
+                  person(c("James", "E."), "Helmreich", role = "ctb"),
                   person(c("Jason"), "Bryer", role = "ctb")
                  ),
   title       = "granovaGG: Elemental Graphics for Analysis of Variance using ggplot2",
