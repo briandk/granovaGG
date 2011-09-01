@@ -878,7 +878,7 @@ granovagg.1w <- function(data,
                  label = label,
                  angle = angle
              ),
-           size  = 2,
+           size  = 2.5,
            color = "grey50",
            hjust = 1,
            vjust = 0.5,
