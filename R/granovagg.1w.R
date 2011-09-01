@@ -539,9 +539,9 @@ granovagg.1w <- function(data,
     f.statistic         <- owp$model.summary$fstatistic["value"]
     f.statistic.rounded <- round(f.statistic, digits = 2)
     return(
-      data.frame(label     = f.statistic.rounded,
+      data.frame(label     = paste("F = ", f.statistic.rounded),
                  x         = owp$squares$x.center,
-                 y         = owp$outer.square$ymax + (2.5 * owp$params$vertical.percent),
+                 y         = owp$outer.square$ymax + (2.0 * owp$params$vertical.percent),
                  text.size = GetSquaresTextSize(f.statistic.rounded)
       )
     )
@@ -549,11 +549,11 @@ granovagg.1w <- function(data,
   
   GetSquaresTextSize <- function(number) {
     if (number < 10) {
-      return(5)
+      return(2.5)
     }
     
     else {
-      return(4)
+      return(2.25)
     }
     
   }
