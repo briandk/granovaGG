@@ -54,7 +54,7 @@
 #'   Robert M. Pruzek \email{RMPruzek@@yahoo.com}
 #'
 #' with contributions by:\cr
-#'   William E. J. Doane \email{wil@@drdoane.com}\cr 
+#'   William E. J. Doane \email{wil@@DrDoane.com}\cr 
 #'   James E. Helmreich \email{James.Helmreich@@Marist.edu}\cr 
 #'   Jason Bryer \email{jason@@bryer.org}
 #' 
