@@ -692,15 +692,17 @@ granovagg.1w <- function(data,
 
   GroupMeanLine <- function(owp) {
     return(geom_segment(
-      aes(
-        x      = x,
-        y      = y,
-        xend   = xend,
-        yend   = yend,
-        color  = factor(paste("Group Mean Line"))
-      ), alpha = I(1/2),
-         data  = owp$group.mean.line
-    ))
+             aes(
+               x      = x,
+               y      = y,
+               xend   = xend,
+               yend   = yend,
+               color  = factor(paste("Group Mean Line"))
+             ), 
+             alpha = I(1/2),
+             data  = owp$group.mean.line
+           )
+    )
   }
 
   GroupMeansByContrast <- function(owp) {
