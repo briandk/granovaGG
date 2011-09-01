@@ -27,7 +27,7 @@ Collate:
     'granovagg.contr.R'
     'granovagg.ds.R'
     'granovaGG-package.R'
-Description: 		This collection of functions in granovaGG provides what we call
+Description: This collection of functions in granovaGG provides what we call
     elemental graphics for display of anova results. The term
     elemental derives from the fact that each function is
     aimed at construction of graphical displays that afford
