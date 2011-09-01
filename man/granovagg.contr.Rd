@@ -28,9 +28,9 @@
   you'll have an opportunity to review each page before
   seeing the next page. Also, when
   \code{print.four.plots.per.page} is \code{TRUE}, the
-  function won't return any output. When
+  function won't return any plot objects as output. When
   \code{print.four.plots.per.page} is set to \code{FALSE},
-  the function returns a list of #' ggplot objects, one
+  the function returns a list of ggplot objects, one
   element per plot.}
 
   \item{jj}{Numeric; controls \code{\link{jitter}} and
@@ -43,12 +43,12 @@
 \value{
   If \code{print.four.plots.per.page} is set to
   \code{FALSE}, the function returns a list of ggplot
-  objects, one element per plot. That allows you to index
+  objects, one element per plot. That allows you to access
   any individual plot or plots, then modify them as you
-  wish. When \code{print.four.plots.per.page} is set to
-  \code{FALSE} (the default), the function prints four
-  plots per page on a graphical device but returns
-  \code{NULL}.
+  wish (with ggplot2 commands, for example). When
+  \code{print.four.plots.per.page} is set to \code{TRUE}
+  (the default), the function prints four plots per page on
+  a graphical device but returns \code{NULL}.
 
   The function also provides printed output: \item{Weighted
   Means}{Table showing the (weighted) means for positive
