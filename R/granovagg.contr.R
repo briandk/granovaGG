@@ -474,7 +474,9 @@ granovagg.contr <- function(data,
   }
   
   GetOutput <- function(ctr) {
-    four.plot.message <- "Since you selected four plots per page to print, no output will be returned"
+    four.plot.message <- paste("Since you elected to print four plots per page\n", 
+                               "granovagg.contr won't return any plot objects.", sep = ""
+                         )
     if (print.four.plots.per.page) {
       message(four.plot.message)
       LayoutFourPlotsPerPage(ctr$output)
