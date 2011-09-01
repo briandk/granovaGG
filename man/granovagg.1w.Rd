@@ -92,30 +92,31 @@
   mean, viz., (M_{j} - M..) where M_{j} denotes the jth
   group's mean, and M.. denotes the grand mean. The L.C.
   can be written as a sum of products of the form MS.B =
-  (1/df.B)(n_{j} (M_{j} - M..) M_{j}). The denominator of
-  the F-statistic, MS.W (mean square within), can be
-  described as a 'scaling factor'. It is just the
-  (weighted) average of the variances of the J groups (j =
-  1 ... J). (n_{j}'s are group sizes.) The differences
-  (M_{j} - M..) are themselves the 'effects' in the
-  analysis. When the effects are plotted against the group
-  means (the horizontal and vertical axes) a straight line
-  necessarily ensues. Group means are plotted as triangles
-  along this line. Once the means have been plotted, the
-  data points (jittered) for the groups are displayed
-  (vertical axis) with respect to the respective contrasts.
-  Since the group means are just the fitted values in
-  one-way ANOVA, and the deviations of the scores within
-  groups are the residuals (subsetted by groups), the
-  graphic can be seen as showing fitted vs. residual values
-  for the line that shows the locus of ordered group means
-  -- from the smallest on the left) the the largest (on the
-  right). If desired, the aggregate of all such residuals
-  can be plotted (as a rug plot) on the right margin of the
-  graphic centered on the grand mean (large green dot in
-  'middle'). The use of effects to locate groups this way
-  yields what we term an 'elemental' graphic because it is
-  based on the central question that drives one-way ANOVA.
+  Sum((1/df.B)(n_j (M_j - M..) M_j)) for j = 1...J. The
+  denominator of the F-statistic, MS.W (mean square
+  within), can be described as a 'scaling factor'. It is
+  just the (weighted) average of the variances of the J
+  groups (j = 1 ... J). (n_{j}'s are group sizes.) The
+  differences (M_{j} - M..) are themselves the 'effects' in
+  the analysis. When the effects are plotted against the
+  group means (the horizontal and vertical axes) a straight
+  line necessarily ensues. Group means are plotted as
+  triangles along this line. Once the means have been
+  plotted, the data points (jittered) for the groups are
+  displayed (vertical axis) with respect to the respective
+  contrasts. Since the group means are just the fitted
+  values in one-way ANOVA, and the deviations of the scores
+  within groups are the residuals (subsetted by groups),
+  the graphic can be seen as showing fitted vs. residual
+  values for the line that shows the locus of ordered group
+  means -- from the smallest on the left) the the largest
+  (on the right). If desired, the aggregate of all such
+  residuals can be plotted (as a rug plot) on the right
+  margin of the graphic centered on the grand mean (large
+  green dot in 'middle'). The use of effects to locate
+  groups this way yields what we term an 'elemental'
+  graphic because it is based on the central question that
+  drives one-way ANOVA.
 
   Note that groups need not have the same size, nor do data
   need to reflect any particular distributional

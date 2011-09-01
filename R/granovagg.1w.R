@@ -16,7 +16,8 @@
 #' a function of the difference between the group's mean and the grand
 #' mean, viz., (M_{j} - M..) where M_{j} denotes the jth group's mean, and M.. denotes
 #' the grand mean. The L.C. can be written as a sum of products of the form 
-#' MS.B = (1/df.B)(n_{j} (M_{j} - M..) M_{j}). The denominator of the F-statistic, MS.W 
+#' MS.B = Sum((1/df.B)(n_j (M_j - M..) M_j)) for j = 1...J. 
+#' The denominator of the F-statistic, MS.W 
 #' (mean square within), can be described as a 'scaling factor'. It is just the (weighted)
 #' average of the variances of the J groups (j = 1 ... J). (n_{j}'s are group sizes.)
 #' The differences (M_{j} - M..) are themselves the 'effects' in the analysis.
