@@ -589,7 +589,7 @@ granovagg.1w <- function(data,
 
   GetGroupSizes  <- function(owp) {
     return(data.frame(
-             y           = max(owp$params$y.range) - (3 * owp$params$vertical.percent),
+             y           = max(owp$params$y.range) - (1 * owp$params$vertical.percent),
              x           = owp$overplot$contrast,
              label       = owp$overplot$group.size,
              overplotted = owp$overplot$overplotted,
@@ -879,7 +879,7 @@ granovagg.1w <- function(data,
                  angle = angle
              ),
            size  = 2.5,
-           color = "grey50",
+           color = "grey10",
            hjust = 1,
            vjust = 0.5,
            data  = owp$group.sizes
