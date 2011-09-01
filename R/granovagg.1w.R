@@ -711,10 +711,11 @@ granovagg.1w <- function(data,
                  y     = group.mean, 
                  fill  = factor("Group Means")
                ),
-                 size  = I(2),
+                 size  = I(3),
                  shape = 24,
                  color = "black",
-                 data  = owp$summary, 
+                 alpha = 0.50,
+                 data  = owp$summary
       )
     )
   }
