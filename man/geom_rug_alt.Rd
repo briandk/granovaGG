@@ -28,6 +28,13 @@ p <- ggplot(mtcars, aes(x=wt, y=mpg))
 p + geom_point() + geom_rug()     # traditional rug fringe placement
 p + geom_point() + geom_rug_alt() # alternate fringe placement
 }
+\author{
+  Hadley Wickham \url{http://had.co.nz}\cr
+
+  With contributions by:\cr William E. J. Doane
+  \email{wil@drdoane.com}\cr Brian A. Danielak
+  \email{brian@briandk.com}
+}
 \references{
   Wickham, H. (2009). Ggplot2: Elegant Graphics for Data
   Analysis. New York: Springer.

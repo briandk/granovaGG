@@ -10,6 +10,11 @@
 #' @seealso \code{\link{geom_rug}}, \code{\link{granovagg.1w}},
 #'   \code{\link{granovagg.ds}}, \code{\link{granovaGG}}
 #'
+#' @author Hadley Wickham \url{http://had.co.nz}\cr
+#'
+#' With contributions by:\cr
+#'   William E. J. Doane \email{wil@@drdoane.com}\cr
+#'   Brian A. Danielak \email{brian@@briandk.com}
 #' @example /demo/geom_rug_alt.R
 #' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
