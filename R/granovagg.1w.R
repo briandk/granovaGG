@@ -432,21 +432,21 @@ granovagg.1w <- function(data,
 
   GetMSbetweenColor <- function(owp) {
     if (owp$stats$F.statistic > 1) {
-      return(brewer.pal(n = 8, name = "Paired")[1])
+      return(brewer.pal(n = 8, name = "Paired")[5])
     }
   
     else {
-      return(brewer.pal(n = 8, name = "Paired")[6])
+      return(brewer.pal(n = 8, name = "Paired")[2])
     }
   }
 
   GetMSwithinColor <- function(owp) {
     if (owp$stats$F.statistic > 1) {
-      return(brewer.pal(n = 8, name = "Paired")[2])
+      return(brewer.pal(n = 8, name = "Paired")[6])
     }
   
     else {
-      return(brewer.pal(n = 8, name = "Paired")[5])
+      return(brewer.pal(n = 8, name = "Paired")[1])
     }
   }
 
