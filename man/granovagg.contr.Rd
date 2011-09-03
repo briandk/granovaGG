@@ -160,7 +160,8 @@ granovagg.contr(data.random, contrasts = contr.helmert(8),
   and computing. New York: Springer.
 }
 \seealso{
-  \code{\link{granovagg.1w}}, \code{\link{granovagg.ds}}
+  \code{\link{granovagg.1w}}, \code{\link{granovagg.ds}},
+  \code{\link{granovaGG}}
 }
 \keyword{hplot}
 

@@ -86,7 +86,7 @@
 #'   Jason Bryer \email{jason@@bryer.org}
 #' 
 #' @seealso \code{\link{granovagg.1w}},
-#'   \code{\link{granovagg.ds}}
+#'   \code{\link{granovagg.ds}}, \code{\link{granovaGG}}
 #' @keywords hplot
 #' @example demo/granovagg.contr.R
 #' @export

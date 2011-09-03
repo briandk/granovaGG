@@ -79,7 +79,8 @@
 #'      \item{group.size}{group sizes}
 #'      \item{overplotting information}{Information about groups that, due to their close means, may be overplotted}
 #' @seealso \code{\link{granovagg.contr}},
-#'   \code{\link{granovagg.ds}}
+#'   \code{\link{granovagg.ds}}, \code{\link{granovaGG}},
+#'   \code{\link{geom_rug_alt}}
 #'
 #' @author Brian A. Danielak \email{brian@@briandk.com}\cr 
 #'   Robert M. Pruzek \email{RMPruzek@@yahoo.com}

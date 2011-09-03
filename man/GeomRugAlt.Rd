@@ -1,5 +1,6 @@
 \name{GeomRugAlt}
 \alias{GeomRugAlt}
+\alias{geom_rug_alt}
 \title{Alternate Marginal Rug Plot Geom for ggplot2}
 \description{
   This alternate rug plot geom simply plots the rug tufts
@@ -23,5 +24,8 @@
 }
 \seealso{
   \code{\link{geom_rug}}
+
+  \code{\link{granovagg.1w}}, \code{\link{granovagg.ds}},
+  \code{\link{granovaGG}}
 }
 

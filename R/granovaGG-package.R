@@ -65,7 +65,7 @@
 #' @seealso
 #' 
 #' \code{\link{granovagg.1w}} \code{\link{granovagg.ds}}
-#'   \code{\link{granovagg.contr}}
+#'   \code{\link{granovagg.contr}}, \code{\link{geom_rug_alt}}
 #' @keywords hplot
 #' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.

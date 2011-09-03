@@ -55,6 +55,10 @@
 #'   James E. Helmreich \email{James.Helmreich@@Marist.edu}\cr 
 #'   Jason Bryer \email{jason@@bryer.org}
 #'
+#' @seealso \code{\link{granovagg.1w}},
+#'   \code{\link{granovagg.ds}}, \code{\link{granovaGG}},
+#'   \code{\link{geom_rug_alt}}
+#'
 #' @example demo/granovagg.ds.R
 #' @export
 #' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.

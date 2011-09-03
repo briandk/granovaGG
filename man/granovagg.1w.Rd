@@ -175,7 +175,9 @@ res = TRUE)
   and computing. New York: Springer.
 }
 \seealso{
-  \code{\link{granovagg.contr}}, \code{\link{granovagg.ds}}
+  \code{\link{granovagg.contr}},
+  \code{\link{granovagg.ds}}, \code{\link{granovaGG}},
+  \code{\link{geom_rug_alt}}
 }
 \keyword{hplot}
 \keyword{htest}

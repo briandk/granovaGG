@@ -71,7 +71,7 @@
 }
 \seealso{
   \code{\link{granovagg.1w}} \code{\link{granovagg.ds}}
-  \code{\link{granovagg.contr}}
+  \code{\link{granovagg.contr}}, \code{\link{geom_rug_alt}}
 }
 \keyword{hplot}
 

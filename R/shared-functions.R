@@ -2,7 +2,9 @@
 #'
 #' This alternate rug plot geom simply plots the rug tufts on the top and right (instead of the bottom and left)
 #' @export
-#' @seealso \code{\link{geom_rug}}
+#' @aliases geom_rug_alt
+#' @seealso \code{\link{geom_rug}}, \code{\link{granovagg.1w}},
+#'   \code{\link{granovagg.ds}}, \code{\link{granovaGG}}
 #'
 #' @author Brian A. Danielak \email{brian@@briandk.com}\cr 
 #'   Robert M. Pruzek \email{RMPruzek@@yahoo.com}

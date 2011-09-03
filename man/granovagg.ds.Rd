@@ -116,4 +116,8 @@ granovagg.ds(blood_lead, sw = .1,
   Wilkinson, L. (1999). The Grammar of Graphics. Statistics
   and computing. New York: Springer.
 }
+\seealso{
+  \code{\link{granovagg.1w}}, \code{\link{granovagg.ds}},
+  \code{\link{granovaGG}}, \code{\link{geom_rug_alt}}
+}
 
