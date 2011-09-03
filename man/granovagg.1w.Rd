@@ -167,6 +167,12 @@ res = TRUE)
 \references{
   Fundamentals of Exploratory Analysis of Variance, Hoaglin
   D., Mosteller F. and Tukey J. eds., Wiley, 1991.
+
+  Wickham, H. (2009). Ggplot2: Elegant Graphics for Data
+  Analysis. New York: Springer.
+
+  Wilkinson, L. (1999). The Grammar of Graphics. Statistics
+  and computing. New York: Springer.
 }
 \seealso{
   \code{\link{granovagg.contr}}, \code{\link{granovagg.ds}}

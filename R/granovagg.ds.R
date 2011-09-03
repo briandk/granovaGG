@@ -57,7 +57,8 @@
 #'
 #' @example demo/granovagg.ds.R
 #' @export
-
+#' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
+#' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
 granovagg.ds <- function(data       = NULL,
                          revc       = FALSE, 
                          main       = "default_granova_title",

@@ -62,6 +62,13 @@
   \email{James.Helmreich@Marist.edu}\cr Jason Bryer
   \email{jason@bryer.org}
 }
+\references{
+  Wickham, H. (2009). Ggplot2: Elegant Graphics for Data
+  Analysis. New York: Springer.
+
+  Wilkinson, L. (1999). The Grammar of Graphics. Statistics
+  and computing. New York: Springer.
+}
 \seealso{
   \code{\link{granovagg.1w}} \code{\link{granovagg.ds}}
   \code{\link{granovagg.contr}}

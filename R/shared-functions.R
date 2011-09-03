@@ -11,7 +11,8 @@
 #'   William E. J. Doane \email{wil@@drdoane.com}\cr 
 #'   James E. Helmreich \email{James.Helmreich@@Marist.edu}\cr 
 #'   Jason Bryer \email{jason@@bryer.org}
-
+#' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
+#' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
 GeomRugAlt <- proto(
   Geom, {
     draw <- function(., data, scales, coordinates, ...) {  
