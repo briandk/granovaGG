@@ -14,7 +14,7 @@
   methods. This package represents a modification of the
   original granova package; the key change is to use
   ggplot2, Hadley Wickham's package based on Grammar of
-  Graphics concepts (due to Wilkenson). The main function
+  Graphics concepts (due to Wilkinson). The main function
   is granovagg.1w (a graphic for one way anova); two other
   functions (granovagg.ds and granovagg.contr) are to
   construct graphics for dependent sample analyses and

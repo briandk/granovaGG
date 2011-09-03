@@ -15,7 +15,7 @@
 #' parallel to the identity reference line. Means for X and Y are also plotted
 #' (as thin dashed vertical and horizontal lines), and rug plots are shown for
 #' the distributions of X (at the top of graphic) and Y (on the right side). The
-#' 95% confidence interval for the population mean difference is also shown
+#' 95\% confidence interval for the population mean difference is also shown
 #' graphically as a green band, perpendicular to the mean treatment effect line.
 #' Because all data points are plotted relative to the identity line, and
 #' summary results are shown graphically, clusters, data trends, outliers, and
