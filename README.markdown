@@ -150,11 +150,12 @@ R can and does cache some package information for efficiency's sake. Unfortunate
     quit()
 ```
 
-### 4. Uninstall granovaGG and restart R
+### 4. Detach granovaGG, uninstall it, and restart R
 
 R can and does cache some package information for efficiency's sake. Unfortunately, when you're rapidly installing/uninstalling development versions of a package, this cache can cause unexpected effects (old versions of functions being called, e.g.).
 
 ```r
+    detach("package:granovaGG")
     remove.packages("granovaGG", lib = .libPaths())
     rm(list = ls(pattern = "granovagg*"))
 
@@ -165,6 +166,7 @@ R can and does cache some package information for efficiency's sake. Unfortunate
     quit()
 ```
 
+Then, follow one of the sets of instructions, above, for installing granovaGG.
 
 
 ## How can I provide feedback?
