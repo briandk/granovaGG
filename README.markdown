@@ -172,9 +172,9 @@ Then, follow one of the sets of instructions, above, for installing granovaGG.
 ## How can I provide feedback?
 *  If you want to request something, or report a bug, use the [Issue Tracker][issueTracker]
 *  If you'd like to contact us directly, we'd love to hear from you:
-    *  [Brian A. Danielak](mailto:BrianDK@umd.edu)
+    *  [Brian A. Danielak](mailto:briandk@umd.edu)
     *  [Robert M. Pruzek](mailto:rpruzek@uamail.albany.edu)
-    *  [William E.J. Doane](mailto:wdoane@Bennington.edu)
+    *  [William E. J. Doane](mailto:wdoane@Bennington.edu)
     *  [James E. Helmreich](mailto:James.Helmreich@marist.edu)
     *  [Jason Bryer](mailto:jason@bryer.org)
 
