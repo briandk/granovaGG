@@ -677,7 +677,7 @@ granovagg.1w <- function(data,
     )
   }
 
-  JitteredScoresByGroupContrast <- function(owp) {
+  ScoresByGroupContrast <- function(owp) {
     only.jitter.in.x.direction <- position_jitter(height = 0, width = GetDegreeOfJitter(owp))
   
     return( 
@@ -1004,7 +1004,7 @@ granovagg.1w <- function(data,
   p <- p + GrandMeanPoint(owp)
   p <- p + ScaleX(owp)
   p <- p + ScaleY(owp)
-  p <- p + JitteredScoresByGroupContrast(owp)
+  p <- p + ScoresByGroupContrast(owp)
   p <- p + GroupMeanLine(owp)
   p <- p + GroupMeansByContrast(owp)
   p <- p + Residuals(owp)
