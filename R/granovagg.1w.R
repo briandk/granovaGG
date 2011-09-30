@@ -100,7 +100,8 @@
 #' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
 granovagg.1w <- function(data, 
-                         group      = NULL, 
+                         group      = NULL,
+                         boxplot    = FALSE, 
                          h.rng      = 1, 
                          v.rng      = 1,
                          jj         = NULL,
@@ -678,6 +679,30 @@ granovagg.1w <- function(data,
   }
 
   ScoresByGroupContrast <- function(owp) {
+    if (boxplot == TRUE) {
+      BoxplotScoresByGroupContrast(owp)
+    } 
+    
+    else {
+      JitteredScoresByGroupContrast(owp)
+    }
+  }
+
+  BoxplotScoresByGroupContrast <- function(owp) {
+    return( 
+      geom_boxplot( 
+        aes(
+          x = contrast, 
+          y = score,
+          group = contrast
+        ), 
+        alpha    = I(1),
+        data     = owp$data,
+      )
+    )
+  }
+  
+  JitteredScoresByGroupContrast <- function(owp) {
     only.jitter.in.x.direction <- position_jitter(height = 0, width = GetDegreeOfJitter(owp))
   
     return( 
@@ -693,7 +718,7 @@ granovagg.1w <- function(data,
       )
     )
   }
-
+  
   GroupMeanLine <- function(owp) {
     return(geom_segment(
              aes(
