@@ -334,10 +334,11 @@ granovagg.1w <- function(data,
     groups <- subset(data, select = group)
     stats  <- subset(data, select = c(-group, -maximum.score))    
     rounded.stats <- round(stats, digits = digits.to.round)
-    message("\nBelow are by-group summary statistics of your input data")
+    output <- ReorderDataByColumn(cbind(groups, rounded.stats), "group.mean")
+    message("\nBy-group summary statistics for your input data (ordered by group means)")
     
     return(
-       print(cbind(groups, rounded.stats))
+       print(output)
     )
   }
   
