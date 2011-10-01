@@ -651,7 +651,7 @@ granovagg.1w <- function(data,
         aes(
           x = 0, y = mean(score), color = factor(paste("Grand Mean"))
         ), 
-        size = 3/2,
+        size = 2.5,
         data = owp$data
       )
     )
