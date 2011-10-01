@@ -980,6 +980,11 @@ granovagg.1w <- function(data,
     }
   }
   
+  PrintLinearModelSummary <- function(model.summary) {
+    message("\nBelow is a linear model summary of your input data")
+    print(model.summary)
+  }
+  
   # Pepare OWP object
   owp                       <- AdaptVariablesFromGranovaComputations()
   owp$summary               <- GetSummary(owp)
@@ -1029,6 +1034,7 @@ granovagg.1w <- function(data,
   p <- p + PlotTitle()
   p <- p + RemoveSizeElementFromLegend()
   PrintOverplotWarning(owp, dg)
+  PrintLinearModelSummary(owp$model.summary)
 
   return(p)
 }
