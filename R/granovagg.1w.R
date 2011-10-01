@@ -845,7 +845,7 @@ granovagg.1w <- function(data,
     if (is.null(xlab)) {
       return(
         xlab(
-          paste("Contrast coefficients based on group means", "\n", "(F = ", round(F.stat, digits = 2), ")", sep = "")
+          paste("Contrast coefficients based on group means")
         )
       )
     }
