@@ -252,15 +252,17 @@ granovagg.ds <- function(data       = NULL,
     mean.1 <- mean(dsp$data[, 1])
     mean.2 <- mean(dsp$data[, 2])
     mean.d <- mean.2 - mean.1
-    sd.d <- sd(dsp$data[, 2] - dsp$data[, 1])
+    standard.deviation.d <- sd(dsp$data[, 2] - dsp$data[, 1])
+    effect.size <- (mean.d / standard.deviation.d)
     
-    output <- matrix(c(n, mean.1, mean.2, mean.d, sd.d), ncol = 1)
+    output <- matrix(c(n, mean.1, mean.2, mean.d, standard.deviation.d, effect.size), ncol = 1)
     dimnames(output) <- list(
       c("n", 
         paste(colnames(dsp$data)[1], "mean"), 
         paste(colnames(dsp$data)[2], "mean"),
         paste("mean(D = ", colnames(dsp$data)[2], " - ", colnames(dsp$data)[1], ")",  sep = ""),
-        paste("SD(D)")
+        paste("SD(D)"),
+        paste("Effect Size")
       ), "Summary Statistics")
     print(output)
   }
