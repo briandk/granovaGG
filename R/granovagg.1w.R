@@ -61,6 +61,8 @@
 #' @param dg Numeric; sets number of decimal points in output display, default = 2
 #' @param resid Logical; displays marginal distribution of residuals (as a
 #'   'rug') on right side (wrt grand mean), default = FALSE.
+#' @param dosqrs Logical; displays graphical squares for visualizing the F-statistic as a ratio
+#'   of MS-between to MS-within
 #' @param xlab Character; horizontal axis label, default = NULL. 
 #' @param ylab Character; vertical axis label, default = NULL. 
 #' @param main Character; main label, top of graphic; can be supplied by user,
@@ -105,7 +107,8 @@ granovagg.1w <- function(data,
                          v.rng      = 1,
                          jj         = NULL,
                          dg         = 2, 
-                         resid      = FALSE,  
+                         resid      = FALSE,
+                         dosqrs     = TRUE,  
                          xlab       = NULL, 
                          ylab       = NULL, 
                          main       = "default_granova_title",
