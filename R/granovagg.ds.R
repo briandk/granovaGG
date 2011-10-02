@@ -246,6 +246,13 @@ granovagg.ds <- function(data       = NULL,
                )
           )         
   }
+  
+  PrintSummary <- function(dsp) {
+    n <- dim(dsp$data)[1]
+    
+    output <- paste("\nn = ", n, sep = "")
+    print(output)
+  }
 
   dsp                <- list(data = GetData(data))
   dsp$effect         <- GetEffect(dsp)
@@ -259,6 +266,7 @@ granovagg.ds <- function(data       = NULL,
   dsp$treatment.line <- GetTreatmentLine(dsp)
   dsp$trails         <- GetTrails(dsp)
   dsp$colors         <- GetColors(dsp)
+  PrintSummary(dsp)
     
   
 
