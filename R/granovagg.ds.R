@@ -252,13 +252,15 @@ granovagg.ds <- function(data       = NULL,
     mean.1 <- mean(dsp$data[, 1])
     mean.2 <- mean(dsp$data[, 2])
     mean.d <- mean.2 - mean.1
+    sd.d <- sd(dsp$data[, 2] - dsp$data[, 1])
     
-    output <- matrix(c(n, mean.1, mean.2, mean.d), ncol = 1)
+    output <- matrix(c(n, mean.1, mean.2, mean.d, sd.d), ncol = 1)
     dimnames(output) <- list(
       c("n", 
         paste(colnames(dsp$data)[1], "mean"), 
         paste(colnames(dsp$data)[2], "mean"),
-        paste("mean difference (", colnames(dsp$data)[2], " - ", colnames(dsp$data)[1], ")",  sep = "")
+        paste("mean(D = ", colnames(dsp$data)[2], " - ", colnames(dsp$data)[1], ")",  sep = ""),
+        paste("SD(D)")
       ), "Summary Statistics")
     print(output)
   }
