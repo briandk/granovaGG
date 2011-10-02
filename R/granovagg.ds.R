@@ -249,8 +249,15 @@ granovagg.ds <- function(data       = NULL,
   
   PrintSummary <- function(dsp) {
     n <- dim(dsp$data)[1]
+    mean.1 <- mean(dsp$data[, 1])
+    mean.2 <- mean(dsp$data[, 2])
     
-    output <- paste("\nn = ", n, sep = "")
+    output <- matrix(c(n, mean.1, mean.2), ncol = 1)
+    dimnames(output) <- list(
+      c("n", 
+        paste(colnames(dsp$data)[1], "mean"), 
+        paste(colnames(dsp$data)[2], "mean")
+      ), "Summary Statistics")
     print(output)
   }
 
@@ -458,6 +465,6 @@ granovagg.ds <- function(data       = NULL,
   p <- p + XLabel(dsp)
   p <- p + YLabel(dsp)
 
-  return(p)
+  return(dsp)
 
 }
