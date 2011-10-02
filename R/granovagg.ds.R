@@ -61,6 +61,7 @@
 #'
 #' @example demo/granovagg.ds.R
 #' @export
+#' @references Pruzek, R. M., & Helmreich, J. E. (2009). Enhancing Dependent Sample Analyses with Graphics. Journal of Statistics Education, 17(1), 21.
 #' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
 granovagg.ds <- function(data       = NULL,
