@@ -746,6 +746,16 @@ granovagg.1w <- function(data,
     }
   }
 
+  SquaresForFstatistic <- function() {
+    output <- NULL
+    
+    if (dosqrs == TRUE) {
+      output <- list(OuterSquare(), InnerSquare())
+    }
+    
+    return(output)
+  }
+  
   OuterSquare <- function() {
     return(
       geom_rect(
@@ -1020,8 +1030,7 @@ granovagg.1w <- function(data,
   p <- p + MaxWithinGroupVariation(owp)
   p <- p + WithinGroupVariation(owp)
   p <- p + BaselineWithinGroupVariation(owp)
-  p <- p + OuterSquare()
-  p <- p + InnerSquare()
+  p <- p + SquaresForFstatistic()
   p <- p + SquaresText(owp)
   p <- p + ColorScale(owp)
   p <- p + FillScale()
