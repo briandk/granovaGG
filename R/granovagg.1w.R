@@ -546,10 +546,15 @@ granovagg.1w <- function(data,
   GetSquaresText <- function(owp) {
     f.statistic         <- owp$model.summary$fstatistic["value"]
     f.statistic.rounded <- round(f.statistic, digits = 2)
+    if (dosqrs == TRUE) {
+      vertical.position <- owp$outer.square$ymax + (2.0 * owp$params$vertical.percent)
+    } else {
+      vertical.position <- owp$outer.square$ymin
+    }
     return(
       data.frame(label     = paste("F = ", f.statistic.rounded),
                  x         = owp$squares$x.center,
-                 y         = owp$outer.square$ymax + (2.0 * owp$params$vertical.percent),
+                 y         = vertical.position,
                  text.size = GetSquaresTextSize(f.statistic.rounded)
       )
     )
@@ -796,7 +801,8 @@ granovagg.1w <- function(data,
               ),
               color = "grey20",
               size  = owp$squares.text$text.size,
-              data  = owp$squares.text
+              data  = owp$squares.text,
+              vjust = ifelse(dosqrs == TRUE, 0.5, -1)
       )
     )
   }
