@@ -250,6 +250,7 @@ granovagg.ds <- function(data       = NULL,
   PrintSummary <- function(dsp) {
     summary <- GetPrintedSummary(dsp)
     summary <- RenamePrintedSummaryRows(summary)
+    summary <- round(summary, digits = 3)
     
     print(summary)
   }
