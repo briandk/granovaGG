@@ -251,8 +251,8 @@ granovagg.ds <- function(data       = NULL,
     n <- dim(dsp$data)[1]
     mean.1 <- mean(dsp$data[, 1])
     mean.2 <- mean(dsp$data[, 2])
-    mean.d <- mean.2 - mean.1
-    standard.deviation.d <- sd(dsp$data[, 2] - dsp$data[, 1])
+    mean.d <- mean.1 - mean.2
+    standard.deviation.d <- sd(dsp$data[, 1] - dsp$data[, 2])
     effect.size <- (mean.d / standard.deviation.d)
     r.xy <- cor(dsp$data[, 1], dsp$data[, 2])
     
@@ -261,7 +261,7 @@ granovagg.ds <- function(data       = NULL,
       c("n", 
         paste(colnames(dsp$data)[1], "mean"), 
         paste(colnames(dsp$data)[2], "mean"),
-        paste("mean(D = ", colnames(dsp$data)[2], " - ", colnames(dsp$data)[1], ")",  sep = ""),
+        paste("mean(D = ", colnames(dsp$data)[1], " - ", colnames(dsp$data)[2], ")",  sep = ""),
         paste("SD(D)"),
         paste("Effect Size"),
         paste("r(", colnames(dsp$data)[1], ", ", colnames(dsp$data)[2], ")", sep = "")
