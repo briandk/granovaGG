@@ -260,8 +260,9 @@ granovagg.ds <- function(data       = NULL,
     upper.treatment.confidence <- dsp$stats$lower.treatment.effect
     t.value <- dsp$t.test$statistic
     degrees.of.freedom <- dsp$t.test$parameter
+    p.value <- dsp$t.test$p.value
     
-    output <- matrix(c(n, mean.1, mean.2, mean.d, standard.deviation.d, effect.size, r.xy, r.x.plus.y.d, lower.treatment.confidence, upper.treatment.confidence, t.value, degrees.of.freedom), ncol = 1)
+    output <- matrix(c(n, mean.1, mean.2, mean.d, standard.deviation.d, effect.size, r.xy, r.x.plus.y.d, lower.treatment.confidence, upper.treatment.confidence, t.value, degrees.of.freedom, p.value), ncol = 1)
     dimnames(output) <- list(
       c("n", 
         paste(colnames(dsp$data)[1], "mean"), 
@@ -274,7 +275,8 @@ granovagg.ds <- function(data       = NULL,
         paste("Lower ", (100 * conf.level), "% ", "CI Treatment Effect", sep = ""),
         paste("Upper ", (100 * conf.level), "% ", "CI Treatment Effect", sep = ""),
         paste("t (D-bar)"),
-        paste("df.t")
+        paste("df.t"),
+        paste("p-value (t-test)")
       ), "Summary Statistics")
     print(output)
   }
