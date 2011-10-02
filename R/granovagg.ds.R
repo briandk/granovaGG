@@ -256,8 +256,9 @@ granovagg.ds <- function(data       = NULL,
     effect.size <- (mean.d / standard.deviation.d)
     r.xy <- cor(dsp$data[, 1], dsp$data[, 2])
     r.x.plus.y.d <- cor((dsp$data[, 1] + dsp$data[, 2]), (dsp$data[, 1] - dsp$data[, 2]))
+    lower.treatment.confidence <- dsp$stats$upper.treatment.effect
     
-    output <- matrix(c(n, mean.1, mean.2, mean.d, standard.deviation.d, effect.size, r.xy, r.x.plus.y.d), ncol = 1)
+    output <- matrix(c(n, mean.1, mean.2, mean.d, standard.deviation.d, effect.size, r.xy, r.x.plus.y.d, lower.treatment.confidence), ncol = 1)
     dimnames(output) <- list(
       c("n", 
         paste(colnames(dsp$data)[1], "mean"), 
@@ -266,7 +267,8 @@ granovagg.ds <- function(data       = NULL,
         paste("SD(D)"),
         paste("Effect Size"),
         paste("r(", colnames(dsp$data)[1], ", ", colnames(dsp$data)[2], ")", sep = ""),
-        paste("r(", colnames(dsp$data)[1], " + ", colnames(dsp$data)[2], ", D)", sep = "")
+        paste("r(", colnames(dsp$data)[1], " + ", colnames(dsp$data)[2], ", D)", sep = ""),
+        paste("Lower 95% CI Treatment Effect")
       ), "Summary Statistics")
     print(output)
   }
@@ -274,6 +276,7 @@ granovagg.ds <- function(data       = NULL,
   dsp                <- list(data = GetData(data))
   dsp$effect         <- GetEffect(dsp)
   dsp$stats          <- GetStats(dsp, conf.level)
+  dsp$t.test         <- t.test(dsp$data[, 1], dsp$data[, 2])
   dsp$params         <- GetGraphicsParams(dsp)
   dsp$shadows        <- GetShadows(dsp)
   dsp$crossbow       <- GetCrossbow(dsp)
