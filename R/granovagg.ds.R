@@ -248,6 +248,13 @@ granovagg.ds <- function(data       = NULL,
   }
   
   PrintSummary <- function(dsp) {
+    summary <- GetPrintedSummary(dsp)
+    summary <- RenamePrintedSummaryRows(summary)
+    
+    print(summary)
+  }
+  
+  GetPrintedSummary <- function(dsp) {
     n <- dim(dsp$data)[1]
     mean.1 <- mean(dsp$data[, 1])
     mean.2 <- mean(dsp$data[, 2])
@@ -262,25 +269,45 @@ granovagg.ds <- function(data       = NULL,
     degrees.of.freedom <- dsp$t.test$parameter
     p.value <- dsp$t.test$p.value
     
-    output <- matrix(c(n, mean.1, mean.2, mean.d, standard.deviation.d, effect.size, r.xy, r.x.plus.y.d, lower.treatment.confidence, upper.treatment.confidence, t.value, degrees.of.freedom, p.value), ncol = 1)
-    dimnames(output) <- list(
-      c("n", 
-        paste(colnames(dsp$data)[1], "mean"), 
-        paste(colnames(dsp$data)[2], "mean"),
-        paste("mean(D = ", colnames(dsp$data)[1], " - ", colnames(dsp$data)[2], ")",  sep = ""),
-        paste("SD(D)"),
-        paste("Effect Size"),
-        paste("r(", colnames(dsp$data)[1], ", ", colnames(dsp$data)[2], ")", sep = ""),
-        paste("r(", colnames(dsp$data)[1], " + ", colnames(dsp$data)[2], ", D)", sep = ""),
-        paste("Lower ", (100 * conf.level), "% ", "CI Treatment Effect", sep = ""),
-        paste("Upper ", (100 * conf.level), "% ", "CI Treatment Effect", sep = ""),
-        paste("t (D-bar)"),
-        paste("df.t"),
-        paste("p-value (t-test)")
-      ), "Summary Statistics")
-    print(output)
+    return(matrix(c(n, 
+                    mean.1, 
+                    mean.2, 
+                    mean.d, 
+                    standard.deviation.d, 
+                    effect.size, 
+                    r.xy, 
+                    r.x.plus.y.d, 
+                    lower.treatment.confidence, 
+                    upper.treatment.confidence, 
+                    t.value, 
+                    degrees.of.freedom, 
+                    p.value
+                  ), 
+                 ncol = 1
+           )
+    )
   }
-
+  
+  RenamePrintedSummaryRows <- function(summary) {
+    dimnames(summary) <- list(
+                           c("n", 
+                             paste(colnames(dsp$data)[1], "mean"), 
+                             paste(colnames(dsp$data)[2], "mean"),
+                             paste("mean(D = ", colnames(dsp$data)[1], " - ", colnames(dsp$data)[2], ")",  sep = ""),
+                             paste("SD(D)"),
+                             paste("Effect Size"),
+                             paste("r(", colnames(dsp$data)[1], ", ", colnames(dsp$data)[2], ")", sep = ""),
+                             paste("r(", colnames(dsp$data)[1], " + ", colnames(dsp$data)[2], ", D)", sep = ""),
+                             paste("Lower ", (100 * conf.level), "% ", "CI Treatment Effect", sep = ""),
+                             paste("Upper ", (100 * conf.level), "% ", "CI Treatment Effect", sep = ""),
+                             paste("t (D-bar)"),
+                             paste("df.t"),
+                             paste("p-value (t-test)")
+                           ), "Summary Statistics")
+                         
+    return(summary)
+  }
+  
   dsp                <- list(data = GetData(data))
   dsp$effect         <- GetEffect(dsp)
   dsp$stats          <- GetStats(dsp, conf.level)
