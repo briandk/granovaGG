@@ -543,19 +543,32 @@ granovagg.1w <- function(data,
     return(summary(model))
   }
 
-  GetSquaresText <- function(owp) {
-    f.statistic         <- owp$model.summary$fstatistic["value"]
-    f.statistic.rounded <- round(f.statistic, digits = 2)
+  GetSquaresData <- function(owp) {
     if (dosqrs == TRUE) {
       vertical.position <- owp$outer.square$ymax + (2.0 * owp$params$vertical.percent)
     } else {
       vertical.position <- owp$outer.square$ymin
     }
+    
+    GetSquaresText(owp, vertical.position)
+  }
+  
+  GetSquaresText <- function(owp, position) {
+    test.statistic         <- owp$model.summary$fstatistic["value"]
+    test.statistic.rounded <- round(test.statistic, digits = 2)
+    
+    if (length(unique(owp$data$group)) == 2) { # 2-group t-test case
+      test.statistic.rounded = round(sqrt(test.statistic), digits = 2)
+      text <- paste("t = ", test.statistic.rounded, sep = "")
+    } else {
+      text <- paste("F = ", test.statistic.rounded, sep = "")
+    } 
+    
     return(
-      data.frame(label     = paste("F = ", f.statistic.rounded),
+      data.frame(label     = text,
                  x         = owp$squares$x.center,
-                 y         = vertical.position,
-                 text.size = GetSquaresTextSize(f.statistic.rounded)
+                 y         = position,
+                 text.size = GetSquaresTextSize(test.statistic.rounded)
       )
     )
   }
@@ -1015,7 +1028,7 @@ granovagg.1w <- function(data,
   owp$outer.square          <- GetOuterSquare(owp)
   owp$inner.square          <- GetInnerSquare(owp)
   owp$model.summary         <- GetModelSummary(owp)
-  owp$squares.text          <- GetSquaresText(owp)
+  owp$squares.text          <- GetSquaresData(owp)
   owp$variation    <- GetWithinGroupVariation(owp)
   owp$label.background      <- GetBackgroundForGroupSizesAndLabels(owp)
   owp$group.labels          <- GetGroupLabels(owp)
