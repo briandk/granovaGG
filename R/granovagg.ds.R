@@ -77,15 +77,17 @@ granovagg.ds <- function(data       = NULL,
 {
   
   GetData <- function(data) {
-    output <- CheckData(data)
-    output <- ReverseXAndY(output)
-    return(output)
+    data <- CheckData(data)
+    data <- ReverseXAndY(data)
+    data <- EnsureDataHasColumnNames(data)
+    data <- EnsureDataIsADataFrame(data)
+    return(data)
   }
   
   CheckData <- function(data) {
     IsDataNull(data)
     IsDataInTwoColumnFormat(data)
-    return(EnsureDataIsADataFrame(data))
+    return(data)
   }
   
   ReverseXAndY <- function(data) {
@@ -121,6 +123,15 @@ granovagg.ds <- function(data       = NULL,
       output <- as.data.frame(output)
     }
     return(output)
+  }
+  
+  EnsureDataHasColumnNames <- function(data) {
+    output <- data
+    if (is.null(colnames(data))) {
+      colnames(data) <- c("x", "y")
+    }
+    
+    return(data)
   }
   
   GetXs <- function(data) {
@@ -514,6 +525,6 @@ granovagg.ds <- function(data       = NULL,
   p <- p + XLabel(dsp)
   p <- p + YLabel(dsp)
 
-  return(dsp)
+  return(p)
 
 }
