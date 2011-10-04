@@ -314,7 +314,7 @@ granovagg.ds <- function(data       = NULL,
                              paste("Upper ", (100 * conf.level), "% ", "CI Treatment Effect", sep = ""),
                              paste("t (D-bar)"),
                              paste("df.t"),
-                             paste("p-value (t-test)")
+                             paste("p-value (t-statistic)")
                            ), "Summary Statistics")
                          
     return(summary)
