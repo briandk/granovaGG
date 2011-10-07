@@ -61,7 +61,7 @@
 #' @param dg Numeric; sets number of decimal points in output display, default = 2
 #' @param resid Logical; displays marginal distribution of residuals (as a
 #'   'rug') on right side (wrt grand mean), default = FALSE.
-#' @param dosqrs Logical; displays graphical squares for visualizing the F-statistic as a ratio
+#' @param print.squares Logical; displays graphical squares for visualizing the F-statistic as a ratio
 #'   of MS-between to MS-within
 #' @param xlab Character; horizontal axis label, default = NULL. 
 #' @param ylab Character; vertical axis label, default = NULL. 
@@ -108,7 +108,7 @@ granovagg.1w <- function(data,
                          jj         = NULL,
                          dg         = 2, 
                          resid      = FALSE,
-                         dosqrs     = TRUE,  
+                         print.squares     = TRUE,  
                          xlab       = NULL, 
                          ylab       = NULL, 
                          main       = "default_granova_title",
@@ -544,7 +544,7 @@ granovagg.1w <- function(data,
   }
 
   GetSquaresData <- function(owp) {
-    if (dosqrs == TRUE) {
+    if (print.squares == TRUE) {
       vertical.position <- owp$outer.square$ymax + (2.0 * owp$params$vertical.percent)
     } else {
       vertical.position <- owp$outer.square$ymin
@@ -767,7 +767,7 @@ granovagg.1w <- function(data,
   SquaresForFstatistic <- function() {
     output <- NULL
     
-    if (dosqrs == TRUE) {
+    if (print.squares == TRUE) {
       output <- list(OuterSquare(), InnerSquare())
     }
     
@@ -815,7 +815,7 @@ granovagg.1w <- function(data,
               color = "grey20",
               size  = owp$squares.text$text.size,
               data  = owp$squares.text,
-              vjust = ifelse(dosqrs == TRUE, 0.5, -1)
+              vjust = ifelse(print.squares == TRUE, 0.5, -1)
       )
     )
   }
