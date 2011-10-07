@@ -1013,17 +1013,18 @@ granovagg.1w <- function(data,
   }
   
   PrintLinearModelSummary <- function(owp) {
-    message("\nBelow is a linear model summary of your input data")
     
     if (length(levels(owp$data$group)) == 2) {
       PrintTtest(owp$data[, c("score", "group")])
     } else {
+      message("\nBelow is a linear model summary of your input data")
       print(owp$model.summary)
     }
   }
   
   PrintTtest <- function(data) {
     unstacked.data <- unstack(data, score ~ group)
+    message("\nBelow is a t-test summary of your input data")
     print(
       t.test(unstacked.data[, 1], unstacked.data[, 2])
     )
