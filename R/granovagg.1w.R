@@ -557,7 +557,7 @@ granovagg.1w <- function(data,
     test.statistic         <- owp$model.summary$fstatistic["value"]
     test.statistic.rounded <- round(test.statistic, digits = 2)
     
-    if (length(unique(owp$data$group)) == 2) { # 2-group t-test case
+    if (length(levels(owp$data$group)) == 2) { # 2-group t-test case
       test.statistic.rounded = round(sqrt(test.statistic), digits = 2)
       text <- paste("t = ", test.statistic.rounded, sep = "")
     } else {
@@ -1012,9 +1012,21 @@ granovagg.1w <- function(data,
     }
   }
   
-  PrintLinearModelSummary <- function(model.summary) {
+  PrintLinearModelSummary <- function(owp) {
     message("\nBelow is a linear model summary of your input data")
-    print(model.summary)
+    
+    if (length(levels(owp$data$group)) == 2) {
+      PrintTtest(owp$data[, c("score", "group")])
+    } else {
+      print(owp$model.summary)
+    }
+  }
+  
+  PrintTtest <- function(data) {
+    unstacked.data <- unstack(data, score ~ group)
+    print(
+      t.test(unstacked.data[, 1], unstacked.data[, 2])
+    )
   }
   
   # Pepare OWP object
@@ -1065,7 +1077,7 @@ granovagg.1w <- function(data,
   p <- p + PlotTitle()
   p <- p + RemoveSizeElementFromLegend()
   PrintOverplotWarning(owp, dg)
-  PrintLinearModelSummary(owp$model.summary)
+  PrintLinearModelSummary(owp)
 
   return(p)
 }
