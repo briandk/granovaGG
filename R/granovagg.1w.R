@@ -61,6 +61,8 @@
 #' @param dg Numeric; sets number of decimal points in output display, default = 2
 #' @param resid Logical; displays marginal distribution of residuals (as a
 #'   'rug') on right side (wrt grand mean), default = FALSE.
+#' @param print.squares Logical; displays graphical squares for visualizing the F-statistic as a ratio
+#'   of MS-between to MS-within
 #' @param xlab Character; horizontal axis label, default = NULL. 
 #' @param ylab Character; vertical axis label, default = NULL. 
 #' @param main Character; main label, top of graphic; can be supplied by user,
@@ -105,7 +107,8 @@ granovagg.1w <- function(data,
                          v.rng      = 1,
                          jj         = NULL,
                          dg         = 2, 
-                         resid      = FALSE,  
+                         resid      = FALSE,
+                         print.squares     = TRUE,  
                          xlab       = NULL, 
                          ylab       = NULL, 
                          main       = "default_granova_title",
@@ -540,14 +543,32 @@ granovagg.1w <- function(data,
     return(summary(model))
   }
 
-  GetSquaresText <- function(owp) {
-    f.statistic         <- owp$model.summary$fstatistic["value"]
-    f.statistic.rounded <- round(f.statistic, digits = 2)
+  GetSquaresData <- function(owp) {
+    if (print.squares == TRUE) {
+      vertical.position <- owp$outer.square$ymax + (2.0 * owp$params$vertical.percent)
+    } else {
+      vertical.position <- owp$outer.square$ymin
+    }
+    
+    GetSquaresText(owp, vertical.position)
+  }
+  
+  GetSquaresText <- function(owp, position) {
+    test.statistic         <- owp$model.summary$fstatistic["value"]
+    test.statistic.rounded <- round(test.statistic, digits = 2)
+    
+    if (length(levels(owp$data$group)) == 2) { # 2-group t-test case
+      test.statistic.rounded = round(sqrt(test.statistic), digits = 2)
+      text <- paste("t = ", test.statistic.rounded, sep = "")
+    } else {
+      text <- paste("F = ", test.statistic.rounded, sep = "")
+    } 
+    
     return(
-      data.frame(label     = paste("F = ", f.statistic.rounded),
+      data.frame(label     = text,
                  x         = owp$squares$x.center,
-                 y         = owp$outer.square$ymax + (2.0 * owp$params$vertical.percent),
-                 text.size = GetSquaresTextSize(f.statistic.rounded)
+                 y         = position,
+                 text.size = GetSquaresTextSize(test.statistic.rounded)
       )
     )
   }
@@ -743,6 +764,16 @@ granovagg.1w <- function(data,
     }
   }
 
+  SquaresForFstatistic <- function() {
+    output <- NULL
+    
+    if (print.squares == TRUE) {
+      output <- list(OuterSquare(), InnerSquare())
+    }
+    
+    return(output)
+  }
+  
   OuterSquare <- function() {
     return(
       geom_rect(
@@ -783,7 +814,8 @@ granovagg.1w <- function(data,
               ),
               color = "grey20",
               size  = owp$squares.text$text.size,
-              data  = owp$squares.text
+              data  = owp$squares.text,
+              vjust = ifelse(print.squares == TRUE, 0.5, -1)
       )
     )
   }
@@ -980,9 +1012,22 @@ granovagg.1w <- function(data,
     }
   }
   
-  PrintLinearModelSummary <- function(model.summary) {
-    message("\nBelow is a linear model summary of your input data")
-    print(model.summary)
+  PrintLinearModelSummary <- function(owp) {
+    
+    if (length(levels(owp$data$group)) == 2) {
+      PrintTtest(owp$data[, c("score", "group")])
+    } else {
+      message("\nBelow is a linear model summary of your input data")
+      print(owp$model.summary)
+    }
+  }
+  
+  PrintTtest <- function(data) {
+    unstacked.data <- unstack(data, score ~ group)
+    message("\nBelow is a t-test summary of your input data")
+    print(
+      t.test(unstacked.data[, 1], unstacked.data[, 2])
+    )
   }
   
   # Pepare OWP object
@@ -996,7 +1041,7 @@ granovagg.1w <- function(data,
   owp$outer.square          <- GetOuterSquare(owp)
   owp$inner.square          <- GetInnerSquare(owp)
   owp$model.summary         <- GetModelSummary(owp)
-  owp$squares.text          <- GetSquaresText(owp)
+  owp$squares.text          <- GetSquaresData(owp)
   owp$variation    <- GetWithinGroupVariation(owp)
   owp$label.background      <- GetBackgroundForGroupSizesAndLabels(owp)
   owp$group.labels          <- GetGroupLabels(owp)
@@ -1017,8 +1062,7 @@ granovagg.1w <- function(data,
   p <- p + MaxWithinGroupVariation(owp)
   p <- p + WithinGroupVariation(owp)
   p <- p + BaselineWithinGroupVariation(owp)
-  p <- p + OuterSquare()
-  p <- p + InnerSquare()
+  p <- p + SquaresForFstatistic()
   p <- p + SquaresText(owp)
   p <- p + ColorScale(owp)
   p <- p + FillScale()
@@ -1034,7 +1078,7 @@ granovagg.1w <- function(data,
   p <- p + PlotTitle()
   p <- p + RemoveSizeElementFromLegend()
   PrintOverplotWarning(owp, dg)
-  PrintLinearModelSummary(owp$model.summary)
+  PrintLinearModelSummary(owp)
 
   return(p)
 }
