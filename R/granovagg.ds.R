@@ -77,15 +77,17 @@ granovagg.ds <- function(data       = NULL,
 {
   
   GetData <- function(data) {
-    output <- CheckData(data)
-    output <- ReverseXAndY(output)
-    return(output)
+    data <- CheckData(data)
+    data <- ReverseXAndY(data)
+    data <- EnsureDataHasColumnNames(data)
+    data <- EnsureDataIsADataFrame(data)
+    return(data)
   }
   
   CheckData <- function(data) {
     IsDataNull(data)
     IsDataInTwoColumnFormat(data)
-    return(EnsureDataIsADataFrame(data))
+    return(data)
   }
   
   ReverseXAndY <- function(data) {
@@ -121,6 +123,15 @@ granovagg.ds <- function(data       = NULL,
       output <- as.data.frame(output)
     }
     return(output)
+  }
+  
+  EnsureDataHasColumnNames <- function(data) {
+    output <- data
+    if (is.null(colnames(data))) {
+      colnames(data) <- c("x", "y")
+    }
+    
+    return(data)
   }
   
   GetXs <- function(data) {
@@ -246,10 +257,73 @@ granovagg.ds <- function(data       = NULL,
                )
           )         
   }
-
+  
+  PrintSummary <- function(dsp) {
+    summary <- GetPrintedSummary(dsp)
+    summary <- RenamePrintedSummaryRows(summary)
+    summary <- round(summary, digits = 3)
+    
+    print(summary)
+  }
+  
+  GetPrintedSummary <- function(dsp) {
+    n <- dim(dsp$data)[1]
+    mean.1 <- mean(dsp$data[, 1])
+    mean.2 <- mean(dsp$data[, 2])
+    mean.d <- mean.1 - mean.2
+    standard.deviation.d <- sd(dsp$data[, 1] - dsp$data[, 2])
+    effect.size <- (mean.d / standard.deviation.d)
+    r.xy <- cor(dsp$data[, 1], dsp$data[, 2])
+    r.x.plus.y.d <- cor((dsp$data[, 1] + dsp$data[, 2]), (dsp$data[, 1] - dsp$data[, 2]))
+    lower.treatment.confidence <- dsp$stats$upper.treatment.effect
+    upper.treatment.confidence <- dsp$stats$lower.treatment.effect
+    t.value <- dsp$t.test$statistic
+    degrees.of.freedom <- dsp$t.test$parameter
+    p.value <- dsp$t.test$p.value
+    
+    return(matrix(c(n, 
+                    mean.1, 
+                    mean.2, 
+                    mean.d, 
+                    standard.deviation.d, 
+                    effect.size, 
+                    r.xy, 
+                    r.x.plus.y.d, 
+                    lower.treatment.confidence, 
+                    upper.treatment.confidence, 
+                    t.value, 
+                    degrees.of.freedom, 
+                    p.value
+                  ), 
+                 ncol = 1
+           )
+    )
+  }
+  
+  RenamePrintedSummaryRows <- function(summary) {
+    dimnames(summary) <- list(
+                           c("n", 
+                             paste(colnames(dsp$data)[1], "mean"), 
+                             paste(colnames(dsp$data)[2], "mean"),
+                             paste("mean(D = ", colnames(dsp$data)[1], " - ", colnames(dsp$data)[2], ")",  sep = ""),
+                             paste("SD(D)"),
+                             paste("Effect Size"),
+                             paste("r(", colnames(dsp$data)[1], ", ", colnames(dsp$data)[2], ")", sep = ""),
+                             paste("r(", colnames(dsp$data)[1], " + ", colnames(dsp$data)[2], ", D)", sep = ""),
+                             paste("Lower ", (100 * conf.level), "% ", "Confidence Interval", sep = ""),
+                             paste("Upper ", (100 * conf.level), "% ", "Confidence Interval", sep = ""),
+                             paste("t (D-bar)"),
+                             paste("df.t"),
+                             paste("p-value (t-statistic)")
+                           ), "Summary Statistics")
+                         
+    return(summary)
+  }
+  
   dsp                <- list(data = GetData(data))
   dsp$effect         <- GetEffect(dsp)
   dsp$stats          <- GetStats(dsp, conf.level)
+  dsp$t.test         <- GetTtest(dsp$data, conf.level)
   dsp$params         <- GetGraphicsParams(dsp)
   dsp$shadows        <- GetShadows(dsp)
   dsp$crossbow       <- GetCrossbow(dsp)
@@ -259,6 +333,7 @@ granovagg.ds <- function(data       = NULL,
   dsp$treatment.line <- GetTreatmentLine(dsp)
   dsp$trails         <- GetTrails(dsp)
   dsp$colors         <- GetColors(dsp)
+  PrintSummary(dsp)
     
   
 
