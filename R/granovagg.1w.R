@@ -981,14 +981,14 @@ granovagg.1w <- function(data,
     )
   }
 
-  PlotTitle <- function () {
-    if (main == "default_granova_title") {
-      return(opts(title = GetClassicTitle()))
-    }
+  PlotTitle <- function (main) {    
+    title.to.output <- main
     
-    else {
-      return(opts(title = main))
+    if ( !is.null(title.to.output) && (title.to.output == "default_granova_title")) {
+      title.to.output <- GetClassicTitle()
     }
+  
+    return(opts(title = title.to.output))
   }
 
   RemoveSizeElementFromLegend <- function() {
@@ -1075,7 +1075,7 @@ granovagg.1w <- function(data,
   p <- p + RotateXTicks()
   p <- p + Theme(plot.theme)
   p <- p + ForceCoordinateAxesToBeEqual(owp)
-  p <- p + PlotTitle()
+  p <- p + PlotTitle(main)
   p <- p + RemoveSizeElementFromLegend()
   PrintOverplotWarning(owp, dg)
   PrintLinearModelSummary(owp)
