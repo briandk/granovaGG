@@ -64,7 +64,7 @@
 #' @param print.squares Logical; displays graphical squares for visualizing the F-statistic as a ratio
 #'   of MS-between to MS-within
 #' @param xlab Character; horizontal axis label, default = NULL. 
-#' @param ylab Character; vertical axis label, default = NULL. 
+#' @param ylab Character; vertical axis label, default = "Dependent variable (response)". 
 #' @param main Character; main label, top of graphic; can be supplied by user,
 #'   default = \code{"default_granova_title"}, which leads to printing of generic title for graphic.
 #' @param plot.theme argument indicating a ggplot2 theme to apply to the
@@ -109,7 +109,7 @@ granovagg.1w <- function(data,
                          dg         = 2, 
                          resid      = FALSE,
                          print.squares     = TRUE,  
-                         xlab       = NULL, 
+                         xlab       = "default_y_label", 
                          ylab       = NULL, 
                          main       = "default_granova_title",
                          plot.theme = "theme_granova_1w", 
@@ -888,14 +888,14 @@ granovagg.1w <- function(data,
     }
   }
 
-  YLabel <- function() {  
-    if (is.null(ylab)) {
-      return(ylab("Dependent variable (response)"))
+  YLabel <- function(ylab) {  
+    label.to.output <- ylab
+    
+    if ((!is.null(ylab)) && (ylab == "default_y_label")) {
+      label.to.output <- "Dependent variable (response)"
     }
   
-    else {
-      return (ylab(ylab))
-    }
+    return(ylab(label.to.output))
   }
 
   BackgroundForGroupSizesAndLabels <- function(owp) {
@@ -1067,7 +1067,7 @@ granovagg.1w <- function(data,
   p <- p + ColorScale(owp)
   p <- p + FillScale()
   p <- p + XLabel()
-  p <- p + YLabel()
+  p <- p + YLabel(ylab)
   p <- p + BackgroundForGroupSizesAndLabels(owp)
   p <- p + GroupSizes(owp)
   p <- p + NonOverplottedGroupLabels(owp)

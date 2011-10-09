@@ -3,9 +3,10 @@
 \title{Elemental Graphic Display for One-Way ANOVA}
 \usage{
   granovagg.1w(data, group = NULL, h.rng = 1, v.rng = 1, jj
-  = NULL, dg = 2, resid = FALSE, dosqrs = TRUE, xlab =
-  NULL, ylab = NULL, main = "default_granova_title",
-  plot.theme = "theme_granova_1w", ...)
+  = NULL, dg = 2, resid = FALSE, print.squares = TRUE, xlab
+  = "default_y_label", ylab = NULL, main =
+  "default_granova_title", plot.theme = "theme_granova_1w",
+  ...)
 }
 \arguments{
   \item{data}{Dataframe or vector. If a dataframe, the two
@@ -40,15 +41,15 @@
   residuals (as a 'rug') on right side (wrt grand mean),
   default = FALSE.}
 
-  \item{dosqrs}{Logical; displays graphical squares for
-  visualizing the F-statistic as a ratio of MS-between to
-  MS-within}
+  \item{print.squares}{Logical; displays graphical squares
+  for visualizing the F-statistic as a ratio of MS-between
+  to MS-within}
 
   \item{xlab}{Character; horizontal axis label, default =
   NULL.}
 
   \item{ylab}{Character; vertical axis label, default =
-  NULL.}
+  "Dependent variable (response)".}
 
   \item{main}{Character; main label, top of graphic; can be
   supplied by user, default =
