@@ -1026,7 +1026,10 @@ granovagg.1w <- function(data,
     unstacked.data <- unstack(data, score ~ group)
     message("\nBelow is a t-test summary of your input data")
     print(
-      t.test(unstacked.data[, 1], unstacked.data[, 2])
+      t.test(unstacked.data[, 1], 
+             unstacked.data[, 2],
+             var.equal = TRUE
+      )
     )
   }
   
