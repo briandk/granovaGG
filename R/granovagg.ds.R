@@ -342,12 +342,13 @@ granovagg.ds <- function(data       = NULL,
 
   
   InitializeGgplot <- function(dsp) {
-    return(ggplot(aes_string(x = names(dsp$data)[1], 
-                             y = names(dsp$data)[2]
-                            ),
-                  data = dsp$data
-                 )
-          )
+    return(
+      ggplot(
+        aes_string(x = dsp$data[1], 
+                   y = dsp$data[2]
+        ), data = dsp$data
+      )
+    )
   }
     
   TreatmentLine <- function(dsp) {
