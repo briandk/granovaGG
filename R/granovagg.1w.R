@@ -63,8 +63,10 @@
 #'   'rug') on right side (wrt grand mean), default = FALSE.
 #' @param print.squares Logical; displays graphical squares for visualizing the F-statistic as a ratio
 #'   of MS-between to MS-within
-#' @param xlab Character; horizontal axis label, default = NULL. 
-#' @param ylab Character; vertical axis label, default = "Dependent variable (response)". 
+#' @param xlab Character; horizontal axis label, can be supplied by user, default = \code{"default_x_label"},
+#'   which leads to a generic x-axis label ("Contrast coefficients based on group means"). 
+#' @param ylab Character; vertical axis label, can be supplied by user, default = \code{"default_y_label"}, 
+#'   which leads to a generic y-axis label ("Dependent variable (response)"). 
 #' @param main Character; main label, top of graphic; can be supplied by user,
 #'   default = \code{"default_granova_title"}, which leads to printing of generic title for graphic.
 #' @param plot.theme argument indicating a ggplot2 theme to apply to the
@@ -109,8 +111,8 @@ granovagg.1w <- function(data,
                          dg         = 2, 
                          resid      = FALSE,
                          print.squares     = TRUE,  
-                         xlab       = "default_y_label", 
-                         ylab       = NULL, 
+                         xlab       = "default_x_label", 
+                         ylab       = "default_y_label", 
                          main       = "default_granova_title",
                          plot.theme = "theme_granova_1w", 
                          ...
@@ -874,18 +876,14 @@ granovagg.1w <- function(data,
     return(scale_fill_manual(value = owp$colors, name = ""))
   }
 
-  XLabel <- function() {
-    if (is.null(xlab)) {
-      return(
-        xlab(
-          paste("Contrast coefficients based on group means")
-        )
-      )
+  XLabel <- function(xlab) {
+    label.to.output <- xlab
+    
+    if ((!is.null(xlab)) && (xlab == "default_x_label")) {
+      label.to.output <- "Contrast coefficients based on group means"
     }
-  
-    else {
-      return (xlab(xlab))
-    }
+    
+    return(xlab(label.to.output))
   }
 
   YLabel <- function(ylab) {  
@@ -1066,7 +1064,7 @@ granovagg.1w <- function(data,
   p <- p + SquaresText(owp)
   p <- p + ColorScale(owp)
   p <- p + FillScale()
-  p <- p + XLabel()
+  p <- p + XLabel(xlab)
   p <- p + YLabel(ylab)
   p <- p + BackgroundForGroupSizesAndLabels(owp)
   p <- p + GroupSizes(owp)
