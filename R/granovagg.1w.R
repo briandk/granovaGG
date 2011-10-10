@@ -102,17 +102,17 @@
 #' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
 granovagg.1w <- function(data, 
-                         group      = NULL, 
-                         h.rng      = 1, 
-                         v.rng      = 1,
-                         jj         = NULL,
-                         dg         = 2, 
-                         resid      = FALSE,
-                         print.squares     = TRUE,  
-                         xlab       = NULL, 
-                         ylab       = NULL, 
-                         main       = "default_granova_title",
-                         plot.theme = "theme_granova_1w", 
+                         group         = NULL, 
+                         h.rng         = 1, 
+                         v.rng         = 1,
+                         jj            = NULL,
+                         dg            = 2, 
+                         resid         = FALSE,
+                         print.squares = TRUE,  
+                         xlab          = NULL, 
+                         ylab          = NULL, 
+                         main          = "default_granova_title",
+                         plot.theme    = "theme_granova_1w", 
                          ...
                 )
 
