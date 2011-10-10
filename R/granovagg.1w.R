@@ -131,7 +131,7 @@ granovagg.1w <- function(data,
   
   CoerceToMatrix <- function(x) {
     error.message <- "It looks like you've tried to pass in higher-dimension data AND a separate group indicator.
-    If your data contains columns of equal numbers of observations, try re-calling granova.1w 
+    If your data contains columns of equal numbers of observations, try re-calling granovagg.1w 
     on your data while setting group = NULL"
     
     if (!is.null(group)) {
