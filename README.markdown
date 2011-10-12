@@ -30,17 +30,17 @@ And, if you already have legacy granova code but would like to use the new ggplo
 So, suppose you have some code that uses three classic functions:
 
 ```r
-    granova.contr(arousal, contrasts = contrasts22)
-    granova.ds(blood_lead)
-    granova.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
+granova.contr(arousal, contrasts = contrasts22)
+granova.ds(blood_lead)
+granova.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
 ```
 
 You can pipe the same code through granovaGG adding a "gg" after the "granova" part of the function call:
 
 ```r
-    granovagg.contr(arousal, contrasts = contrasts22)
-    granovagg.ds(blood_lead)
-    granovagg.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
+granovagg.contr(arousal, contrasts = contrasts22)
+granovagg.ds(blood_lead)
+granovagg.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
 ```
 
 ## Can I see what some sample graphics look like?
@@ -51,26 +51,32 @@ Absolutely. To see examples of granovaGG output, check out:
 3.  A [blog post][DoaneBlog] by William E. J. Doane describing the Dependent Sample plots.
 
 ## How can I install the development version of granovaGG on my system?
-There are three ways to get granovaGG. Which way you choose depends on how adventurous you are and how much stability you want. *Choose your path wisely:*
+There are three ways to get granovaGG: 
 
-### I've got icewater in my veins I want bleeding-edge code
+1. Grab our latest bleeding-edge development version
+2. Grab a comparatively more stable development version
+3. Get the current official release from CRAN
+
+Which way you choose depends on how adventurous you are and how much stability you want. *Choose your path wisely:*
+
+### I've got icewater in my veins and I want bleeding-edge code
 First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't got it, you can get it in R:
 
 ```r
-    install.packages(pkgs="devtools", dependencies=TRUE)
+install.packages(pkgs="devtools", dependencies=TRUE)
 ```
 
 Then, use the `install_github()` function to fetch our spooky experimental code from the development branch
 
 ```r
-    library(devtools)
-    
-    # If you've already installed granovaGG, then detach and remove the current local version
-    detach("package:granovaGG")
-    remove.packages("granovaGG", lib = .libPaths())
-    
-    # ...and then install the latest development version
-    install_github(repo="granovaGG", username="briandk", branch="dev")
+library(devtools)
+
+# If you've already installed granovaGG, then detach and remove the current local version
+detach("package:granovaGG")
+remove.packages("granovaGG", lib = .libPaths())
+
+# ...and then install the latest development version
+install_github(repo="granovaGG", username="briandk", branch="dev")
 ```
         
 Lastly, sign the imaginary waiver that says we're not responsible if granovaGG steals your cat *And, don't forget to [Report your bugs][issueTracker] and [share stories of inspiration on the wiki][wiki]*
@@ -79,31 +85,35 @@ Lastly, sign the imaginary waiver that says we're not responsible if granovaGG s
 First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't got it, you can get it in R:
 
 ```r
-    install.packages(pkgs="devtools", dependencies=TRUE)
+install.packages(pkgs="devtools", dependencies=TRUE)
 ```    
 Then, use the `install_github()` function to fetch our hardy code from the master branch:
 
 ```r
-    library(devtools)
+library(devtools)
 
-    # If you've already installed granovaGG, then detach and remove the current local version
-    detach("package:granovaGG")
-    remove.packages("granovaGG", lib = .libPaths())
-    
-    # ...and then install the latest stable version
-    install_github(repo="granovaGG", username="briandk", branch="master")
+# If you've already installed granovaGG, then detach and remove the current local version
+detach("package:granovaGG")
+remove.packages("granovaGG", lib = .libPaths())
+
+# ...and then install the latest stable version
+install_github(repo="granovaGG", username="briandk", branch="master")
 ```
 
 ### I want a stable, official release from CRAN
-You'll have to wait a bit. We haven't yet submitted to CRAN, but we hope you'll come back and see us again soon :-)
+No problem! `granovaGG` is currently [available on CRAN][granovaGG]. Grabbing the latest CRAN version is as easy as
+
+```r
+install.packages("granovaGG", dependencies = TRUE)
+```
 
 ## How do I remove the experimental version?
 
 If you want to remove granovaGG entirely, run: 
 
 ```r
-    detach("package:granovaGG")
-    remove.packages("granovaGG", lib = .libPaths())
+detach("package:granovaGG")
+remove.packages("granovaGG", lib = .libPaths())
 ```
 
 *If you're removing `granovaGG` because of something buggy, be sure to [report it][issueTracker] so we can get right on fixing it.*
@@ -117,23 +127,23 @@ Here are several steps you can try (one at a time) in order to bring your system
 ### 1. Update all installed packages
 
 ```r
-    update.packages()
+update.packages()
 ```
 
 ### 2. Detach granovaGG
 
 ```r
-    detach("package:granovaGG")
+detach("package:granovaGG")
 
-    # confirm that there are no granovaGG remenents in your workspace
-    search()
-    ls()
+# confirm that there are no granovaGG remenents in your workspace
+search()
+ls()
 ```
 
 If you find any granovaGG functions in your environment, try
 
 ```r
-    rm(list = ls(pattern = "granovagg*"))
+rm(list = ls(pattern = "granovagg*"))
 ```
 
 ### 3. Detach granovaGG and restart R
@@ -141,13 +151,13 @@ If you find any granovaGG functions in your environment, try
 R can and does cache some package information for efficiency's sake. Unfortunately, when you're rapidly installing/uninstalling development versions of a package, this cache can cause unexpected effects (old versions of functions being called, e.g.).
 
 ```r
-    detach("package:granovaGG")
+detach("package:granovaGG")
 
-    # confirm that there are no granovaGG remenents in your workspace
-    search()
-    ls()
+# confirm that there are no granovaGG remenents in your workspace
+search()
+ls()
 
-    quit()
+quit()
 ```
 
 ### 4. Detach granovaGG, uninstall it, and restart R
@@ -155,15 +165,15 @@ R can and does cache some package information for efficiency's sake. Unfortunate
 R can and does cache some package information for efficiency's sake. Unfortunately, when you're rapidly installing/uninstalling development versions of a package, this cache can cause unexpected effects (old versions of functions being called, e.g.).
 
 ```r
-    detach("package:granovaGG")
-    remove.packages("granovaGG", lib = .libPaths())
-    rm(list = ls(pattern = "granovagg*"))
+detach("package:granovaGG")
+remove.packages("granovaGG", lib = .libPaths())
+rm(list = ls(pattern = "granovagg*"))
 
-    # confirm that there are no granovaGG remenents in your workspace
-    search()
-    ls()
+# confirm that there are no granovaGG remenents in your workspace
+search()
+ls()
 
-    quit()
+quit()
 ```
 
 Then, follow one of the sets of instructions, above, for installing granovaGG.
@@ -192,3 +202,4 @@ Then, follow one of the sets of instructions, above, for installing granovaGG.
 [issueTracker]: https://github.com/briandk/granovaGG/issues
 [wiki]: https://github.com/briandk/granovaGG/wiki
 [devtools]: http://cran.r-project.org/web/packages/devtools/index.html
+[granovaGG]: http://cran.r-project.org/web/packages/granovaGG/index.html
