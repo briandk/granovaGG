@@ -59,7 +59,7 @@ There are three ways to get granovaGG:
 
 Which way you choose depends on how adventurous you are and how much stability you want. *Choose your path wisely:*
 
-### I've got icewater in my veins I want bleeding-edge code
+### I've got icewater in my veins and I want bleeding-edge code
 First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't got it, you can get it in R:
 
 ```r
