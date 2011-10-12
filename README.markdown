@@ -51,7 +51,13 @@ Absolutely. To see examples of granovaGG output, check out:
 3.  A [blog post][DoaneBlog] by William E. J. Doane describing the Dependent Sample plots.
 
 ## How can I install the development version of granovaGG on my system?
-There are three ways to get granovaGG. Which way you choose depends on how adventurous you are and how much stability you want. *Choose your path wisely:*
+There are three ways to get granovaGG: 
+
+1. Grab our latest bleeding-edge development version
+2. Grab a comparatively more stable development version
+3. Get the current official release from CRAN
+
+Which way you choose depends on how adventurous you are and how much stability you want. *Choose your path wisely:*
 
 ### I've got icewater in my veins I want bleeding-edge code
 First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't got it, you can get it in R:
