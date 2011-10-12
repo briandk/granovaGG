@@ -105,7 +105,7 @@ granovagg.1w <- function(data,
                          group         = NULL, 
                          h.rng         = 1, 
                          v.rng         = 1,
-                         jj            = NULL,
+                         jj            = 1,
                          dg            = 2, 
                          resid         = FALSE,
                          print.squares = TRUE,  
@@ -411,12 +411,9 @@ granovagg.1w <- function(data,
   }
 
   GetDegreeOfJitter <- function(owp) {
-    result <- owp$params$horizontal.percent
+    result <- (jj / 200) * owp$params$contrast.range.distance
     
-    if (!is.null(jj)) {
-      result <- (jj / 200) * owp$params$contrast.range.distance
-    } 
-    else if (IsSmallestContrastDifferenceSmallerThanOnePercentOfDataResolution(owp)) {
+    if (IsSmallestContrastDifferenceSmallerThanOnePercentOfDataResolution(owp)) {
         result <- GetSmallestDistanceBetweenAdjacentContrasts(owp$summary$contrast)
     }
     
