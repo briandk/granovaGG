@@ -95,7 +95,11 @@ Then, use the `install_github()` function to fetch our hardy code from the maste
 ```
 
 ### I want a stable, official release from CRAN
-You'll have to wait a bit. We haven't yet submitted to CRAN, but we hope you'll come back and see us again soon :-)
+No problem! `granovaGG` is currently [available on CRAN][granovaGG]. Grabbing the latest CRAN version is as easy as
+
+```r
+install.packages("granovaGG", dependencies = TRUE)
+```
 
 ## How do I remove the experimental version?
 
@@ -192,3 +196,4 @@ Then, follow one of the sets of instructions, above, for installing granovaGG.
 [issueTracker]: https://github.com/briandk/granovaGG/issues
 [wiki]: https://github.com/briandk/granovaGG/wiki
 [devtools]: http://cran.r-project.org/web/packages/devtools/index.html
+[granovaGG]: http://cran.r-project.org/web/packages/granovaGG/index.html
