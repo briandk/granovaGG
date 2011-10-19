@@ -110,6 +110,10 @@ granovagg.ds(blood_lead, sw = .1,
   \email{jason@bryer.org}
 }
 \references{
+  Pruzek, R. M., & Helmreich, J. E. (2009). Enhancing
+  Dependent Sample Analyses with Graphics. Journal of
+  Statistics Education, 17(1), 21.
+
   Wickham, H. (2009). Ggplot2: Elegant Graphics for Data
   Analysis. New York: Springer.
 

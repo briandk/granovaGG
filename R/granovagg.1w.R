@@ -61,6 +61,8 @@
 #' @param dg Numeric; sets number of decimal points in output display, default = 2
 #' @param resid Logical; displays marginal distribution of residuals (as a
 #'   'rug') on right side (wrt grand mean), default = FALSE.
+#' @param print.squares Logical; displays graphical squares for visualizing the F-statistic as a ratio
+#'   of MS-between to MS-within
 #' @param xlab Character; horizontal axis label, default = NULL. 
 #' @param ylab Character; vertical axis label, default = NULL. 
 #' @param main Character; main label, top of graphic; can be supplied by user,
@@ -100,17 +102,17 @@
 #' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
 granovagg.1w <- function(data, 
-                         group      = NULL,
-                         boxplot    = FALSE, 
-                         h.rng      = 1, 
-                         v.rng      = 1,
-                         jj         = NULL,
-                         dg         = 2, 
-                         resid      = FALSE,  
-                         xlab       = NULL, 
-                         ylab       = NULL, 
-                         main       = "default_granova_title",
-                         plot.theme = "theme_granova_1w", 
+                         group         = NULL, 
+                         h.rng         = 1, 
+                         v.rng         = 1,
+                         jj            = NULL,
+                         dg            = 2, 
+                         resid         = FALSE,
+                         print.squares = TRUE,  
+                         xlab          = NULL, 
+                         ylab          = NULL, 
+                         main          = "default_granova_title",
+                         plot.theme    = "theme_granova_1w", 
                          ...
                 )
 
@@ -129,7 +131,7 @@ granovagg.1w <- function(data,
   
   CoerceToMatrix <- function(x) {
     error.message <- "It looks like you've tried to pass in higher-dimension data AND a separate group indicator.
-    If your data contains columns of equal numbers of observations, try re-calling granova.1w 
+    If your data contains columns of equal numbers of observations, try re-calling granovagg.1w 
     on your data while setting group = NULL"
     
     if (!is.null(group)) {
@@ -335,10 +337,11 @@ granovagg.1w <- function(data,
     groups <- subset(data, select = group)
     stats  <- subset(data, select = c(-group, -maximum.score))    
     rounded.stats <- round(stats, digits = digits.to.round)
-    message("\nBelow are by-group summary statistics of your input data")
+    output <- ReorderDataByColumn(cbind(groups, rounded.stats), "group.mean")
+    message("\nBy-group summary statistics for your input data (ordered by group means)")
     
     return(
-       print(cbind(groups, rounded.stats))
+       print(output)
     )
   }
   
@@ -540,14 +543,32 @@ granovagg.1w <- function(data,
     return(summary(model))
   }
 
-  GetSquaresText <- function(owp) {
-    f.statistic         <- owp$model.summary$fstatistic["value"]
-    f.statistic.rounded <- round(f.statistic, digits = 2)
+  GetSquaresData <- function(owp) {
+    if (print.squares == TRUE) {
+      vertical.position <- owp$outer.square$ymax + (2.0 * owp$params$vertical.percent)
+    } else {
+      vertical.position <- owp$outer.square$ymin
+    }
+    
+    GetSquaresText(owp, vertical.position)
+  }
+  
+  GetSquaresText <- function(owp, position) {
+    test.statistic         <- owp$model.summary$fstatistic["value"]
+    test.statistic.rounded <- round(test.statistic, digits = 2)
+    
+    if (length(levels(owp$data$group)) == 2) { # 2-group t-test case
+      test.statistic.rounded = round(sqrt(test.statistic), digits = 2)
+      text <- paste("t = ", test.statistic.rounded, sep = "")
+    } else {
+      text <- paste("F = ", test.statistic.rounded, sep = "")
+    } 
+    
     return(
-      data.frame(label     = paste("F = ", f.statistic.rounded),
+      data.frame(label     = text,
                  x         = owp$squares$x.center,
-                 y         = owp$outer.square$ymax + (2.0 * owp$params$vertical.percent),
-                 text.size = GetSquaresTextSize(f.statistic.rounded)
+                 y         = position,
+                 text.size = GetSquaresTextSize(test.statistic.rounded)
       )
     )
   }
@@ -652,7 +673,7 @@ granovagg.1w <- function(data,
         aes(
           x = 0, y = mean(score), color = factor(paste("Grand Mean"))
         ), 
-        size = 3/2,
+        size = 2.5,
         data = owp$data
       )
     )
@@ -767,6 +788,16 @@ granovagg.1w <- function(data,
     }
   }
 
+  SquaresForFstatistic <- function() {
+    output <- NULL
+    
+    if (print.squares == TRUE) {
+      output <- list(OuterSquare(), InnerSquare())
+    }
+    
+    return(output)
+  }
+  
   OuterSquare <- function() {
     return(
       geom_rect(
@@ -807,7 +838,8 @@ granovagg.1w <- function(data,
               ),
               color = "grey20",
               size  = owp$squares.text$text.size,
-              data  = owp$squares.text
+              data  = owp$squares.text,
+              vjust = ifelse(print.squares == TRUE, 0.5, -1)
       )
     )
   }
@@ -870,7 +902,7 @@ granovagg.1w <- function(data,
     if (is.null(xlab)) {
       return(
         xlab(
-          paste("Contrast coefficients based on group means", "\n", "(F = ", round(F.stat, digits = 2), ")", sep = "")
+          paste("Contrast coefficients based on group means")
         )
       )
     }
@@ -1004,6 +1036,27 @@ granovagg.1w <- function(data,
     }
   }
   
+  PrintLinearModelSummary <- function(owp) {
+    
+    if (length(levels(owp$data$group)) == 2) {
+      PrintTtest(owp$data[, c("score", "group")])
+    } else {
+      message("\nBelow is a linear model summary of your input data")
+      print(owp$model.summary)
+    }
+  }
+  
+  PrintTtest <- function(data) {
+    unstacked.data <- unstack(data, score ~ group)
+    message("\nBelow is a t-test summary of your input data")
+    print(
+      t.test(unstacked.data[, 1], 
+             unstacked.data[, 2],
+             var.equal = TRUE
+      )
+    )
+  }
+  
   # Pepare OWP object
   owp                       <- AdaptVariablesFromGranovaComputations()
   owp$summary               <- GetSummary(owp)
@@ -1015,7 +1068,7 @@ granovagg.1w <- function(data,
   owp$outer.square          <- GetOuterSquare(owp)
   owp$inner.square          <- GetInnerSquare(owp)
   owp$model.summary         <- GetModelSummary(owp)
-  owp$squares.text          <- GetSquaresText(owp)
+  owp$squares.text          <- GetSquaresData(owp)
   owp$variation    <- GetWithinGroupVariation(owp)
   owp$label.background      <- GetBackgroundForGroupSizesAndLabels(owp)
   owp$group.labels          <- GetGroupLabels(owp)
@@ -1036,8 +1089,7 @@ granovagg.1w <- function(data,
   p <- p + MaxWithinGroupVariation(owp)
   p <- p + WithinGroupVariation(owp)
   p <- p + BaselineWithinGroupVariation(owp)
-  p <- p + OuterSquare()
-  p <- p + InnerSquare()
+  p <- p + SquaresForFstatistic()
   p <- p + SquaresText(owp)
   p <- p + ColorScale(owp)
   p <- p + FillScale()
@@ -1053,6 +1105,7 @@ granovagg.1w <- function(data,
   p <- p + PlotTitle()
   p <- p + RemoveSizeElementFromLegend()
   PrintOverplotWarning(owp, dg)
+  PrintLinearModelSummary(owp)
 
   return(p)
 }
