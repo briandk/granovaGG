@@ -1,6 +1,9 @@
 ## Welcome
 You're at the development home for the Graphical Analysis of Variance using ggplot2 (granovaGG) package for [R]! Click here for [instructions on installing granovaGG][1].
 
+## How can I install the development version of granovaGG on my system?
+This one's easy. Just see our lovely [installation instrutions][1].
+
 ## What does this package do?
 The package granovaGG is designed to produce statistical graphics driven by the fundamental questions of analysis of variance. The graphics granovaGG creates can offer far more visual information than a traditional tabular model summary or significance test. For an example of how granovaGG can enhance analysis, see [Pruzek and Helmreich (2009)].
 
@@ -49,10 +52,6 @@ Absolutely. To see examples of granovaGG output, check out:
 1.  A [presentation][Feb2011Presentation] Brian Danielak gave at the DC UseR group in February, 2011.
 2.  A [presentation][2011July14Presentation] on some of the latest updates to `granovagg.1w` and `granovagg.contr`
 3.  A [blog post][DoaneBlog] by William E. J. Doane describing the Dependent Sample plots.
-
-## How can I install the development version of granovaGG on my system?
-This one's easy. Just see our lovely [installation instrutions][1].
-
 
 ## How can I provide feedback?
 *  If you want to request something, or report a bug, use the [Issue Tracker][issueTracker]
