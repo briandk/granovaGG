@@ -2,7 +2,7 @@
 You're at the development home for the Graphical Analysis of Variance using ggplot2 (granovaGG) package for [R]! Click here for [instructions on installing granovaGG][1].
 
 ## How can I install the development version of granovaGG on my system?
-This one's easy. Just see our lovely [installation instrutions][1].
+This one's easy. Just see our lovely [installation instructions][1].
 
 ## What does this package do?
 The package granovaGG is designed to produce statistical graphics driven by the fundamental questions of analysis of variance. The graphics granovaGG creates can offer far more visual information than a traditional tabular model summary or significance test. For an example of how granovaGG can enhance analysis, see [Pruzek and Helmreich (2009)].
