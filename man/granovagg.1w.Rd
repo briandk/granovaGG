@@ -2,11 +2,19 @@
 \alias{granovagg.1w}
 \title{Elemental Graphic Display for One-Way ANOVA}
 \usage{
+<<<<<<< HEAD
+  granovagg.1w(data, group = NULL, h.rng = 1, v.rng = 1, jj
+  = NULL, dg = 2, resid = FALSE, print.squares = TRUE, xlab
+  = "default_y_label", ylab = NULL, main =
+  "default_granova_title", plot.theme = "theme_granova_1w",
+  ...)
+=======
   granovagg.1w(data, group = NULL, h.rng = 1, v.rng = 1,
     jj = NULL, dg = 2, resid = FALSE, print.squares = TRUE,
     xlab = NULL, ylab = NULL,
     main = "default_granova_title",
     plot.theme = "theme_granova_1w", ...)
+>>>>>>> dev
 }
 \arguments{
   \item{data}{Dataframe or vector. If a dataframe, the two
@@ -49,7 +57,7 @@
   NULL.}
 
   \item{ylab}{Character; vertical axis label, default =
-  NULL.}
+  "Dependent variable (response)".}
 
   \item{main}{Character; main label, top of graphic; can be
   supplied by user, default =

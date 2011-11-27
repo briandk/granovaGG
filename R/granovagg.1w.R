@@ -63,8 +63,10 @@
 #'   'rug') on right side (wrt grand mean), default = FALSE.
 #' @param print.squares Logical; displays graphical squares for visualizing the F-statistic as a ratio
 #'   of MS-between to MS-within
-#' @param xlab Character; horizontal axis label, default = NULL. 
-#' @param ylab Character; vertical axis label, default = NULL. 
+#' @param xlab Character; horizontal axis label, can be supplied by user, default = \code{"default_x_label"},
+#'   which leads to a generic x-axis label ("Contrast coefficients based on group means"). 
+#' @param ylab Character; vertical axis label, can be supplied by user, default = \code{"default_y_label"}, 
+#'   which leads to a generic y-axis label ("Dependent variable (response)"). 
 #' @param main Character; main label, top of graphic; can be supplied by user,
 #'   default = \code{"default_granova_title"}, which leads to printing of generic title for graphic.
 #' @param plot.theme argument indicating a ggplot2 theme to apply to the
@@ -102,17 +104,17 @@
 #' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
 granovagg.1w <- function(data, 
-                         group         = NULL, 
-                         h.rng         = 1, 
-                         v.rng         = 1,
-                         jj            = NULL,
-                         dg            = 2, 
-                         resid         = FALSE,
-                         print.squares = TRUE,  
-                         xlab          = NULL, 
-                         ylab          = NULL, 
-                         main          = "default_granova_title",
-                         plot.theme    = "theme_granova_1w", 
+                         group      = NULL, 
+                         h.rng      = 1, 
+                         v.rng      = 1,
+                         jj         = NULL,
+                         dg         = 2, 
+                         resid      = FALSE,
+                         print.squares     = TRUE,  
+                         xlab       = "default_x_label", 
+                         ylab       = "default_y_label", 
+                         main       = "default_granova_title",
+                         plot.theme = "theme_granova_1w", 
                          ...
                 )
 
@@ -874,28 +876,24 @@ granovagg.1w <- function(data,
     return(scale_fill_manual(value = owp$colors, name = ""))
   }
 
-  XLabel <- function() {
-    if (is.null(xlab)) {
-      return(
-        xlab(
-          paste("Contrast coefficients based on group means")
-        )
-      )
+  XLabel <- function(xlab) {
+    label.to.output <- xlab
+    
+    if ((!is.null(xlab)) && (xlab == "default_x_label")) {
+      label.to.output <- "Contrast coefficients based on group means"
     }
-  
-    else {
-      return (xlab(xlab))
-    }
+    
+    return(xlab(label.to.output))
   }
 
-  YLabel <- function() {  
-    if (is.null(ylab)) {
-      return(ylab("Dependent variable (response)"))
+  YLabel <- function(ylab) {  
+    label.to.output <- ylab
+    
+    if ((!is.null(ylab)) && (ylab == "default_y_label")) {
+      label.to.output <- "Dependent variable (response)"
     }
   
-    else {
-      return (ylab(ylab))
-    }
+    return(ylab(label.to.output))
   }
 
   BackgroundForGroupSizesAndLabels <- function(owp) {
@@ -981,14 +979,14 @@ granovagg.1w <- function(data,
     )
   }
 
-  PlotTitle <- function () {
-    if (main == "default_granova_title") {
-      return(opts(title = GetClassicTitle()))
-    }
+  PlotTitle <- function (main) {    
+    title.to.output <- main
     
-    else {
-      return(opts(title = main))
+    if ( !is.null(title.to.output) && (title.to.output == "default_granova_title")) {
+      title.to.output <- GetClassicTitle()
     }
+  
+    return(opts(title = title.to.output))
   }
 
   RemoveSizeElementFromLegend <- function() {
@@ -1069,8 +1067,8 @@ granovagg.1w <- function(data,
   p <- p + SquaresText(owp)
   p <- p + ColorScale(owp)
   p <- p + FillScale()
-  p <- p + XLabel()
-  p <- p + YLabel()
+  p <- p + XLabel(xlab)
+  p <- p + YLabel(ylab)
   p <- p + BackgroundForGroupSizesAndLabels(owp)
   p <- p + GroupSizes(owp)
   p <- p + NonOverplottedGroupLabels(owp)
@@ -1078,7 +1076,7 @@ granovagg.1w <- function(data,
   p <- p + RotateXTicks()
   p <- p + Theme(plot.theme)
   p <- p + ForceCoordinateAxesToBeEqual(owp)
-  p <- p + PlotTitle()
+  p <- p + PlotTitle(main)
   p <- p + RemoveSizeElementFromLegend()
   PrintOverplotWarning(owp, dg)
   PrintLinearModelSummary(owp)
