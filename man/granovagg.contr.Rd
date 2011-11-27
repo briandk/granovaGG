@@ -2,9 +2,10 @@
 \alias{granovagg.contr}
 \title{Elemental Graphic Display for Contrast Effect of ANOVA}
 \usage{
-  granovagg.contr(data, contrasts, ylab =
-  "default_y_label", plot.theme = "theme_granova_contr",
-  print.four.plots.per.page = TRUE, jj = 1, ...)
+  granovagg.contr(data, contrasts,
+    ylab = "default_y_label",
+    plot.theme = "theme_granova_contr",
+    print.four.plots.per.page = TRUE, jj = 1, ...)
 }
 \arguments{
   \item{data}{Vector of scores for all equally sized
@@ -45,7 +46,7 @@
   \code{FALSE}, the function returns a list of ggplot
   objects, one element per plot. That allows you to access
   any individual plot or plots, then modify them as you
-  wish (with ggplot2 commands, for example). When
+  wish (with ggplot2 commands, for example).  When
   \code{print.four.plots.per.page} is set to \code{TRUE}
   (the default), the function prints four plots per page on
   a graphical device but returns \code{NULL}.

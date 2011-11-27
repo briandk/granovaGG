@@ -1,5 +1,8 @@
 ## Welcome
-You're at the development home for the Graphical Analysis of Variance using ggplot2 (granovaGG) package for [R]!
+You're at the development home for the Graphical Analysis of Variance using ggplot2 (granovaGG) package for [R]! Click here for [instructions on installing granovaGG][1].
+
+## How can I install the development version of granovaGG on my system?
+This one's easy. Just see our lovely [installation instructions][1].
 
 ## What does this package do?
 The package granovaGG is designed to produce statistical graphics driven by the fundamental questions of analysis of variance. The graphics granovaGG creates can offer far more visual information than a traditional tabular model summary or significance test. For an example of how granovaGG can enhance analysis, see [Pruzek and Helmreich (2009)].
@@ -50,135 +53,6 @@ Absolutely. To see examples of granovaGG output, check out:
 2.  A [presentation][2011July14Presentation] on some of the latest updates to `granovagg.1w` and `granovagg.contr`
 3.  A [blog post][DoaneBlog] by William E. J. Doane describing the Dependent Sample plots.
 
-## How can I install the development version of granovaGG on my system?
-There are three ways to get granovaGG: 
-
-1. Grab our latest bleeding-edge development version
-2. Grab a comparatively more stable development version
-3. Get the current official release from CRAN
-
-Which way you choose depends on how adventurous you are and how much stability you want. *Choose your path wisely:*
-
-### I've got icewater in my veins and I want bleeding-edge code
-First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't got it, you can get it in R:
-
-```r
-install.packages(pkgs="devtools", dependencies=TRUE)
-```
-
-Then, use the `install_github()` function to fetch our spooky experimental code from the development branch
-
-```r
-library(devtools)
-
-# If you've already installed granovaGG, then detach and remove the current local version
-detach("package:granovaGG")
-remove.packages("granovaGG", lib = .libPaths())
-
-# ...and then install the latest development version
-install_github(repo="granovaGG", username="briandk", branch="dev")
-```
-        
-Lastly, sign the imaginary waiver that says we're not responsible if granovaGG steals your cat *And, don't forget to [Report your bugs][issueTracker] and [share stories of inspiration on the wiki][wiki]*
-        
-### I want a relatively stable release, but I don't have time to wait for CRAN
-First, make sure you've got Hadley Wickham's excellent [devtools][devtools] package installed. If you haven't got it, you can get it in R:
-
-```r
-install.packages(pkgs="devtools", dependencies=TRUE)
-```    
-Then, use the `install_github()` function to fetch our hardy code from the master branch:
-
-```r
-library(devtools)
-
-# If you've already installed granovaGG, then detach and remove the current local version
-detach("package:granovaGG")
-remove.packages("granovaGG", lib = .libPaths())
-
-# ...and then install the latest stable version
-install_github(repo="granovaGG", username="briandk", branch="master")
-```
-
-### I want a stable, official release from CRAN
-No problem! `granovaGG` is currently [available on CRAN][granovaGG]. Grabbing the latest CRAN version is as easy as
-
-```r
-install.packages("granovaGG", dependencies = TRUE)
-```
-
-## How do I remove the experimental version?
-
-If you want to remove granovaGG entirely, run: 
-
-```r
-detach("package:granovaGG")
-remove.packages("granovaGG", lib = .libPaths())
-```
-
-*If you're removing `granovaGG` because of something buggy, be sure to [report it][issueTracker] so we can get right on fixing it.*
-
-## What can I do to troubleshoot issues I'm having with granovaGG?
-
-Many problems in R are caused by (a) version incompatibilities in one of the dependent packages or (b) old/mismatched versions of functions loaded in the current workspace.
-
-Here are several steps you can try (one at a time) in order to bring your system up to date with the latest version of granovaGG. Try each troubleshooting step and reinstall granovaGG after each.
-
-### 1. Update all installed packages
-
-```r
-update.packages()
-```
-
-### 2. Detach granovaGG
-
-```r
-detach("package:granovaGG")
-
-# confirm that there are no granovaGG remenents in your workspace
-search()
-ls()
-```
-
-If you find any granovaGG functions in your environment, try
-
-```r
-rm(list = ls(pattern = "granovagg*"))
-```
-
-### 3. Detach granovaGG and restart R
-
-R can and does cache some package information for efficiency's sake. Unfortunately, when you're rapidly installing/uninstalling development versions of a package, this cache can cause unexpected effects (old versions of functions being called, e.g.).
-
-```r
-detach("package:granovaGG")
-
-# confirm that there are no granovaGG remenents in your workspace
-search()
-ls()
-
-quit()
-```
-
-### 4. Detach granovaGG, uninstall it, and restart R
-
-R can and does cache some package information for efficiency's sake. Unfortunately, when you're rapidly installing/uninstalling development versions of a package, this cache can cause unexpected effects (old versions of functions being called, e.g.).
-
-```r
-detach("package:granovaGG")
-remove.packages("granovaGG", lib = .libPaths())
-rm(list = ls(pattern = "granovagg*"))
-
-# confirm that there are no granovaGG remenents in your workspace
-search()
-ls()
-
-quit()
-```
-
-Then, follow one of the sets of instructions, above, for installing granovaGG.
-
-
 ## How can I provide feedback?
 *  If you want to request something, or report a bug, use the [Issue Tracker][issueTracker]
 *  If you'd like to contact us directly, we'd love to hear from you:
@@ -190,6 +64,7 @@ Then, follow one of the sets of instructions, above, for installing granovaGG.
 
 
 
+[1]: https://github.com/briandk/granovaGG/wiki/Installation
 [R]: http://www.r-project.org
 [Pruzek and Helmreich (2009)]: http://www.amstat.org/publications/jse/v17n1/helmreich.html
 [granovaClassic]: http://cran.r-project.org/web/packages/granova/index.html

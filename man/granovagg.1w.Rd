@@ -2,11 +2,19 @@
 \alias{granovagg.1w}
 \title{Elemental Graphic Display for One-Way ANOVA}
 \usage{
+<<<<<<< HEAD
   granovagg.1w(data, group = NULL, h.rng = 1, v.rng = 1, jj
   = NULL, dg = 2, resid = FALSE, print.squares = TRUE, xlab
   = "default_y_label", ylab = NULL, main =
   "default_granova_title", plot.theme = "theme_granova_1w",
   ...)
+=======
+  granovagg.1w(data, group = NULL, h.rng = 1, v.rng = 1,
+    jj = NULL, dg = 2, resid = FALSE, print.squares = TRUE,
+    xlab = NULL, ylab = NULL,
+    main = "default_granova_title",
+    plot.theme = "theme_granova_1w", ...)
+>>>>>>> dev
 }
 \arguments{
   \item{data}{Dataframe or vector. If a dataframe, the two
@@ -27,9 +35,9 @@
 
   \item{jj}{Numeric; sets horiz. jittering level of points.
   \code{jj} gets passed as the \code{amount} parameter to
-  \code{\link{jitter}}. When \code{jj = NULL} (the default
+  \code{\link{jitter}}.  When \code{jj = NULL} (the default
   behavior), the degree of jitter will take on a sensible
-  value. In addition, if pairs of ordered means are close
+  value.  In addition, if pairs of ordered means are close
   to one another and \code{jj = NULL}, the degree of jitter
   will default to the smallest difference between two
   adjacent contrasts.}
@@ -143,7 +151,7 @@ library(MASS)
 wt.gain <- anorexia[, 3] - anorexia[, 2]
 granovagg.1w(wt.gain, group = anorexia[, 1], size.line = -3)
 
-##########################
+#########################
 
 data(poison)
 ##Note violation of constant variance across groups in following graphic.
@@ -159,6 +167,12 @@ granovagg.1w(poison$RankRateSurvTime, group = poison$Group,
 ylab = "Ranked and Centered Survival Rates",
 main = "One-way ANOVA display, poison data (ignoring 2-way set-up)", 
 res = TRUE)
+
+#########################
+
+data(chickwts)
+?chickwts # An explanation of the chickwts dataset
+with(chickwts, granovagg.1w(weight, group = feed)) # Modeling weight as explained by feed type
 }
 \author{
   Brian A. Danielak \email{brian@briandk.com}\cr Robert M.
