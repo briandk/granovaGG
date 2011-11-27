@@ -2,10 +2,11 @@
 \alias{granovagg.1w}
 \title{Elemental Graphic Display for One-Way ANOVA}
 \usage{
-  granovagg.1w(data, group = NULL, h.rng = 1, v.rng = 1, jj
-  = NULL, dg = 2, resid = FALSE, dosqrs = TRUE, xlab =
-  NULL, ylab = NULL, main = "default_granova_title",
-  plot.theme = "theme_granova_1w", ...)
+  granovagg.1w(data, group = NULL, h.rng = 1, v.rng = 1,
+    jj = NULL, dg = 2, resid = FALSE, print.squares = TRUE,
+    xlab = NULL, ylab = NULL,
+    main = "default_granova_title",
+    plot.theme = "theme_granova_1w", ...)
 }
 \arguments{
   \item{data}{Dataframe or vector. If a dataframe, the two
@@ -26,9 +27,9 @@
 
   \item{jj}{Numeric; sets horiz. jittering level of points.
   \code{jj} gets passed as the \code{amount} parameter to
-  \code{\link{jitter}}. When \code{jj = NULL} (the default
+  \code{\link{jitter}}.  When \code{jj = NULL} (the default
   behavior), the degree of jitter will take on a sensible
-  value. In addition, if pairs of ordered means are close
+  value.  In addition, if pairs of ordered means are close
   to one another and \code{jj = NULL}, the degree of jitter
   will default to the smallest difference between two
   adjacent contrasts.}
@@ -40,9 +41,9 @@
   residuals (as a 'rug') on right side (wrt grand mean),
   default = FALSE.}
 
-  \item{dosqrs}{Logical; displays graphical squares for
-  visualizing the F-statistic as a ratio of MS-between to
-  MS-within}
+  \item{print.squares}{Logical; displays graphical squares
+  for visualizing the F-statistic as a ratio of MS-between
+  to MS-within}
 
   \item{xlab}{Character; horizontal axis label, default =
   NULL.}

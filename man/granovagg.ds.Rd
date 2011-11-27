@@ -2,9 +2,11 @@
 \alias{granovagg.ds}
 \title{Elemental Graphic for Display of Dependent Sample Data}
 \usage{
-  granovagg.ds(data = NULL, revc = FALSE, main =
-  "default_granova_title", xlab = NULL, ylab = NULL,
-  conf.level = 0.95, plot.theme = "theme_granova_ds", ...)
+  granovagg.ds(data = NULL, revc = FALSE,
+    main = "default_granova_title", xlab = NULL,
+    ylab = NULL, conf.level = 0.95,
+    plot.theme = "theme_granova_ds", northeast.padding = 0,
+    southwest.padding = 0, ...)
 }
 \arguments{
   \item{data}{is an n X 2 dataframe or matrix. First column
@@ -27,12 +29,23 @@
   of data.}
 
   \item{conf.level}{The confidence level at which to
-  perform a dependent sample t-test. Defaults to
+  perform a dependent sample t-test.  Defaults to
   \code{0.95} (95\% Confidence)}
 
   \item{plot.theme}{argument indicating a ggplot2 theme to
   apply to the graphic; defaults to a customized theme
   created for the dependent sample graphic}
+
+  \item{northeast.padding}{(numeric) extends axes toward
+  lower left, effectively moving data points to the
+  southwest. Defaults to zero padding.}
+
+  \item{southwest.padding}{(numeric) extends axes toward
+  upper right, effectively moving data points to the
+  southwest. Defaults to zero padding.  Making both
+  southwest and northeast padding smaller moves points
+  farther apart, while making both larger moves data points
+  closer together.}
 
   \item{...}{Optional arguments to/from other functions}
 }
