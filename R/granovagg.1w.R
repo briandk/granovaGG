@@ -68,7 +68,7 @@
 #' @param ylab Character; vertical axis label, can be supplied by user, default = \code{"default_y_label"}, 
 #'   which leads to a generic y-axis label ("Dependent variable (response)"). 
 #' @param main Character; main label, top of graphic; can be supplied by user,
-#'   default = \code{"default_granova_title"}, which leads to printing of generic title for graphic.
+#'   default = \code{"default_granova_title"}, which will print a generic title for graphic.
 #' @param plot.theme argument indicating a ggplot2 theme to apply to the
 #'   graphic; defaults to a customized theme created for the one-way graphic
 #' @param ... Optional arguments to/from other functions

@@ -34,7 +34,7 @@
 #' @param data is an n X 2 dataframe or matrix. First column defines X
 #'   (intially for horzontal axis), the second defines Y.
 #' @param main optional main title (as character); can be supplied by user. The default value is
-#'   \code{"default_granova_title"}, which leads to printing of a generic title for graphic.
+#'   \code{"default_granova_title"}, which will print a generic title for graphic.
 #' @param revc reverses X,Y specifications
 #' @param xlab optional label (as character) for horizontal axis. If not
 #'   defined, axis labels are taken from colnames of data.
