@@ -428,8 +428,8 @@ granovagg.1w <- function(data,
   GetSquareParameters <- function(owp) {
     return(
       list(
-        x.center = max(owp$params$x.range) - (5 * (owp$params$horizontal.percent)),
-        y.center = min(owp$params$y.range) + (5 * (owp$params$vertical.percent)),
+        x.center = max(owp$params$x.range) - (5.5 * (owp$params$horizontal.percent)),
+        y.center = min(owp$params$y.range) + (5.5 * (owp$params$vertical.percent)),
         height   = 10 * owp$params$vertical.percent,
         width    = 10 * owp$params$horizontal.percent
       )
