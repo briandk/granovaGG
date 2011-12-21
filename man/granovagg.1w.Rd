@@ -57,8 +57,8 @@
 
   \item{main}{Character; main label, top of graphic; can be
   supplied by user, default =
-  \code{"default_granova_title"}, which leads to printing
-  of generic title for graphic.}
+  \code{"default_granova_title"}, which will print a
+  generic title for graphic.}
 
   \item{plot.theme}{argument indicating a ggplot2 theme to
   apply to the graphic; defaults to a customized theme
@@ -139,13 +139,13 @@
 \examples{
 data(arousal)
 #Drug A
-granovagg.1w(arousal[,1:2], h.rng = 1.6, v.rng = 0.5, top.dot = .35)
+granovagg.1w(arousal[,1:2], h.rng = 1.6, v.rng = 0.5)
 
 #########################
 
 library(MASS)
 wt.gain <- anorexia[, 3] - anorexia[, 2]
-granovagg.1w(wt.gain, group = anorexia[, 1], size.line = -3)
+granovagg.1w(wt.gain, group = anorexia[, 1])
 
 #########################
 

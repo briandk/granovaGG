@@ -28,6 +28,5 @@
   B, or both drug A and drug B. Response is a standard
   measure of physiological arousal.
 }
-\keyword{dataset}
 \keyword{datasets}
 

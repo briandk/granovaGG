@@ -1,12 +1,12 @@
 data(arousal)
 #Drug A
-granovagg.1w(arousal[,1:2], h.rng = 1.6, v.rng = 0.5, top.dot = .35)
+granovagg.1w(arousal[,1:2], h.rng = 1.6, v.rng = 0.5)
 
 #########################
 
 library(MASS)
 wt.gain <- anorexia[, 3] - anorexia[, 2]
-granovagg.1w(wt.gain, group = anorexia[, 1], size.line = -3)
+granovagg.1w(wt.gain, group = anorexia[, 1])
 
 #########################
 

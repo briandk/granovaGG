@@ -15,8 +15,8 @@
 
   \item{main}{optional main title (as character); can be
   supplied by user. The default value is
-  \code{"default_granova_title"}, which leads to printing
-  of a generic title for graphic.}
+  \code{"default_granova_title"}, which will print a
+  generic title for the graphic.}
 
   \item{revc}{reverses X,Y specifications}
 
@@ -100,11 +100,6 @@ data(anorexia.sub)
 granovagg.ds(anorexia.sub, revc = TRUE, 
   main = "Assessment Plot for weights to assess Family Therapy treatment 
   for Anorexia Patients")
-# If labels for four unusual points at lower left are desired:
-granovagg.ds(anorexia.sub, revc = TRUE, 
-  main = "Assessment Plot for weights to assess Family Therapy treatment 
-  for Anorexia Patients", ident = TRUE)
-
 
 ## See discussion of blood lead graphic in EDSAG, J. Statistics Ed.
 data(blood_lead)

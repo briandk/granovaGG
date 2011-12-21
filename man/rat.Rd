@@ -27,6 +27,5 @@
   type: beef, pork, chicken and protein level: high and
   low.
 }
-\keyword{dataset}
 \keyword{datasets}
 

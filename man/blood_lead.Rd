@@ -32,6 +32,5 @@ children.}
   Sample Analyses with Graphics, Journal of Statistics
   Education Volume 17, Number 1 (March 2009).
 }
-\keyword{dataset}
 \keyword{datasets}
 
