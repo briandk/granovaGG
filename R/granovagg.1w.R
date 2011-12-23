@@ -98,11 +98,13 @@
 #'   Mosteller F. and Tukey J. eds., Wiley, 1991.
 #' @include shared-functions.R 
 #' @include theme-defaults.R
-#' @export
 #' @keywords hplot htest
 #' @example /demo/granovagg.1w.R
 #' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
+#' @import RColorBrewer
+#' @import plyr
+#' @export
 granovagg.1w <- function(data, 
                          group      = NULL, 
                          h.rng      = 1, 
