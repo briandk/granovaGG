@@ -72,9 +72,37 @@
 
 NULL
 
-#' Family Treatment Weight change data for young female anorexia patients.
+#' Virus Preparation on Tobacco Leaves
 #' 
+#' This data is taken from Snedecor and Cochran (1980) and corresponds to a true
+#' matched pairs experiment. The data originally came from Youden and Beale in
+#' 1934 who "wished to find out if two preparations of a virus would produce
+#' different effects on tobacco plants. Half a leaf of a tobacco plant was
+#' rubbed with cheesecloth soaked in one preparation of the virus extract, and
+#' the second half was rubbed similarly with the second extract." (Page 86,
+#' Snedecor and Cochran, 1980) Each of the 8 points in the figure corresponds to
+#' the numbers of lesions on the two halves of one leaf with sides that had been
+#' treated differently.
+#'
+#' @name tobacco
+#' @docType data
+#' @format A dataframe with 8 observations on the following 2 variables, no NAs
+#' 
+#' \describe{
+#'    \item{prep1}{Virus Preparation 1}
+#'    \item{prep2}{Virus Preparation 2}
+#' }
+#'
+#' @references Snedecor, W., Cochran, W. (1980). Statistical methods. Iowa State
+#'   University Press, Ames Iowa, seventh edition.
+#' @source Youden, W. J., Beale, H. P. (1934). A statistical study of the local
+#'   lesion method for estimating tobacco mosaic virus. In Contributions from
+#'   Boyce Thompson Institute 6, page 437.
+#' @keywords datasets
+NULL
 
+
+#' Family Treatment Weight change data for young female anorexia patients.
 #' 
 #' The MASS package includes the dataset \code{anorexia}, containing pre and
 #' post treatment weights for young female anorexia patients.  This is a subset
