@@ -96,6 +96,7 @@
 #'
 #' @references Fundamentals of Exploratory Analysis of Variance, Hoaglin D.,
 #'   Mosteller F. and Tukey J. eds., Wiley, 1991.
+#' @include granovagg.1w-helpers.R
 #' @include shared-functions.R 
 #' @include theme-defaults.R
 #' @keywords hplot htest
@@ -439,7 +440,7 @@ granovagg.1w <- function(data,
   }
 
   GetMSbetweenColor <- function(owp) {
-    if (owp$stats$F.statistic > 1) {
+    if ((IsFSignificant(owp$model.summary)) == TRUE) {
       return(brewer.pal(n = 8, name = "Paired")[5])
     }
   
@@ -449,7 +450,7 @@ granovagg.1w <- function(data,
   }
 
   GetMSwithinColor <- function(owp) {
-    if (owp$stats$F.statistic > 1) {
+    if ((IsFSignificant(owp$model.summary)) == TRUE) {
       return(brewer.pal(n = 8, name = "Paired")[6])
     }
   
@@ -1036,6 +1037,7 @@ granovagg.1w <- function(data,
   # Pepare OWP object
   owp                       <- AdaptVariablesFromGranovaComputations()
   owp$summary               <- GetSummary(owp)
+  owp$model.summary         <- GetModelSummary(owp)
   owp$group.mean.line       <- GetGroupMeanLine(owp)
   owp$params                <- GetGraphicalParameters(owp)
   owp$overplot              <- AddOverplotInformation(owp$summary, "contrast", 2*owp$params$horizontal.percent)
@@ -1043,7 +1045,6 @@ granovagg.1w <- function(data,
   owp$colors                <- GetColors()
   owp$outer.square          <- GetOuterSquare(owp)
   owp$inner.square          <- GetInnerSquare(owp)
-  owp$model.summary         <- GetModelSummary(owp)
   owp$squares.text          <- GetSquaresData(owp)
   owp$variation    <- GetWithinGroupVariation(owp)
   owp$label.background      <- GetBackgroundForGroupSizesAndLabels(owp)
