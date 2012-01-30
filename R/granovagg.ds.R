@@ -492,7 +492,7 @@ granovagg.ds <- function(data       = NULL,
   ColorScale <- function(dsp) {
     colors <- c(dsp$colors$treatment.line, dsp$colors$CIBand)
   
-    return(scale_color_manual(value = colors, name = ""))
+    return(scale_color_manual(values = colors, name = ""))
   }
 
   XLabel <- function(dsp) {

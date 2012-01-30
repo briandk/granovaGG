@@ -699,7 +699,7 @@ granovagg.1w <- function(data,
         breaks = (owp$params$aggregate.y.breaks),
         labels = signif(owp$params$aggregate.y.breaks, digits = 2),
         limits = owp$params$y.range,
-        expand = c(0.00, 0),
+        expand = c(0.00, 0)
       )
     )
   }
@@ -871,12 +871,12 @@ granovagg.1w <- function(data,
   ColorScale <- function(owp) {
     return(
       scale_color_manual(
-        value = owp$colors, name = "")
+        values = owp$colors, name = "")
     )
   }
 
   FillScale <- function() {
-    return(scale_fill_manual(value = owp$colors, name = ""))
+    return(scale_fill_manual(values = owp$colors, name = ""))
   }
 
   XLabel <- function(xlab) {
