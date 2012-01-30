@@ -1,3 +1,4 @@
+#' @import grid
 theme_granova_1w <- function(base_size = 12) {
   theme_granova_1w                  <- theme_bw()
   theme_granova_1w$axis.text.x      <- theme_text(size = 8, lineheight = 0.9, vjust = 0.5, angle = 90, colour = "grey50")
