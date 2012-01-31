@@ -6,7 +6,6 @@
 #' @param stat statistic used by this laye
 #' @param position position adjustment used by this layer
 #' @param ... ignored
-#' @export
 #' @seealso \code{\link{geom_rug}}, \code{\link{granovagg.1w}},
 #'   \code{\link{granovagg.ds}}, \code{\link{granovaGG}}
 #'
@@ -18,14 +17,21 @@
 #' @example /demo/geom_rug_alt.R
 #' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
-geom_rug_alt <- function (mapping  = NULL, 
-                          data     = NULL, 
-                          stat     = "identity", 
-                          position = "identity", 
-                          ...
+#' @import proto
+#' @export
+geom_rug_alt <- function(mapping  = NULL, 
+                         data     = NULL, 
+                         stat     = "identity", 
+                         position = "identity", 
+                         ...
                 ) 
 {
-  GeomRugAlt$new(mapping = mapping, data = data, stat = stat, position = position, ...)
+  GeomRugAlt$new(mapping = mapping, 
+              data = data, 
+              stat = stat, 
+              position = position, 
+              ...
+  )
 }
 
 GeomRugAlt <- proto(
