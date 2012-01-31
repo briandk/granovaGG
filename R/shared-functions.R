@@ -35,7 +35,9 @@ geom_rug_alt <- function(mapping  = NULL,
 }
 
 GeomRugAlt <- proto(
-  Geom, {
+  ggplot2:::Geom, {
+    objname <- "rug_alt"
+
     draw <- function(., data, scales, coordinates, ...) {  
       rugs <- list()
       data <- coordinates$transform(data, scales)    
