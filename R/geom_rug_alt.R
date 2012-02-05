@@ -40,7 +40,15 @@ GeomRugAlt <- proto(
 
     draw <- function(., data, scales, coordinates, ...) {  
       rugs <- list()
-      data <- coordinates$transform(data, scales)    
+      
+      # addressing cross-compatibility with ggplot2 versions
+      if (exists("coord_transform")) {
+        data <- coord_transform(coordinates, data, scales)
+      } else {
+        data <- coordinates$transform(data, scales) # ggplot2 v0.8.9 fallback
+      }
+
+          
       if (!is.null(data$x)) {
         rugs$x <- with(data, segmentsGrob(
           x0 = unit(x, "native"), x1 = unit(x, "native"), 
