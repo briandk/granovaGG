@@ -50,7 +50,7 @@ theme_granova_contr <- function(base_size = 12) {
   theme_granova_contr <- theme_bw()
   theme_granova_contr$axis.text.x      <- theme_text()
   theme_granova_contr$axis.text.y      <- theme_text(hjust = 1)
-  theme_granova_contr$axis.title.x     <- theme_text(size = 10, vjust = -0.3)
+  theme_granova_contr$axis.title.x     <- theme_text(size = 10)
   theme_granova_contr$axis.title.y     <- theme_text(size = 10, angle = 90, vjust = 0.3, hjust = 0.5)
   
   theme_granova_contr$panel.grid.major <- theme_blank()
