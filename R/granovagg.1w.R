@@ -105,6 +105,7 @@
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
 #' @import RColorBrewer
 #' @import plyr
+#' @include geom_rug_alt.R
 #' @export
 granovagg.1w <- function(data, 
                          group      = NULL, 
@@ -462,25 +463,14 @@ granovagg.1w <- function(data,
 
   GetColors <- function() {
     colors <- c(
-     GetMSbetweenColor(owp),
-     GetMSwithinColor(owp),
-     brewer.pal(n = 8, name = "Set1")[3],
-     brewer.pal(n = 8, name = "Paired")[8],
-     brewer.pal(n = 8, name = "Paired")[2],
-     "darkblue",
-     "darkorange"
-    )
-  
-    names(colors) <- c(
-      "MS-between",
-      "MS-within",
-      "Grand Mean",
-      "Group Means",
-      "Group Mean Line",
-      "Within 1 SDpooled",
-      "Outside 1 SDpooled"
-    )
-  
+      "MS-between"         = GetMSbetweenColor(owp),
+      "MS-within"          = GetMSwithinColor(owp),
+      "Grand Mean"         = brewer.pal(n = 8, name = "Set1")[3],
+      "Group Means"        = brewer.pal(n = 8, name = "Paired")[8],
+      "Group Mean Line"    = brewer.pal(n = 8, name = "Paired")[2],
+      "Within 1 SDpooled"  = "darkblue",
+      "Outside 1 SDpooled" = "darkorange"
+    )  
     return(colors)
   
   }
