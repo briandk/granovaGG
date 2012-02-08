@@ -859,10 +859,13 @@ granovagg.1w <- function(data,
   }
   
   ColorScale <- function(owp) {
-    return(
-      scale_color_manual(
-        values = owp$colors, name = "")
-    )
+    output <- scale_color_manual(values = owp$colors, name = "")
+
+    if(exists("guides")) {
+      output <- scale_color_manual(values = owp$colors, guide = "legend")
+    }
+
+    return(output)
   }
 
   FillScale <- function() {
@@ -983,7 +986,8 @@ granovagg.1w <- function(data,
   }
 
   RemoveSizeElementFromLegend <- function() {
-    return(scale_size_continuous(legend = FALSE))
+    # return(scale_size_continuous(legend = FALSE))
+    return(NULL)
   }
   
   ### Warning Function Below
