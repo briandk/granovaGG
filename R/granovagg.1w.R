@@ -462,17 +462,19 @@ granovagg.1w <- function(data,
 
 
   GetColors <- function() {
-    colors <- c(
-      "MS-between"         = GetMSbetweenColor(owp),
-      "MS-within"          = GetMSwithinColor(owp),
+    strokeColors <- c(
       "Grand Mean"         = brewer.pal(n = 8, name = "Set1")[3],
-      "Group Means"        = brewer.pal(n = 8, name = "Paired")[8],
       "Group Mean Line"    = brewer.pal(n = 8, name = "Paired")[2],
       "Within 1 SDpooled"  = "darkblue",
       "Outside 1 SDpooled" = "darkorange"
+    )
+    
+    fillColors <- c(
+      "MS-between"         = GetMSbetweenColor(owp),
+      "MS-within"          = GetMSwithinColor(owp),
+      "Group Means"        = brewer.pal(n = 8, name = "Paired")[8]
     )  
-    return(colors)
-  
+    return(list(stroke = strokeColors, fill = fillColors))
   }
 
   GetAsTheOuterSquare <- function(owp, name.of.square) {
@@ -859,17 +861,21 @@ granovagg.1w <- function(data,
   }
   
   ColorScale <- function(owp) {
-    output <- scale_color_manual(values = owp$colors, name = "")
+    output <- scale_color_manual(values = owp$colors$stroke, name = "")
 
     if(exists("guides")) {
-      output <- scale_color_manual(values = owp$colors, guide = "legend")
+      output <- scale_color_manual(
+                  values = owp$colors$stroke, 
+                  name = "",
+                  guide = "legend"
+                )
     }
 
     return(output)
   }
 
   FillScale <- function() {
-    return(scale_fill_manual(values = owp$colors, name = ""))
+    return(scale_fill_manual(values = owp$colors$fill, name = ""))
   }
 
   XLabel <- function(xlab) {
