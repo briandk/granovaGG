@@ -105,6 +105,7 @@
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
 #' @import RColorBrewer
 #' @import plyr
+#' @include geom_rug_alt.R
 #' @export
 granovagg.1w <- function(data, 
                          group      = NULL, 
@@ -461,28 +462,19 @@ granovagg.1w <- function(data,
 
 
   GetColors <- function() {
-    colors <- c(
-     GetMSbetweenColor(owp),
-     GetMSwithinColor(owp),
-     brewer.pal(n = 8, name = "Set1")[3],
-     brewer.pal(n = 8, name = "Paired")[8],
-     brewer.pal(n = 8, name = "Paired")[2],
-     "darkblue",
-     "darkorange"
+    strokeColors <- c(
+      "Grand Mean"         = brewer.pal(n = 8, name = "Set1")[3],
+      "Group Mean Line"    = brewer.pal(n = 8, name = "Paired")[2],
+      "Within 1 SDpooled"  = "darkblue",
+      "Outside 1 SDpooled" = "darkorange"
     )
-  
-    names(colors) <- c(
-      "MS-between",
-      "MS-within",
-      "Grand Mean",
-      "Group Means",
-      "Group Mean Line",
-      "Within 1 SDpooled",
-      "Outside 1 SDpooled"
-    )
-  
-    return(colors)
-  
+    
+    fillColors <- c(
+      "MS-between"         = GetMSbetweenColor(owp),
+      "MS-within"          = GetMSwithinColor(owp),
+      "Group Means"        = brewer.pal(n = 8, name = "Paired")[8]
+    )  
+    return(list(stroke = strokeColors, fill = fillColors))
   }
 
   GetAsTheOuterSquare <- function(owp, name.of.square) {
@@ -699,7 +691,7 @@ granovagg.1w <- function(data,
         breaks = (owp$params$aggregate.y.breaks),
         labels = signif(owp$params$aggregate.y.breaks, digits = 2),
         limits = owp$params$y.range,
-        expand = c(0.00, 0),
+        expand = c(0.00, 0)
       )
     )
   }
@@ -869,14 +861,21 @@ granovagg.1w <- function(data,
   }
   
   ColorScale <- function(owp) {
-    return(
-      scale_color_manual(
-        value = owp$colors, name = "")
-    )
+    output <- scale_color_manual(values = owp$colors$stroke, name = "")
+
+    if(exists("guides")) {
+      output <- scale_color_manual(
+                  values = owp$colors$stroke, 
+                  name = "",
+                  guide = "legend"
+                )
+    }
+
+    return(output)
   }
 
   FillScale <- function() {
-    return(scale_fill_manual(value = owp$colors, name = ""))
+    return(scale_fill_manual(values = owp$colors$fill, name = ""))
   }
 
   XLabel <- function(xlab) {
@@ -993,7 +992,8 @@ granovagg.1w <- function(data,
   }
 
   RemoveSizeElementFromLegend <- function() {
-    return(scale_size_continuous(legend = FALSE))
+    # return(scale_size_continuous(legend = FALSE))
+    return(NULL)
   }
   
   ### Warning Function Below
