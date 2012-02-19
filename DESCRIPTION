@@ -1,5 +1,5 @@
 Package: granovaGG
-Version: 1.0.20120208183704
+Version: 1.0.20120218200047
 Date: 2011-09-03
 Title: Graphical Analysis of Variance Using ggplot2
 Author: Brian A. Danielak <brian@briandk.com>,
@@ -23,11 +23,11 @@ Collate:
     'theme-defaults.R'
     'shared-functions.R'
     'granovagg.1w-helpers.R'
+    'geom_rug_alt.R'
     'granovagg.1w.R'
     'granovagg.contr.R'
     'granovagg.ds.R'
     'granovaGG-package.R'
-    'geom_rug_alt.R'
 Description: This collection of functions in granovaGG
     provides what we call elemental graphics for display of
     anova results. The term elemental derives from the fact

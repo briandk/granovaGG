@@ -8,3 +8,28 @@ IsFSignificant <- function(model.summary) {
          )
   )
 }
+
+## Plotting Functions
+
+  ScaleX_1w <- function(owp) {
+    return(
+      scale_x_continuous(
+        breaks = (owp$params$aggregate.x.breaks),
+        labels = signif(owp$params$aggregate.x.breaks, digits = 2),
+        limits = owp$params$x.range,
+        expand = c(0.00, 0)
+      )
+    )
+  }
+
+  ScaleY_1w <- function(owp) {
+    return(
+      scale_y_continuous(
+        breaks = (owp$params$aggregate.y.breaks),
+        labels = signif(owp$params$aggregate.y.breaks, digits = 2),
+        limits = owp$params$y.range,
+        expand = c(0.00, 0)
+      )
+    )
+  }
+

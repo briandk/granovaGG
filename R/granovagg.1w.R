@@ -676,26 +676,6 @@ granovagg.1w <- function(data,
     )
   }
 
-  ScaleX <- function(owp) {
-    return(scale_x_continuous(
-      breaks = (owp$params$aggregate.x.breaks),
-      labels = signif(owp$params$aggregate.x.breaks, digits = 2),
-      limits = owp$params$x.range,
-      expand = c(0.00, 0))
-    )
-  }
-
-  ScaleY <- function(owp) {
-    return(
-      scale_y_continuous(
-        breaks = (owp$params$aggregate.y.breaks),
-        labels = signif(owp$params$aggregate.y.breaks, digits = 2),
-        limits = owp$params$y.range,
-        expand = c(0.00, 0)
-      )
-    )
-  }
-
   JitteredScoresByGroupContrast <- function(owp) {
     only.jitter.in.x.direction <- position_jitter(height = 0, width = GetDegreeOfJitter(owp))
   
@@ -1057,8 +1037,8 @@ granovagg.1w <- function(data,
   p <- InitializeGgplot()
   p <- p + GrandMeanLine(owp)
   p <- p + GrandMeanPoint(owp)
-  p <- p + ScaleX(owp)
-  p <- p + ScaleY(owp)
+  p <- p + ScaleX_1w(owp)
+  p <- p + ScaleY_1w(owp)
   p <- p + JitteredScoresByGroupContrast(owp)
   p <- p + GroupMeanLine(owp)
   p <- p + GroupMeansByContrast(owp)
