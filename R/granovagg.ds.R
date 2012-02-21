@@ -524,7 +524,7 @@ granovagg.ds <- function(data       = NULL,
   }
   
   ForceCoordinateAxesToBeEqual <- function() {
-    return(coord_fixed())
+    return(coord_fixed(ratio = 1))
   }
   
           
@@ -541,8 +541,8 @@ granovagg.ds <- function(data       = NULL,
   p <- p + CIBand(dsp)
   p <- p + ColorScale(dsp)
   p <- p + ScaleX(dsp) + ScaleY(dsp)
-  p <- p + ForceCoordinateAxesToBeEqual()
   p <- p + PadViewingWindow(dsp$params)
+  p <- p + ForceCoordinateAxesToBeEqual()
   p <- p + Title()
   p <- p + XLabel(dsp)
   p <- p + YLabel(dsp)
