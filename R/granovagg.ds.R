@@ -190,7 +190,7 @@ granovagg.ds <- function(data       = NULL,
                 bounds            = .bounds,  
                 shadow.offset     = .shadow.offset,
                 anchor            = .crossbow.anchor,
-                point.size        = I(2),
+                point.size        = I(2.5),
                 mean.line.size    = I(1/2)      
                )
           )
@@ -469,7 +469,7 @@ granovagg.ds <- function(data       = NULL,
                       data  = dsp$shadow, 
                       size  = dsp$params$point.size,
                       shape = 16,
-                      alpha = I(1/4) 
+                      alpha = I(1/2) 
                      )
           )
   }
