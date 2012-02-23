@@ -324,21 +324,6 @@ granovagg.1w <- function(data,
     return(label.vector)
   }
 
-  GetSummary <- function(owp) {
-    return(
-      ddply(owp$data, .(group), summarise,
-        group              = unique(group),
-        group.mean         = mean(score),
-        trimmed.mean       = mean(score, trim = 0.2),
-        contrast           = unique(contrast),
-        variance           = var(score),
-        standard.deviation = sd(score),
-        maximum.score      = max(score),
-        group.size         = length(score)
-      )
-    )
-  }
-
   PrintGroupSummary <- function(data, digits.to.round) {
     groups <- subset(data, select = group)
     stats  <- subset(data, select = c(-group, -maximum.score))    
@@ -1016,7 +1001,7 @@ granovagg.1w <- function(data,
   
   # Pepare OWP object
   owp                       <- AdaptVariablesFromGranovaComputations()
-  owp$summary               <- GetSummary(owp)
+  owp$summary               <- GetSummary_1w(owp)
   owp$model.summary         <- GetModelSummary(owp)
   owp$group.mean.line       <- GetGroupMeanLine(owp)
   owp$params                <- GetGraphicalParameters(owp)
