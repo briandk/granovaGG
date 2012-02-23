@@ -3,7 +3,7 @@ granovaGG 1.1
 
 MAJOR CHANGES
 
-* granovaGG is universally compatible with ggplot2 0.8.9 and ggplot2 0.9.0
+* granovaGG is compatible with both ggplot2 0.8.9 and ggplot2 0.9.0
 
 * granovaGG now imports most of its dependencies through a NAMESPACE file, 
   so most dependent packages are no longer loaded into the global namespace
