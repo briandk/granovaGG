@@ -323,18 +323,6 @@ granovagg.1w <- function(data,
   
     return(label.vector)
   }
-
-  PrintGroupSummary <- function(data, digits.to.round) {
-    groups <- subset(data, select = group)
-    stats  <- subset(data, select = c(-group, -maximum.score))    
-    rounded.stats <- round(stats, digits = digits.to.round)
-    output <- ReorderDataByColumn(cbind(groups, rounded.stats), "group.mean")
-    message("\nBy-group summary statistics for your input data (ordered by group means)")
-    
-    return(
-       print(output)
-    )
-  }
   
   GetGroupMeanLine <- function(owp) {
     return(
@@ -1015,7 +1003,7 @@ granovagg.1w <- function(data,
   owp$label.background      <- GetBackgroundForGroupSizesAndLabels(owp)
   owp$group.labels          <- GetGroupLabels(owp)
   owp$group.sizes           <- GetGroupSizes(owp)
-  PrintGroupSummary(owp$summary, dg)
+  PrintGroupSummary_1w(owp$summary, dg)
 
 
   #Plot OWP object
