@@ -67,6 +67,11 @@
 #'
 #' @example demo/granovagg.ds.R
 #' @export
+#'
+#' @include shared-functions.R
+#' @include theme-defaults.R
+#' @include granovagg.ds-helpers.R
+#'
 #' @references Pruzek, R. M., & Helmreich, J. E. (2009). Enhancing Dependent Sample Analyses with Graphics. Journal of Statistics Education, 17(1), 21.
 #' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
@@ -474,21 +479,6 @@ granovagg.ds <- function(data       = NULL,
           )
   }
 
-  Trails <- function(dsp) {
-    return(geom_segment(aes(x    = x.trail.start,
-                            y    = y.trail.start,
-                            xend = x.trail.end,
-                            yend = y.trail.end
-                           ),
-                        data     = dsp$trails,
-                        size     = I(1/3),
-                        color    = "black",
-                        linetype = 1,
-                        alpha    = I(1/10)              
-                       ) 
-          )
-  }
-
   ColorScale <- function(dsp) {
     colors <- c(dsp$colors$treatment.line, dsp$colors$CIBand)
   
@@ -532,7 +522,7 @@ granovagg.ds <- function(data       = NULL,
   p <- p + TreatmentLine(dsp)
   p <- p + XMeanLine(dsp) + YMeanLine(dsp)
   p <- p + Shadows(dsp)
-  p <- p + Trails(dsp)
+  p <- p + Trails_ds(dsp)
   p <- p + RawData(dsp)
   p <- p + Theme(plot.theme)
   p <- p + IdentityLine()
