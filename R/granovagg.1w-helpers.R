@@ -29,8 +29,8 @@ IsFSignificant <- function(model.summary) {
   }
 
   PrintGroupSummary_1w <- function(data, digits.to.round) {
-    groups <- subset(data, select = group)
-    stats  <- subset(data, select = c(-group, -maximum.score))    
+    groups <- with(data, subset(data, select = group))
+    stats  <- with(data, subset(data, select = c(-group, -maximum.score)))
     rounded.stats <- round(stats, digits = digits.to.round)
     output <- ReorderDataByColumn(cbind(groups, rounded.stats), "group.mean")
     message("\nBy-group summary statistics for your input data (ordered by group means)")
