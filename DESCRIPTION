@@ -19,6 +19,8 @@ Imports:
     reshape2,
     proto,
     grid
+Suggests:
+    MASS
 Collate:
     'theme-defaults.R'
     'shared-functions.R'

@@ -241,7 +241,7 @@ granovagg.1w <- function(data,
 
 
   ammt <- (1/200) * diff(rng.sts)
-  stats.vcj<-jitter(stats.vc, am = ammt)
+  stats.vcj<-jitter(stats.vc, amount = ammt)
     
   #Reordering the stats matrix by the mean of each group
   statsro<-stats[order(stats[,4]),]
