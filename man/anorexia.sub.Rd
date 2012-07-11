@@ -3,7 +3,7 @@
 \alias{anorexia.sub}
 \title{Family Treatment Weight change data for young female anorexia patients.}
 \format{A dataframe with 17 observations on the following 2 variables, no
-NAs.
+  NAs.
 
 \describe{
 
@@ -15,7 +15,7 @@ NAs.
 \source{
   Hand, D. J., Daly, F., McConway, K., Lunn, D. and
   Ostrowski, E. eds (1993) A Handbook of Small Data Sets.
-  Chapman & Hall, Data set 285 (p. 229)
+  Chapman & Hall, Data set 285 (p.  229)
 }
 \description{
   The MASS package includes the dataset \code{anorexia},

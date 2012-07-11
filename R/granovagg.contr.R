@@ -89,9 +89,11 @@
 #'   \code{\link{granovagg.ds}}, \code{\link{granovaGG}}
 #' @keywords hplot
 #' @example demo/granovagg.contr.R
-#' @export
 #' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
+#' @import gridExtra
+#' @import reshape2
+#' @export
 granovagg.contr <- function(data, 
                             contrasts, 
                             ylab       = "default_y_label",

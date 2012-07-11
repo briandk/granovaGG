@@ -34,7 +34,7 @@
 #' @param data is an n X 2 dataframe or matrix. First column defines X
 #'   (intially for horzontal axis), the second defines Y.
 #' @param main optional main title (as character); can be supplied by user. The default value is
-#'   \code{"default_granova_title"}, which leads to printing of a generic title for graphic.
+#'   \code{"default_granova_title"}, which will print a generic title for the graphic.
 #' @param revc reverses X,Y specifications
 #' @param xlab optional label (as character) for horizontal axis. If not
 #'   defined, axis labels are taken from colnames of data.
@@ -44,6 +44,12 @@
 #'   Defaults to \code{0.95} (95\% Confidence)
 #' @param plot.theme argument indicating a ggplot2 theme to apply to the
 #'   graphic; defaults to a customized theme created for the dependent sample graphic
+#' @param northeast.padding (numeric) extends axes toward lower left, 
+#'   effectively moving data points to the southwest. Defaults to zero padding.
+#' @param southwest.padding (numeric) extends axes toward upper right,
+#'   effectively moving data points to the southwest. Defaults to zero padding.
+#'   Making both southwest and northeast padding smaller moves points farther apart, 
+#'   while making both larger moves data points closer together.
 #' @param ... Optional arguments to/from other functions
 #' @return Returns a plot object of class \code{ggplot}. 
 #'
@@ -71,6 +77,8 @@ granovagg.ds <- function(data       = NULL,
                          ylab       = NULL,
                          conf.level = 0.95,
                          plot.theme = "theme_granova_ds",
+                         northeast.padding = 0,
+                         southwest.padding = 0,
                          ...
                 ) 
 
@@ -170,9 +178,9 @@ granovagg.ds <- function(data       = NULL,
     .extrema               <- c(max(.aggregate.data.range), min(.aggregate.data.range))    
     .square.data.range     <- max(.extrema) - min(.extrema)
     .southwest.padding     <- (65/100) * .square.data.range
-    .north.east.padding    <- (15/100) * .square.data.range
+    .northeast.padding     <- (15/100) * .square.data.range
     .lower.graphical.bound <- min(.extrema) - .southwest.padding
-    .upper.graphical.bound <- max(.extrema) + .north.east.padding
+    .upper.graphical.bound <- max(.extrema) + .northeast.padding
     .bounds                <- c(.lower.graphical.bound, .upper.graphical.bound)
     .center                <- mean(.bounds)
     .crossbow.anchor       <- mean(.bounds) + min(.bounds)
@@ -182,7 +190,7 @@ granovagg.ds <- function(data       = NULL,
                 bounds            = .bounds,  
                 shadow.offset     = .shadow.offset,
                 anchor            = .crossbow.anchor,
-                point.size        = I(2),
+                point.size        = I(2.5),
                 mean.line.size    = I(1/2)      
                )
           )
@@ -384,6 +392,18 @@ granovagg.ds <- function(data       = NULL,
   ScaleY <- function(dsp) {
     return(scale_y_continuous(limits = dsp$params$bounds))
   }
+  
+  PadViewingWindow <- function(params) {
+    ne.offset = params$square.data.range * southwest.padding
+    sw.offset = params$square.data.range * northeast.padding
+    padded.window = c(params$bounds[1] - sw.offset, params$bounds[2] + ne.offset)
+    
+    return(
+      coord_cartesian(xlim = padded.window,
+                      ylim = padded.window
+      )
+    )
+  } 
 
   RugPlot <- function(dsp) {
     return(geom_rug_alt(size  = I(1/2),
@@ -449,7 +469,7 @@ granovagg.ds <- function(data       = NULL,
                       data  = dsp$shadow, 
                       size  = dsp$params$point.size,
                       shape = 16,
-                      alpha = I(1/4) 
+                      alpha = I(1/2) 
                      )
           )
   }
@@ -472,7 +492,7 @@ granovagg.ds <- function(data       = NULL,
   ColorScale <- function(dsp) {
     colors <- c(dsp$colors$treatment.line, dsp$colors$CIBand)
   
-    return(scale_color_manual(value = colors, name = ""))
+    return(scale_color_manual(values = colors, name = ""))
   }
 
   XLabel <- function(dsp) {
@@ -504,7 +524,7 @@ granovagg.ds <- function(data       = NULL,
   }
   
   ForceCoordinateAxesToBeEqual <- function() {
-    return(coord_fixed())
+    return(coord_fixed(ratio = 1))
   }
   
           
@@ -521,6 +541,7 @@ granovagg.ds <- function(data       = NULL,
   p <- p + CIBand(dsp)
   p <- p + ColorScale(dsp)
   p <- p + ScaleX(dsp) + ScaleY(dsp)
+  p <- p + PadViewingWindow(dsp$params)
   p <- p + ForceCoordinateAxesToBeEqual()
   p <- p + Title()
   p <- p + XLabel(dsp)

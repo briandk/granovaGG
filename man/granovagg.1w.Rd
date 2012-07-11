@@ -2,10 +2,11 @@
 \alias{granovagg.1w}
 \title{Elemental Graphic Display for One-Way ANOVA}
 \usage{
-  granovagg.1w(data, group = NULL, h.rng = 1, v.rng = 1, jj
-  = NULL, dg = 2, resid = FALSE, dosqrs = TRUE, xlab =
-  NULL, ylab = NULL, main = "default_granova_title",
-  plot.theme = "theme_granova_1w", ...)
+  granovagg.1w(data, group = NULL, h.rng = 1, v.rng = 1,
+    jj = NULL, dg = 2, resid = FALSE, print.squares = TRUE,
+    xlab = "default_x_label", ylab = "default_y_label",
+    main = "default_granova_title",
+    plot.theme = "theme_granova_1w", ...)
 }
 \arguments{
   \item{data}{Dataframe or vector. If a dataframe, the two
@@ -26,9 +27,9 @@
 
   \item{jj}{Numeric; sets horiz. jittering level of points.
   \code{jj} gets passed as the \code{amount} parameter to
-  \code{\link{jitter}}. When \code{jj = NULL} (the default
+  \code{\link{jitter}}.  When \code{jj = NULL} (the default
   behavior), the degree of jitter will take on a sensible
-  value. In addition, if pairs of ordered means are close
+  value.  In addition, if pairs of ordered means are close
   to one another and \code{jj = NULL}, the degree of jitter
   will default to the smallest difference between two
   adjacent contrasts.}
@@ -40,20 +41,24 @@
   residuals (as a 'rug') on right side (wrt grand mean),
   default = FALSE.}
 
-  \item{dosqrs}{Logical; displays graphical squares for
-  visualizing the F-statistic as a ratio of MS-between to
-  MS-within}
+  \item{print.squares}{Logical; displays graphical squares
+  for visualizing the F-statistic as a ratio of MS-between
+  to MS-within}
 
-  \item{xlab}{Character; horizontal axis label, default =
-  NULL.}
+  \item{xlab}{Character; horizontal axis label, can be
+  supplied by user, default = \code{"default_x_label"},
+  which leads to a generic x-axis label ("Contrast
+  coefficients based on group means").}
 
-  \item{ylab}{Character; vertical axis label, default =
-  NULL.}
+  \item{ylab}{Character; vertical axis label, can be
+  supplied by user, default = \code{"default_y_label"},
+  which leads to a generic y-axis label ("Dependent
+  variable (response)").}
 
   \item{main}{Character; main label, top of graphic; can be
   supplied by user, default =
-  \code{"default_granova_title"}, which leads to printing
-  of generic title for graphic.}
+  \code{"default_granova_title"}, which will print a
+  generic title for graphic.}
 
   \item{plot.theme}{argument indicating a ggplot2 theme to
   apply to the graphic; defaults to a customized theme
@@ -134,15 +139,15 @@
 \examples{
 data(arousal)
 #Drug A
-granovagg.1w(arousal[,1:2], h.rng = 1.6, v.rng = 0.5, top.dot = .35)
+granovagg.1w(arousal[,1:2], h.rng = 1.6, v.rng = 0.5)
 
-#########################
+###
 
-library(MASS)
+library(MASS) # Contains the anorexia dataset
 wt.gain <- anorexia[, 3] - anorexia[, 2]
-granovagg.1w(wt.gain, group = anorexia[, 1], size.line = -3)
+granovagg.1w(wt.gain, group = anorexia[, 1])
 
-##########################
+###
 
 data(poison)
 ##Note violation of constant variance across groups in following graphic.
@@ -158,6 +163,12 @@ granovagg.1w(poison$RankRateSurvTime, group = poison$Group,
 ylab = "Ranked and Centered Survival Rates",
 main = "One-way ANOVA display, poison data (ignoring 2-way set-up)", 
 res = TRUE)
+
+###
+
+data(chickwts)
+?chickwts # An explanation of the chickwts dataset
+with(chickwts, granovagg.1w(weight, group = feed)) # Modeling weight as explained by feed type
 }
 \author{
   Brian A. Danielak \email{brian@briandk.com}\cr Robert M.

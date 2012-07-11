@@ -2,9 +2,11 @@
 \alias{granovagg.ds}
 \title{Elemental Graphic for Display of Dependent Sample Data}
 \usage{
-  granovagg.ds(data = NULL, revc = FALSE, main =
-  "default_granova_title", xlab = NULL, ylab = NULL,
-  conf.level = 0.95, plot.theme = "theme_granova_ds", ...)
+  granovagg.ds(data = NULL, revc = FALSE,
+    main = "default_granova_title", xlab = NULL,
+    ylab = NULL, conf.level = 0.95,
+    plot.theme = "theme_granova_ds", northeast.padding = 0,
+    southwest.padding = 0, ...)
 }
 \arguments{
   \item{data}{is an n X 2 dataframe or matrix. First column
@@ -13,8 +15,8 @@
 
   \item{main}{optional main title (as character); can be
   supplied by user. The default value is
-  \code{"default_granova_title"}, which leads to printing
-  of a generic title for graphic.}
+  \code{"default_granova_title"}, which will print a
+  generic title for the graphic.}
 
   \item{revc}{reverses X,Y specifications}
 
@@ -27,12 +29,23 @@
   of data.}
 
   \item{conf.level}{The confidence level at which to
-  perform a dependent sample t-test. Defaults to
+  perform a dependent sample t-test.  Defaults to
   \code{0.95} (95\% Confidence)}
 
   \item{plot.theme}{argument indicating a ggplot2 theme to
   apply to the graphic; defaults to a customized theme
   created for the dependent sample graphic}
+
+  \item{northeast.padding}{(numeric) extends axes toward
+  lower left, effectively moving data points to the
+  southwest. Defaults to zero padding.}
+
+  \item{southwest.padding}{(numeric) extends axes toward
+  upper right, effectively moving data points to the
+  southwest. Defaults to zero padding.  Making both
+  southwest and northeast padding smaller moves points
+  farther apart, while making both larger moves data points
+  closer together.}
 
   \item{...}{Optional arguments to/from other functions}
 }
@@ -81,24 +94,63 @@
   dependent sample analysis.
 }
 \examples{
-### See discussion of anorexia graphic in EDSAG, J. Statistics Ed.
+### Using granovagg.ds to examine trends or effects for repeated measures data.
+
+# This example corresponds to case 1b in Pruzek and Helmreich (2009). In this
+# graphic we're looking for the effect of treatment on patients with anorexia.
+
 data(anorexia.sub)
+granovagg.ds(anorexia.sub, 
+             revc = TRUE, 
+             main = "Assessment Plot for weights to assess Family Therapy treatment for Anorexia Patients",
+             xlab = "Weight after therapy (lbs.)",
+             ylab = "Weight before therapy (lbs.)"
+)
 
-granovagg.ds(anorexia.sub, revc = TRUE, 
-  main = "Assessment Plot for weights to assess Family Therapy treatment 
-  for Anorexia Patients")
-# If labels for four unusual points at lower left are desired:
-granovagg.ds(anorexia.sub, revc = TRUE, 
-  main = "Assessment Plot for weights to assess Family Therapy treatment 
-  for Anorexia Patients", ident = TRUE)
+### Using granovagg.ds to compare two experimental treatments (with blocking)
 
+# This example corresponds to case 2a in Pruzek and Helmreich (2009). For this
+# data, we're comparing the effects of two different virus preparations on the
+# number of lesions produced on a tobacco leaf.
 
-## See discussion of blood lead graphic in EDSAG, J. Statistics Ed.
+data(tobacco)
+granovagg.ds(tobacco[, c("prep1", "prep2")], 
+             main = "Local Lesions on Tobacco Leaves",
+             xlab = "Virus Preparation 1",
+             ylab = "Virus Preparation 2"
+)
+
+### Using granovagg.ds to compare two experimental treatments (with blocking)
+
+# This example corresponds to case 2a in Pruzek and Helmreich (2009). For this
+# data, we're comparing the wear resistance of two different shoe sole
+# materials, each randomly assigned to the feet of 10 boys.
+
+library(MASS) # Contains the shoes dataset
+shoes <- as.data.frame(shoes)
+granovagg.ds(shoes,
+             revc = TRUE,
+             main = "Shoe Wear",
+             xlab = "Sole Material B",
+             ylab = "Sole Material A",
+)
+
+### Using granovagg.ds to compare matched individuals for two treatments
+
+# This example corresponds to case 2b in Pruzek and Helmreich (2009). For this
+# data, we're examining the level of lead (in mg/dl) present in the blood of
+# children. Children of parents who had worked in a factory where lead was used
+# in making batteries were matched by age, exposure to traffic, and neighborhood
+# with children whose parents did not work in lead-related industries.
+
 data(blood_lead)
-
-granovagg.ds(blood_lead, sw = .1, 
-   main = "Dependent Sample Assessment Plot
-   Blood Lead Levels of Matched Pairs of Children")
+granovagg.ds(blood_lead, 
+             sw = .1, 
+             main = "Dependent Sample Assessment Plot
+             Blood Lead Levels of Matched Pairs of Children",
+             xlab = "Exposed (mg/dl)",
+             ylab = "Control (mg/dl)"
+)
 }
 \author{
   Brian A. Danielak \email{brian@briandk.com}\cr Robert M.

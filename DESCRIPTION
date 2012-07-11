@@ -1,28 +1,31 @@
 Package: granovaGG
-Version: 1.0.20111019132241
-Date: 2011-09-03
+Version: 1.1.20120710224027
+Date: 2012-02-23
 Title: Graphical Analysis of Variance Using ggplot2
-Author: Brian A. Danielak <brian@briandk.com>, 
-    Robert M. Pruzek <RMPruzek@yahoo.com>, 
+Author: Brian A. Danielak <brian@briandk.com>,
+    Robert M. Pruzek <RMPruzek@yahoo.com>,
     with contributions from:
-    William E. J. Doane <wil@DrDoane.com>, 
-    James E. Helmreich <James.Helmreich@Marist.edu>, 
+    William E. J. Doane <wil@DrDoane.com>,
+    James E. Helmreich <James.Helmreich@Marist.edu>,
     Jason Bryer <jason@bryer.org>
 Maintainer: Brian A. Danielak <brian@briandk.com>
 Depends:
-    R (>= 2.13.0),
-    ggplot2 (>= 0.8.9),
+    R (>= 2.14.0),
+    ggplot2 (>= 0.8.9)
+Imports:
     RColorBrewer,
+    plyr,
     gridExtra,
-    MASS
+    reshape2,
+    proto,
+    grid
 Suggests:
-    mgcv,
-    rgl,
-    tcltk,
     MASS
 Collate:
     'theme-defaults.R'
     'shared-functions.R'
+    'granovagg.1w-helpers.R'
+    'geom_rug_alt.R'
     'granovagg.1w.R'
     'granovagg.contr.R'
     'granovagg.ds.R'

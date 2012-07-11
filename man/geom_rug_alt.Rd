@@ -2,8 +2,8 @@
 \alias{geom_rug_alt}
 \title{Alternate Marginal Rug Plot Geom for ggplot2}
 \usage{
-  geom_rug_alt(mapping = NULL, data = NULL, stat =
-  "identity", position = "identity", ...)
+  geom_rug_alt(mapping = NULL, data = NULL,
+    stat = "identity", position = "identity", ...)
 }
 \arguments{
   \item{mapping}{mapping between variables and aesthetics

@@ -3,7 +3,7 @@
 \alias{rat}
 \title{Weight gains of rats fed different diets}
 \format{A data frame with 60 observations on the following 3 variables, no
-NAs.
+  NAs.
 
 \describe{
 
@@ -12,7 +12,7 @@ NAs.
 \item{Diet.Amount}{Amount of protein in diet: 1 = High, 2 = Low.}
 
 \item{Diet.Type}{Type of protein in diet: 1 = Beef, 2 = Pork, 3 =
-Cereal.}
+  Cereal.}
 
 }}
 \source{

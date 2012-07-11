@@ -4,7 +4,7 @@
 \title{Blood lead levels of lead workers' children matched with similar control
 children.}
 \format{A dataframe with 33 observations on the following 2 variables, no
-NAs.
+  NAs.
 
 \describe{
 
@@ -15,7 +15,7 @@ NAs.
 }}
 \source{
   Morton, D., Saah, A., Silberg, S., Owens, W., Roberts,
-  M., Saah, M. (1982). Lead absorption in children of
+  M., Saah, M.  (1982). Lead absorption in children of
   employees in a lead related industry. American Journal of
   Epidemiology, 115:549-555.
 }

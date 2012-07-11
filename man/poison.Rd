@@ -3,15 +3,15 @@
 \alias{poison}
 \title{Poison data from Biological Experiment}
 \format{This data frame was originally \code{poison.data} from the package
-\code{BHH2}, but as presented here has added columns; no NAs. \describe{
-\item{Poison}{Factor with three levels I, II, and III.}
-\item{Treatment}{Factor with four levels, A, B, C, and D.}
-\item{Group}{Factor with 12 levels, 1:12.}
-\item{SurvTime}{Numeric; survival time.}
-\item{RateSurvTime}{Numeric; inverse of SurvTime}
-\item{RankRateSurvTime}{Numeric; \code{RateSurvTime} scores have
-been converted to ranks, and then rescaled to have the same median as and
-a spread comparable to \code{RateSurvTime}} }}
+  \code{BHH2}, but as presented here has added columns; no NAs. \describe{
+  \item{Poison}{Factor with three levels I, II, and III.}
+  \item{Treatment}{Factor with four levels, A, B, C, and D.}
+  \item{Group}{Factor with 12 levels, 1:12.}
+  \item{SurvTime}{Numeric; survival time.}
+  \item{RateSurvTime}{Numeric; inverse of SurvTime}
+  \item{RankRateSurvTime}{Numeric; \code{RateSurvTime} scores have
+  been converted to ranks, and then rescaled to have the same median as and
+  a spread comparable to \code{RateSurvTime}} }}
 \source{
   Box, G. E. P. and D. R. Cox, An Analysis of
   Transformations (with discussion), Journal of the Royal

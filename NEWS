@@ -1,16 +1,43 @@
+granovaGG 1.1
+-------------
+
+MAJOR CHANGES
+
+* granovaGG is compatible with both ggplot2 0.8.9 and ggplot2 0.9.0
+
+* granovaGG now imports most of its dependencies through a NAMESPACE file, 
+  so most dependent packages are no longer loaded into the global namespace
+
+MINOR CHANGES
+
+* granovagg.ds provides printed summary output
+
+* granovagg.ds handles axis reversal and visual padding arguments
+
+* granovagg.1w provides better printed summary output, including 
+  linear model information
+
+* Users can now suppress printed squares in granovagg.1w
+
+* Printed squares in granovagg.1w now change color if F > F_critical;
+  previously they changed color if F > 1. 
+
 granovaGG 1.0
 -------------
 
 NEW FEATURES
 
-* ggplot2 implementations of three of the four graphical analysis of variance functions:
+* ggplot2 implementations of three of the four graphical analysis of variance
+  functions:
   
-    * .1w - elemental graphic for the one-way analysis of variance
-    * .contr - elemental graphic for observing contrast effects in one-way analysis of variance
-    * .ds - elemental graphic for dependent sample assessment
+    * .1w - elemental graphic for the one-way analysis of variance contr -
+    * .elemental graphic for observing contrast effects in one-way analysis of
+    * .variance ds - elemental graphic for dependent sample assessment
   
-* Since the core functions can return ggplot2 objects (or a list of them, in the case of .contr)
-  you can use the extensibility of ggplot2's grammar of graphics to customize your plots
+* Since the core functions can return ggplot2 objects (or a list of them, in the
+  case of .contr)   you can use the extensibility of ggplot2's grammar of graphics
+  to customize your plots
   
-* geom_rug_alt - an alternate ggplot2 geom for creating rugs whose tufts appear on the top and right
-  of a graph, instead of the default bottom and left sides produced by geom_rug
+* geom_rug_alt - an alternate ggplot2 geom for creating rugs whose tufts appear
+  on the top and right   of a graph, instead of the default bottom and left sides
+  produced by geom_rug
