@@ -63,6 +63,8 @@
 #'   'rug') on right side (wrt grand mean), default = FALSE.
 #' @param print.squares Logical; displays graphical squares for visualizing the F-statistic as a ratio
 #'   of MS-between to MS-within
+#' @param geom Character; specifies the kind of geometric object (points, boxplots, violin plots) 
+#'  used to represent the raw scores in a group
 #' @param xlab Character; horizontal axis label, can be supplied by user, default = \code{"default_x_label"},
 #'   which leads to a generic x-axis label ("Contrast coefficients based on group means"). 
 #' @param ylab Character; vertical axis label, can be supplied by user, default = \code{"default_y_label"}, 
@@ -114,7 +116,8 @@ granovagg.1w <- function(data,
                          jj         = NULL,
                          dg         = 2, 
                          resid      = FALSE,
-                         print.squares     = TRUE,  
+                         print.squares     = TRUE,
+                         score.geom = "point",  
                          xlab       = "default_x_label", 
                          ylab       = "default_y_label", 
                          main       = "default_granova_title",
@@ -676,6 +679,12 @@ granovagg.1w <- function(data,
     )
   }
 
+  RawScores <- function(owp, score.geom) {
+    switch(score.geom,
+           point = JitteredScoresByGroupContrast(owp)
+    )
+  }
+
   JitteredScoresByGroupContrast <- function(owp) {
     only.jitter.in.x.direction <- position_jitter(height = 0, width = GetDegreeOfJitter(owp))
   
@@ -1039,7 +1048,7 @@ granovagg.1w <- function(data,
   p <- p + GrandMeanPoint(owp)
   p <- p + ScaleX_1w(owp)
   p <- p + ScaleY_1w(owp)
-  p <- p + JitteredScoresByGroupContrast(owp)
+  p <- p + RawScores(owp, score.geom)
   p <- p + GroupMeanLine(owp)
   p <- p + GroupMeansByContrast(owp)
   p <- p + Residuals(owp)
