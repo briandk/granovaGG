@@ -649,23 +649,6 @@ granovagg.1w <- function(data,
 
   ######## Plot Functions Below
 
-  JitteredScoresByGroupContrast <- function(owp) {
-    only.jitter.in.x.direction <- position_jitter(height = 0, width = GetDegreeOfJitter(owp))
-
-    return(
-      geom_point(
-        aes(
-          x = contrast,
-          y = score
-        ),
-        alpha    = I(1),
-        size     = I(2),
-        data     = owp$data,
-        position = only.jitter.in.x.direction
-      )
-    )
-  }
-
   GroupMeanLine <- function(owp) {
     return(geom_segment(
              aes(
