@@ -108,17 +108,17 @@
 #' @include geom_rug_alt.R
 #' @export
 granovagg.1w <- function(data,
-                         group      = NULL,
-                         h.rng      = 1,
-                         v.rng      = 1,
-                         jj         = NULL,
-                         dg         = 2,
-                         resid      = FALSE,
-                         print.squares     = TRUE,
-                         xlab       = "default_x_label",
-                         ylab       = "default_y_label",
-                         main       = "default_granova_title",
-                         plot.theme = "theme_granova_1w",
+                         group         = NULL,
+                         h.rng         = 1,
+                         v.rng         = 1,
+                         jj            = NULL,
+                         dg            = 2,
+                         resid         = FALSE,
+                         print.squares = TRUE,
+                         xlab          = "default_x_label",
+                         ylab          = "default_y_label",
+                         main          = "default_granova_title",
+                         plot.theme    = "theme_granova_1w",
                          ...
                 )
 
@@ -1020,5 +1020,5 @@ granovagg.1w <- function(data,
   PrintOverplotWarning(owp, dg)
   PrintLinearModelSummary(owp)
 
-  return(p)
+  return(owp)
 }
