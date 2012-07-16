@@ -649,18 +649,6 @@ granovagg.1w <- function(data,
 
   ######## Plot Functions Below
 
-  GrandMeanPoint <- function(owp) {
-    return(
-      geom_point(
-        aes(
-          x = 0, y = mean(score), color = factor(paste("Grand Mean"))
-        ),
-        size = 2.5,
-        data = owp$data
-      )
-    )
-  }
-
   JitteredScoresByGroupContrast <- function(owp) {
     only.jitter.in.x.direction <- position_jitter(height = 0, width = GetDegreeOfJitter(owp))
 
