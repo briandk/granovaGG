@@ -649,17 +649,6 @@ granovagg.1w <- function(data,
 
   ######## Plot Functions Below
 
-  GrandMeanLine <- function(owp) {
-    return(
-      geom_hline(
-        color      = brewer.pal(n = 8, name = "Set1")[3],
-        alpha      = I(1/2),
-        size       = I(0.25),
-        yintercept = owp$stats$grand.mean
-      )
-    )
-  }
-
   GrandMeanPoint <- function(owp) {
     return(
       geom_point(
