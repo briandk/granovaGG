@@ -37,8 +37,8 @@ GrandMeanPoint <- function(owp) {
   )
 }
 
-JitteredScoresByGroupContrast <- function(owp) {
-  only.jitter.in.x.direction <- position_jitter(height = 0, width = GetDegreeOfJitter(owp))
+JitteredScoresByGroupContrast <- function(owp, jj) {
+  only.jitter.in.x.direction <- position_jitter(height = 0, width = GetDegreeOfJitter_1w(owp, jj))
 
   return(
     geom_point(
@@ -53,6 +53,39 @@ JitteredScoresByGroupContrast <- function(owp) {
     )
   )
 }
+
+GetDegreeOfJitter_1w <- function(owp, jj) {
+  result <- owp$params$horizontal.percent
+
+  if (!is.null(jj)) {
+    result <- (jj / 200) * owp$params$contrast.range.distance
+  }
+  else if (IsSmallestContrastDifferenceSmallerThanOnePercentOfDataResolution(owp)) {
+      result <- GetSmallestDistanceBetweenAdjacentContrasts(owp$summary$contrast)
+  }
+
+  return(result)
+}
+
+GetSmallestDistanceBetweenAdjacentContrasts <- function(contrasts) {
+  ordered.contrasts             <- sort(contrasts)
+  adjacent.contrast.differences <- 1:(length(contrasts) - 1)
+
+  for (i in adjacent.contrast.differences) {
+    contrast.difference              <- abs(ordered.contrasts[i + 1] - ordered.contrasts[i])
+    adjacent.contrast.differences[i] <- contrast.difference
+  }
+
+  return(min(adjacent.contrast.differences))
+}
+
+IsSmallestContrastDifferenceSmallerThanOnePercentOfDataResolution <- function(owp) {
+  return(
+    abs(GetSmallestDistanceBetweenAdjacentContrasts(owp$summary$contrast)) < owp$params$horizontal.percent
+  )
+}
+
+
 
 
 

@@ -398,37 +398,6 @@ granovagg.1w <- function(data,
     )
   }
 
-  GetSmallestDistanceBetweenAdjacentContrasts <- function(contrasts) {
-    ordered.contrasts             <- sort(contrasts)
-    adjacent.contrast.differences <- 1:(length(contrasts) - 1)
-
-    for (i in adjacent.contrast.differences) {
-      contrast.difference              <- abs(ordered.contrasts[i + 1] - ordered.contrasts[i])
-      adjacent.contrast.differences[i] <- contrast.difference
-    }
-
-    return(min(adjacent.contrast.differences))
-  }
-
-  IsSmallestContrastDifferenceSmallerThanOnePercentOfDataResolution <- function(owp) {
-    return(
-      abs(GetSmallestDistanceBetweenAdjacentContrasts(owp$summary$contrast)) < owp$params$horizontal.percent
-    )
-  }
-
-  GetDegreeOfJitter <- function(owp) {
-    result <- owp$params$horizontal.percent
-
-    if (!is.null(jj)) {
-      result <- (jj / 200) * owp$params$contrast.range.distance
-    }
-    else if (IsSmallestContrastDifferenceSmallerThanOnePercentOfDataResolution(owp)) {
-        result <- GetSmallestDistanceBetweenAdjacentContrasts(owp$summary$contrast)
-    }
-
-    return(result)
-  }
-
   GetSquareParameters <- function(owp) {
     return(
       list(
@@ -995,7 +964,7 @@ granovagg.1w <- function(data,
   p <- p + GrandMeanPoint(owp)
   p <- p + ScaleX_1w(owp)
   p <- p + ScaleY_1w(owp)
-  p <- p + JitteredScoresByGroupContrast(owp)
+  p <- p + JitteredScoresByGroupContrast(owp, jj)
   p <- p + GroupMeanLine(owp)
   p <- p + GroupMeansByContrast(owp)
   p <- p + Residuals(owp)
@@ -1020,5 +989,5 @@ granovagg.1w <- function(data,
   PrintOverplotWarning(owp, dg)
   PrintLinearModelSummary(owp)
 
-  return(owp)
+  return(p)
 }
