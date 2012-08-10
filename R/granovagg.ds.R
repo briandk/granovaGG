@@ -513,14 +513,16 @@ granovagg.ds <- function(data       = NULL,
     return(ylab(result))
   }
 
-  Title <- function() {
-    if (main == "default_granova_title") {
-      return(theme(title = "Dependent Sample Assessment Plot"))
+  Title <- function(main) {
+    output.title <- "Dependent Sample Assessment Plot"
+    if (main != "default_granova_title") {
+      output.title <- main
     }
 
-    else {
-      return(theme(title = main))
-    }
+    return(
+      ggtitle(output.title)
+    )
+
   }
 
   ForceCoordinateAxesToBeEqual <- function() {
@@ -543,7 +545,7 @@ granovagg.ds <- function(data       = NULL,
   p <- p + ScaleX(dsp) + ScaleY(dsp)
   p <- p + PadViewingWindow(dsp$params)
   p <- p + ForceCoordinateAxesToBeEqual()
-  p <- p + Title()
+  p <- p + Title(main)
   p <- p + XLabel(dsp)
   p <- p + YLabel(dsp)
 
