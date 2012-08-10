@@ -873,7 +873,7 @@ granovagg.1w <- function(data,
   }
 
   RotateXTicks <- function() {
-    return(opts(axis.text.x = theme_text(angle = 90)))
+    return(theme(axis.text.x = element_text(angle = 90)))
   }
 
   ForceCoordinateAxesToBeEqual <- function(owp) {
@@ -893,7 +893,9 @@ granovagg.1w <- function(data,
       title.to.output <- GetClassicTitle()
     }
 
-    return(opts(title = title.to.output))
+    return(
+      ggtitle(title.to.output)
+    )
   }
 
   RemoveSizeElementFromLegend <- function() {
