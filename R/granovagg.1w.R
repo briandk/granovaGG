@@ -650,17 +650,18 @@ granovagg.1w <- function(data,
     )
   }
 
-  Residuals <- function(owp) {
+  Residuals <- function(owp, resid) {
     if (resid == TRUE) {
       return(
-        geom_rug_alt(
+        geom_rug(
                aes(
                  x     = NULL,
                  y     = within.group.residuals,
                  color = factor(within.1.sd.of.the.mean.of.all.residuals)
                ),
                alpha = I(1),
-               data  = owp$residuals
+               data  = owp$residuals,
+               sides = "l"
         )
       )
     }
@@ -969,7 +970,7 @@ granovagg.1w <- function(data,
   p <- p + JitteredScoresByGroupContrast(owp, jj)
   p <- p + GroupMeanLine(owp)
   p <- p + GroupMeansByContrast(owp)
-  p <- p + Residuals(owp)
+  p <- p + Residuals(owp, resid)
   p <- p + MaxWithinGroupVariation(owp)
   p <- p + WithinGroupVariation(owp)
   p <- p + BaselineWithinGroupVariation(owp)
