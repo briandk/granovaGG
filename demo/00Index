@@ -1,4 +1,3 @@
 granovagg.1w		demonstrates elemental graphics for one-way analysis of variance.
 granovagg.contr		demonstrates elemental graphics for contrast effects in one-way analysis of variance.
 granovagg.ds		demonstrates elemental graphics for dependent sample assessment.
-geom_rug_alt		demonstrates alternate placement for rug plot fringes (or tufts)
