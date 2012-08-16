@@ -191,8 +191,7 @@ with(chickwts, granovagg.1w(weight, group = feed)) # Modeling weight as explaine
 }
 \seealso{
   \code{\link{granovagg.contr}},
-  \code{\link{granovagg.ds}}, \code{\link{granovaGG}},
-  \code{\link{geom_rug_alt}}
+  \code{\link{granovagg.ds}}, \code{\link{granovaGG}}
 }
 \keyword{hplot}
 \keyword{htest}

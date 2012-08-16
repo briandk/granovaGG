@@ -83,8 +83,7 @@
 #'      \item{group.size}{group sizes}
 #'      \item{overplotting information}{Information about groups that, due to their close means, may be overplotted}
 #' @seealso \code{\link{granovagg.contr}},
-#'   \code{\link{granovagg.ds}}, \code{\link{granovaGG}},
-#'   \code{\link{geom_rug_alt}}
+#'   \code{\link{granovagg.ds}}, \code{\link{granovaGG}}
 #'
 #' @author Brian A. Danielak \email{brian@@briandk.com}\cr
 #'   Robert M. Pruzek \email{RMPruzek@@yahoo.com}
@@ -105,7 +104,6 @@
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
 #' @import RColorBrewer
 #' @import plyr
-#' @include geom_rug_alt.R
 #' @export
 granovagg.1w <- function(data,
                          group         = NULL,
