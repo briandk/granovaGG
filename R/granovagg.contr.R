@@ -294,8 +294,9 @@ granovagg.contr <- function(data,
   }
 
   ContrastPlotTitle <- function(ctr, index) {
+    plot.title <- paste("Coefficients vs. Response\n", GetContrastName(ctr$contrast.matrix, index))
     return(
-        theme(title = paste("Coefficients vs. Response\n", GetContrastName(ctr$contrast.matrix, index)))
+        ggtitle(plot.title)
     )
   }
 
@@ -405,8 +406,9 @@ granovagg.contr <- function(data,
   }
 
   GroupSummaryPlotTitle <- function(ctr) {
+    plot.title <- paste("Responses for all groups\n", "each n = ", ctr$responses.per.group)
     return(
-      theme(title = paste("Responses for all groups\n", "each n = ", ctr$responses.per.group))
+      ggtitle(plot.title)
     )
   }
 

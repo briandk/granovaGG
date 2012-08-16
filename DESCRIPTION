@@ -1,5 +1,5 @@
 Package: granovaGG
-Version: 1.1.20120816162556
+Version: 1.1.20120816163245
 Date: 2012-02-23
 Title: Graphical Analysis of Variance Using ggplot2
 Author: Brian A. Danielak <brian@briandk.com>,
@@ -17,7 +17,6 @@ Imports:
     plyr,
     gridExtra (>= 0.9.1),
     reshape2,
-    proto,
     grid
 Suggests:
     MASS
