@@ -2,7 +2,7 @@ Package: granovaGG
 Version: 1.2
 Date: 2012-08-31
 Title: Graphical Analysis of Variance Using ggplot2
-Author: Brian A. Danielak <brian@briandk.com>,
+Author: Brian A. Danielak <itsme@briandk.com>,
     Robert M. Pruzek <RMPruzek@yahoo.com>,
     with contributions from:
     William E. J. Doane <wil@DrDoane.com>,
