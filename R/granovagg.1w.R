@@ -1,48 +1,48 @@
 #' Elemental Graphic Display for One-Way ANOVA
-#' 
+#'
 #' Graphic to display data for a one-way analysis of
-#' variance -- that is for unstructured groups. Also to help understand 
+#' variance -- that is for unstructured groups. Also to help understand
 #' how data play out in the context of the basic one-way model,
 #' how the F statistic is generated for the data at hand,
 #' etc. The graphic may be called 'elemental' or 'natural'
 #' because it is built upon the central question that drives
 #' one-way ANOVA (see details below).
-#' 
+#'
 #' The one-way ANOVA graphic shows how the comparison of unstructured
 #' groups, viz. their means, entails a particular linear combination (L.C.)
-#' of the group means. In particular, we use the fact that the numerator of 
+#' of the group means. In particular, we use the fact that the numerator of
 #' the one-way F statistic, the mean square between (MS.B), is a linear combination
-#' of the group means; each weight -- one for each group -- in the L.C. is (principally) 
+#' of the group means; each weight -- one for each group -- in the L.C. is (principally)
 #' a function of the difference between the group's mean and the grand
 #' mean, viz., (M_{j} - M..) where M_{j} denotes the jth group's mean, and M.. denotes
-#' the grand mean. The L.C. can be written as a sum of products of the form 
-#' MS.B = Sum((1/df.B)(n_j (M_j - M..) M_j)) for j = 1...J. 
-#' The denominator of the F-statistic, MS.W 
+#' the grand mean. The L.C. can be written as a sum of products of the form
+#' MS.B = Sum((1/df.B)(n_j (M_j - M..) M_j)) for j = 1...J.
+#' The denominator of the F-statistic, MS.W
 #' (mean square within), can be described as a 'scaling factor'. It is just the (weighted)
 #' average of the variances of the J groups (j = 1 ... J). (n_{j}'s are group sizes.)
 #' The differences (M_{j} - M..) are themselves the 'effects' in the analysis.
 #' When the effects are plotted against the group means (the horizontal and
 #' vertical axes) a straight line necessarily ensues. Group means are plotted as
-#' triangles along this line. Once the means have been plotted, the data points 
+#' triangles along this line. Once the means have been plotted, the data points
 #' (jittered) for the groups are displayed (vertical axis) with respect to the
 #' respective contrasts. Since the group means are just the fitted values in
 #' one-way ANOVA, and the deviations of the scores within groups are the residuals
 #' (subsetted by groups), the graphic can be seen as showing fitted vs. residual
-#' values for the line that shows the locus of ordered group means -- from the smallest 
+#' values for the line that shows the locus of ordered group means -- from the smallest
 #' on the left) the the largest (on the right). If desired, the aggregate of all
-#' such residuals can be plotted (as a rug plot) on the right margin of the 
-#' graphic centered on the grand mean (large green dot in 'middle'). The use of 
-#' effects to locate groups this way yields what we term an 'elemental' 
-#' graphic because it is based on the central question that drives one-way 
-#' ANOVA. 
-#' 
+#' such residuals can be plotted (as a rug plot) on the right margin of the
+#' graphic centered on the grand mean (large green dot in 'middle'). The use of
+#' effects to locate groups this way yields what we term an 'elemental'
+#' graphic because it is based on the central question that drives one-way
+#' ANOVA.
+#'
 #' Note that groups need not have the same size, nor do data need to
-#' reflect any particular distributional characteristics. Finally, the gray bars 
-#' (one for each group) at the bottom of the graphic show the relative sizes of 
+#' reflect any particular distributional characteristics. Finally, the gray bars
+#' (one for each group) at the bottom of the graphic show the relative sizes of
 #' the group standard deviations with referene to the 'average' group s.d. (more precisely,
 #' the square root of the MS.W). This 'average' corresponds to the thin white
 #' line that runs horizontally across these bars.
-#' 
+#'
 #' @param data Dataframe or vector. If a dataframe, the two or more columns
 #'   are taken to be groups of equal size (whence \code{group} is NULL).  If
 #'   \code{data} is a vector, \code{group} must be a vector, perhaps a factor,
@@ -53,10 +53,10 @@
 #'   1
 #' @param v.rng Numeric; controls the vertical spread of points, default =
 #'   1.
-#' @param jj Numeric; sets horiz. jittering level of points. \code{jj} gets passed as the 
-#'   \code{amount} parameter to \code{\link{jitter}}. 
-#'   When \code{jj = NULL} (the default behavior), the degree of jitter will take on a sensible value. 
-#'   In addition, if pairs of ordered means are close to one another and \code{jj = NULL}, 
+#' @param jj Numeric; sets horiz. jittering level of points. \code{jj} gets passed as the
+#'   \code{amount} parameter to \code{\link{jitter}}.
+#'   When \code{jj = NULL} (the default behavior), the degree of jitter will take on a sensible value.
+#'   In addition, if pairs of ordered means are close to one another and \code{jj = NULL},
 #'   the degree of jitter will default to the smallest difference between two adjacent contrasts.
 #' @param dg Numeric; sets number of decimal points in output display, default = 2
 #' @param resid Logical; displays marginal distribution of residuals (as a
@@ -64,16 +64,16 @@
 #' @param print.squares Logical; displays graphical squares for visualizing the F-statistic as a ratio
 #'   of MS-between to MS-within
 #' @param xlab Character; horizontal axis label, can be supplied by user, default = \code{"default_x_label"},
-#'   which leads to a generic x-axis label ("Contrast coefficients based on group means"). 
-#' @param ylab Character; vertical axis label, can be supplied by user, default = \code{"default_y_label"}, 
-#'   which leads to a generic y-axis label ("Dependent variable (response)"). 
+#'   which leads to a generic x-axis label ("Contrast coefficients based on group means").
+#' @param ylab Character; vertical axis label, can be supplied by user, default = \code{"default_y_label"},
+#'   which leads to a generic y-axis label ("Dependent variable (response)").
 #' @param main Character; main label, top of graphic; can be supplied by user,
 #'   default = \code{"default_granova_title"}, which will print a generic title for graphic.
 #' @param plot.theme argument indicating a ggplot2 theme to apply to the
 #'   graphic; defaults to a customized theme created for the one-way graphic
 #' @param ... Optional arguments to/from other functions
-#' @return Returns a plot object of class \code{ggplot}. The function also provides printed output including by-group 
-#'   statistical summaries and information about groups that might be overplotted (if applicable): 
+#' @return Returns a plot object of class \code{ggplot}. The function also provides printed output including by-group
+#'   statistical summaries and information about groups that might be overplotted (if applicable):
 #'      \item{group}{group names}
 #'      \item{group means}{means for each group}
 #'      \item{trimmed.mean}{20\% trimmed group means}
@@ -83,21 +83,20 @@
 #'      \item{group.size}{group sizes}
 #'      \item{overplotting information}{Information about groups that, due to their close means, may be overplotted}
 #' @seealso \code{\link{granovagg.contr}},
-#'   \code{\link{granovagg.ds}}, \code{\link{granovaGG}},
-#'   \code{\link{geom_rug_alt}}
+#'   \code{\link{granovagg.ds}}, \code{\link{granovaGG}}
 #'
-#' @author Brian A. Danielak \email{brian@@briandk.com}\cr 
+#' @author Brian A. Danielak \email{brian@@briandk.com}\cr
 #'   Robert M. Pruzek \email{RMPruzek@@yahoo.com}
 #'
 #' with contributions by:\cr
-#'   William E. J. Doane \email{wil@@drdoane.com}\cr 
-#'   James E. Helmreich \email{James.Helmreich@@Marist.edu}\cr 
+#'   William E. J. Doane \email{wil@@drdoane.com}\cr
+#'   James E. Helmreich \email{James.Helmreich@@Marist.edu}\cr
 #'   Jason Bryer \email{jason@@bryer.org}
 #'
 #' @references Fundamentals of Exploratory Analysis of Variance, Hoaglin D.,
 #'   Mosteller F. and Tukey J. eds., Wiley, 1991.
 #' @include granovagg.1w-helpers.R
-#' @include shared-functions.R 
+#' @include shared-functions.R
 #' @include theme-defaults.R
 #' @keywords hplot htest
 #' @example /demo/granovagg.1w.R
@@ -105,41 +104,40 @@
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
 #' @import RColorBrewer
 #' @import plyr
-#' @include geom_rug_alt.R
 #' @export
-granovagg.1w <- function(data, 
-                         group      = NULL, 
-                         h.rng      = 1, 
-                         v.rng      = 1,
-                         jj         = NULL,
-                         dg         = 2, 
-                         resid      = FALSE,
-                         print.squares     = TRUE,  
-                         xlab       = "default_x_label", 
-                         ylab       = "default_y_label", 
-                         main       = "default_granova_title",
-                         plot.theme = "theme_granova_1w", 
+granovagg.1w <- function(data,
+                         group         = NULL,
+                         h.rng         = 1,
+                         v.rng         = 1,
+                         jj            = NULL,
+                         dg            = 2,
+                         resid         = FALSE,
+                         print.squares = TRUE,
+                         xlab          = "default_x_label",
+                         ylab          = "default_y_label",
+                         main          = "default_granova_title",
+                         plot.theme    = "theme_granova_1w",
                          ...
                 )
 
 {
   yy <- data
-      
+
   CoerceHigherDimensionalDataToMatrix <- function(data) {
     if (is.data.frame(data)) {
       if (length(names(data)) > 1) {
         data <- CoerceToMatrix(data)
       }
     }
-    
+
     return(data)
   }
-  
+
   CoerceToMatrix <- function(x) {
     error.message <- "It looks like you've tried to pass in higher-dimension data AND a separate group indicator.
-    If your data contains columns of equal numbers of observations, try re-calling granovagg.1w 
+    If your data contains columns of equal numbers of observations, try re-calling granovagg.1w
     on your data while setting group = NULL"
-    
+
     if (!is.null(group)) {
       message(error.message)
     }
@@ -147,29 +145,29 @@ granovagg.1w <- function(data,
   }
 
   yy <- CoerceHigherDimensionalDataToMatrix(yy)
-  
+
   #Testing input data type
   mtx <- is.matrix(yy)
   if (!mtx) {
     # if this executes, yy is already a vector as handed in via data
     yr <- yy
     groupf<-factor(group)
-  }       
-        
+  }
+
   #If yy is matrix sans colnames, need to give them some
   if(mtx & is.null(colnames(yy))) { #Note changes here;did not work before, and I thought LETTERS looked better (your thoughts?)
        dmyy2<-dim(yy)[2]
        cnms<-LETTERS[1:dmyy2]     #Note that numbers replaced by LETTERS if initial matrix yy does not have col. names
-       colnames(yy)<-c(paste(" G",cnms)) 
+       colnames(yy)<-c(paste(" G",cnms))
   }  #1:dim(yy)[2]))
 
   # If yy is a matrix, the data represents a balanced case. The code below creates a yr (outcomes) vector and a groupf (factored groups) vector by repeating each of the column numbers (group) of the source matrix for each of the outcomes in that column.
-  if(mtx) { 
-    group <- rep(1:ncol(yy), each = nrow(yy)) 
+  if(mtx) {
+    group <- rep(1:ncol(yy), each = nrow(yy))
     groupf<-factor(group,labels=colnames(yy))
     yr <- as.vector(yy)
   }
-      
+
   ngroups<-length(unique(groupf))
 
   # By this point, all data have been transformed to yr and groupf - two vectors of equal length. Think of them as the "score" and "group" columns of an n x 2 dataframe, where n = total number of observations.
@@ -186,7 +184,7 @@ granovagg.1w <- function(data,
   mvs <- function(x){c(mean(x),var(x),sd(x))}
   stats <- matrix(unlist(tapply(yr,groupf,mvs)),byrow=T,ncol=3)
   # stats will have as many rows as we have groups, one row per group
-  
+
   #      [,1]   [,2]  [,3]
   # [1,] 3.75 12.917 3.594
   # [2,] 2.50  1.667 1.291
@@ -198,7 +196,7 @@ granovagg.1w <- function(data,
   # [1] 1 1 1 1 2 2 2 2 3 3 3 3 4 4 4 4
 
   #yrm is a vector of same length as 'groupn' with the appropriate group mean in each cell
-  yrm <- stats[,1][groupn] 
+  yrm <- stats[,1][groupn]
 
   # The second bracket notation is a way of repeatedly selecting from the stats matrix
   # > x <- c("a", "b", "c")
@@ -216,11 +214,11 @@ granovagg.1w <- function(data,
   tabc.dm <- tabc/mn.n
   grandmean <- mean(yr)
 
-  #Stats now has 6 cols, first is group size, second group mean minus grandmean, 
+  #Stats now has 6 cols, first is group size, second group mean minus grandmean,
   #third is weighted (by group size) mean, then mean, var, sd.
 
   stats <- cbind(tabc,stats[,1]-grandmean, tabc.dm * stats[,1],stats)
-    
+
   #Creating x, y ranges for graph
   #Parameters h.rng, v.rng, jj for horizontal, vertical and jitter enabled.
 
@@ -242,7 +240,7 @@ granovagg.1w <- function(data,
 
   ammt <- (1/200) * diff(rng.sts)
   stats.vcj<-jitter(stats.vc, amount = ammt)
-    
+
   #Reordering the stats matrix by the mean of each group
   statsro<-stats[order(stats[,4]),]
 
@@ -256,23 +254,23 @@ granovagg.1w <- function(data,
   MS.w<-SS.w/df.w
   MS.b<-SS.bet/df.b
   residuals<-round(yr-stats.vc,3)
-  
+
   #sdw is standard deviation within, ie of residuals.
   sdw<-sd(residuals)*sqrt((length(yr)-1)/df.w)
 
   #This interval based on pooled standard error within.
-  grandmean.pm.sdw<-c(grandmean-sdw,grandmean+sdw) 
+  grandmean.pm.sdw<-c(grandmean-sdw,grandmean+sdw)
   grandmean.pm.sewR<-round(grandmean.pm.sdw,1-1)
-    
+
     F.stat <- MS.b/MS.w
-                          
+
   p.F <- 1 - pf(F.stat, df.b,df.w)
   sqrF<-sqrt(F.stat)
   sqrs<-2*sqrt(MS.w)/rng.rt
-    
+
   #Trimmed means marked and outputted if 'trmean = TRUE'
   trmd.mn<-tapply(yr,list(groupf), mean, tr=.2)
-      
+
   gsum<-array(c(grandmean, df.b, df.w, MS.b, MS.w, F.stat, p.F, round(r.xy.sqd,3)))
   dimnames(gsum)<-list(c('Grandmean', 'df.bet', 'df.with', 'MS.bet', 'MS.with', 'F.stat', 'F.prob', 'SS.bet/SS.tot'))
   stats.out<-cbind(statsro[,1:4],round(as.matrix(trmd.mn[order(stats[,4])]),2),statsro[,5:6])
@@ -306,10 +304,10 @@ granovagg.1w <- function(data,
                          sd.within                 = sdw
     )
     result$residuals <- data.frame(within.group.residuals                   = residuals,
-                                   within.1.sd.of.the.mean.of.all.residuals = 
+                                   within.1.sd.of.the.mean.of.all.residuals =
                                      ConvertBooleanValuesToResidualLabels(abs(residuals - grandmean) < sdw)
     )
-  
+
     result$range.expansion <- list(horizontal.range.expansion = 1.25 * h.rng,
                                    vertical.range.expansion   = 0.2 * v.rng
                               )
@@ -320,7 +318,7 @@ granovagg.1w <- function(data,
     label.vector                          <- as.character(boolean.vector)
     label.vector[label.vector == "TRUE"]  <- "Within 1 SDpooled"
     label.vector[label.vector == "FALSE"] <- "Outside 1 SDpooled"
-  
+
     return(label.vector)
   }
 
@@ -341,16 +339,16 @@ granovagg.1w <- function(data,
 
   PrintGroupSummary <- function(data, digits.to.round) {
     groups <- subset(data, select = group)
-    stats  <- subset(data, select = c(-group, -maximum.score))    
+    stats  <- subset(data, select = c(-group, -maximum.score))
     rounded.stats <- round(stats, digits = digits.to.round)
     output <- ReorderDataByColumn(cbind(groups, rounded.stats), "group.mean")
     message("\nBy-group summary statistics for your input data (ordered by group means)")
-    
+
     return(
        print(output)
     )
   }
-  
+
   GetGroupMeanLine <- function(owp) {
     return(
       data.frame(
@@ -358,7 +356,7 @@ granovagg.1w <- function(data,
         y     = min(owp$data$group.mean),
         xend  = max(owp$data$contrast),
         yend  = max(owp$data$group.mean),
-        color = "blue"      
+        color = "blue"
       )
     )
   }
@@ -372,17 +370,17 @@ granovagg.1w <- function(data,
     .score.range.distance    <- max(.expanded.score.range) - min(.expanded.score.range)
     .contrast.range.distance <- max(.expanded.contrast.range) - min(.expanded.contrast.range)
     .aggregate.y.breaks      <- c(owp$summary$group.mean, range(owp$data$score))
-    .aggregate.x.breaks      <- c(owp$summary$contrast, 0) 
+    .aggregate.x.breaks      <- c(owp$summary$contrast, 0)
     .vertical.percent        <- .score.range.distance / 100
     .horizontal.percent      <- .contrast.range.distance / 100
     .y.range                 <- c(
                                   min(.expanded.score.range) - (10 * .vertical.percent),
                                   max(.expanded.score.range) + (10 * .vertical.percent)
                                 )
-    .x.range                 <- c(min(.expanded.contrast.range) - (10 * .horizontal.percent), 
+    .x.range                 <- c(min(.expanded.contrast.range) - (10 * .horizontal.percent),
                                   max(.expanded.contrast.range) + (10 * .horizontal.percent))
     .aspect.ratio            <- .contrast.range.distance / .score.range.distance
-  
+
     return(list(
              expanded.contrast.range = .expanded.contrast.range,
              score.range.distance    = .score.range.distance,
@@ -396,37 +394,6 @@ granovagg.1w <- function(data,
              contrast.range.distance = .contrast.range.distance
            )
     )
-  }
-
-  GetSmallestDistanceBetweenAdjacentContrasts <- function(contrasts) {
-    ordered.contrasts             <- sort(contrasts)  
-    adjacent.contrast.differences <- 1:(length(contrasts) - 1)
-  
-    for (i in adjacent.contrast.differences) {
-      contrast.difference              <- abs(ordered.contrasts[i + 1] - ordered.contrasts[i])
-      adjacent.contrast.differences[i] <- contrast.difference
-    }
-  
-    return(min(adjacent.contrast.differences))
-  }
-
-  IsSmallestContrastDifferenceSmallerThanOnePercentOfDataResolution <- function(owp) {
-    return(
-      abs(GetSmallestDistanceBetweenAdjacentContrasts(owp$summary$contrast)) < owp$params$horizontal.percent
-    )
-  }
-
-  GetDegreeOfJitter <- function(owp) {
-    result <- owp$params$horizontal.percent
-    
-    if (!is.null(jj)) {
-      result <- (jj / 200) * owp$params$contrast.range.distance
-    } 
-    else if (IsSmallestContrastDifferenceSmallerThanOnePercentOfDataResolution(owp)) {
-        result <- GetSmallestDistanceBetweenAdjacentContrasts(owp$summary$contrast)
-    }
-    
-    return(result)
   }
 
   GetSquareParameters <- function(owp) {
@@ -444,7 +411,7 @@ granovagg.1w <- function(data,
     if ((IsFSignificant(owp$model.summary)) == TRUE) {
       return(brewer.pal(n = 8, name = "Paired")[5])
     }
-  
+
     else {
       return(brewer.pal(n = 8, name = "Paired")[2])
     }
@@ -454,7 +421,7 @@ granovagg.1w <- function(data,
     if ((IsFSignificant(owp$model.summary)) == TRUE) {
       return(brewer.pal(n = 8, name = "Paired")[6])
     }
-  
+
     else {
       return(brewer.pal(n = 8, name = "Paired")[1])
     }
@@ -468,12 +435,12 @@ granovagg.1w <- function(data,
       "Within 1 SDpooled"  = "darkblue",
       "Outside 1 SDpooled" = "darkorange"
     )
-    
+
     fillColors <- c(
       "MS-between"         = GetMSbetweenColor(owp),
       "MS-within"          = GetMSwithinColor(owp),
       "Group Means"        = brewer.pal(n = 8, name = "Paired")[8]
-    )  
+    )
     return(list(stroke = strokeColors, fill = fillColors))
   }
 
@@ -517,7 +484,7 @@ granovagg.1w <- function(data,
     if (owp$stats$F.statistic > 1) {
       return(GetAsTheOuterSquare(owp, "MS-between"))
     }
-  
+
     else {
       return(GetAsTheOuterSquare(owp, "MS-within"))
     }
@@ -527,16 +494,16 @@ granovagg.1w <- function(data,
     if (owp$stats$F.statistic > 1) {
       return(GetMSwithinAsTheInnerSquare(owp))
     }
-  
+
     else {
       return(GetMSbetweenAsTheInnerSquare(owp))
     }
-  
+
   }
 
   GetModelSummary <- function(owp) {
     model <- lm(score ~ group, data = owp$data)
-  
+
     return(summary(model))
   }
 
@@ -546,21 +513,21 @@ granovagg.1w <- function(data,
     } else {
       vertical.position <- owp$outer.square$ymin
     }
-    
+
     GetSquaresText(owp, vertical.position)
   }
-  
+
   GetSquaresText <- function(owp, position) {
     test.statistic         <- owp$model.summary$fstatistic["value"]
     test.statistic.rounded <- round(test.statistic, digits = 2)
-    
+
     if (length(levels(owp$data$group)) == 2) { # 2-group t-test case
       test.statistic.rounded = round(sqrt(test.statistic), digits = 2)
       text <- paste("t = ", test.statistic.rounded, sep = "")
     } else {
       text <- paste("F = ", test.statistic.rounded, sep = "")
-    } 
-    
+    }
+
     return(
       data.frame(label     = text,
                  x         = owp$squares$x.center,
@@ -569,21 +536,21 @@ granovagg.1w <- function(data,
       )
     )
   }
-  
+
   GetSquaresTextSize <- function(number) {
     if (number < 10) {
       return(2.5)
     }
-    
+
     else {
       return(2.25)
     }
-    
+
   }
 
   GetWithinGroupVariation <- function(owp) {
     lower.bound           <- min(owp$params$y.range)
-    contrast              <- owp$summary$contrast 
+    contrast              <- owp$summary$contrast
     standard.deviation    <- owp$summary$standard.deviation
     root.mean.square.variation <- sqrt(mean(owp$summary$variance))
     return(
@@ -600,7 +567,7 @@ granovagg.1w <- function(data,
     scale.factor <- 1/2
     return(scale.factor * data)
   }
-  
+
   GetBackgroundForGroupSizesAndLabels <- function(owp) {
     return(data.frame(ymin = max(owp$params$y.range) - 15 * owp$params$vertical.percent,
                       ymax = max(owp$params$y.range),
@@ -619,7 +586,7 @@ granovagg.1w <- function(data,
              angle       = 90
            )
     )
-  
+
   }
 
   GetGroupLabels <- function(owp) {
@@ -632,7 +599,7 @@ granovagg.1w <- function(data,
            )
     )
   }
-  
+
   AddOverplotInformation <- function(data, variable, tolerance) {
     more.than.two.groups <- length(data[[variable]]) > 2
     ordered.data <- ReorderDataByColumn(data, variable)
@@ -643,55 +610,11 @@ granovagg.1w <- function(data,
     else {
       overplotted <- rep(FALSE, times = length(data[[variable]]))
     }
-    
+
     return(data.frame(ordered.data, overplotted))
   }
 
   ######## Plot Functions Below
-
-  InitializeGgplot <- function() {
-    return(ggplot())
-  }
-
-  GrandMeanLine <- function(owp) {
-    return(
-      geom_hline(
-        color      = brewer.pal(n = 8, name = "Set1")[3],
-        alpha      = I(1/2),
-        size       = I(0.25),
-        yintercept = owp$stats$grand.mean
-      )
-    )
-  }
-
-  GrandMeanPoint <- function(owp) {
-    return(
-      geom_point(
-        aes(
-          x = 0, y = mean(score), color = factor(paste("Grand Mean"))
-        ), 
-        size = 2.5,
-        data = owp$data
-      )
-    )
-  }
-
-  JitteredScoresByGroupContrast <- function(owp) {
-    only.jitter.in.x.direction <- position_jitter(height = 0, width = GetDegreeOfJitter(owp))
-  
-    return( 
-      geom_point( 
-        aes(
-          x = contrast, 
-          y = score
-        ), 
-        alpha    = I(1),
-        size     = I(2),
-        data     = owp$data,
-        position = only.jitter.in.x.direction
-      )
-    )
-  }
 
   GroupMeanLine <- function(owp) {
     return(geom_segment(
@@ -701,7 +624,7 @@ granovagg.1w <- function(data,
                xend   = xend,
                yend   = yend,
                color  = factor(paste("Group Mean Line"))
-             ), 
+             ),
              alpha = I(1/2),
              data  = owp$group.mean.line
            )
@@ -709,11 +632,11 @@ granovagg.1w <- function(data,
   }
 
   GroupMeansByContrast <- function(owp) {
-    return( 
-      geom_point( 
+    return(
+      geom_point(
                aes(
-                 x     = contrast, 
-                 y     = group.mean, 
+                 x     = contrast,
+                 y     = group.mean,
                  fill  = factor("Group Means")
                ),
                  size  = I(3),
@@ -725,17 +648,18 @@ granovagg.1w <- function(data,
     )
   }
 
-  Residuals <- function(owp) {      
+  Residuals <- function(owp, resid) {
     if (resid == TRUE) {
       return(
-        geom_rug_alt(
+        geom_rug(
                aes(
-                 x     = NULL, 
+                 x     = NULL,
                  y     = within.group.residuals,
-                 color = factor(within.1.sd.of.the.mean.of.all.residuals) 
+                 color = factor(within.1.sd.of.the.mean.of.all.residuals)
                ),
                alpha = I(1),
-               data  = owp$residuals
+               data  = owp$residuals,
+               sides = "l"
         )
       )
     }
@@ -743,14 +667,14 @@ granovagg.1w <- function(data,
 
   SquaresForFstatistic <- function() {
     output <- NULL
-    
+
     if (print.squares == TRUE) {
       output <- list(OuterSquare(), InnerSquare())
     }
-    
+
     return(output)
   }
-  
+
   OuterSquare <- function() {
     return(
       geom_rect(
@@ -781,7 +705,7 @@ granovagg.1w <- function(data,
     )
   }
 
-  SquaresText <- function(owp) {    
+  SquaresText <- function(owp) {
     return(
       geom_text(
               aes(
@@ -824,11 +748,11 @@ granovagg.1w <- function(data,
       )
     )
   }
-  
+
   GetWithinGroupVariationSize <- function () {
     return(1.5)
   }
-  
+
   BaselineWithinGroupVariation <- function(owp) {
     return(
       geom_hline(aes(yintercept = baseline.variation),
@@ -837,15 +761,15 @@ granovagg.1w <- function(data,
         data  = owp$variation
       )
     )
-    
+
   }
-  
+
   ColorScale <- function(owp) {
     output <- scale_color_manual(values = owp$colors$stroke, name = "")
 
     if(exists("guides")) {
       output <- scale_color_manual(
-                  values = owp$colors$stroke, 
+                  values = owp$colors$stroke,
                   name = "",
                   guide = "legend"
                 )
@@ -860,21 +784,21 @@ granovagg.1w <- function(data,
 
   XLabel <- function(xlab) {
     label.to.output <- xlab
-    
+
     if ((!is.null(xlab)) && (xlab == "default_x_label")) {
       label.to.output <- "Contrast coefficients based on group means"
     }
-    
+
     return(xlab(label.to.output))
   }
 
-  YLabel <- function(ylab) {  
+  YLabel <- function(ylab) {
     label.to.output <- ylab
-    
+
     if ((!is.null(ylab)) && (ylab == "default_y_label")) {
       label.to.output <- "Dependent variable (response)"
     }
-  
+
     return(ylab(label.to.output))
   }
 
@@ -942,13 +866,13 @@ granovagg.1w <- function(data,
       )
     }
   }
-  
+
   GetGroupLabelSize <- function() {
     return(3)
   }
-  
+
   RotateXTicks <- function() {
-    return(opts(axis.text.x = theme_text(angle = 90)))
+    return(theme(axis.text.x = element_text(angle = 90)))
   }
 
   ForceCoordinateAxesToBeEqual <- function(owp) {
@@ -961,30 +885,32 @@ granovagg.1w <- function(data,
     )
   }
 
-  PlotTitle <- function (main) {    
+  PlotTitle <- function (main) {
     title.to.output <- main
-    
+
     if ( !is.null(title.to.output) && (title.to.output == "default_granova_title")) {
       title.to.output <- GetClassicTitle()
     }
-  
-    return(opts(title = title.to.output))
+
+    return(
+      ggtitle(title.to.output)
+    )
   }
 
   RemoveSizeElementFromLegend <- function() {
     # return(scale_size_continuous(legend = FALSE))
     return(NULL)
   }
-  
+
   ### Warning Function Below
-  
+
   PrintOverplotWarning <- function(owp, digits.to.round) {
     if (TRUE %in% owp$overplot$overplotted) {
-      overplotted.groups <- subset(owp$overplot, 
+      overplotted.groups <- subset(owp$overplot,
                                    overplotted == TRUE,
                                    select = c("group", "group.mean", "contrast")
                             )
-      overplotted.groups <- transform(overplotted.groups, 
+      overplotted.groups <- transform(overplotted.groups,
                                       group.mean = round(group.mean, digits = digits.to.round),
                                       contrast   = round(contrast, digits = digits.to.round)
                             )
@@ -992,9 +918,9 @@ granovagg.1w <- function(data,
       print(overplotted.groups)
     }
   }
-  
+
   PrintLinearModelSummary <- function(owp) {
-    
+
     if (length(levels(owp$data$group)) == 2) {
       PrintTtest(owp$data[, c("score", "group")])
     } else {
@@ -1002,18 +928,18 @@ granovagg.1w <- function(data,
       print(owp$model.summary)
     }
   }
-  
+
   PrintTtest <- function(data) {
     unstacked.data <- unstack(data, score ~ group)
     message("\nBelow is a t-test summary of your input data")
     print(
-      t.test(unstacked.data[, 1], 
+      t.test(unstacked.data[, 1],
              unstacked.data[, 2],
              var.equal = TRUE
       )
     )
   }
-  
+
   # Pepare OWP object
   owp                       <- AdaptVariablesFromGranovaComputations()
   owp$summary               <- GetSummary(owp)
@@ -1034,15 +960,15 @@ granovagg.1w <- function(data,
 
 
   #Plot OWP object
-  p <- InitializeGgplot()
+  p <- InitializeGgplot_1w()
   p <- p + GrandMeanLine(owp)
   p <- p + GrandMeanPoint(owp)
   p <- p + ScaleX_1w(owp)
   p <- p + ScaleY_1w(owp)
-  p <- p + JitteredScoresByGroupContrast(owp)
+  p <- p + JitteredScoresByGroupContrast(owp, jj)
   p <- p + GroupMeanLine(owp)
   p <- p + GroupMeansByContrast(owp)
-  p <- p + Residuals(owp)
+  p <- p + Residuals(owp, resid)
   p <- p + MaxWithinGroupVariation(owp)
   p <- p + WithinGroupVariation(owp)
   p <- p + BaselineWithinGroupVariation(owp)

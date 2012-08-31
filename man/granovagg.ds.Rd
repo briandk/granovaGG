@@ -174,6 +174,6 @@ granovagg.ds(blood_lead,
 }
 \seealso{
   \code{\link{granovagg.1w}}, \code{\link{granovagg.ds}},
-  \code{\link{granovaGG}}, \code{\link{geom_rug_alt}}
+  \code{\link{granovaGG}}
 }
 
