@@ -14,7 +14,7 @@
 #' the one-way F statistic, the mean square between (MS.B), is a linear combination
 #' of the group means; each weight -- one for each group -- in the L.C. is (principally)
 #' a function of the difference between the group's mean and the grand
-#' mean, viz., (M_{j} - M..) where M_{j} denotes the jth group's mean, and M.. denotes
+#' mean, viz., \eqn{M_j} (M_{j} - M..) where M_{j} denotes the jth group's mean, and M.. denotes
 #' the grand mean. The L.C. can be written as a sum of products of the form
 #' MS.B = Sum((1/df.B)(n_j (M_j - M..) M_j)) for j = 1...J.
 #' The denominator of the F-statistic, MS.W
