@@ -16,16 +16,15 @@
 
 }}
 \source{
-  Fundamentals of Exploratory Analysis of Variance, Hoaglin
-  D., Mosteller F. and Tukey J. eds., Wiley, 1991, p. 100;
-  originally from Statistical Methods, 7th ed, Snedecor G.
-  and Cochran W. (1980), Iowa State Press.
+Fundamentals of Exploratory Analysis of Variance, Hoaglin
+D., Mosteller F. and Tukey J. eds., Wiley, 1991, p. 100;
+originally from Statistical Methods, 7th ed, Snedecor G.
+and Cochran W. (1980), Iowa State Press.
 }
 \description{
-  60 rats were fed varying diets to see which produced the
-  greatest weight gain.  Two diet factors were protein
-  type: beef, pork, chicken and protein level: high and
-  low.
+60 rats were fed varying diets to see which produced the
+greatest weight gain.  Two diet factors were protein type:
+beef, pork, chicken and protein level: high and low.
 }
 \keyword{datasets}
 

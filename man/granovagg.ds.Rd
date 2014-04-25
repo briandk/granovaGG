@@ -2,11 +2,10 @@
 \alias{granovagg.ds}
 \title{Elemental Graphic for Display of Dependent Sample Data}
 \usage{
-  granovagg.ds(data = NULL, revc = FALSE,
-    main = "default_granova_title", xlab = NULL,
-    ylab = NULL, conf.level = 0.95,
-    plot.theme = "theme_granova_ds", northeast.padding = 0,
-    southwest.padding = 0, ...)
+granovagg.ds(data = NULL, revc = FALSE, main = "default_granova_title",
+  xlab = NULL, ylab = NULL, conf.level = 0.95,
+  plot.theme = "theme_granova_ds", northeast.padding = 0,
+  southwest.padding = 0, ...)
 }
 \arguments{
   \item{data}{is an n X 2 dataframe or matrix. First column
@@ -50,48 +49,48 @@
   \item{...}{Optional arguments to/from other functions}
 }
 \value{
-  Returns a plot object of class \code{ggplot}.
+Returns a plot object of class \code{ggplot}.
 }
 \description{
-  Plots dependent sample data beginning from a scatterplot
-  for the X,Y pairs; proceeds to display difference scores
-  as point projections; also X and Y means, as well as the
-  mean of the difference scores.
+Plots dependent sample data beginning from a scatterplot
+for the X,Y pairs; proceeds to display difference scores as
+point projections; also X and Y means, as well as the mean
+of the difference scores.
 }
 \details{
-  Paired X and Y values are plotted as scatterplot. The
-  identity reference line (for Y = X) is drawn. Parallel
-  projections of data points to (a lower-left) line segment
-  show how each point relates to its X-Y = D difference;
-  semitransparent "shadow" points are used to display the
-  distribution of difference scores, with thin grey lines
-  leading from each raw datapoint to its shadow projection
-  on the difference distribution. The range of that
-  difference score distribution is drawn as a blue line
-  beneath the shadow points and the mean difference is
-  displayed as a heavy dashed purple line, parallel to the
-  identity reference line. Means for X and Y are also
-  plotted (as thin dashed vertical and horizontal lines),
-  and rug plots are shown for the distributions of X (at
-  the top of graphic) and Y (on the right side). The 95\%
-  confidence interval for the population mean difference is
-  also shown graphically as a green band, perpendicular to
-  the mean treatment effect line. Because all data points
-  are plotted relative to the identity line, and summary
-  results are shown graphically, clusters, data trends,
-  outliers, and possible uses of transformations are
-  readily seen, possibly to be accommodated.
+Paired X and Y values are plotted as scatterplot. The
+identity reference line (for Y = X) is drawn. Parallel
+projections of data points to (a lower-left) line segment
+show how each point relates to its X-Y = D difference;
+semitransparent "shadow" points are used to display the
+distribution of difference scores, with thin grey lines
+leading from each raw datapoint to its shadow projection on
+the difference distribution. The range of that difference
+score distribution is drawn as a blue line beneath the
+shadow points and the mean difference is displayed as a
+heavy dashed purple line, parallel to the identity
+reference line. Means for X and Y are also plotted (as thin
+dashed vertical and horizontal lines), and rug plots are
+shown for the distributions of X (at the top of graphic)
+and Y (on the right side). The 95\% confidence interval for
+the population mean difference is also shown graphically as
+a green band, perpendicular to the mean treatment effect
+line. Because all data points are plotted relative to the
+identity line, and summary results are shown graphically,
+clusters, data trends, outliers, and possible uses of
+transformations are readily seen, possibly to be
+accommodated.
 
-  In summary, the graphic shows all initial data points
-  relative to the identity line, adds projections (to the
-  'north' and 'east') showing the marginal distributions of
-  X and Y, as well as projections to the 'southwest' where
-  the difference scores for each point are drawn. Means for
-  all three distributions are shown using straight lines;
-  the confidence interval for the population mean
-  difference score is also shown. Summary statistics are
-  printed as side effects of running the function for the
-  dependent sample analysis.
+In summary, the graphic shows all initial data points
+relative to the identity line, adds projections (to the
+'north' and 'east') showing the marginal distributions of X
+and Y, as well as projections to the 'southwest' where the
+difference scores for each point are drawn. Means for all
+three distributions are shown using straight lines; the
+confidence interval for the population mean difference
+score is also shown. Summary statistics are printed as side
+effects of running the function for the dependent sample
+analysis.
 }
 \examples{
 ### Using granovagg.ds to examine trends or effects for repeated measures data.
@@ -153,27 +152,27 @@ granovagg.ds(blood_lead,
 )
 }
 \author{
-  Brian A. Danielak \email{brian@briandk.com}\cr Robert M.
-  Pruzek \email{RMPruzek@yahoo.com}
+Brian A. Danielak \email{brian@briandk.com}\cr Robert M.
+Pruzek \email{RMPruzek@yahoo.com}
 
-  with contributions by:\cr William E. J. Doane
-  \email{wil@drdoane.com}\cr James E. Helmreich
-  \email{James.Helmreich@Marist.edu}\cr Jason Bryer
-  \email{jason@bryer.org}
+with contributions by:\cr William E. J. Doane
+\email{wil@drdoane.com}\cr James E. Helmreich
+\email{James.Helmreich@Marist.edu}\cr Jason Bryer
+\email{jason@bryer.org}
 }
 \references{
-  Pruzek, R. M., & Helmreich, J. E. (2009). Enhancing
-  Dependent Sample Analyses with Graphics. Journal of
-  Statistics Education, 17(1), 21.
+Pruzek, R. M., & Helmreich, J. E. (2009). Enhancing
+Dependent Sample Analyses with Graphics. Journal of
+Statistics Education, 17(1), 21.
 
-  Wickham, H. (2009). Ggplot2: Elegant Graphics for Data
-  Analysis. New York: Springer.
+Wickham, H. (2009). Ggplot2: Elegant Graphics for Data
+Analysis. New York: Springer.
 
-  Wilkinson, L. (1999). The Grammar of Graphics. Statistics
-  and computing. New York: Springer.
+Wilkinson, L. (1999). The Grammar of Graphics. Statistics
+and computing. New York: Springer.
 }
 \seealso{
-  \code{\link{granovagg.1w}}, \code{\link{granovagg.ds}},
-  \code{\link{granovaGG}}
+\code{\link{granovagg.1w}}, \code{\link{granovagg.ds}},
+\code{\link{granovaGG}}
 }
 
