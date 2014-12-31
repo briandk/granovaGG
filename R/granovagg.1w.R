@@ -817,15 +817,17 @@ granovagg.1w <- function(data,
   }
 
   BackgroundForGroupSizesAndLabels <- function(owp) {
-    return(geom_rect(
-                   aes(ymin  = ymin,
-                       ymax  = ymax,
-                       xmin  = xmin,
-                       xmax  = xmax
-                   ),
-                   fill  = "white",
-                   data  = owp$label.background
-           )
+    return(
+      geom_rect(
+        aes_string(
+          ymin  = "ymin",
+          ymax  = "ymax",
+          xmin  = "xmin",
+          xmax  = "xmax"
+        ),
+        fill  = "white",
+        data  = owp$label.background
+      )
     )
   }
 
