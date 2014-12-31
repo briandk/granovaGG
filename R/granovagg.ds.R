@@ -459,17 +459,19 @@ granovagg.ds <- function(data       = NULL,
   }
 
   Crossbow <- function(dsp) {
-    return(geom_segment(aes(x    = x,
-                            y    = y,
-                            xend = x.end,
-                            yend = y.end
-                           ),
-                        size  = I(3/4),
-                        alpha = I(3/4),
-                        color = dsp$colors$crossbow,
-                        data  = dsp$crossbow
-                       )
-          )
+    return(
+      geom_segment(
+        aes_string(x    = "x",
+                   y    = "y",
+                   xend = "x.end",
+                   yend = "y.end"
+        ),
+        size  = 3/4,
+        alpha = 3/4,
+        color = dsp$colors$crossbow,
+        data  = dsp$crossbow
+      )
+    )
   }
 
   CIBand <- function(dsp) {
