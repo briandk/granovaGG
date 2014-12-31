@@ -207,6 +207,10 @@ granovagg.contr <- function(data,
   }
 
   GetSummary <- function(data) {
+    # To appease R CMD check
+    x.values <- NULL
+    y.values <- NULL
+
     return(
       ddply(data, .(x.values > 0), summarise,
         contrasts          = mean(x.values),
@@ -254,12 +258,12 @@ granovagg.contr <- function(data,
   JitteredResponsesByContrast <- function (data) {
     return(
       geom_point(
-               aes(
-                 x = x.values,
-                 y = y.values
-               ),
-               data     = data,
-               position = position_jitter(height = 0, width = GetDegreeOfJitter(jj))
+        aes_string(
+          x = "x.values",
+          y = "y.values"
+        ),
+        data     = data,
+        position = position_jitter(height = 0, width = GetDegreeOfJitter(jj))
       )
     )
   }
@@ -267,14 +271,14 @@ granovagg.contr <- function(data,
   EffectsOfContrasts <- function(data) {
     return(
       geom_point(
-               aes(
-                 x = contrasts,
-                 y = responses
-               ),
-               data  = data,
-               color = brewer.pal(8, "Set1")[2],
-               size  = I(3),
-               alpha = 0.75
+        aes_string(
+          x = "contrasts",
+          y = "responses"
+        ),
+        data  = data,
+        color = brewer.pal(8, "Set1")[2],
+        size  = 3,
+        alpha = 0.75
       )
     )
   }
@@ -282,13 +286,13 @@ granovagg.contr <- function(data,
   ConnectEffectMeans <- function(data) {
     return(
       geom_line(
-               aes(
-                 x = contrasts,
-                 y = responses
-               ),
-               data  = data,
-               color = brewer.pal(8, "Set1")[2],
-               alpha = 1
+        aes_string(
+          x = "contrasts",
+          y = "responses"
+        ),
+        data  = data,
+        color = brewer.pal(8, "Set1")[2],
+        alpha = 1
       )
     )
   }
@@ -341,12 +345,23 @@ granovagg.contr <- function(data,
   }
 
   GetGroupSummary <- function(data) {
-    output <- ddply(data, .(variable), summarise,
-                group      = unique(variable),
-                group.mean = mean(value),
-                standard.deviation = sd(value)
-             )
-    output <- transform(output, pooled.standard.deviation = mean(standard.deviation^2)^0.5)
+    # Appease R CMD Check
+    variable <- NULL
+    value <- NULL
+    standard.deviation <- NULL
+
+    output <- ddply(
+      data,
+      .(variable),
+      summarise,
+      group      = unique(variable),
+      group.mean = mean(value),
+      standard.deviation = sd(value)
+    )
+    output <- transform(
+      output,
+      pooled.standard.deviation = mean(standard.deviation^2)^0.5
+    )
     return(subset(output, select = -variable))
   }
 
@@ -366,12 +381,12 @@ granovagg.contr <- function(data,
   RawScoresByGroup <- function(data) {
     return(
       geom_point(
-               aes(
-                 x = as.factor(variable),
-                 y = value
-               ),
-               data = data,
-               position = position_jitter(height = 0, width = 3 * GetDegreeOfJitter(jj))
+        aes_string(
+          x = "as.factor(variable)",
+          y = "value"
+        ),
+        data = data,
+        position = position_jitter(height = 0, width = 3 * GetDegreeOfJitter(jj))
       )
     )
   }
@@ -379,14 +394,14 @@ granovagg.contr <- function(data,
   MeansByGroup <- function(data) {
     return(
       geom_point(
-               aes(
-                 x = group,
-                 y = group.mean
-               ),
-               data  = data,
-               color = brewer.pal(8, "Set1")[2],
-               size  = I(3),
-               alpha = 1
+        aes_string(
+          x = "group",
+          y = "group.mean"
+        ),
+        data  = data,
+        color = brewer.pal(8, "Set1")[2],
+        size  = I(3),
+        alpha = 1
       )
     )
   }
@@ -394,13 +409,13 @@ granovagg.contr <- function(data,
   ConnectGroupResponseMeans <- function(data) {
     return(
       geom_line(
-               aes(
-                 x = group,
-                 y = group.mean
-               ),
-               data  = data,
-               color = brewer.pal(8, "Set1")[2],
-               alpha = 1
+        aes_string(
+          x = "group",
+          y = "group.mean"
+        ),
+        data  = data,
+        color = brewer.pal(8, "Set1")[2],
+        alpha = 1
       )
     )
   }

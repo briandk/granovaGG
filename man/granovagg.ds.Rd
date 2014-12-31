@@ -83,9 +83,10 @@ analysis.
 # graphic we're looking for the effect of treatment on patients with anorexia.
 
 data(anorexia.sub)
-granovagg.ds(anorexia.sub, 
-             revc = TRUE, 
-             main = "Assessment Plot for weights to assess Family Therapy treatment for Anorexia Patients",
+granovagg.ds(anorexia.sub,
+             revc = TRUE,
+             main = "Assessment Plot for weights to assess\\
+                     Family Therapy treatment for Anorexia Patients",
              xlab = "Weight after therapy (lbs.)",
              ylab = "Weight before therapy (lbs.)"
 )
@@ -97,7 +98,7 @@ granovagg.ds(anorexia.sub,
 # number of lesions produced on a tobacco leaf.
 
 data(tobacco)
-granovagg.ds(tobacco[, c("prep1", "prep2")], 
+granovagg.ds(tobacco[, c("prep1", "prep2")],
              main = "Local Lesions on Tobacco Leaves",
              xlab = "Virus Preparation 1",
              ylab = "Virus Preparation 2"
@@ -127,8 +128,8 @@ granovagg.ds(shoes,
 # with children whose parents did not work in lead-related industries.
 
 data(blood_lead)
-granovagg.ds(blood_lead, 
-             sw = .1, 
+granovagg.ds(blood_lead,
+             sw = .1,
              main = "Dependent Sample Assessment Plot
              Blood Lead Levels of Matched Pairs of Children",
              xlab = "Exposed (mg/dl)",
