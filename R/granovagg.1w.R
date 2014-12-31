@@ -728,13 +728,14 @@ granovagg.1w <- function(data,
   WithinGroupVariation <- function(owp) {
     return(
       geom_linerange(
-                aes(
-                  x      = x,
-                  ymin   = ymin,
-                  ymax   = ymax
-                ), color = "grey30",
-                   size  = GetWithinGroupVariationSize(),
-                   data  = owp$variation
+        aes_string(
+          x      = "x",
+          ymin   = "ymin",
+          ymax   = "ymax"
+        ),
+        color = "grey30",
+        size  = GetWithinGroupVariationSize(),
+        data  = owp$variation
       )
     )
   }
