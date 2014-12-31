@@ -506,18 +506,21 @@ granovagg.ds <- function(data       = NULL,
   }
 
   Trails <- function(dsp) {
-    return(geom_segment(aes(x    = x.trail.start,
-                            y    = y.trail.start,
-                            xend = x.trail.end,
-                            yend = y.trail.end
-                           ),
-                        data     = dsp$trails,
-                        size     = I(1/3),
-                        color    = "black",
-                        linetype = 1,
-                        alpha    = I(1/10)
-                       )
-          )
+    return(
+      geom_segment(
+        aes_string(
+          x    = "x.trail.start",
+          y    = "y.trail.start",
+          xend = "x.trail.end",
+          yend = "y.trail.end"
+        ),
+        data     = dsp$trails,
+        size     = 1/3,
+        color    = "black",
+        linetype = 1,
+        alpha    = 1/10
+      )
+    )
   }
 
   ColorScale <- function(dsp) {
