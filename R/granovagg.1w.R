@@ -942,15 +942,32 @@ granovagg.1w <- function(data,
   ### Warning Function Below
 
   PrintOverplotWarning <- function(owp, digits.to.round) {
+    # To appease R CMD Check
+    overplotted <- NULL
+    group.mean <- NULL
+    contrast <- NULL
+
     if (TRUE %in% owp$overplot$overplotted) {
-      overplotted.groups <- subset(owp$overplot,
-                                   overplotted == TRUE,
-                                   select = c("group", "group.mean", "contrast")
-                            )
-      overplotted.groups <- transform(overplotted.groups,
-                                      group.mean = round(group.mean, digits = digits.to.round),
-                                      contrast   = round(contrast, digits = digits.to.round)
-                            )
+      overplotted.groups <- subset(
+        owp$overplot,
+        overplotted == TRUE,
+        select = c(
+          "group",
+          "group.mean",
+          "contrast"
+        )
+      )
+      overplotted.groups <- transform(
+        overplotted.groups,
+        group.mean = round(
+          group.mean,
+          digits = digits.to.round
+        ),
+        contrast = round(
+          contrast,
+          digits = digits.to.round
+        )
+      )
       message("\nThe following groups are likely to be overplotted")
       print(overplotted.groups)
     }
