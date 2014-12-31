@@ -271,14 +271,14 @@ granovagg.contr <- function(data,
   EffectsOfContrasts <- function(data) {
     return(
       geom_point(
-               aes(
-                 x = contrasts,
-                 y = responses
-               ),
-               data  = data,
-               color = brewer.pal(8, "Set1")[2],
-               size  = I(3),
-               alpha = 0.75
+        aes_string(
+          x = "contrasts",
+          y = "responses"
+        ),
+        data  = data,
+        color = brewer.pal(8, "Set1")[2],
+        size  = 3,
+        alpha = 0.75
       )
     )
   }
