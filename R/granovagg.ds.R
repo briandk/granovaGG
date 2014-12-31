@@ -477,11 +477,12 @@ granovagg.ds <- function(data       = NULL,
   CIBand <- function(dsp) {
     return(
       geom_segment(
-        aes_string(x     = "x",
-                   y     = "y",
-                   xend  = "x.end",
-                   yend  = "y.end",
-                   color = "color"
+        aes_string(
+          x     = "x",
+          y     = "y",
+          xend  = "x.end",
+          yend  = "y.end",
+          color = "color"
         ),
         size = 2,
         data = dsp$CIBand
@@ -490,15 +491,18 @@ granovagg.ds <- function(data       = NULL,
   }
 
   Shadows <- function(dsp) {
-    return(geom_point(aes(x = x.shadow,
-                          y = y.shadow
-                         ),
-                      data  = dsp$shadow,
-                      size  = dsp$params$point.size,
-                      shape = 16,
-                      alpha = I(1/2)
-                     )
-          )
+    return(
+      geom_point(
+        aes_string(
+          x = "x.shadow",
+          y = "y.shadow"
+        ),
+        data  = dsp$shadow,
+        size  = dsp$params$point.size,
+        shape = 16,
+        alpha = 1/2
+      )
+    )
   }
 
   Trails <- function(dsp) {
