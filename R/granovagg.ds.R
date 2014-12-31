@@ -475,16 +475,18 @@ granovagg.ds <- function(data       = NULL,
   }
 
   CIBand <- function(dsp) {
-    return(geom_segment(aes(x     = x,
-                            y     = y,
-                            xend  = x.end,
-                            yend  = y.end,
-                            color = color
-                           ),
-                        size = I(2),
-                        data = dsp$CIBand
-                       )
-          )
+    return(
+      geom_segment(
+        aes_string(x     = "x",
+                   y     = "y",
+                   xend  = "x.end",
+                   yend  = "y.end",
+                   color = "color"
+        ),
+        size = 2,
+        data = dsp$CIBand
+      )
+    )
   }
 
   Shadows <- function(dsp) {
