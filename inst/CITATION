@@ -9,8 +9,8 @@ bibentry(
                   person(c("Jason"), "Bryer", role = "ctb")
                  ),
   title       = "granovaGG: Elemental Graphics for Analysis of Variance using ggplot2",
-  year        = "2011",
+  year        = "2014",
   url         = "http://github.com/briandk/granovaGG",
-  note        = "R package version 1.0",
-  textVersion = "Danielak, B. A., Pruzek, R. M., Doane, W. E. J., Helmreich, J. E., & Bryer, J. (2011). granovaGG: Elemental Graphics for Analysis of Variance using ggplot2. R package version 1.0. http://github.com/briandk/granovaGG"
+  note        = "R package version 1.2",
+  textVersion = "Danielak, B. A., Pruzek, R. M., Doane, W. E. J., Helmreich, J. E., & Bryer, J. (2014). granovaGG: Elemental Graphics for Analysis of Variance using ggplot2. R package version 1.2. http://github.com/briandk/granovaGG"
 )

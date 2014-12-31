@@ -121,6 +121,7 @@ granovagg.1w <- function(data,
                 )
 
 {
+
   yy <- data
 
   CoerceHigherDimensionalDataToMatrix <- function(data) {
@@ -323,6 +324,10 @@ granovagg.1w <- function(data,
   }
 
   GetSummary <- function(owp) {
+    # To appease R CMD Check
+    score <- NULL
+    contrast <- NULL
+
     return(
       ddply(owp$data, .(group), summarise,
         group              = unique(group),
@@ -338,6 +343,9 @@ granovagg.1w <- function(data,
   }
 
   PrintGroupSummary <- function(data, digits.to.round) {
+    # To appease R CMD Check
+    maximum.score <- NULL
+
     groups <- subset(data, select = group)
     stats  <- subset(data, select = c(-group, -maximum.score))
     rounded.stats <- round(stats, digits = digits.to.round)
@@ -617,33 +625,34 @@ granovagg.1w <- function(data,
   ######## Plot Functions Below
 
   GroupMeanLine <- function(owp) {
-    return(geom_segment(
-             aes(
-               x      = x,
-               y      = y,
-               xend   = xend,
-               yend   = yend,
-               color  = factor(paste("Group Mean Line"))
-             ),
-             alpha = I(1/2),
-             data  = owp$group.mean.line
-           )
+    return(
+      geom_segment(
+        aes_string(
+          x      = "x",
+          y      = "y",
+          xend   = "xend",
+          yend   = "yend",
+          color  = "factor('Group Mean Line')"
+        ),
+        alpha = I(1/2),
+        data  = owp$group.mean.line
+      )
     )
   }
 
   GroupMeansByContrast <- function(owp) {
     return(
       geom_point(
-               aes(
-                 x     = contrast,
-                 y     = group.mean,
-                 fill  = factor("Group Means")
-               ),
-                 size  = I(3),
-                 shape = 24,
-                 color = "black",
-                 alpha = 0.50,
-                 data  = owp$summary
+        aes_string(
+          x     = "contrast",
+          y     = "group.mean",
+          fill  = "factor('Group Means')"
+        ),
+        size  = I(3),
+        shape = 24,
+        color = "black",
+        alpha = 0.50,
+        data  = owp$summary
       )
     )
   }
@@ -652,14 +661,14 @@ granovagg.1w <- function(data,
     if (resid == TRUE) {
       return(
         geom_rug(
-               aes(
-                 x     = NULL,
-                 y     = within.group.residuals,
-                 color = factor(within.1.sd.of.the.mean.of.all.residuals)
-               ),
-               alpha = I(1),
-               data  = owp$residuals,
-               sides = "l"
+          aes_string(
+            x     = "NULL",
+            y     = "within.group.residuals",
+            color = "factor(within.1.sd.of.the.mean.of.all.residuals)"
+          ),
+          alpha = I(1),
+          data  = owp$residuals,
+          sides = "l"
         )
       )
     }
@@ -678,14 +687,15 @@ granovagg.1w <- function(data,
   OuterSquare <- function() {
     return(
       geom_rect(
-              aes(
-                xmin   = xmin,
-                xmax   = xmax,
-                ymin   = ymin,
-                ymax   = ymax,
-                fill   = fill,
-                color  = NULL
-              ), data  = owp$outer.square
+        aes_string(
+          xmin   = "xmin",
+          xmax   = "xmax",
+          ymin   = "ymin",
+          ymax   = "ymax",
+          fill   = "fill",
+          color  = "NULL"
+        ),
+        data  = owp$outer.square
       )
     )
   }
@@ -693,14 +703,15 @@ granovagg.1w <- function(data,
   InnerSquare <- function() {
     return(
       geom_rect(
-              aes(
-                xmin   = xmin,
-                xmax   = xmax,
-                ymin   = ymin,
-                ymax   = ymax,
-                fill   = fill,
-                color  = NULL
-              ), data  = owp$inner.square,
+        aes_string(
+          xmin   = "xmin",
+          xmax   = "xmax",
+          ymin   = "ymin",
+          ymax   = "ymax",
+          fill   = "fill",
+          color  = "NULL"
+        ),
+        data  = owp$inner.square,
       )
     )
   }
@@ -708,15 +719,15 @@ granovagg.1w <- function(data,
   SquaresText <- function(owp) {
     return(
       geom_text(
-              aes(
-                x     = x,
-                y     = y,
-                label = label
-              ),
-              color = "grey20",
-              size  = owp$squares.text$text.size,
-              data  = owp$squares.text,
-              vjust = ifelse(print.squares == TRUE, 0.5, -1)
+        aes_string(
+          x     = "x",
+          y     = "y",
+          label = "label"
+        ),
+        color = "grey20",
+        size  = owp$squares.text$text.size,
+        data  = owp$squares.text,
+        vjust = ifelse(print.squares == TRUE, 0.5, -1)
       )
     )
   }
@@ -724,13 +735,14 @@ granovagg.1w <- function(data,
   WithinGroupVariation <- function(owp) {
     return(
       geom_linerange(
-                aes(
-                  x      = x,
-                  ymin   = ymin,
-                  ymax   = ymax
-                ), color = "grey30",
-                   size  = GetWithinGroupVariationSize(),
-                   data  = owp$variation
+        aes_string(
+          x      = "x",
+          ymin   = "ymin",
+          ymax   = "ymax"
+        ),
+        color = "grey30",
+        size  = GetWithinGroupVariationSize(),
+        data  = owp$variation
       )
     )
   }
@@ -738,13 +750,14 @@ granovagg.1w <- function(data,
   MaxWithinGroupVariation <- function(owp) {
     return(
       geom_linerange(
-                aes(
-                  x      = x,
-                  ymin   = ymin,
-                  ymax   = max(ymax)
-                ), color = "grey",
-                   size  = GetWithinGroupVariationSize(),
-                   data  = owp$variation
+        aes_string(
+          x      = "x",
+          ymin   = "ymin",
+          ymax   = "max(ymax)"
+        ),
+        color = "grey",
+        size  = GetWithinGroupVariationSize(),
+        data  = owp$variation
       )
     )
   }
@@ -755,31 +768,39 @@ granovagg.1w <- function(data,
 
   BaselineWithinGroupVariation <- function(owp) {
     return(
-      geom_hline(aes(yintercept = baseline.variation),
+      geom_hline(
+        aes_string(
+          yintercept = "baseline.variation"
+        ),
         color = "white",
         size  = I(1/4),
         data  = owp$variation
       )
     )
-
   }
 
   ColorScale <- function(owp) {
-    output <- scale_color_manual(values = owp$colors$stroke, name = "")
-
+    output <- scale_color_manual(
+      values = owp$colors$stroke,
+      name = ""
+    )
     if(exists("guides")) {
       output <- scale_color_manual(
-                  values = owp$colors$stroke,
-                  name = "",
-                  guide = "legend"
-                )
+        values = owp$colors$stroke,
+        name = "",
+        guide = "legend"
+      )
     }
-
     return(output)
   }
 
   FillScale <- function() {
-    return(scale_fill_manual(values = owp$colors$fill, name = ""))
+    return(
+      scale_fill_manual(
+        values = owp$colors$fill,
+        name = ""
+      )
+    )
   }
 
   XLabel <- function(xlab) {
@@ -803,66 +824,81 @@ granovagg.1w <- function(data,
   }
 
   BackgroundForGroupSizesAndLabels <- function(owp) {
-    return(geom_rect(
-                   aes(ymin  = ymin,
-                       ymax  = ymax,
-                       xmin  = xmin,
-                       xmax  = xmax
-                   ),
-                   fill  = "white",
-                   data  = owp$label.background
-           )
+    return(
+      geom_rect(
+        aes_string(
+          ymin  = "ymin",
+          ymax  = "ymax",
+          xmin  = "xmin",
+          xmax  = "xmax"
+        ),
+        fill  = "white",
+        data  = owp$label.background
+      )
     )
   }
 
   GroupSizes  <- function(owp) {
-    return(geom_text(
-             aes(x     = x,
-                 y     = y,
-                 label = label,
-                 angle = angle
-             ),
-           size  = 2.5,
-           color = "grey10",
-           hjust = 1,
-           vjust = 0.5,
-           data  = owp$group.sizes
-           )
+    return(
+      geom_text(
+        aes_string(
+          x     = "x",
+          y     = "y",
+          label = "label",
+          angle = "angle"
+        ),
+        size  = 2.5,
+        color = "grey10",
+        hjust = 1,
+        vjust = 0.5,
+        data  = owp$group.sizes
+      )
     )
   }
 
   NonOverplottedGroupLabels <- function(owp) {
+    overplotted <- NULL # to appease R CMD check
     if (FALSE %in% owp$group.labels$overplotted) {
-      return(geom_text(
-               aes(x     = x,
-                   y     = y,
-                   label = label,
-                   angle = angle
-               ),
-             size  = GetGroupLabelSize(),
-             color = "grey50",
-             hjust = 0.5,
-             vjust = 0.5,
-             data  = subset(owp$group.labels, overplotted == FALSE)
-             )
+      return(
+        geom_text(
+          aes_string(
+            x     = "x",
+            y     = "y",
+            label = "label",
+            angle = "angle"
+          ),
+          size  = GetGroupLabelSize(),
+          color = "grey50",
+          hjust = 0.5,
+          vjust = 0.5,
+          data  = subset(
+            owp$group.labels,
+            overplotted == FALSE
+          )
+        )
       )
     }
   }
 
   OverplottedGroupLabels <- function(owp) {
+    overplotted <- NULL # to appease R CMD check
     if (TRUE %in% owp$group.labels$overplotted) {
-      return(geom_text(
-               aes(x     = x,
-                   y     = y,
-                   label = label,
-                   angle = angle
-               ),
-             size  = GetGroupLabelSize(),
-             color = brewer.pal(n = 8, name = "Paired")[6],
-             hjust = 0.5,
-             vjust = 0.5,
-             data  = subset(owp$group.labels, overplotted == TRUE)
-             )
+      return(
+        geom_text(
+          aes_string(
+            x     = "x",
+            y     = "y",
+            label = "label",
+            angle = "angle"
+          ),
+          size  = GetGroupLabelSize(),
+          color = brewer.pal(n = 8, name = "Paired")[6],
+          hjust = 0.5,
+          vjust = 0.5,
+          data  = subset(
+            owp$group.labels,
+            overplotted == TRUE)
+        )
       )
     }
   }
@@ -872,11 +908,19 @@ granovagg.1w <- function(data,
   }
 
   RotateXTicks <- function() {
-    return(theme(axis.text.x = element_text(angle = 90)))
+    return(
+      theme(
+        axis.text.x = element_text(angle = 90)
+      )
+    )
   }
 
   ForceCoordinateAxesToBeEqual <- function(owp) {
-    return(coord_fixed(ratio = owp$params$aspect.ratio))
+    return(
+      coord_fixed(
+        ratio = owp$params$aspect.ratio
+      )
+    )
   }
 
   GetClassicTitle <- function () {
@@ -905,15 +949,32 @@ granovagg.1w <- function(data,
   ### Warning Function Below
 
   PrintOverplotWarning <- function(owp, digits.to.round) {
+    # To appease R CMD Check
+    overplotted <- NULL
+    group.mean <- NULL
+    contrast <- NULL
+
     if (TRUE %in% owp$overplot$overplotted) {
-      overplotted.groups <- subset(owp$overplot,
-                                   overplotted == TRUE,
-                                   select = c("group", "group.mean", "contrast")
-                            )
-      overplotted.groups <- transform(overplotted.groups,
-                                      group.mean = round(group.mean, digits = digits.to.round),
-                                      contrast   = round(contrast, digits = digits.to.round)
-                            )
+      overplotted.groups <- subset(
+        owp$overplot,
+        overplotted == TRUE,
+        select = c(
+          "group",
+          "group.mean",
+          "contrast"
+        )
+      )
+      overplotted.groups <- transform(
+        overplotted.groups,
+        group.mean = round(
+          group.mean,
+          digits = digits.to.round
+        ),
+        contrast = round(
+          contrast,
+          digits = digits.to.round
+        )
+      )
       message("\nThe following groups are likely to be overplotted")
       print(overplotted.groups)
     }

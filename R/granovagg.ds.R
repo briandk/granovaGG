@@ -232,6 +232,7 @@ granovagg.ds <- function(data       = NULL,
   }
 
   GetCrossElementCoordinates <- function(dsp) {
+    color <- NULL # to appease R CMD check
     crossbow <- dsp$crossbow
     ci.band  <- subset(dsp$CIBand, select = -color)
     output   <- rbind(crossbow, ci.band)
@@ -359,37 +360,54 @@ granovagg.ds <- function(data       = NULL,
   }
 
   TreatmentLine <- function(dsp) {
-    return(geom_abline(aes(intercept = intercept,
-                           slope     = slope,
-                           color     = color
-                          ),
-                       alpha    = 0.5,
-                       size     = I(1),
-                       linetype = "dashed",
-                       data     = dsp$treatment.line
-                      )
-          )
+    return(
+      geom_abline(
+        aes_string(
+          intercept = "intercept",
+          slope     = "slope",
+          color     = "color"
+        ),
+        lpha    = 0.5,
+        size     = I(1),
+        linetype = "dashed",
+        data     = dsp$treatment.line
+      )
+    )
   }
 
   RawData <- function(dsp) {
-    return(geom_point(size = dsp$params$point.size))
+    return(
+      geom_point(
+        size = dsp$params$point.size
+      )
+    )
   }
 
   IdentityLine <- function() {
-    return(geom_abline(slope     = 1,
-                       intercept = 0,
-                       alpha     = 0.75,
-                       size      = 1
-                      )
-          )
+    return(
+      geom_abline(
+        slope     = 1,
+        intercept = 0,
+        alpha     = 0.75,
+        size      = 1
+      )
+    )
   }
 
   ScaleX <- function(dsp) {
-    return(scale_x_continuous(limits = dsp$params$bounds))
+    return(
+      scale_x_continuous(
+        limits = dsp$params$bounds
+      )
+    )
   }
 
   ScaleY <- function(dsp) {
-    return(scale_y_continuous(limits = dsp$params$bounds))
+    return(
+      scale_y_continuous(
+        limits = dsp$params$bounds
+      )
+    )
   }
 
   PadViewingWindow <- function(params) {
@@ -398,8 +416,9 @@ granovagg.ds <- function(data       = NULL,
     padded.window = c(params$bounds[1] - sw.offset, params$bounds[2] + ne.offset)
 
     return(
-      coord_cartesian(xlim = padded.window,
-                      ylim = padded.window
+      coord_cartesian(
+        xlim = padded.window,
+        ylim = padded.window
       )
     )
   }
@@ -407,8 +426,8 @@ granovagg.ds <- function(data       = NULL,
   RugPlot <- function(dsp) {
     return(
       geom_rug(
-        size  = I(1/2),
-        alpha = I(1/3),
+        size  = 1/2,
+        alpha = 1/3,
         color = dsp$colors$rugplot,
         sides = "tr", # top and right sides
         data  = dsp$data
@@ -417,78 +436,92 @@ granovagg.ds <- function(data       = NULL,
   }
 
   XMeanLine <- function(dsp) {
-    return(geom_vline(xintercept = mean(GetXs(dsp$data)),
-                      color      = dsp$colors$mean.line,
-                      size       = dsp$params$mean.line.size,
-                      linetype   = "dashed",
-                      alpha      = I(1/2)
-                     )
-          )
+    return(
+      geom_vline(
+        xintercept = mean(GetXs(dsp$data)),
+        color      = dsp$colors$mean.line,
+        size       = dsp$params$mean.line.size,
+        linetype   = "dashed",
+        alpha      = I(1/2)
+      )
+    )
   }
 
   YMeanLine <- function(dsp)  {
-    return(geom_hline(yintercept = mean(GetYs(dsp$data)),
-                      color      = dsp$colors$mean.line,
-                      size       = dsp$params$mean.line.size,
-                      linetype   = "dashed",
-                      alpha      = I(1/2)
-                     )
-          )
-
+    return(
+      geom_hline(
+        yintercept = mean(GetYs(dsp$data)),
+        color      = dsp$colors$mean.line,
+        size       = dsp$params$mean.line.size,
+        linetype   = "dashed",
+        alpha      = I(1/2)
+      )
+    )
   }
 
   Crossbow <- function(dsp) {
-    return(geom_segment(aes(x    = x,
-                            y    = y,
-                            xend = x.end,
-                            yend = y.end
-                           ),
-                        size  = I(3/4),
-                        alpha = I(3/4),
-                        color = dsp$colors$crossbow,
-                        data  = dsp$crossbow
-                       )
-          )
+    return(
+      geom_segment(
+        aes_string(x    = "x",
+                   y    = "y",
+                   xend = "x.end",
+                   yend = "y.end"
+        ),
+        size  = 3/4,
+        alpha = 3/4,
+        color = dsp$colors$crossbow,
+        data  = dsp$crossbow
+      )
+    )
   }
 
   CIBand <- function(dsp) {
-    return(geom_segment(aes(x     = x,
-                            y     = y,
-                            xend  = x.end,
-                            yend  = y.end,
-                            color = color
-                           ),
-                        size = I(2),
-                        data = dsp$CIBand
-                       )
-          )
+    return(
+      geom_segment(
+        aes_string(
+          x     = "x",
+          y     = "y",
+          xend  = "x.end",
+          yend  = "y.end",
+          color = "color"
+        ),
+        size = 2,
+        data = dsp$CIBand
+      )
+    )
   }
 
   Shadows <- function(dsp) {
-    return(geom_point(aes(x = x.shadow,
-                          y = y.shadow
-                         ),
-                      data  = dsp$shadow,
-                      size  = dsp$params$point.size,
-                      shape = 16,
-                      alpha = I(1/2)
-                     )
-          )
+    return(
+      geom_point(
+        aes_string(
+          x = "x.shadow",
+          y = "y.shadow"
+        ),
+        data  = dsp$shadow,
+        size  = dsp$params$point.size,
+        shape = 16,
+        alpha = 1/2
+      )
+    )
   }
 
   Trails <- function(dsp) {
-    return(geom_segment(aes(x    = x.trail.start,
-                            y    = y.trail.start,
-                            xend = x.trail.end,
-                            yend = y.trail.end
-                           ),
-                        data     = dsp$trails,
-                        size     = I(1/3),
-                        color    = "black",
-                        linetype = 1,
-                        alpha    = I(1/10)
-                       )
-          )
+    return(
+      geom_segment(
+        aes_string(
+          x    = "x.trail.start",
+          y    = "y.trail.start",
+          xend = "x.trail.end",
+          yend = "y.trail.end"
+        ),
+        data     = dsp$trails,
+        size     = 1/3,
+        color    = "black",
+        linetype = 1,
+        alpha    = 1/10
+      )
+    )
   }
 
   ColorScale <- function(dsp) {

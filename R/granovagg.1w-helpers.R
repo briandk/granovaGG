@@ -1,11 +1,13 @@
 IsFSignificant <- function(model.summary) {
-  f.critical  <- qf(p   = 0.95,
-                    df1 = model.summary$fstatistic["numdf"],
-                    df2 = model.summary$fstatistic["dendf"]
-                 )
-  return(as.logical(
-           model.summary$fstatistic["value"] > f.critical
-         )
+  f.critical  <- qf(
+    p   = 0.95,
+    df1 = model.summary$fstatistic["numdf"],
+    df2 = model.summary$fstatistic["dendf"]
+  )
+  return(
+    as.logical(
+      model.summary$fstatistic["value"] > f.critical
+    )
   )
 }
 
@@ -28,8 +30,10 @@ GrandMeanLine <- function(owp) {
 GrandMeanPoint <- function(owp) {
   return(
     geom_point(
-      aes(
-        x = 0, y = mean(score), color = factor(paste("Grand Mean"))
+      aes_string(
+        x = "0",
+        y = "mean(score)",
+        color = 'factor(paste("Grand Mean"))'
       ),
       size = 2.5,
       data = owp$data
@@ -38,16 +42,19 @@ GrandMeanPoint <- function(owp) {
 }
 
 JitteredScoresByGroupContrast <- function(owp, jj) {
-  only.jitter.in.x.direction <- position_jitter(height = 0, width = GetDegreeOfJitter_1w(owp, jj))
+  only.jitter.in.x.direction <- position_jitter(
+    height = 0,
+    width = GetDegreeOfJitter_1w(owp, jj)
+  )
 
   return(
     geom_point(
-      aes(
-        x = contrast,
-        y = score
+      aes_string(
+        x = "contrast",
+        y = "score"
       ),
-      alpha    = I(1),
-      size     = I(2),
+      alpha    = 1,
+      size     = 2,
       data     = owp$data,
       position = only.jitter.in.x.direction
     )
