@@ -425,8 +425,8 @@ granovagg.ds <- function(data       = NULL,
   RugPlot <- function(dsp) {
     return(
       geom_rug(
-        size  = I(1/2),
-        alpha = I(1/3),
+        size  = 1/2,
+        alpha = 1/3,
         color = dsp$colors$rugplot,
         sides = "tr", # top and right sides
         data  = dsp$data
