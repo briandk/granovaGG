@@ -409,13 +409,13 @@ granovagg.contr <- function(data,
   ConnectGroupResponseMeans <- function(data) {
     return(
       geom_line(
-               aes(
-                 x = group,
-                 y = group.mean
-               ),
-               data  = data,
-               color = brewer.pal(8, "Set1")[2],
-               alpha = 1
+        aes_string(
+          x = "group",
+          y = "group.mean"
+        ),
+        data  = data,
+        color = brewer.pal(8, "Set1")[2],
+        alpha = 1
       )
     )
   }
