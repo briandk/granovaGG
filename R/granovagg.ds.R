@@ -375,24 +375,38 @@ granovagg.ds <- function(data       = NULL,
   }
 
   RawData <- function(dsp) {
-    return(geom_point(size = dsp$params$point.size))
+    return(
+      geom_point(
+        size = dsp$params$point.size
+      )
+    )
   }
 
   IdentityLine <- function() {
-    return(geom_abline(slope     = 1,
-                       intercept = 0,
-                       alpha     = 0.75,
-                       size      = 1
-                      )
-          )
+    return(
+      geom_abline(
+        slope     = 1,
+        intercept = 0,
+        alpha     = 0.75,
+        size      = 1
+      )
+    )
   }
 
   ScaleX <- function(dsp) {
-    return(scale_x_continuous(limits = dsp$params$bounds))
+    return(
+      scale_x_continuous(
+        limits = dsp$params$bounds
+      )
+    )
   }
 
   ScaleY <- function(dsp) {
-    return(scale_y_continuous(limits = dsp$params$bounds))
+    return(
+      scale_y_continuous(
+        limits = dsp$params$bounds
+      )
+    )
   }
 
   PadViewingWindow <- function(params) {
@@ -401,8 +415,9 @@ granovagg.ds <- function(data       = NULL,
     padded.window = c(params$bounds[1] - sw.offset, params$bounds[2] + ne.offset)
 
     return(
-      coord_cartesian(xlim = padded.window,
-                      ylim = padded.window
+      coord_cartesian(
+        xlim = padded.window,
+        ylim = padded.window
       )
     )
   }
