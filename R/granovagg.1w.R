@@ -680,14 +680,15 @@ granovagg.1w <- function(data,
   OuterSquare <- function() {
     return(
       geom_rect(
-              aes(
-                xmin   = xmin,
-                xmax   = xmax,
-                ymin   = ymin,
-                ymax   = ymax,
-                fill   = fill,
-                color  = NULL
-              ), data  = owp$outer.square
+        aes_string(
+          xmin   = "xmin",
+          xmax   = "xmax",
+          ymin   = "ymin",
+          ymax   = "ymax",
+          fill   = "fill",
+          color  = "NULL"
+        ),
+        data  = owp$outer.square
       )
     )
   }
@@ -695,14 +696,15 @@ granovagg.1w <- function(data,
   InnerSquare <- function() {
     return(
       geom_rect(
-              aes(
-                xmin   = xmin,
-                xmax   = xmax,
-                ymin   = ymin,
-                ymax   = ymax,
-                fill   = fill,
-                color  = NULL
-              ), data  = owp$inner.square,
+        aes_string(
+          xmin   = "xmin",
+          xmax   = "xmax",
+          ymin   = "ymin",
+          ymax   = "ymax",
+          fill   = "fill",
+          color  = "NULL"
+        ),
+        data  = owp$inner.square,
       )
     )
   }
