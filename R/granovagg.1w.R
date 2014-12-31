@@ -618,33 +618,34 @@ granovagg.1w <- function(data,
   ######## Plot Functions Below
 
   GroupMeanLine <- function(owp) {
-    return(geom_segment(
-             aes(
-               x      = x,
-               y      = y,
-               xend   = xend,
-               yend   = yend,
-               color  = factor(paste("Group Mean Line"))
-             ),
-             alpha = I(1/2),
-             data  = owp$group.mean.line
-           )
+    return(
+      geom_segment(
+        aes_string(
+          x      = "x",
+          y      = "y",
+          xend   = "xend",
+          yend   = "yend",
+          color  = "factor('Group Mean Line')"
+        ),
+        alpha = I(1/2),
+        data  = owp$group.mean.line
+      )
     )
   }
 
   GroupMeansByContrast <- function(owp) {
     return(
       geom_point(
-               aes(
-                 x     = contrast,
-                 y     = group.mean,
-                 fill  = factor("Group Means")
-               ),
-                 size  = I(3),
-                 shape = 24,
-                 color = "black",
-                 alpha = 0.50,
-                 data  = owp$summary
+        aes_string(
+          x     = "contrast",
+          y     = "group.mean",
+          fill  = "factor('Group Means')"
+        ),
+        size  = I(3),
+        shape = 24,
+        color = "black",
+        alpha = 0.50,
+        data  = owp$summary
       )
     )
   }
