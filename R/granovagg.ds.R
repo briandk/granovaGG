@@ -232,6 +232,7 @@ granovagg.ds <- function(data       = NULL,
   }
 
   GetCrossElementCoordinates <- function(dsp) {
+    color <- NULL # to appease R CMD check
     crossbow <- dsp$crossbow
     ci.band  <- subset(dsp$CIBand, select = -color)
     output   <- rbind(crossbow, ci.band)
