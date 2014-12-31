@@ -770,25 +770,30 @@ granovagg.1w <- function(data,
         data  = owp$variation
       )
     )
-
   }
 
   ColorScale <- function(owp) {
-    output <- scale_color_manual(values = owp$colors$stroke, name = "")
-
+    output <- scale_color_manual(
+      values = owp$colors$stroke,
+      name = ""
+    )
     if(exists("guides")) {
       output <- scale_color_manual(
-                  values = owp$colors$stroke,
-                  name = "",
-                  guide = "legend"
-                )
+        values = owp$colors$stroke,
+        name = "",
+        guide = "legend"
+      )
     }
-
     return(output)
   }
 
   FillScale <- function() {
-    return(scale_fill_manual(values = owp$colors$fill, name = ""))
+    return(
+      scale_fill_manual(
+        values = owp$colors$fill,
+        name = ""
+      )
+    )
   }
 
   XLabel <- function(xlab) {
