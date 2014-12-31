@@ -207,6 +207,10 @@ granovagg.contr <- function(data,
   }
 
   GetSummary <- function(data) {
+    # To appease R CMD check
+    x.values <- NULL
+    y.values <- NULL
+
     return(
       ddply(data, .(x.values > 0), summarise,
         contrasts          = mean(x.values),
