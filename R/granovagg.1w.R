@@ -324,6 +324,10 @@ granovagg.1w <- function(data,
   }
 
   GetSummary <- function(owp) {
+    # To appease R CMD Check
+    score <- NULL
+    contrast <- NULL
+
     return(
       ddply(owp$data, .(group), summarise,
         group              = unique(group),
@@ -339,6 +343,9 @@ granovagg.1w <- function(data,
   }
 
   PrintGroupSummary <- function(data, digits.to.round) {
+    # To appease R CMD Check
+    maximum.score <- NULL
+
     groups <- subset(data, select = group)
     stats  <- subset(data, select = c(-group, -maximum.score))
     rounded.stats <- round(stats, digits = digits.to.round)
