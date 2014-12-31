@@ -832,18 +832,20 @@ granovagg.1w <- function(data,
   }
 
   GroupSizes  <- function(owp) {
-    return(geom_text(
-             aes(x     = x,
-                 y     = y,
-                 label = label,
-                 angle = angle
-             ),
-           size  = 2.5,
-           color = "grey10",
-           hjust = 1,
-           vjust = 0.5,
-           data  = owp$group.sizes
-           )
+    return(
+      geom_text(
+        aes_string(
+          x     = "x",
+          y     = "y",
+          label = "label",
+          angle = "angle"
+        ),
+        size  = 2.5,
+        color = "grey10",
+        hjust = 1,
+        vjust = 0.5,
+        data  = owp$group.sizes
+      )
     )
   }
 
