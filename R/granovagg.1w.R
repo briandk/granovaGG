@@ -95,7 +95,6 @@
 #'
 #' @references Fundamentals of Exploratory Analysis of Variance, Hoaglin D.,
 #'   Mosteller F. and Tukey J. eds., Wiley, 1991.
-#' @include globalVariables.R
 #' @include granovagg.1w-helpers.R
 #' @include shared-functions.R
 #' @include theme-defaults.R
@@ -941,9 +940,6 @@ granovagg.1w <- function(data,
       )
     )
   }
-
-  # Appease R CMD Check
-  appeaseRCmdCheck()
 
   # Pepare OWP object
   owp                       <- AdaptVariablesFromGranovaComputations()
