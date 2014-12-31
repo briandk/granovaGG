@@ -345,12 +345,23 @@ granovagg.contr <- function(data,
   }
 
   GetGroupSummary <- function(data) {
-    output <- ddply(data, .(variable), summarise,
-                group      = unique(variable),
-                group.mean = mean(value),
-                standard.deviation = sd(value)
-             )
-    output <- transform(output, pooled.standard.deviation = mean(standard.deviation^2)^0.5)
+    # Appease R CMD Check
+    variable <- NULL
+    value <- NULL
+    standard.deviation <- NULL
+
+    output <- ddply(
+      data,
+      .(variable),
+      summarise,
+      group      = unique(variable),
+      group.mean = mean(value),
+      standard.deviation = sd(value)
+    )
+    output <- transform(
+      output,
+      pooled.standard.deviation = mean(standard.deviation^2)^0.5
+    )
     return(subset(output, select = -variable))
   }
 
