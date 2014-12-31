@@ -850,6 +850,7 @@ granovagg.1w <- function(data,
   }
 
   NonOverplottedGroupLabels <- function(owp) {
+    overplotted <- NULL # to appease R CMD check
     if (FALSE %in% owp$group.labels$overplotted) {
       return(
         geom_text(
@@ -873,19 +874,24 @@ granovagg.1w <- function(data,
   }
 
   OverplottedGroupLabels <- function(owp) {
+    overplotted <- NULL # to appease R CMD check
     if (TRUE %in% owp$group.labels$overplotted) {
-      return(geom_text(
-               aes(x     = x,
-                   y     = y,
-                   label = label,
-                   angle = angle
-               ),
-             size  = GetGroupLabelSize(),
-             color = brewer.pal(n = 8, name = "Paired")[6],
-             hjust = 0.5,
-             vjust = 0.5,
-             data  = subset(owp$group.labels, overplotted == TRUE)
-             )
+      return(
+        geom_text(
+          aes_string(
+            x     = "x",
+            y     = "y",
+            label = "label",
+            angle = "angle"
+          ),
+          size  = GetGroupLabelSize(),
+          color = brewer.pal(n = 8, name = "Paired")[6],
+          hjust = 0.5,
+          vjust = 0.5,
+          data  = subset(
+            owp$group.labels,
+            overplotted == TRUE)
+        )
       )
     }
   }
