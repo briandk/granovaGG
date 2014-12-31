@@ -42,16 +42,19 @@ GrandMeanPoint <- function(owp) {
 }
 
 JitteredScoresByGroupContrast <- function(owp, jj) {
-  only.jitter.in.x.direction <- position_jitter(height = 0, width = GetDegreeOfJitter_1w(owp, jj))
+  only.jitter.in.x.direction <- position_jitter(
+    height = 0,
+    width = GetDegreeOfJitter_1w(owp, jj)
+  )
 
   return(
     geom_point(
-      aes(
-        x = contrast,
-        y = score
+      aes_string(
+        x = "contrast",
+        y = "score"
       ),
-      alpha    = I(1),
-      size     = I(2),
+      alpha    = 1,
+      size     = 2,
       data     = owp$data,
       position = only.jitter.in.x.direction
     )
