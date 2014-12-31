@@ -851,18 +851,23 @@ granovagg.1w <- function(data,
 
   NonOverplottedGroupLabels <- function(owp) {
     if (FALSE %in% owp$group.labels$overplotted) {
-      return(geom_text(
-               aes(x     = x,
-                   y     = y,
-                   label = label,
-                   angle = angle
-               ),
-             size  = GetGroupLabelSize(),
-             color = "grey50",
-             hjust = 0.5,
-             vjust = 0.5,
-             data  = subset(owp$group.labels, overplotted == FALSE)
-             )
+      return(
+        geom_text(
+          aes_string(
+            x     = "x",
+            y     = "y",
+            label = "label",
+            angle = "angle"
+          ),
+          size  = GetGroupLabelSize(),
+          color = "grey50",
+          hjust = 0.5,
+          vjust = 0.5,
+          data  = subset(
+            owp$group.labels,
+            overplotted == FALSE
+          )
+        )
       )
     }
   }
