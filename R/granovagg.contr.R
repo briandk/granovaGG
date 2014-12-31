@@ -286,13 +286,13 @@ granovagg.contr <- function(data,
   ConnectEffectMeans <- function(data) {
     return(
       geom_line(
-               aes(
-                 x = contrasts,
-                 y = responses
-               ),
-               data  = data,
-               color = brewer.pal(8, "Set1")[2],
-               alpha = 1
+        aes_string(
+          x = "contrasts",
+          y = "responses"
+        ),
+        data  = data,
+        color = brewer.pal(8, "Set1")[2],
+        alpha = 1
       )
     )
   }
