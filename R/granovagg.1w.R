@@ -901,11 +901,19 @@ granovagg.1w <- function(data,
   }
 
   RotateXTicks <- function() {
-    return(theme(axis.text.x = element_text(angle = 90)))
+    return(
+      theme(
+        axis.text.x = element_text(angle = 90)
+      )
+    )
   }
 
   ForceCoordinateAxesToBeEqual <- function(owp) {
-    return(coord_fixed(ratio = owp$params$aspect.ratio))
+    return(
+      coord_fixed(
+        ratio = owp$params$aspect.ratio
+      )
+    )
   }
 
   GetClassicTitle <- function () {
