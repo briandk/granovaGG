@@ -761,7 +761,10 @@ granovagg.1w <- function(data,
 
   BaselineWithinGroupVariation <- function(owp) {
     return(
-      geom_hline(aes(yintercept = baseline.variation),
+      geom_hline(
+        aes_string(
+          yintercept = "baseline.variation"
+        ),
         color = "white",
         size  = I(1/4),
         data  = owp$variation
