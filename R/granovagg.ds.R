@@ -359,16 +359,19 @@ granovagg.ds <- function(data       = NULL,
   }
 
   TreatmentLine <- function(dsp) {
-    return(geom_abline(aes(intercept = intercept,
-                           slope     = slope,
-                           color     = color
-                          ),
-                       alpha    = 0.5,
-                       size     = I(1),
-                       linetype = "dashed",
-                       data     = dsp$treatment.line
-                      )
-          )
+    return(
+      geom_abline(
+        aes_string(
+          intercept = "intercept",
+          slope     = "slope",
+          color     = "color"
+        ),
+        lpha    = 0.5,
+        size     = I(1),
+        linetype = "dashed",
+        data     = dsp$treatment.line
+      )
+    )
   }
 
   RawData <- function(dsp) {
