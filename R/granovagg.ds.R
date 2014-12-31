@@ -435,24 +435,27 @@ granovagg.ds <- function(data       = NULL,
   }
 
   XMeanLine <- function(dsp) {
-    return(geom_vline(xintercept = mean(GetXs(dsp$data)),
-                      color      = dsp$colors$mean.line,
-                      size       = dsp$params$mean.line.size,
-                      linetype   = "dashed",
-                      alpha      = I(1/2)
-                     )
-          )
+    return(
+      geom_vline(
+        xintercept = mean(GetXs(dsp$data)),
+        color      = dsp$colors$mean.line,
+        size       = dsp$params$mean.line.size,
+        linetype   = "dashed",
+        alpha      = I(1/2)
+      )
+    )
   }
 
   YMeanLine <- function(dsp)  {
-    return(geom_hline(yintercept = mean(GetYs(dsp$data)),
-                      color      = dsp$colors$mean.line,
-                      size       = dsp$params$mean.line.size,
-                      linetype   = "dashed",
-                      alpha      = I(1/2)
-                     )
-          )
-
+    return(
+      geom_hline(
+        yintercept = mean(GetYs(dsp$data)),
+        color      = dsp$colors$mean.line,
+        size       = dsp$params$mean.line.size,
+        linetype   = "dashed",
+        alpha      = I(1/2)
+      )
+    )
   }
 
   Crossbow <- function(dsp) {
