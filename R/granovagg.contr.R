@@ -394,14 +394,14 @@ granovagg.contr <- function(data,
   MeansByGroup <- function(data) {
     return(
       geom_point(
-               aes(
-                 x = group,
-                 y = group.mean
-               ),
-               data  = data,
-               color = brewer.pal(8, "Set1")[2],
-               size  = I(3),
-               alpha = 1
+        aes_string(
+          x = "group",
+          y = "group.mean"
+        ),
+        data  = data,
+        color = brewer.pal(8, "Set1")[2],
+        size  = I(3),
+        alpha = 1
       )
     )
   }
