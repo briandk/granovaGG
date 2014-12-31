@@ -381,12 +381,12 @@ granovagg.contr <- function(data,
   RawScoresByGroup <- function(data) {
     return(
       geom_point(
-               aes(
-                 x = as.factor(variable),
-                 y = value
-               ),
-               data = data,
-               position = position_jitter(height = 0, width = 3 * GetDegreeOfJitter(jj))
+        aes_string(
+          x = "as.factor(variable)",
+          y = "value"
+        ),
+        data = data,
+        position = position_jitter(height = 0, width = 3 * GetDegreeOfJitter(jj))
       )
     )
   }
