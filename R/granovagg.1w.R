@@ -712,15 +712,15 @@ granovagg.1w <- function(data,
   SquaresText <- function(owp) {
     return(
       geom_text(
-              aes(
-                x     = x,
-                y     = y,
-                label = label
-              ),
-              color = "grey20",
-              size  = owp$squares.text$text.size,
-              data  = owp$squares.text,
-              vjust = ifelse(print.squares == TRUE, 0.5, -1)
+        aes_string(
+          x     = "x",
+          y     = "y",
+          label = "label"
+        ),
+        color = "grey20",
+        size  = owp$squares.text$text.size,
+        data  = owp$squares.text,
+        vjust = ifelse(print.squares == TRUE, 0.5, -1)
       )
     )
   }
