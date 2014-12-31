@@ -254,12 +254,12 @@ granovagg.contr <- function(data,
   JitteredResponsesByContrast <- function (data) {
     return(
       geom_point(
-               aes(
-                 x = x.values,
-                 y = y.values
-               ),
-               data     = data,
-               position = position_jitter(height = 0, width = GetDegreeOfJitter(jj))
+        aes_string(
+          x = "x.values",
+          y = "y.values"
+        ),
+        data     = data,
+        position = position_jitter(height = 0, width = GetDegreeOfJitter(jj))
       )
     )
   }
