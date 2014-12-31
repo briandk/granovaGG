@@ -654,14 +654,14 @@ granovagg.1w <- function(data,
     if (resid == TRUE) {
       return(
         geom_rug(
-               aes(
-                 x     = NULL,
-                 y     = within.group.residuals,
-                 color = factor(within.1.sd.of.the.mean.of.all.residuals)
-               ),
-               alpha = I(1),
-               data  = owp$residuals,
-               sides = "l"
+          aes_string(
+            x     = "NULL",
+            y     = "within.group.residuals",
+            color = "factor(within.1.sd.of.the.mean.of.all.residuals)"
+          ),
+          alpha = I(1),
+          data  = owp$residuals,
+          sides = "l"
         )
       )
     }
