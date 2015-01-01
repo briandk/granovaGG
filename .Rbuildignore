@@ -3,3 +3,5 @@ roxygen.R
 ^\.Rproj\.user$
 granovaGG.Rproj
 README.m*
+cran-comments.md
+
