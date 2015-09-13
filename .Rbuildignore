@@ -5,3 +5,4 @@ granovaGG.Rproj
 README.m*
 cran-comments.md
 
+^.*\.Rproj$
