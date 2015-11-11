@@ -367,7 +367,7 @@ granovagg.ds <- function(data       = NULL,
           slope     = "slope",
           color     = "color"
         ),
-        lpha    = 0.5,
+        alpha    = 0.5,
         size     = I(1),
         linetype = "dashed",
         data     = dsp$treatment.line
