@@ -90,6 +90,15 @@ granovagg.ds <- function(data       = NULL,
     data <- EnsureDataIsADataFrame(data)
     return(data)
   }
+  
+  FormatDataForPlotting <- function(dsp) {
+    return(
+      data.frame(
+        x_values = dsp$data[, 2],
+        y_values = dsp$data[, 1]
+      )
+    )
+  }
 
   CheckData <- function(data) {
     IsDataNull(data)
@@ -150,7 +159,7 @@ granovagg.ds <- function(data       = NULL,
   }
 
   GetEffect <- function(dsp) {
-    return(GetXs(dsp$data) - GetYs(dsp$data))
+    return(GetXs(dsp$plotting_data) - GetYs(dsp$plotting_data))
   }
 
   GetTtest <- function(data, conf.level) {
@@ -173,7 +182,10 @@ granovagg.ds <- function(data       = NULL,
   }
 
   GetGraphicsParams <- function(dsp) {
-    .aggregate.data.range  <- c(range(GetXs(dsp$data)), range(GetYs(dsp$data)))
+    .aggregate.data.range  <- c(
+      range(dsp$plotting_data$x_values), 
+      range(dsp$plotting_data$y_values)
+    )
     .extrema               <- c(max(.aggregate.data.range), min(.aggregate.data.range))
     .square.data.range     <- max(.extrema) - min(.extrema)
     .southwest.padding     <- (65/100) * .square.data.range
@@ -213,10 +225,10 @@ granovagg.ds <- function(data       = NULL,
   }
 
   GetCIBand <- function(dsp) {
-    return(data.frame(x.end = ((dsp$params$anchor + dsp$stats$lower.treatment.effect) / 2) - 3 * (dsp$params$shadow.offset),
-                      y.end = ((dsp$params$anchor - dsp$stats$lower.treatment.effect) / 2) - 3 * (dsp$params$shadow.offset),
-                      x     = ((dsp$params$anchor + dsp$stats$upper.treatment.effect) / 2) - 3 * (dsp$params$shadow.offset),
-                      y     = ((dsp$params$anchor - dsp$stats$upper.treatment.effect) / 2) - 3 * (dsp$params$shadow.offset),
+    return(data.frame(x.end = ((dsp$params$anchor + dsp$stats$lower.treatment.effect) / 2) - (3 * (dsp$params$shadow.offset)),
+                      y.end = ((dsp$params$anchor - dsp$stats$lower.treatment.effect) / 2) - (3 * (dsp$params$shadow.offset)),
+                      x     = ((dsp$params$anchor + dsp$stats$upper.treatment.effect) / 2) - (3 * (dsp$params$shadow.offset)),
+                      y     = ((dsp$params$anchor - dsp$stats$upper.treatment.effect) / 2) - (3 * (dsp$params$shadow.offset)),
                       color = factor(paste(100 * conf.level, "% CI", " (t = ", round(dsp$stats$t.statistic, digits = 2), ")", sep =""))
                      )
           )
@@ -224,7 +236,7 @@ granovagg.ds <- function(data       = NULL,
   }
 
   GetTreatmentLine <- function(dsp) {
-    return(data.frame(intercept = -dsp$stats$mean.treatment.effect,
+    return(data.frame(intercept = dsp$stats$mean.treatment.effect,
                       slope     = 1,
                       color     = factor(paste("Mean Diff. =", round(dsp$stats$mean.treatment.effect, digits = 2)))
                      )
@@ -248,8 +260,8 @@ granovagg.ds <- function(data       = NULL,
   }
 
   GetTrails <- function(dsp) {
-    return(data.frame(x.trail.start = GetXs(dsp$data),
-                      y.trail.start = GetYs(dsp$data),
+    return(data.frame(x.trail.start = dsp$plotting_data$x_values,
+                      y.trail.start = dsp$plotting_data$y_values,
                       x.trail.end   = GetXs(dsp$shadow),
                       y.trail.end   = GetYs(dsp$shadow)
                      )
@@ -329,6 +341,7 @@ granovagg.ds <- function(data       = NULL,
   }
 
   dsp                <- list(data = GetData(data))
+  dsp$plotting_data  <- FormatDataForPlotting(dsp)
   dsp$effect         <- GetEffect(dsp)
   dsp$stats          <- GetStats(dsp, conf.level)
   dsp$t.test         <- GetTtest(dsp$data, conf.level)
@@ -352,9 +365,11 @@ granovagg.ds <- function(data       = NULL,
   InitializeGgplot <- function(dsp) {
     return(
       ggplot(
-        aes_string(x = dsp$data[1],
-                   y = dsp$data[2]
-        ), data = dsp$data
+        aes_string(
+          x = "x_values",
+          y = "y_values"
+        ),
+        data = dsp$plotting_data
       )
     )
   }
@@ -378,6 +393,11 @@ granovagg.ds <- function(data       = NULL,
   RawData <- function(dsp) {
     return(
       geom_point(
+        aes_string(
+          x = "x_values",
+          y = "y_values"
+        ),
+        data = dsp$plotting_data,
         size = dsp$params$point.size
       )
     )
@@ -430,7 +450,7 @@ granovagg.ds <- function(data       = NULL,
         alpha = 1/3,
         color = dsp$colors$rugplot,
         sides = "tr", # top and right sides
-        data  = dsp$data
+        data  = dsp$plotting_data
       )
     )
   }
@@ -571,7 +591,7 @@ granovagg.ds <- function(data       = NULL,
   p <- p + Shadows(dsp)
   p <- p + Trails(dsp)
   p <- p + RawData(dsp)
-  p <- p + Theme(plot.theme)
+  # p <- p + Theme(plot.theme)
   p <- p + IdentityLine()
   p <- p + RugPlot(dsp)
   p <- p + Crossbow(dsp)
