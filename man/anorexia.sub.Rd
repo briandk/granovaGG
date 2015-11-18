@@ -9,9 +9,9 @@
 
 \describe{
 
-\item{Prewt}{Pretreatment weight of subject, in pounds.}
+\item{\code{Prewt}}{Pretreatment weight of subject, in pounds.}
 
-\item{Postwt}{Postreatment weight of subject, in pounds.}
+\item{\code{Postwt}}{Postreatment weight of subject, in pounds.}
 
 }}
 \source{

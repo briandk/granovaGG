@@ -151,9 +151,9 @@ NULL
 #'
 #' \describe{
 #'
-#' \item{Prewt}{Pretreatment weight of subject, in pounds.}
+#' \item{\code{Prewt}}{Pretreatment weight of subject, in pounds.}
 #'
-#' \item{Postwt}{Postreatment weight of subject, in pounds.}
+#' \item{\code{Postwt}}{Postreatment weight of subject, in pounds.}
 #'
 #' }
 #' @references Venables, W. N. and Ripley, B. D. (2002) Modern Applied
