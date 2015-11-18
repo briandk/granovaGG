@@ -1,13 +1,14 @@
 ### Using granovagg.ds to examine trends or effects for repeated measures data.
 
 # This example corresponds to case 1b in Pruzek and Helmreich (2009). In this
-# graphic we're looking for the effect of treatment on patients with anorexia.
+# graphic we're looking for the effect of Family Treatment on patients with anorexia.
 
 data(anorexia.sub)
+
 granovagg.ds(anorexia.sub,
              revc = TRUE,
-             main = "Assessment Plot for weights to assess\
-                     Family Therapy treatment for Anorexia Patients",
+             main = "Assessment Plot for weights to assess \
+                    Family Therapy treatment for Anorexia Patients",
              xlab = "Weight after therapy (lbs.)",
              ylab = "Weight before therapy (lbs.)"
 )
@@ -31,8 +32,7 @@ granovagg.ds(tobacco[, c("prep1", "prep2")],
 # data, we're comparing the wear resistance of two different shoe sole
 # materials, each randomly assigned to the feet of 10 boys.
 
-library(MASS) # Contains the shoes dataset
-shoes <- as.data.frame(shoes)
+data(shoes)
 granovagg.ds(shoes,
              revc = TRUE,
              main = "Shoe Wear",

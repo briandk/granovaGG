@@ -1,4 +1,3 @@
-#' @import grid
 theme_granova_1w <- function(base_size = 12) {
   theme_bw() %+replace%
     theme(

@@ -101,8 +101,43 @@ NULL
 #' @keywords datasets
 NULL
 
+#' Anorexia Data on Weight Change
+#'
+#' The anorexia data frame has 72 rows and 3 columns. Weight change data for young female anorexia patients.
+#' @name anorexia
+#' @docType data
+#' @format A dataframe with 72 observations of three variables:
+#' 
+#' \describe{
+#'
+#' \item{Treat}{Factor of three levels: "\code{Cont}" (control), "\code{CBT}" (Cognitive Behavioural treatment) and "\code{FT}" (family treatment).}
+#' 
+#' \item{Prewt}{Pretreatment weight of subject, in pounds.}
+#'
+#' \item{Postwt}{Postreatment weight of subject, in pounds.}
+#'}
+#'
+#' @references Venables, W. N. and Ripley, B. D. (2002) Modern Applied
+#'   Statistics with S. Fourth edition. Springer.
+#' @source Hand, D. J., Daly, F., McConway, K., Lunn, D. and Ostrowski, E. eds
+#'   (1993) A Handbook of Small Data Sets. Chapman & Hall, Data set 285 (p.
+#'   229)
+#' @keywords datasets
 
-#' Family Treatment Weight change data for young female anorexia patients.
+NULL
+
+#' Shoe wear data of Box, Hunter and Hunter
+#' 
+#' A list of two vectors, giving the wear of shoes of materials A and B for one foot each of ten boys.
+#' 
+#' @name shoes
+#' @docType data
+#' @references Venables, W. N. and Ripley, B. D. (2002) \emph{Modern Applied Statistics with S}. Fourth edition. Springer.
+#' @source G. E. P. Box, W. G. Hunter and J. S. Hunter (1978) \emph{Statistics for Experimenters}. Wiley, p. 100
+
+NULL 
+
+#' Family Treatment Weight change data for young female anorexia patients (subset).
 #'
 #' The MASS package includes the dataset \code{anorexia}, containing pre and
 #' post treatment weights for young female anorexia patients.  This is a subset
@@ -116,9 +151,9 @@ NULL
 #'
 #' \describe{
 #'
-#' \item{Prewt}{Pretreatment weight of subject, in pounds.}
+#' \item{\code{Prewt}}{Pretreatment weight of subject, in pounds.}
 #'
-#' \item{Postwt}{Postreatment weight of subject, in pounds.}
+#' \item{\code{Postwt}}{Postreatment weight of subject, in pounds.}
 #'
 #' }
 #' @references Venables, W. N. and Ripley, B. D. (2002) Modern Applied
