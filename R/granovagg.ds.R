@@ -173,9 +173,9 @@ granovagg.ds <- function(data       = NULL,
 
   GetStats <- function(dsp, conf.level) {
     ttest <- GetTtest(dsp$data, conf.level)
-    return(data.frame(lower.treatment.effect = as.numeric(ttest$conf.int[2]),
+    return(data.frame(lower.treatment.effect = as.numeric(ttest$conf.int[1]),
                       mean.treatment.effect  = as.numeric(ttest$estimate[1]),
-                      upper.treatment.effect = as.numeric(ttest$conf.int[1]),
+                      upper.treatment.effect = as.numeric(ttest$conf.int[2]),
                       t.statistic            = as.numeric(ttest$statistic[1])
                      )
           )
@@ -225,10 +225,10 @@ granovagg.ds <- function(data       = NULL,
   }
 
   GetCIBand <- function(dsp) {
-    return(data.frame(x.end = ((dsp$params$anchor + dsp$stats$lower.treatment.effect) / 2) - (3 * (dsp$params$shadow.offset)),
-                      y.end = ((dsp$params$anchor - dsp$stats$lower.treatment.effect) / 2) - (3 * (dsp$params$shadow.offset)),
-                      x     = ((dsp$params$anchor + dsp$stats$upper.treatment.effect) / 2) - (3 * (dsp$params$shadow.offset)),
-                      y     = ((dsp$params$anchor - dsp$stats$upper.treatment.effect) / 2) - (3 * (dsp$params$shadow.offset)),
+    return(data.frame(x.end = ((dsp$params$anchor - dsp$stats$lower.treatment.effect) / 2) - (3 * (dsp$params$shadow.offset)),
+                      y.end = ((dsp$params$anchor + dsp$stats$lower.treatment.effect) / 2) - (3 * (dsp$params$shadow.offset)),
+                      x     = ((dsp$params$anchor - dsp$stats$upper.treatment.effect) / 2) - (3 * (dsp$params$shadow.offset)),
+                      y     = ((dsp$params$anchor + dsp$stats$upper.treatment.effect) / 2) - (3 * (dsp$params$shadow.offset)),
                       color = factor(paste(100 * conf.level, "% CI", " (t = ", round(dsp$stats$t.statistic, digits = 2), ")", sep =""))
                      )
           )
@@ -458,7 +458,7 @@ granovagg.ds <- function(data       = NULL,
   XMeanLine <- function(dsp) {
     return(
       geom_vline(
-        xintercept = mean(GetXs(dsp$data)),
+        xintercept = mean(dsp$data[, 2]),
         color      = dsp$colors$mean.line,
         size       = dsp$params$mean.line.size,
         linetype   = "dashed",
@@ -470,7 +470,7 @@ granovagg.ds <- function(data       = NULL,
   YMeanLine <- function(dsp)  {
     return(
       geom_hline(
-        yintercept = mean(GetYs(dsp$data)),
+        yintercept = mean(dsp$data[, 1]),
         color      = dsp$colors$mean.line,
         size       = dsp$params$mean.line.size,
         linetype   = "dashed",
