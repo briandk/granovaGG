@@ -1,3 +1,18 @@
+granovaGG 1.4.0
+---------------
+
+MAJOR CHANGES
+
+* Fixed a typo on an alpha parameter in granovagg.ds that was giving unneeded grief. Many thanks to Jeremy Gray (@jeremycg) for raising the issue
+
+* Fix bugs related to drawing CI Band, crossbow, trails, and shadows in granovagg.ds
+
+MINOR CHANGES
+
+* Stop importing datasets from MASS; instead put them directly in the package and document them locally
+
+* Remove calls to unit(), which will help address issues like #164
+
 granovaGG 1.2
 -------------
 
