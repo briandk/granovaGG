@@ -1,4 +1,3 @@
-#' @import grid
 theme_granova_1w <- function(base_size = 12) {
   theme_bw() %+replace%
     theme(
@@ -9,7 +8,7 @@ theme_granova_1w <- function(base_size = 12) {
       axis.line        = element_blank(),
 
       legend.text      = element_text(size = 8, lineheight = 8),
-      legend.key.size  = unit(0.5, "lines"),
+      # legend.key.size  = unit(0.5, "lines"),
 
       panel.background = element_rect(colour = NA),
       panel.border     = element_rect(fill = NA, colour = NA),
@@ -25,7 +24,7 @@ theme_granova_ds <- function(base_size = 12) {
   theme_granova_ds$axis.title.x    <- element_text(size = 10)
   theme_granova_ds$axis.title.y    <- element_text(size = 10, angle = 90)
 
-  theme_granova_ds$legend.key.size <- unit(1, "lines")
+  # theme_granova_ds$legend.key.size <- unit(1, "lines")
   theme_granova_ds$legend.text     <- element_text(size = 8, lineheight = 8)
   theme_granova_ds$plot.title      <- element_text(face = "bold", size = base_size)
 

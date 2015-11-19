@@ -3,15 +3,15 @@
 \docType{data}
 \name{anorexia.sub}
 \alias{anorexia.sub}
-\title{Family Treatment Weight change data for young female anorexia patients.}
+\title{Family Treatment Weight change data for young female anorexia patients (subset).}
 \format{A dataframe with 17 observations on the following 2 variables, no
   NAs.
 
 \describe{
 
-\item{Prewt}{Pretreatment weight of subject, in pounds.}
+\item{\code{Prewt}}{Pretreatment weight of subject, in pounds.}
 
-\item{Postwt}{Postreatment weight of subject, in pounds.}
+\item{\code{Postwt}}{Postreatment weight of subject, in pounds.}
 
 }}
 \source{
