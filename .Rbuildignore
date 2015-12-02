@@ -7,3 +7,9 @@ cran-comments.md
 LICENSE
 
 ^.*\.Rproj$
+
+# Vagrant stuff
+.vagrant
+Vagrantfile
+bootstrap.sh
+install_granovaGG_from_source.R
