@@ -5,4 +5,7 @@ install.packages(
 )
 
 library(devtools)
-install_github("briandk/granovaGG@v1.4.0")
+install(
+    pkg = "/vagrant/granovaGG",
+    dependencies = TRUE
+)
