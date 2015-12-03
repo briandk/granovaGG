@@ -65,6 +65,8 @@
 #'   \code{\link{granovagg.ds}}, \code{\link{granovaGG}}
 #'
 #' @example demo/granovagg.ds.R
+#' @import stats
+#' @import utils
 #' @export
 #' @references Pruzek, R. M., & Helmreich, J. E. (2009). Enhancing Dependent Sample Analyses with Graphics. Journal of Statistics Education, 17(1), 21.
 #' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
@@ -90,7 +92,7 @@ granovagg.ds <- function(data       = NULL,
     data <- EnsureDataIsADataFrame(data)
     return(data)
   }
-  
+
   FormatDataForPlotting <- function(dsp) {
     return(
       data.frame(
@@ -183,7 +185,7 @@ granovagg.ds <- function(data       = NULL,
 
   GetGraphicsParams <- function(dsp) {
     .aggregate.data.range  <- c(
-      range(dsp$plotting_data$x_values), 
+      range(dsp$plotting_data$x_values),
       range(dsp$plotting_data$y_values)
     )
     .extrema               <- c(max(.aggregate.data.range), min(.aggregate.data.range))

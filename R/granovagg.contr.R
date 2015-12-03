@@ -93,6 +93,8 @@
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
 #' @import gridExtra
 #' @import reshape2
+#' @import stats
+#' @import utils
 #' @export
 granovagg.contr <- function(data,
                             contrasts,
