@@ -14,5 +14,8 @@ Vagrantfile
 bootstrap.sh
 install_granovaGG_from_source.R
 
+# Docker stuff
+Dockerfile
+
 # Notes to self
 steps-to-release-to-CRAN.md
