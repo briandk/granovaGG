@@ -102,7 +102,7 @@
 #' @example /demo/granovagg.1w.R
 #' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
-#' @import plyr
+#' @import magrittr
 #' @import RColorBrewer
 #' @import stats
 #' @import utils
@@ -329,19 +329,20 @@ granovagg.1w <- function(data,
     # To appease R CMD Check
     score <- NULL
     contrast <- NULL
-
-    return(
-      ddply(owp$data, .(group), summarise,
-        group              = unique(group),
-        group.mean         = mean(score),
-        trimmed.mean       = mean(score, trim = 0.2),
-        contrast           = unique(contrast),
-        variance           = var(score),
-        standard.deviation = sd(score),
-        maximum.score      = max(score),
-        group.size         = length(score)
+    summary_output <- owp$data %>%
+      debug_pipe() %>% 
+      dplyr::group_by(group) %>% 
+      debug_pipe() %>% 
+      dplyr::summarise(
+            group.mean         = mean(score),
+            trimmed.mean       = mean(score, trim = 0.2),
+            contrast           = unique(contrast),
+            variance           = var(score),
+            standard.deviation = sd(score),
+            maximum.score      = max(score),
+            group.size         = length(score)
       )
-    )
+    return(summary_output)
   }
 
   PrintGroupSummary <- function(data, digits.to.round) {
