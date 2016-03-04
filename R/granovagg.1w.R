@@ -330,9 +330,7 @@ granovagg.1w <- function(data,
     score <- NULL
     contrast <- NULL
     summary_output <- owp$data %>%
-      debug_pipe() %>% 
       dplyr::group_by(group) %>% 
-      debug_pipe() %>% 
       dplyr::summarise(
             group.mean         = mean(score),
             trimmed.mean       = mean(score, trim = 0.2),
