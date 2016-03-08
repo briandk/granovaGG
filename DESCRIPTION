@@ -1,5 +1,5 @@
 Package: granovaGG
-Version: 1.4.20160304162831
+Version: 1.4.20160308125536
 Date: 2015-12-03
 Title: Graphical Analysis of Variance Using ggplot2
 Author: Brian A. Danielak <brian@briandk.com>,
@@ -18,7 +18,8 @@ Imports:
     magrittr,
     plyr,
     RColorBrewer,
-    reshape2
+    reshape2,
+    tidyr
 Collate:
     'granovaGG-package.R'
     'granovagg.1w-helpers.R'
