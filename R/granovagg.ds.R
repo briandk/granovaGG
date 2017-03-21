@@ -342,23 +342,27 @@ granovagg.ds <- function(data       = NULL,
     return(summary)
   }
 
-  dsp                <- list(data = GetData(data))
-  dsp$plotting_data  <- FormatDataForPlotting(dsp)
-  dsp$effect         <- GetEffect(dsp)
-  dsp$stats          <- GetStats(dsp, conf.level)
-  dsp$t.test         <- GetTtest(dsp$data, conf.level)
-  dsp$params         <- GetGraphicsParams(dsp)
-  dsp$shadows        <- GetShadows(dsp)
-  dsp$crossbow       <- GetCrossbow(dsp)
-  dsp$CIBand         <- GetCIBand(dsp)
-  dsp$cross.elements <- GetCrossElementCoordinates(dsp)
-  dsp$params$bounds  <- EnsureCrossElementsAppearInVisualBounds(dsp)
-  dsp$treatment.line <- GetTreatmentLine(dsp)
-  dsp$trails         <- GetTrails(dsp)
-  dsp$colors         <- GetColors(dsp)
+  create_data_structure_to_hold_plotting_information <- function() {
+    dsp                <- list(data = GetData(data))
+    dsp$plotting_data  <- FormatDataForPlotting(dsp)
+    dsp$effect         <- GetEffect(dsp)
+    dsp$stats          <- GetStats(dsp, conf.level)
+    dsp$t.test         <- GetTtest(dsp$data, conf.level)
+    dsp$params         <- GetGraphicsParams(dsp)
+    dsp$shadows        <- GetShadows(dsp)
+    dsp$crossbow       <- GetCrossbow(dsp)
+    dsp$CIBand         <- GetCIBand(dsp)
+    dsp$cross.elements <- GetCrossElementCoordinates(dsp)
+    dsp$params$bounds  <- EnsureCrossElementsAppearInVisualBounds(dsp)
+    dsp$treatment.line <- GetTreatmentLine(dsp)
+    dsp$trails         <- GetTrails(dsp)
+    dsp$colors         <- GetColors(dsp)
+    
+    return(dsp)
+  }
+
+  dsp <- create_data_structure_to_hold_plotting_information()
   PrintSummary(dsp)
-
-
 
   # Because of the way ggplot2 creates plot objects, layers can be
   # added to a plot p simply by calling "p <- p + newLayer"
