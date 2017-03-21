@@ -15,7 +15,7 @@ LayoutFourPlotPages <- function(plot.list, pages) {
                       plot.list[[i+3]]
                  )
     args.list <- c(args.list, list(nrow = 2, ncol = 2))
-    do.call(grid.arrange, args.list)
+    do.call(gridExtra::grid.arrange, list(grobs = args.list))
     DisplayEndOfPageMessage()
     i <- i + 4
   }
@@ -31,7 +31,7 @@ LayoutRemainderPlots <- function(plot.list, remainder.plots) {
                        )
              
     args.list <- c(args.list, list(nrow = 2, ncol = 2))
-    do.call(grid.arrange, args.list)
+    do.call(gridExtra::grid.arrange, args.list)
   }
 }
 
