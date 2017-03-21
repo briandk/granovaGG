@@ -137,7 +137,7 @@ granovagg.ds <- function(data       = NULL,
 
   EnsureDataIsADataFrame <- function(data) {
     output <- data
-    if (!is.data.frame(data)) {
+    if (!is.data.frame(data) || tibble::is_tibble(data)) {
       output <- as.data.frame(output)
     }
     return(output)
@@ -165,6 +165,7 @@ granovagg.ds <- function(data       = NULL,
   }
 
   GetTtest <- function(data, conf.level) {
+    data %<>% EnsureDataIsADataFrame()
     return(t.test(data[, 1],
                   data[, 2],
                   paired     = TRUE,
