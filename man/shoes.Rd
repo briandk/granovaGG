@@ -13,4 +13,3 @@ A list of two vectors, giving the wear of shoes of materials A and B for one foo
 \references{
 Venables, W. N. and Ripley, B. D. (2002) \emph{Modern Applied Statistics with S}. Fourth edition. Springer.
 }
-

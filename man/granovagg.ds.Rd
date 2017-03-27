@@ -136,15 +136,6 @@ granovagg.ds(blood_lead,
              ylab = "Control (mg/dl)"
 )
 }
-\author{
-Brian A. Danielak \email{brian@briandk.com}\cr
-  Robert M. Pruzek \email{RMPruzek@yahoo.com}
-
-with contributions by:\cr
-  William E. J. Doane \email{wil@drdoane.com}\cr
-  James E. Helmreich \email{James.Helmreich@Marist.edu}\cr
-  Jason Bryer \email{jason@bryer.org}
-}
 \references{
 Pruzek, R. M., & Helmreich, J. E. (2009). Enhancing Dependent Sample Analyses with Graphics. Journal of Statistics Education, 17(1), 21.
 
@@ -156,4 +147,12 @@ Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New Yor
 \code{\link{granovagg.1w}},
   \code{\link{granovagg.ds}}, \code{\link{granovaGG}}
 }
+\author{
+Brian A. Danielak \email{brian@briandk.com}\cr
+  Robert M. Pruzek \email{RMPruzek@yahoo.com}
 
+with contributions by:\cr
+  William E. J. Doane \email{wil@drdoane.com}\cr
+  James E. Helmreich \email{James.Helmreich@Marist.edu}\cr
+  Jason Bryer \email{jason@bryer.org}
+}

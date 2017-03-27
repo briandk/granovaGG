@@ -2,8 +2,8 @@
 % Please edit documentation in R/granovaGG-package.R
 \docType{package}
 \name{granovaGG-package}
-\alias{granovaGG}
 \alias{granovaGG-package}
+\alias{granovaGG}
 \title{Elemental Graphics for Analysis of Variance Using ggplot2}
 \description{
 This collection of functions in granovaGG provides what we call
@@ -56,15 +56,6 @@ functions.
   License: \tab GPL (>= 2)\cr
 }
 }
-\author{
-Brian A. Danielak \email{brian@briandk.com}\cr
-  Robert M. Pruzek \email{RMPruzek@yahoo.com}
-
-with contributions by:\cr
-  William E. J. Doane \email{wil@DrDoane.com}\cr
-  James E. Helmreich \email{James.Helmreich@Marist.edu}\cr
-  Jason Bryer \email{jason@bryer.org}
-}
 \references{
 Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
 
@@ -74,5 +65,13 @@ Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New Yor
 \code{\link{granovagg.1w}} \code{\link{granovagg.ds}}
   \code{\link{granovagg.contr}}
 }
-\keyword{hplot}
+\author{
+Brian A. Danielak \email{brian@briandk.com}\cr
+  Robert M. Pruzek \email{RMPruzek@yahoo.com}
 
+with contributions by:\cr
+  William E. J. Doane \email{wil@DrDoane.com}\cr
+  James E. Helmreich \email{James.Helmreich@Marist.edu}\cr
+  Jason Bryer \email{jason@bryer.org}
+}
+\keyword{hplot}

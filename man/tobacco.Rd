@@ -31,4 +31,3 @@ Snedecor, W., Cochran, W. (1980). Statistical methods. Iowa State
   University Press, Ames Iowa, seventh edition.
 }
 \keyword{datasets}
-

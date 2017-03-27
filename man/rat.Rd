@@ -29,4 +29,3 @@ gain.  Two diet factors were protein type: beef, pork, chicken and protein
 level: high and low.
 }
 \keyword{datasets}
-

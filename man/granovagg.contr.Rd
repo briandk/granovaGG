@@ -118,15 +118,6 @@ data.random <- rt(64, 5)
 granovagg.contr(data.random, contrasts = contr.helmert(8), 
   ylab = "Random Data")
 }
-\author{
-Brian A. Danielak \email{brian@briandk.com}\cr
-  Robert M. Pruzek \email{RMPruzek@yahoo.com}
-
-with contributions by:\cr
-  William E. J. Doane \email{wil@drdoane.com}\cr
-  James E. Helmreich \email{James.Helmreich@Marist.edu}\cr
-  Jason Bryer \email{jason@bryer.org}
-}
 \references{
 Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
 
@@ -136,5 +127,13 @@ Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New Yor
 \code{\link{granovagg.1w}},
   \code{\link{granovagg.ds}}, \code{\link{granovaGG}}
 }
-\keyword{hplot}
+\author{
+Brian A. Danielak \email{brian@briandk.com}\cr
+  Robert M. Pruzek \email{RMPruzek@yahoo.com}
 
+with contributions by:\cr
+  William E. J. Doane \email{wil@drdoane.com}\cr
+  James E. Helmreich \email{James.Helmreich@Marist.edu}\cr
+  Jason Bryer \email{jason@bryer.org}
+}
+\keyword{hplot}

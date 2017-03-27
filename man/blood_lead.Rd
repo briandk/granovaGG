@@ -32,4 +32,3 @@ See discussion in Section 2.5 of Enhancing Dependent Sample
   1 (March 2009).
 }
 \keyword{datasets}
-
