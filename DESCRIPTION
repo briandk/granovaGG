@@ -1,5 +1,5 @@
 Package: granovaGG
-Version: 1.4.20170321155400
+Version: 1.4.20170327112327
 Date: 2015-12-03
 Title: Graphical Analysis of Variance Using ggplot2
 Author: Brian A. Danielak <brian@briandk.com>,
@@ -19,6 +19,7 @@ Imports:
     plyr,
     RColorBrewer,
     reshape2,
+    tibble,
     tidyr
 Collate:
     'granovaGG-package.R'
@@ -74,4 +75,4 @@ Description: This collection of functions in 'granovaGG'
     their corresponding display requirements. See the help
     files for individual functions.
 License: GPL (>= 2)
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

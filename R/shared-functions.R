@@ -8,14 +8,13 @@ LayoutFourPlotsPerPage <- function(list.of.plots) {
 
 LayoutFourPlotPages <- function(plot.list, pages) {
   i <- 1
-  while (i < 4 * pages) {
-    args.list <- list(plot.list[[i]],
-                      plot.list[[i+1]],
-                      plot.list[[i+2]],
-                      plot.list[[i+3]]
-                 )
-    args.list <- c(args.list, list(nrow = 2, ncol = 2))
-    do.call(gridExtra::grid.arrange, list(grobs = args.list))
+  while (i < (4 * pages)) {
+    gridExtra::arrangeGrob(
+      plot.list[[i]],
+      plot.list[[i+1]],
+      plot.list[[i+2]],
+      plot.list[[i+3]]
+    )
     DisplayEndOfPageMessage()
     i <- i + 4
   }
