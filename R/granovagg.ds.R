@@ -104,6 +104,7 @@ granovagg.ds <- function(data       = NULL,
 
   CheckData <- function(data) {
     IsDataNull(data)
+    IsDataInTwoColumnFormat(data)
     return(data)
   }
 
@@ -122,6 +123,18 @@ granovagg.ds <- function(data       = NULL,
       stop("It looks like you didn't pass any data to granovagg.ds")
     }
   }
+
+  IsDataInTwoColumnFormat <- function(data) {
+    message <- "It looks like the data you handed in isn't in two-column (n x 2) format. granovagg.ds needs n x 2 data to work."
+    if (is.null(dim(data))) {
+      stop(message)
+    }
+
+    if (dim(data)[2] != 2) {
+      stop(message)
+    }
+  }
+
 
   EnsureDataIsADataFrame <- function(data) {
     output <- data
