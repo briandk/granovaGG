@@ -49,21 +49,12 @@
 #' @param ylab Character; y axis label. Defaults to a generic granova title.
 #' @param plot.theme argument indicating a ggplot2 theme to apply to the
 #'   graphic; defaults to a customized theme created for the contrast graphic
-#' @param print.four.plots.per.page If \code{TRUE}, the function lays out four plots per page and sends
-#'   each page to the graphics device. When running R interactively, you'll have an opportunity to review each page
-#'   before seeing the next page. Also, when \code{print.four.plots.per.page} is \code{TRUE}, the function won't
-#'   return any plot objects as output. When \code{print.four.plots.per.page} is set to \code{FALSE},
-#'   the function returns a list of ggplot objects, one element per plot.
 #' @param jj Numeric; controls \code{\link{jitter}} and allows you to control the
 #'   degree of jitter in the contrast plots. \code{jj} is divided by 100 and passed as the \code{amount}
 #'   parameter to \code{\link{jitter}}.
 #' @param ... Optional arguments to/from other functions.
-#' @return If \code{print.four.plots.per.page} is set to \code{FALSE}, the function returns
-#'   a list of ggplot objects, one element per plot. That allows you to access any individual plot
+#' @return a list of ggplot objects, one element per plot. That allows you to access any individual plot
 #'   or plots, then modify them as you wish (with ggplot2 commands, for example).
-#'   When \code{print.four.plots.per.page} is set to \code{TRUE}
-#'   (the default), the function prints four plots per page on a graphical device
-#'   but returns \code{NULL}.
 #'
 #'   The function also provides printed output:
 #'   \item{Weighted Means}{Table showing the (weighted) means for positive
@@ -99,7 +90,6 @@ granovagg.contr <- function(data,
                             contrasts,
                             ylab       = "default_y_label",
                             plot.theme = "theme_granova_contr",
-                            print.four.plots.per.page = TRUE,
                             jj = 1,
                             ...
                    )
@@ -522,59 +512,6 @@ granovagg.contr <- function(data,
     print(ctr$contrast.matrix, digits = 3)
   }
 
-  GetOutput <- function(ctr) {
-    four.plot.message <- paste("Because you elected to print four plots per page\n",
-                               "granovagg.contr won't return any plot objects.", sep = ""
-                         )
-    if (print.four.plots.per.page) {
-      message(four.plot.message)
-      LayoutFourPlotsPerPage(ctr$output)
-      output <- NULL
-    }
-
-    else {
-      output <- ctr$output
-    }
-    return(output)
-  }
-  
-  LayoutFourPlotsPerPage <- function(list.of.plots) {
-    four.plot.pages <- floor(length(list.of.plots) / 4)
-    remainder.plots <- length(list.of.plots) %% 4 # a %% b is notation for a modulo b
-    
-    LayoutFourPlotPages(list.of.plots, four.plot.pages)
-    LayoutRemainderPlots(list.of.plots, remainder.plots)
-  }
-  
-  LayoutFourPlotPages <- function(plot.list, pages) {
-    i <- 1
-    while (i < (4 * pages)) {
-      args.list <- list(plot.list[[i]],
-                        plot.list[[i+1]],
-                        plot.list[[i+2]],
-                        plot.list[[i+3]]
-      )
-      args.list <- c(args.list, list(nrow = 2, ncol = 2))
-      do.call(gridExtra::grid.arrange, list(grobs = args.list))
-      DisplayEndOfPageMessage()
-      i <- i + 4
-    }
-  }
-  
-  LayoutRemainderPlots <- function(plot.list, remainder.plots) {
-    if (remainder.plots > 0) {
-      remainder.start <- length(plot.list) - remainder.plots + 1
-      remainder.end   <- length(plot.list)
-      args.list       <- lapply(X   = remainder.start : remainder.end,
-                                FUN = GetListElementByIndex,
-                                x   = plot.list
-      )
-      
-      args.list <- c(args.list, list(nrow = 2, ncol = 2))
-      do.call(gridExtra::grid.arrange, args.list)
-    }
-  }
-
   ctr                        <- AdaptVariablesFromGranovaComputations()
   ctr$linear.model           <- GetLinearModel(ctr)
   ctr$contrast.plot.data     <- GetContrastPlotData(ctr)
@@ -582,8 +519,6 @@ granovagg.contr <- function(data,
   ctr$summary.plot.data      <- GetSummaryPlotData(ctr)
   ctr$summary.plot           <- ComposeSummaryPlot(ctr$summary.plot.data)
   ctr$output                 <- CollateOutputPlots(ctr)
-  PrintOutput()
 
-  return(ctr %>% GetOutput)
-
+  return(ctr$output)
 }
