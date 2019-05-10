@@ -413,7 +413,7 @@ granovagg.contr <- function(data,
     return(
       geom_point(
         aes_string(
-          x = "group",
+          x = "contrast_number",
           y = "group.mean"
         ),
         data  = data,
@@ -428,11 +428,12 @@ granovagg.contr <- function(data,
     return(
       geom_line(
         aes_string(
-          x = "group",
+          x = "contrast_number",
           y = "group.mean"
         ),
         data  = data,
         color = brewer.pal(8, "Set1")[2],
+        group = 1, # https://stackoverflow.com/a/29019102
         alpha = 1
       )
     )
