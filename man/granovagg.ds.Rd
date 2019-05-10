@@ -4,10 +4,10 @@
 \alias{granovagg.ds}
 \title{Elemental Graphic for Display of Dependent Sample Data}
 \usage{
-granovagg.ds(data = NULL, revc = FALSE, main = "default_granova_title",
-  xlab = NULL, ylab = NULL, conf.level = 0.95,
-  plot.theme = "theme_granova_ds", northeast.padding = 0,
-  southwest.padding = 0, ...)
+granovagg.ds(data = NULL, revc = FALSE,
+  main = "default_granova_title", xlab = NULL, ylab = NULL,
+  conf.level = 0.95, plot.theme = "theme_granova_ds",
+  northeast.padding = 0, southwest.padding = 0, ...)
 }
 \arguments{
 \item{data}{is an n X 2 dataframe or matrix. First column defines X
