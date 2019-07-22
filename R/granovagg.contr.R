@@ -82,6 +82,7 @@
 #' @example demo/granovagg.contr.R
 #' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
+#' @import ggplot2
 #' @import reshape2
 #' @import stats
 #' @import utils

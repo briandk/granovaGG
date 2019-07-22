@@ -65,7 +65,9 @@
 #'   \code{\link{granovagg.ds}}, \code{\link{granovaGG}}
 #'
 #' @example demo/granovagg.ds.R
+#' @import ggplot2
 #' @import stats
+#' @import tibble
 #' @import utils
 #' @export
 #' @references Pruzek, R. M., & Helmreich, J. E. (2009). Enhancing Dependent Sample Analyses with Graphics. Journal of Statistics Education, 17(1), 21.
