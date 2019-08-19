@@ -1,49 +1,5 @@
-LayoutFourPlotsPerPage <- function(list.of.plots) {
-  four.plot.pages <- floor(length(list.of.plots) / 4)
-  remainder.plots <- length(list.of.plots) %% 4 # a %% b is notation for a modulo b
-
-  LayoutFourPlotPages(list.of.plots, four.plot.pages)
-  LayoutRemainderPlots(list.of.plots, remainder.plots)
-}
-
-LayoutFourPlotPages <- function(plot.list, pages) {
-  i <- 1
-  while (i < 4 * pages) {
-    args.list <- list(plot.list[[i]],
-                      plot.list[[i+1]],
-                      plot.list[[i+2]],
-                      plot.list[[i+3]]
-                 )
-    args.list <- c(args.list, list(nrow = 2, ncol = 2))
-    do.call(grid.arrange, args.list)
-    DisplayEndOfPageMessage()
-    i <- i + 4
-  }
-}
-
-LayoutRemainderPlots <- function(plot.list, remainder.plots) {
-  if (remainder.plots > 0) {
-    remainder.start <- length(plot.list) - remainder.plots + 1
-    remainder.end   <- length(plot.list)
-    args.list       <- lapply(X   = remainder.start : remainder.end,
-                              FUN = GetListElementByIndex,
-                              x   = plot.list
-                       )
-             
-    args.list <- c(args.list, list(nrow = 2, ncol = 2))
-    do.call(grid.arrange, args.list)
-  }
-}
-
 GetListElementByIndex <- function(x, index) {
   return(x[[index]])
-}
-
-
-DisplayEndOfPageMessage <- function() {
-  if (interactive()) {
-    readline("Examine the contrast plots and consider printing. When you're done, press <Return>")
-  }
 }
 
 Theme <- function(plot.theme) {

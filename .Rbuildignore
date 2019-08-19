@@ -1,3 +1,7 @@
+# Travis CI for continuous integragtion
+.travis.yml
+
+# R stuff
 dev.R
 roxygen.R
 ^\.Rproj\.user$

@@ -49,21 +49,12 @@
 #' @param ylab Character; y axis label. Defaults to a generic granova title.
 #' @param plot.theme argument indicating a ggplot2 theme to apply to the
 #'   graphic; defaults to a customized theme created for the contrast graphic
-#' @param print.four.plots.per.page If \code{TRUE}, the function lays out four plots per page and sends
-#'   each page to the graphics device. When running R interactively, you'll have an opportunity to review each page
-#'   before seeing the next page. Also, when \code{print.four.plots.per.page} is \code{TRUE}, the function won't
-#'   return any plot objects as output. When \code{print.four.plots.per.page} is set to \code{FALSE},
-#'   the function returns a list of ggplot objects, one element per plot.
 #' @param jj Numeric; controls \code{\link{jitter}} and allows you to control the
 #'   degree of jitter in the contrast plots. \code{jj} is divided by 100 and passed as the \code{amount}
 #'   parameter to \code{\link{jitter}}.
 #' @param ... Optional arguments to/from other functions.
-#' @return If \code{print.four.plots.per.page} is set to \code{FALSE}, the function returns
-#'   a list of ggplot objects, one element per plot. That allows you to access any individual plot
+#' @return a list of ggplot objects, one element per plot. That allows you to access any individual plot
 #'   or plots, then modify them as you wish (with ggplot2 commands, for example).
-#'   When \code{print.four.plots.per.page} is set to \code{TRUE}
-#'   (the default), the function prints four plots per page on a graphical device
-#'   but returns \code{NULL}.
 #'
 #'   The function also provides printed output:
 #'   \item{Weighted Means}{Table showing the (weighted) means for positive
@@ -91,7 +82,7 @@
 #' @example demo/granovagg.contr.R
 #' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
-#' @import gridExtra
+#' @import ggplot2
 #' @import reshape2
 #' @import stats
 #' @import utils
@@ -100,7 +91,6 @@ granovagg.contr <- function(data,
                             contrasts,
                             ylab       = "default_y_label",
                             plot.theme = "theme_granova_contr",
-                            print.four.plots.per.page = TRUE,
                             jj = 1,
                             ...
                    )
@@ -212,13 +202,19 @@ granovagg.contr <- function(data,
     # To appease R CMD check
     x.values <- NULL
     y.values <- NULL
-
-    return(
-      ddply(data, .(x.values > 0), summarise,
-        contrasts          = mean(x.values),
-        responses          = mean(y.values)
+    summary_output <- data %>%
+      dplyr::group_by(x.values > 0) %>%
+      dplyr::summarise(
+        contrasts = mean(x.values),
+        responses = mean(y.values)
       )
-    )
+    return(summary_output)
+    # summary_output <- data %>% dplyr
+    #   data, .(x.values > 0), summarise,
+    #   contrasts          = mean(x.values),
+    #   responses          = mean(y.values)
+    # )
+    # return(summary_output)
   }
 
   GetContrastPlots <- function (ctr) {
@@ -248,7 +244,7 @@ granovagg.contr <- function(data,
   MeanResponse <- function(response) {
     return(
       geom_hline(
-        aes_string(yintercept = mean(response)),
+        aes(yintercept = mean(response)),
         color = brewer.pal(8, "Set1")[1],
         data  = as.data.frame(data),
         alpha = 0.5,
@@ -326,8 +322,11 @@ granovagg.contr <- function(data,
                    matrix(ctr$response, ncol = ctr$number.of.groups)
                  )
     raw.data <- RenameSummaryColumnNames(raw.data)
-    raw.data <- melt(raw.data)
-    raw.data$variable <- as.numeric(raw.data$variable)
+    raw.data <- tidyr::gather(
+      raw.data,
+      key = contrast_number,
+      value = score
+    )
     summary.data <- GetGroupSummary(raw.data)
 
     return(list(
@@ -352,19 +351,27 @@ granovagg.contr <- function(data,
     value <- NULL
     standard.deviation <- NULL
 
-    output <- ddply(
-      data,
-      .(variable),
-      summarise,
-      group      = unique(variable),
-      group.mean = mean(value),
-      standard.deviation = sd(value)
-    )
-    output <- transform(
-      output,
-      pooled.standard.deviation = mean(standard.deviation^2)^0.5
-    )
-    return(subset(output, select = -variable))
+    output <- data %>% 
+      dplyr::group_by(contrast_number) %>% 
+      dplyr::summarise(
+        group.mean = mean(score),
+        standard.deviation = sd(score),
+        pooled.standard.deviation = mean(standard.deviation)^0.5
+      )
+    # output <- plyr::ddply(
+    #   data,
+    #   .(variable),
+    #   summarise,
+    #   group      = unique(variable),
+    #   group.mean = mean(value),
+    #   standard.deviation = sd(value)
+    # )
+    # output <- transform(
+    #   output,
+    #   pooled.standard.deviation = mean(standard.deviation^2)^0.5
+    # )
+    # return(subset(output, select = -variable))
+    return(output)
   }
 
   ComposeSummaryPlot <- function(plot.data) {
@@ -384,8 +391,8 @@ granovagg.contr <- function(data,
     return(
       geom_point(
         aes_string(
-          x = "as.factor(variable)",
-          y = "value"
+          x = "as.factor(contrast_number)",
+          y = "score"
         ),
         data = data,
         position = position_jitter(height = 0, width = 3 * GetDegreeOfJitter(jj))
@@ -397,7 +404,7 @@ granovagg.contr <- function(data,
     return(
       geom_point(
         aes_string(
-          x = "group",
+          x = "contrast_number",
           y = "group.mean"
         ),
         data  = data,
@@ -412,11 +419,12 @@ granovagg.contr <- function(data,
     return(
       geom_line(
         aes_string(
-          x = "group",
+          x = "contrast_number",
           y = "group.mean"
         ),
         data  = data,
         color = brewer.pal(8, "Set1")[2],
+        group = 1, # https://stackoverflow.com/a/29019102
         alpha = 1
       )
     )
@@ -464,16 +472,22 @@ granovagg.contr <- function(data,
   }
 
   GetSummaryDataByContrast <- function(x, pooled.standard.deviation) {
-    ExtractData <- function(x) {
+    ExtractData <- function(x, pooled_standard_deviation) {
       summary.data <- x$summary.data
       neg <- summary.data$responses[summary.data$contrasts <= 0]
       pos <- summary.data$responses[summary.data$contrasts > 0]
       diff <- pos - neg
-      stEftSze <- (pos - neg) / pooled.standard.deviation
+      stEftSze <- (pos - neg) / pooled_standard_deviation
       return(data.frame(neg, pos, diff, stEftSze))
     }
-    output <- ldply(x, .fun = ExtractData)
-    output <- ForceRowNamesToBeContrastNumbers(output)
+    output <- sapply(
+      X = x, 
+      FUN = ExtractData, 
+      pooled_standard_deviation = pooled.standard.deviation
+    ) %>% 
+      t() %>%  
+      as.data.frame() %>% 
+      ForceRowNamesToBeContrastNumbers()
     return(output)
   }
 
@@ -499,22 +513,6 @@ granovagg.contr <- function(data,
     print(ctr$contrast.matrix, digits = 3)
   }
 
-  GetOutput <- function(ctr) {
-    four.plot.message <- paste("Since you elected to print four plots per page\n",
-                               "granovagg.contr won't return any plot objects.", sep = ""
-                         )
-    if (print.four.plots.per.page) {
-      message(four.plot.message)
-      LayoutFourPlotsPerPage(ctr$output)
-      output <- NULL
-    }
-
-    else {
-      output <- ctr$output
-    }
-    return(output)
-  }
-
   ctr                        <- AdaptVariablesFromGranovaComputations()
   ctr$linear.model           <- GetLinearModel(ctr)
   ctr$contrast.plot.data     <- GetContrastPlotData(ctr)
@@ -522,8 +520,6 @@ granovagg.contr <- function(data,
   ctr$summary.plot.data      <- GetSummaryPlotData(ctr)
   ctr$summary.plot           <- ComposeSummaryPlot(ctr$summary.plot.data)
   ctr$output                 <- CollateOutputPlots(ctr)
-  PrintOutput()
 
-  return(GetOutput(ctr))
-
+  return(ctr$output)
 }

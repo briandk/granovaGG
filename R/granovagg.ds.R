@@ -65,7 +65,9 @@
 #'   \code{\link{granovagg.ds}}, \code{\link{granovaGG}}
 #'
 #' @example demo/granovagg.ds.R
+#' @import ggplot2
 #' @import stats
+#' @import tibble
 #' @import utils
 #' @export
 #' @references Pruzek, R. M., & Helmreich, J. E. (2009). Enhancing Dependent Sample Analyses with Graphics. Journal of Statistics Education, 17(1), 21.
@@ -135,9 +137,10 @@ granovagg.ds <- function(data       = NULL,
     }
   }
 
+
   EnsureDataIsADataFrame <- function(data) {
     output <- data
-    if (!is.data.frame(data)) {
+    if (!is.data.frame(data) || tibble::is_tibble(data)) {
       output <- as.data.frame(output)
     }
     return(output)
@@ -165,6 +168,7 @@ granovagg.ds <- function(data       = NULL,
   }
 
   GetTtest <- function(data, conf.level) {
+    data %<>% EnsureDataIsADataFrame()
     return(t.test(data[, 1],
                   data[, 2],
                   paired     = TRUE,
@@ -342,23 +346,27 @@ granovagg.ds <- function(data       = NULL,
     return(summary)
   }
 
-  dsp                <- list(data = GetData(data))
-  dsp$plotting_data  <- FormatDataForPlotting(dsp)
-  dsp$effect         <- GetEffect(dsp)
-  dsp$stats          <- GetStats(dsp, conf.level)
-  dsp$t.test         <- GetTtest(dsp$data, conf.level)
-  dsp$params         <- GetGraphicsParams(dsp)
-  dsp$shadows        <- GetShadows(dsp)
-  dsp$crossbow       <- GetCrossbow(dsp)
-  dsp$CIBand         <- GetCIBand(dsp)
-  dsp$cross.elements <- GetCrossElementCoordinates(dsp)
-  dsp$params$bounds  <- EnsureCrossElementsAppearInVisualBounds(dsp)
-  dsp$treatment.line <- GetTreatmentLine(dsp)
-  dsp$trails         <- GetTrails(dsp)
-  dsp$colors         <- GetColors(dsp)
+  create_data_structure_to_hold_plotting_information <- function() {
+    dsp                <- list(data = GetData(data))
+    dsp$plotting_data  <- FormatDataForPlotting(dsp)
+    dsp$effect         <- GetEffect(dsp)
+    dsp$stats          <- GetStats(dsp, conf.level)
+    dsp$t.test         <- GetTtest(dsp$data, conf.level)
+    dsp$params         <- GetGraphicsParams(dsp)
+    dsp$shadows        <- GetShadows(dsp)
+    dsp$crossbow       <- GetCrossbow(dsp)
+    dsp$CIBand         <- GetCIBand(dsp)
+    dsp$cross.elements <- GetCrossElementCoordinates(dsp)
+    dsp$params$bounds  <- EnsureCrossElementsAppearInVisualBounds(dsp)
+    dsp$treatment.line <- GetTreatmentLine(dsp)
+    dsp$trails         <- GetTrails(dsp)
+    dsp$colors         <- GetColors(dsp)
+
+    return(dsp)
+  }
+
+  dsp <- create_data_structure_to_hold_plotting_information()
   PrintSummary(dsp)
-
-
 
   # Because of the way ggplot2 creates plot objects, layers can be
   # added to a plot p simply by calling "p <- p + newLayer"

@@ -29,4 +29,3 @@ Box G. E. P, Hunter, J. S. and Hunter, W. C. (2005). Statistics
   for Experimenters II. New York: Wiley.
 }
 \keyword{datasets}
-

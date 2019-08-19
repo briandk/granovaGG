@@ -30,4 +30,3 @@ four treatments: placebo, drug A, drug B, or both drug A and drug B.
 Response is a standard measure of physiological arousal.
 }
 \keyword{datasets}
-

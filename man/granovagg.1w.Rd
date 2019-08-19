@@ -5,9 +5,9 @@
 \title{Elemental Graphic Display for One-Way ANOVA}
 \usage{
 granovagg.1w(data, group = NULL, h.rng = 1, v.rng = 1, jj = NULL,
-  dg = 2, resid = FALSE, print.squares = TRUE, xlab = "default_x_label",
-  ylab = "default_y_label", main = "default_granova_title",
-  plot.theme = "theme_granova_1w", ...)
+  dg = 2, resid = FALSE, print.squares = TRUE,
+  xlab = "default_x_label", ylab = "default_y_label",
+  main = "default_granova_title", plot.theme = "theme_granova_1w", ...)
 }
 \arguments{
 \item{data}{Dataframe or vector. If a dataframe, the two or more columns
@@ -143,15 +143,6 @@ data(chickwts)
 ?chickwts # An explanation of the chickwts dataset
 with(chickwts, granovagg.1w(weight, group = feed)) # Modeling weight as explained by feed type
 }
-\author{
-Brian A. Danielak \email{brian@briandk.com}\cr
-  Robert M. Pruzek \email{RMPruzek@yahoo.com}
-
-with contributions by:\cr
-  William E. J. Doane \email{wil@drdoane.com}\cr
-  James E. Helmreich \email{James.Helmreich@Marist.edu}\cr
-  Jason Bryer \email{jason@bryer.org}
-}
 \references{
 Fundamentals of Exploratory Analysis of Variance, Hoaglin D.,
   Mosteller F. and Tukey J. eds., Wiley, 1991.
@@ -164,6 +155,14 @@ Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New Yor
 \code{\link{granovagg.contr}},
   \code{\link{granovagg.ds}}, \code{\link{granovaGG}}
 }
+\author{
+Brian A. Danielak \email{brian@briandk.com}\cr
+  Robert M. Pruzek \email{RMPruzek@yahoo.com}
+
+with contributions by:\cr
+  William E. J. Doane \email{wil@drdoane.com}\cr
+  James E. Helmreich \email{James.Helmreich@Marist.edu}\cr
+  Jason Bryer \email{jason@bryer.org}
+}
 \keyword{hplot}
 \keyword{htest}
-
