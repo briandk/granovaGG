@@ -4,7 +4,8 @@
 \name{arousal}
 \alias{arousal}
 \title{Arousal in Rats}
-\format{A data frame with 40 observations, 10 in each of 4 columns the
+\format{
+A data frame with 40 observations, 10 in each of 4 columns the
   corresponding to placebo, drug A, drug B and both drug A and drug B; no
   NAs.
 
@@ -18,7 +19,8 @@
 
 \item{Drug.A.B}{Rats receiving both drug A and drug B.}
 
-}}
+}
+}
 \source{
 Richard Lowry. Concepts & Applications of Inferential Statistics.
   Vassar College, Poughkeepsie, N.Y., 2010,

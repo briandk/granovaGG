@@ -4,8 +4,14 @@
 \alias{granovagg.contr}
 \title{Elemental Graphic Display for Contrast Effect of ANOVA}
 \usage{
-granovagg.contr(data, contrasts, ylab = "default_y_label",
-  plot.theme = "theme_granova_contr", jj = 1, ...)
+granovagg.contr(
+  data,
+  contrasts,
+  ylab = "default_y_label",
+  plot.theme = "theme_granova_contr",
+  jj = 1,
+  ...
+)
 }
 \arguments{
 \item{data}{Vector of scores for all equally sized groups, or a data.fame or

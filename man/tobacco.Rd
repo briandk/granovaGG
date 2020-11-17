@@ -4,12 +4,14 @@
 \name{tobacco}
 \alias{tobacco}
 \title{Virus Preparation on Tobacco Leaves}
-\format{A dataframe with 8 observations on the following 2 variables, no NAs
+\format{
+A dataframe with 8 observations on the following 2 variables, no NAs
 
 \describe{
    \item{prep1}{Virus Preparation 1}
    \item{prep2}{Virus Preparation 2}
-}}
+}
+}
 \source{
 Youden, W. J., Beale, H. P. (1934). A statistical study of the local
   lesion method for estimating tobacco mosaic virus. In Contributions from

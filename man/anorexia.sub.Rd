@@ -4,7 +4,8 @@
 \name{anorexia.sub}
 \alias{anorexia.sub}
 \title{Family Treatment Weight change data for young female anorexia patients (subset).}
-\format{A dataframe with 17 observations on the following 2 variables, no
+\format{
+A dataframe with 17 observations on the following 2 variables, no
   NAs.
 
 \describe{
@@ -13,7 +14,8 @@
 
 \item{\code{Postwt}}{Postreatment weight of subject, in pounds.}
 
-}}
+}
+}
 \source{
 Hand, D. J., Daly, F., McConway, K., Lunn, D. and Ostrowski, E. eds
   (1993) A Handbook of Small Data Sets. Chapman & Hall, Data set 285 (p.
