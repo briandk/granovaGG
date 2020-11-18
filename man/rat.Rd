@@ -4,7 +4,8 @@
 \name{rat}
 \alias{rat}
 \title{Weight gains of rats fed different diets}
-\format{A data frame with 60 observations on the following 3 variables, no
+\format{
+A data frame with 60 observations on the following 3 variables, no
   NAs.
 
 \describe{
@@ -16,7 +17,8 @@
 \item{Diet.Type}{Type of protein in diet: 1 = Beef, 2 = Pork, 3 =
   Cereal.}
 
-}}
+}
+}
 \source{
 Fundamentals of Exploratory Analysis of Variance, Hoaglin D.,
   Mosteller F. and Tukey J. eds., Wiley, 1991, p. 100; originally from

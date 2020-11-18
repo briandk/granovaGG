@@ -5,7 +5,8 @@
 \alias{blood_lead}
 \title{Blood lead levels of lead workers' children matched with similar control
 children.}
-\format{A dataframe with 33 observations on the following 2 variables, no
+\format{
+A dataframe with 33 observations on the following 2 variables, no
   NAs.
 
 \describe{
@@ -14,7 +15,8 @@ children.}
 
 \item{Control}{Blood lead level of exposed child, mg/dl.}
 
-}}
+}
+}
 \source{
 Morton, D., Saah, A., Silberg, S., Owens, W., Roberts, M., Saah, M.
   (1982). Lead absorption in children of employees in a lead related

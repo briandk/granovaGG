@@ -4,10 +4,21 @@
 \alias{granovagg.1w}
 \title{Elemental Graphic Display for One-Way ANOVA}
 \usage{
-granovagg.1w(data, group = NULL, h.rng = 1, v.rng = 1, jj = NULL,
-  dg = 2, resid = FALSE, print.squares = TRUE,
-  xlab = "default_x_label", ylab = "default_y_label",
-  main = "default_granova_title", plot.theme = "theme_granova_1w", ...)
+granovagg.1w(
+  data,
+  group = NULL,
+  h.rng = 1,
+  v.rng = 1,
+  jj = NULL,
+  dg = 2,
+  resid = FALSE,
+  print.squares = TRUE,
+  xlab = "default_x_label",
+  ylab = "default_y_label",
+  main = "default_granova_title",
+  plot.theme = "theme_granova_1w",
+  ...
+)
 }
 \arguments{
 \item{data}{Dataframe or vector. If a dataframe, the two or more columns

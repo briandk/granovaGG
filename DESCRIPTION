@@ -1,5 +1,5 @@
 Package: granovaGG
-Version: 1.4.20170328124127
+Version: 1.4.0
 Date: 2015-12-03
 Title: Graphical Analysis of Variance Using ggplot2
 Author: Brian A. Danielak <brian@briandk.com>,
@@ -75,4 +75,5 @@ Description: This collection of functions in 'granovaGG'
     their corresponding display requirements. See the help
     files for individual functions.
 License: GPL (>= 2)
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
+Encoding: UTF-8

@@ -4,10 +4,18 @@
 \alias{granovagg.ds}
 \title{Elemental Graphic for Display of Dependent Sample Data}
 \usage{
-granovagg.ds(data = NULL, revc = FALSE,
-  main = "default_granova_title", xlab = NULL, ylab = NULL,
-  conf.level = 0.95, plot.theme = "theme_granova_ds",
-  northeast.padding = 0, southwest.padding = 0, ...)
+granovagg.ds(
+  data = NULL,
+  revc = FALSE,
+  main = "default_granova_title",
+  xlab = NULL,
+  ylab = NULL,
+  conf.level = 0.95,
+  plot.theme = "theme_granova_ds",
+  northeast.padding = 0,
+  southwest.padding = 0,
+  ...
+)
 }
 \arguments{
 \item{data}{is an n X 2 dataframe or matrix. First column defines X
@@ -86,7 +94,7 @@ data(anorexia.sub)
 
 granovagg.ds(anorexia.sub,
              revc = TRUE,
-             main = "Assessment Plot for weights to assess \\
+             main = "Assessment Plot for weights to assess \
                     Family Therapy treatment for Anorexia Patients",
              xlab = "Weight after therapy (lbs.)",
              ylab = "Weight before therapy (lbs.)"
