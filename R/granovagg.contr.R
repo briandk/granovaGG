@@ -50,8 +50,8 @@
 #' @param plot.theme argument indicating a ggplot2 theme to apply to the
 #'   graphic; defaults to a customized theme created for the contrast graphic
 #' @param jj Numeric; controls \code{\link{jitter}} and allows you to control the
-#'   degree of jitter in the contrast plots. \code{jj} is divided by 100 and passed as the \code{amount}
-#'   parameter to \code{\link{jitter}}.
+#'   degree of jitter in the contrast plots. \code{jj} is divided by 100 and passed as the \code{width}
+#'   parameter to \code{\link{ggplot2::position_jitter}}.
 #' @param ... Optional arguments to/from other functions.
 #' @return a list of ggplot objects, one element per plot. That allows you to access any individual plot
 #'   or plots, then modify them as you wish (with ggplot2 commands, for example).
@@ -83,7 +83,6 @@
 #' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
 #' @references Wilkinson, L. (1999). The Grammar of Graphics. Statistics and computing. New York: Springer.
 #' @import ggplot2
-#' @import reshape2
 #' @import stats
 #' @import utils
 #' @export
@@ -358,19 +357,6 @@ granovagg.contr <- function(data,
         standard.deviation = sd(score),
         pooled.standard.deviation = mean(standard.deviation)^0.5
       )
-    # output <- plyr::ddply(
-    #   data,
-    #   .(variable),
-    #   summarise,
-    #   group      = unique(variable),
-    #   group.mean = mean(value),
-    #   standard.deviation = sd(value)
-    # )
-    # output <- transform(
-    #   output,
-    #   pooled.standard.deviation = mean(standard.deviation^2)^0.5
-    # )
-    # return(subset(output, select = -variable))
     return(output)
   }
 
