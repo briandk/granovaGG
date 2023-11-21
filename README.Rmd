@@ -16,40 +16,70 @@ knitr::opts_chunk$set(
 # granovaGG
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
-The goal of granovaGG is to ...
+The package granovaGG is designed to produce statistical graphics driven by the fundamental questions of analysis of variance.
+The graphics granovaGG creates can offer far more visual information than a traditional tabular model summary or significance test.
+For an example of how granovaGG can enhance analysis, see [Pruzek and Helmreich (2009)](rmpruzek.com/wp-content/uploads/2011/07/ElementalGraphicsForANOVA.finalJune11.pdf).
 
 ## Installation
 
-You can install the development version of granovaGG from [GitHub](https://github.com/) with:
+You can install the development version of granovaGG from [GitHub](https://github.com) with:
 
 ``` r
 # install.packages("devtools")
 devtools::install_github("briandk/granovaGG")
 ```
 
-## Example
+## Usage
 
-This is a basic example which shows you how to solve a common problem:
+There are three main functions in this package:
 
-```{r example}
+-   `granovagg.1w()`: for plotting one-way analysis of variance (ANOVA)
+
+-   `granovagg.ds`(): for plotting dependent-sample t-test data
+
+-   `granovagg.contr()`: for plotting contrasts
+
+## Examples
+
+### `granovagg.1w()`
+
+```{r}
 library(granovaGG)
-## basic example code
+data(poison)
+
+# Note violation of constant variance across groups in following graphic.
+granovagg.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+### `granovagg.ds()`
 
-```{r cars}
-summary(cars)
+```{r}
+library(granovaGG)
+
+# This example corresponds to case 1b in Pruzek and Helmreich (2009). In this
+# graphic we're looking for the effect of Family Treatment on patients with anorexia.
+
+data(anorexia.sub)
+
+granovagg.ds(anorexia.sub,
+             revc = TRUE,
+             main = "Assessment Plot for weights to assess\nFamily Therapy treatment for Anorexia Patients",
+             xlab = "Weight after therapy (lbs.)",
+             ylab = "Weight before therapy (lbs.)"
+)    
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
+### `granovagg.contr()`
 
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+```{r}
+data(arousal)  
+contrasts22 <- data.frame( c(-.5,-.5,.5,.5), 
+  c(-.5,.5,-.5,.5), c(.5,-.5,-.5,.5) )
+names(contrasts22) <- c("Drug.A", "Drug.B", "Drug.A.B")
+granovagg.contr(arousal, contrasts = contrasts22)
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+## FAQs
