@@ -11,7 +11,7 @@ by the fundamental questions of analysis of variance. The graphics
 granovaGG creates can offer far more visual information than a
 traditional tabular model summary or significance test. For an example
 of how granovaGG can enhance analysis, see [Pruzek and Helmreich
-(2009)](rmpruzek.com/wp-content/uploads/2011/07/ElementalGraphicsForANOVA.finalJune11.pdf).
+(2011)](rmpruzek.com/wp-content/uploads/2011/07/ElementalGraphicsForANOVA.finalJune11.pdf).
 
 ## Installation
 
