@@ -26,8 +26,8 @@ groups [G]) x (number of contrasts) [generally (G x G-1)].}
 graphic; defaults to a customized theme created for the contrast graphic}
 
 \item{jj}{Numeric; controls \code{\link{jitter}} and allows you to control the
-degree of jitter in the contrast plots. \code{jj} is divided by 100 and passed as the \code{amount}
-parameter to \code{\link{jitter}}.}
+degree of jitter in the contrast plots. \code{jj} is divided by 100 and passed as the \code{width}
+parameter to \code{\link[ggplot2]{position_jitter}}.}
 
 \item{...}{Optional arguments to/from other functions.}
 }

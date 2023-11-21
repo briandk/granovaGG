@@ -51,7 +51,7 @@
 #'   graphic; defaults to a customized theme created for the contrast graphic
 #' @param jj Numeric; controls \code{\link{jitter}} and allows you to control the
 #'   degree of jitter in the contrast plots. \code{jj} is divided by 100 and passed as the \code{width}
-#'   parameter to \code{\link{ggplot2::position_jitter}}.
+#'   parameter to \code{\link[ggplot2]{position_jitter}}.
 #' @param ... Optional arguments to/from other functions.
 #' @return a list of ggplot objects, one element per plot. That allows you to access any individual plot
 #'   or plots, then modify them as you wish (with ggplot2 commands, for example).
