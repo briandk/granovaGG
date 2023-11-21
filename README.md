@@ -182,3 +182,67 @@ granovagg.contr(arousal, contrasts = contrasts22)
 <img src="man/figures/README-unnamed-chunk-4-4.png" width="100%" />
 
 ## FAQs
+
+## Isn’t there already a granova package on CRAN?
+
+[Yes.](http://cran.r-project.org/web/packages/granova/index.html)
+
+## So what’s the difference between granova and granovaGG?
+
+There are several, actually.
+
+First, the current version of
+[granova](http://cran.r-project.org/web/packages/granova/index.html) on
+CRAN uses R’s base graphics to produce plots. `granovaGG`, on the other
+hand, uses an R package called
+[ggplot2](http://cran.r-project.org/web/packages/ggplot2/index.html),
+which offers a much greater degree of expressiveness and extensibility.
+
+Second, 3-D functionality for creating an elemental graphic for 2-way
+ANOVA is only in granova; granovaGG doesn’t have it.
+
+In short, `granovaGG` offers ggplot2-based versions of three of the four
+core functions in `granova`:
+
+- `granova.1w`
+- `granova.contr`
+- `granova.ds`
+
+## Do I have to choose between granova and granovaGG?
+
+Absolutely not. You can have your granova cake with granovaGG icing!
+
+The packages are currently designed to work side-by-side, which means
+you can load them both and get the most out of their respective
+strengths.
+
+And, if you already have legacy granova code but would like to use the
+new ggplot2-based functions in granovaGG, the transition is easy: just
+add two letters to your function call.
+
+So, suppose you have some code that uses three classic functions:
+
+``` r
+granova.contr(arousal, contrasts = contrasts22)
+granova.ds(blood_lead)
+granova.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
+```
+
+You can pipe the same code through granovaGG adding a “gg” after the
+“granova” part of the function call:
+
+``` r
+granovagg.contr(arousal, contrasts = contrasts22)
+granovagg.ds(blood_lead)
+granovagg.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
+```
+
+## How can I provide feedback?
+
+- If you want to request something, or report a bug, use the [Issue
+  Tracker](https://github.com/briandk/granovaGG/issues)
+- If you’d like to contact us directly, we’d love to hear from you:
+  - [Brian A. Danielak](mailto:briandanielak+granovagg@gmail.com)
+  - [William E. J. Doane](mailto:wdoane@Bennington.edu)
+  - [James E. Helmreich](mailto:James.Helmreich@marist.edu)
+  - [Jason Bryer](mailto:jason@bryer.org)
