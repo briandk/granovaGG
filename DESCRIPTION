@@ -72,5 +72,5 @@ Description: This collection of functions in 'granovaGG'
     their corresponding display requirements. See the help
     files for individual functions.
 License: GPL (>= 2)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 Encoding: UTF-8
