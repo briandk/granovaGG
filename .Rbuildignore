@@ -25,3 +25,5 @@ Dockerfile
 steps-to-release-to-CRAN.md
 ^\.github$
 ^README\.Rmd$
+^LICENSE\.md$
+^cran-comments\.md$
