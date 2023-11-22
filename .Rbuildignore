@@ -8,7 +8,6 @@ roxygen.R
 granovaGG.Rproj
 README.m*
 cran-comments.md
-LICENSE
 
 ^.*\.Rproj$
 

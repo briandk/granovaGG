@@ -82,6 +82,7 @@ Description: create what we call Elemental Graphics for display of
     files for individual functions.
 URL: https://github.com/briandk/granovaGG
 BugReports: https://github.com/briandk/granovaGG/issues
+License: MIT + file LICENSE
 Depends:
     R (>= 2.14.0),
 Imports:
@@ -102,4 +103,3 @@ Collate:
     'granovagg.1w.R'
     'granovagg.contr.R'
     'granovagg.ds.R'
-License: MIT + file LICENSE

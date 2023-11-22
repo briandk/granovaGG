@@ -323,8 +323,8 @@ granovagg.contr <- function(data,
     raw.data <- RenameSummaryColumnNames(raw.data)
     raw.data <- tidyr::gather(
       raw.data,
-      key = contrast_number,
-      value = score
+      key = "contrast_number",
+      value = "score"
     )
     summary.data <- GetGroupSummary(raw.data)
 
@@ -351,10 +351,10 @@ granovagg.contr <- function(data,
     standard.deviation <- NULL
 
     output <- data %>% 
-      dplyr::group_by(contrast_number) %>% 
+      dplyr::group_by(.data$contrast_number) %>% 
       dplyr::summarise(
-        group.mean = mean(score),
-        standard.deviation = sd(score),
+        group.mean = mean(.data$score),
+        standard.deviation = sd(.data$score),
         pooled.standard.deviation = mean(standard.deviation)^0.5
       )
     return(output)
@@ -436,12 +436,6 @@ granovagg.contr <- function(data,
     output[[ctr$number.of.contrasts + 1]] <- ctr$summary.plot
 
     return(output)
-  }
-
-  OptionalPlotPrinting <- function(output) {
-    if (print.four.plots.per.page) {
-      LayoutFourPlotsPerPage(output)
-    }
   }
 
   PrintOutput <- function() {
