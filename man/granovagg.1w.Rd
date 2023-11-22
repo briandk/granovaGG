@@ -91,13 +91,13 @@ of the group means. In particular, we use the fact that the numerator of
 the one-way F statistic, the mean square between (MS.B), is a linear combination
 of the group means; each weight -- one for each group -- in the L.C. is (principally)
 a function of the difference between the group's mean and the grand
-mean, viz., (M_{j} - M..) where M_{j} denotes the jth group's mean, and M.. denotes
+mean, viz., (M~j~ - M..) where M~j~ denotes the jth group's mean, and M.. denotes
 the grand mean. The L.C. can be written as a sum of products of the form
 MS.B = Sum((1/df.B)(n_j (M_j - M..) M_j)) for j = 1...J.
 The denominator of the F-statistic, MS.W
 (mean square within), can be described as a 'scaling factor'. It is just the (weighted)
-average of the variances of the J groups (j = 1 ... J). (n_{j}'s are group sizes.)
-The differences (M_{j} - M..) are themselves the 'effects' in the analysis.
+average of the variances of the J groups (j = 1 ... J). (n~j~'s are group sizes.)
+The differences (M~j~ - M..) are themselves the 'effects' in the analysis.
 When the effects are plotted against the group means (the horizontal and
 vertical axes) a straight line necessarily ensues. Group means are plotted as
 triangles along this line. Once the means have been plotted, the data points
