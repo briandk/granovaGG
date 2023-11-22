@@ -36,7 +36,7 @@ Authors@R: c(
       role = "ctb"
     )
   )
-Description: create what we call Elemental Graphics for display of
+Description: Create what we call Elemental Graphics for display of
     anova results. The term elemental derives from the fact
     that each function is aimed at construction of
     graphical displays that afford direct visualizations of
