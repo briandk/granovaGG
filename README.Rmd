@@ -86,14 +86,14 @@ granovagg.contr(arousal, contrasts = contrasts22)
 
 ## Isn't there already a granova package on CRAN?
 
-[Yes.](http://cran.r-project.org/web/packages/granova/index.html)
+[Yes](https://cran.r-project.org/package=granova).
 
 ## So what's the difference between granova and granovaGG?
 
 There are several, actually.
 
-First, the current version of [granova](http://cran.r-project.org/web/packages/granova/index.html) on CRAN uses R's base graphics to produce plots.
-`granovaGG`, on the other hand, uses an R package called [ggplot2](http://cran.r-project.org/web/packages/ggplot2/index.html), which offers a much greater degree of expressiveness and extensibility.
+First, the current version of granova on CRAN uses R's base graphics to produce plots.
+`granovaGG`, on the other hand, uses an R package called [ggplot2](https://cran.r-project.org/package=ggplot2), which offers a much greater degree of expressiveness and extensibility.
 
 Second, 3-D functionality for creating an elemental graphic for 2-way ANOVA is only in granova; granovaGG doesn't have it.
 
