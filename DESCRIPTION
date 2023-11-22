@@ -102,4 +102,4 @@ Collate:
     'granovagg.1w.R'
     'granovagg.contr.R'
     'granovagg.ds.R'
-License: MIT
+License: MIT + file LICENSE

@@ -27,3 +27,4 @@ steps-to-release-to-CRAN.md
 ^README\.Rmd$
 ^LICENSE\.md$
 ^cran-comments\.md$
+^CRAN-SUBMISSION$
