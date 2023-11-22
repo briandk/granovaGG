@@ -80,7 +80,7 @@ Description: create what we call Elemental Graphics for display of
     that accommodate diverse features of data, according to
     their corresponding display requirements. See the help
     files for individual functions.
-URL: https://github.com/briandk/granovaGG/
+URL: https://github.com/briandk/granovaGG
 BugReports: https://github.com/briandk/granovaGG/issues
 Depends:
     R (>= 2.14.0),
