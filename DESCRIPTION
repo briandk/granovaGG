@@ -1,31 +1,41 @@
 Package: granovaGG
 Version: 1.4.1
-Date: 2023-11-20
+Date: 2023-11-22
 Title: Graphical Analysis of Variance Using ggplot2
-Author: Brian A. Danielak <briandanielak+granovagg@gmail.com>,
-    Robert M. Pruzek <RMPruzek@yahoo.com>,
-    with contributions from:
-    William E. J. Doane <wil@DrDoane.com>,
-    James E. Helmreich <James.Helmreich@Marist.edu>,
-    Jason Bryer <jason@bryer.org>
-Maintainer: Brian A. Danielak <briandanielak+granovagg@gmail.com>
-Depends:
-    R (>= 2.14.0),
-Imports:
-    dplyr,
-    ggplot2 (>= 0.9.2),
-    magrittr,
-    RColorBrewer,
-    tibble,
-    tidyr
-Collate:
-    'granovaGG-package.R'
-    'granovagg.1w-helpers.R'
-    'theme-defaults.R'
-    'shared-functions.R'
-    'granovagg.1w.R'
-    'granovagg.contr.R'
-    'granovagg.ds.R'
+Authors@R: c(
+    person(
+      "Brian A.",
+      "Danielak",
+      email = "briandanielak+granovagg@gmail.com",
+      role = c("aut", "cre"),
+      comment = c(ORCID = "0000-0003-4279-6708"),
+    ),
+    person(
+      "Robert M.",
+      "Pruzek",
+      email = "Robert@RMPruzek.com",
+      role = "aut",
+    ),
+    person(
+      given = "William E. J.",
+      family = "Doane",
+      email = "wil@DrDoane.com",
+      role = "ctb",
+      comment = c(ORCID = "0000-0002-5047-8286")
+    ),
+    person(
+      given = "James E.",
+      family = "Helmreich",
+      email = "James.Helmreich@Marist.edu",
+      role = "ctb"
+    ),
+    person(
+      "Jason",
+      "Bryer",
+      email = "jason@bryer.org",
+      role = "ctb"
+    )
+  )
 Description: This collection of functions in 'granovaGG'
     provides what we call elemental graphics for display of
     anova results. The term elemental derives from the fact
@@ -71,6 +81,26 @@ Description: This collection of functions in 'granovaGG'
     that accommodate diverse features of data, according to
     their corresponding display requirements. See the help
     files for individual functions.
-License: GPL (>= 2)
-RoxygenNote: 7.2.3
+URL: https://github.com/briandk/granovaGG/
+BugReports: https://github.com/briandk/granovaGG/issues
+Depends:
+    R (>= 2.14.0),
+Imports:
+    dplyr,
+    ggplot2 (>= 0.9.2),
+    magrittr,
+    RColorBrewer,
+    tibble,
+    tidyr
 Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.2.3
+Collate:
+    'granovaGG-package.R'
+    'granovagg.1w-helpers.R'
+    'theme-defaults.R'
+    'shared-functions.R'
+    'granovagg.1w.R'
+    'granovagg.contr.R'
+    'granovagg.ds.R'
+License: MIT
