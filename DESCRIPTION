@@ -1,5 +1,5 @@
 Package: granovaGG
-Version: 1.4.1
+Version: 1.4.1.9000
 Date: 2023-11-22
 Title: Graphical Analysis of Variance Using ggplot2
 Authors@R: c(
