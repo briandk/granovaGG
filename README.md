@@ -4,6 +4,9 @@
 # granovaGG
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/briandk/granovaGG/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/briandk/granovaGG/actions/workflows/R-CMD-check.yaml)
+
 <!-- badges: end -->
 
 The package granovaGG is designed to produce statistical graphics driven
@@ -19,8 +22,8 @@ You can install the development version of granovaGG from
 [GitHub](https://github.com) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("briandk/granovaGG")
+# install.packages("remotes")
+remotes::install_github("briandk/granovaGG")
 ```
 
 ## Usage
@@ -107,6 +110,9 @@ granovagg.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
 #> Residual standard error: 0.1491 on 36 degrees of freedom
 #> Multiple R-squared:  0.7335, Adjusted R-squared:  0.6521 
 #> F-statistic:  9.01 on 11 and 36 DF,  p-value: 1.986e-07
+#> Warning in geom_point(aes_string(x = "0", y = "mean(score)", color = "factor(paste(\"Grand Mean\"))"), : All aesthetics have length 1, but the data has 48 rows.
+#> ℹ Please consider using `annotate()` or provide this layer with data containing
+#>   a single row.
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
@@ -174,10 +180,8 @@ granovagg.contr(arousal, contrasts = contrasts22)
     #> [[4]]
     #> Warning in mean.default(response): argument is not numeric or logical:
     #> returning NA
-
-    #> Warning in mean.default(response): argument is not numeric or logical:
-    #> returning NA
-    #> Warning: Removed 10 rows containing missing values (`geom_hline()`).
+    #> Warning: Removed 10 rows containing missing values or values outside the scale range
+    #> (`geom_hline()`).
 
 <img src="man/figures/README-unnamed-chunk-4-4.png" width="100%" />
 

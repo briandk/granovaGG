@@ -17,6 +17,8 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/briandk/granovaGG/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/briandk/granovaGG/actions/workflows/R-CMD-check.yaml)
+
 <!-- badges: end -->
 
 The package granovaGG is designed to produce statistical graphics driven by the fundamental questions of analysis of variance.
@@ -28,8 +30,8 @@ For an example of how granovaGG can enhance analysis, see [Pruzek and Helmreich 
 You can install the development version of granovaGG from [GitHub](https://github.com) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("briandk/granovaGG")
+# install.packages("remotes")
+remotes::install_github("briandk/granovaGG")
 ```
 
 ## Usage
