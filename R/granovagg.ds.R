@@ -461,16 +461,9 @@ granovagg.ds <- function(data       = NULL,
   }
 
   PadViewingWindow <- function(params) {
-    ne.offset = params$square.data.range * southwest.padding
-    sw.offset = params$square.data.range * northeast.padding
-    padded.window = c(params$bounds[1] - sw.offset, params$bounds[2] + ne.offset)
-
-    return(
-      coord_cartesian(
-        xlim = padded.window,
-        ylim = padded.window
-      )
-    )
+    ne.offset = params$square.data.range * northeast.padding
+    sw.offset = params$square.data.range * southwest.padding
+    return(c(params$bounds[1] - sw.offset, params$bounds[2] + ne.offset))
   }
 
   RugPlot <- function(dsp) {
@@ -610,8 +603,10 @@ granovagg.ds <- function(data       = NULL,
 
   }
 
-  ForceCoordinateAxesToBeEqual <- function() {
-    return(coord_fixed(ratio = 1))
+  ForceCoordinateAxesToBeEqual <- function(padded.window) {
+    return(coord_fixed(ratio = 1,
+                       xlim  = padded.window,
+                       ylim  = padded.window))
   }
 
 
@@ -627,13 +622,14 @@ granovagg.ds <- function(data       = NULL,
   p <- p + Crossbow(dsp)
   p <- p + CIBand(dsp)
   p <- p + ColorScale(dsp)
+  padded.window <- PadViewingWindow(dsp$params)
   p <- p + ScaleX(dsp) + ScaleY(dsp)
-  p <- p + PadViewingWindow(dsp$params)
-  p <- p + ForceCoordinateAxesToBeEqual()
+  p <- p + ForceCoordinateAxesToBeEqual(padded.window)
   p <- p + Title(main)
   p <- p + XLabel(dsp)
   p <- p + YLabel(dsp)
 
+  attr(p, "padded.window") <- padded.window
   return(p)
 
 }

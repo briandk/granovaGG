@@ -1,7 +1,6 @@
 # TODO
 
 ## granovagg.ds
-- Swap the `southwest.padding` / `northeast.padding` multipliers in `PadViewingWindow()` so each argument adjusts the intended edge of the viewing window.
 - Replace all `aes_string()` calls with tidy-eval `aes()` usage.
 - [issue #168] Resolve the “Length of logical index vector” failure by tracing where a logical vector is recycled; add a test reproducing the mpg example.
 

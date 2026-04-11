@@ -9,6 +9,7 @@
 -   granovagg.ds now checks for numeric two-column input after any reversal and validates `conf.level` lies in (0,1); added tests covering both conditions.
 -   Added `tests/testthat/test-granovagg-ds-summary.R` to snapshot the anorexia.sub summary output, ensuring reported means, confidence intervals, and t-statistic stay stable.
 -   Removed the last magrittr `%<>%` usage in granovagg.ds by switching `GetTtest()` to a base assignment, continuing the migration toward native pipes.
+-   `PadViewingWindow()` now applies `southwest.padding` and `northeast.padding` to the intended edges; regression tests confirm the coordinate ranges respect the user inputs.
 
 # granovaGG 1.4.1
 
