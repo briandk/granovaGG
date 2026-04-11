@@ -25,8 +25,12 @@ test_that("granovagg.contr returns plots and prints weighted means for arousal",
   
   summary_data <- attr(plots, "summary.data")
   expect_false(is.null(summary_data))
+  expect_identical(
+    as.character(summary_data$contrast_number),
+    colnames(arousal)
+  )
   long_data <- data.frame(
-    contrast_number = rep(as.character(seq_len(ncol(arousal))), each = nrow(arousal)),
+    contrast_number = rep(colnames(arousal), each = nrow(arousal)),
     score = as.vector(as.matrix(arousal))
   )
   manual_summary <-

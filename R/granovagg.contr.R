@@ -224,6 +224,21 @@ granovagg.contr <- function(data,
     return(base.labels)
   }
 
+  ResolveGroupLabels <- function(original.data, contrast.matrix, number.of.groups) {
+    if (!is.null(dim(original.data))) {
+      column.names <- colnames(original.data)
+      if (!is.null(column.names) && length(column.names) == number.of.groups) {
+        return(column.names)
+      }
+    }
+    row.names <- rownames(contrast.matrix)
+    if (!is.null(row.names) && length(row.names) == number.of.groups) {
+      return(row.names)
+    }
+
+    return(as.character(seq_len(number.of.groups)))
+  }
+
   indic <- function(xx) {
              mm <- matrix(0, length(xx), length(unique(xx)))
              indx <- ifelse(xx == col(mm), 1, 0)
@@ -259,6 +274,7 @@ granovagg.contr <- function(data,
           number.of.contrasts           = dim(standardized.contrasts)[2],
           number.of.groups              = number.of.groups,
           responses.per.group           = responses.per.group,
+          group.labels                  = ResolveGroupLabels(data, contrasts, number.of.groups),
           contrast.labels               = BuildContrastLabels(contrasts, xlab)
         )
     )
@@ -420,14 +436,22 @@ granovagg.contr <- function(data,
     raw.data <- as.data.frame(
                    matrix(ctr$response, ncol = ctr$number.of.groups)
                  )
-    raw.data <- RenameSummaryColumnNames(raw.data)
+    raw.data <- RenameSummaryColumnNames(raw.data, ctr$group.labels)
     raw.data <- raw.data |>
       tidyr::pivot_longer(
         cols = dplyr::everything(),
         names_to = "contrast_number",
         values_to = "score"
       )
+    raw.data$contrast_number <- factor(
+      raw.data$contrast_number,
+      levels = ctr$group.labels
+    )
     summary.data <- GetGroupSummary(raw.data)
+    summary.data$contrast_number <- factor(
+      summary.data$contrast_number,
+      levels = ctr$group.labels
+    )
 
     return(list(
                 raw.data     = raw.data,
@@ -436,11 +460,16 @@ granovagg.contr <- function(data,
     )
   }
 
-  RenameSummaryColumnNames <- function(data) {
-    colnames(data) <- sapply(
-                        1:ncol(data),
-                        function(index) {paste(index)}
-                      )
+  RenameSummaryColumnNames <- function(data, labels) {
+    assert_that(
+      length(labels) == ncol(data),
+      msg = sprintf(
+        "Expected %d group labels but got %d",
+        ncol(data),
+        length(labels)
+      )
+    )
+    colnames(data) <- labels
 
     return(data)
   }

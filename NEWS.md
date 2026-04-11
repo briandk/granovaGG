@@ -3,6 +3,9 @@
     below 1 act as direct widths while retaining the historical percent-based
     behavior for larger values; the demo now includes an example showing how to
     widen the jitter window when contrast panels overplot.
+-   The granovagg.contr summary plot now preserves the original group labels
+    from the input data (or contrast rows), only falling back to numeric
+    indices when no names exist.
 -   Added an `xlab` override to granovagg.contr so each contrast panel can adopt
     a custom axis label (matched either by position or column name) while
     retaining the automatic `Contrast <name>` default for unspecified entries.

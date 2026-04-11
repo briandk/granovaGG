@@ -1,7 +1,6 @@
 # TODO
 
 ## granovagg.contr
-- [issue #49] Preserve original group names in the summary plot instead of renaming columns to numerals.
 
 ## Cross-cutting
 - Introduce `tests/testthat/setup.R` (if needed) to load datasets and set a deterministic seed for jitter-related unit tests.
