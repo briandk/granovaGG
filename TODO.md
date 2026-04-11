@@ -1,8 +1,5 @@
 # TODO
 
-## granovagg.ds
-- [issue #168] Resolve the “Length of logical index vector” failure by tracing where a logical vector is recycled; add a test reproducing the mpg example.
-
 ## granovagg.contr
 - Assert that contrast matrices have zero-sum columns and dimensions compatible with the response vector; fail fast using `assertthat`.
 - Add `tests/testthat/test-granovagg-contr.R` to confirm weighted means/effect sizes for the `arousal` demo and capture console outputs.
