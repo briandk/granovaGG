@@ -123,6 +123,17 @@ granovagg.1w <- function(data,
                          ...)
 
 {
+  if (is.data.frame(data)) {
+    stopifnot(all(vapply(data, is.numeric, logical(1))))
+    data_length <- length(unlist(data))
+  } else {
+    stopifnot(is.numeric(data))
+    data_length <- length(data)
+  }
+  if (!is.null(group)) {
+    stopifnot(length(group) == data_length)
+  }
+  
   yy <- data
   
   CoerceHigherDimensionalDataToMatrix <- function(data) {
@@ -1030,10 +1041,17 @@ granovagg.1w <- function(data,
   }
   
   PrintTtest <- function(data) {
-    unstacked.data <- unstack(data, score ~ group)
+    split.data <- split(data$score, droplevels(data$group))
+    if (length(split.data) != 2) {
+      stop("t-test summary requires exactly two groups.")
+    }
+    group.sizes <- vapply(split.data, length, integer(1))
+    if (any(group.sizes == 0)) {
+      stop("Both groups must include at least one observation for the t-test summary.")
+    }
     message("\nBelow is a t-test summary of your input data")
-    print(t.test(unstacked.data[, 1],
-                 unstacked.data[, 2],
+    print(t.test(split.data[[1]],
+                 split.data[[2]],
                  var.equal = TRUE))
   }
   
