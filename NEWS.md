@@ -2,6 +2,7 @@
 -   granovagg.1w now asserts numeric inputs and matching group labels up front, failing fast when arguments are malformed.
 -   Fixed the two-group summary branch so unequal sample sizes no longer break the t-test output, and added regression coverage for the scenario.
 -   Migrated all `aes_string()` calls in granovagg.1w to tidy-eval `aes()` usage with `.data` pronouns, reducing reliance on deprecated evaluation helpers.
+-   Corrected the y-range expansion calc to use `owp$range.expansion$vertical.range.expansion`, preventing collapsed axes.
 
 # granovaGG 1.4.1
 

@@ -442,10 +442,10 @@ granovagg.1w <- function(data,
     .expanded.score.range    <-
       c(
         min(.score.range) - (
-          owp$range$vertical.range.expansion / 2 * diff(.score.range)
+          owp$range.expansion$vertical.range.expansion / 2 * diff(.score.range)
         ),
         max(.score.range) + (
-          owp$range$vertical.range.expansion / 2 * diff(.score.range)
+          owp$range.expansion$vertical.range.expansion / 2 * diff(.score.range)
         )
       )
     .score.range.distance    <-
