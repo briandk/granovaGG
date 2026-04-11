@@ -3,6 +3,8 @@
     below 1 act as direct widths while retaining the historical percent-based
     behavior for larger values; the demo now includes an example showing how to
     widen the jitter window when contrast panels overplot.
+-   Added the "Customizing granovaGG Graphics with ggplot2" vignette (issue
+    #88) to demonstrate how to theme and extend each plot type.
 -   Audited the remaining line-based geoms in granovagg.1w/ds so they now set
     `linewidth` instead of the deprecated `size` aesthetic, eliminating the
     ggplot2 3.4 warnings.
