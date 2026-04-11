@@ -2,7 +2,6 @@
 
 ## granovagg.1w
 - [issue #149] Add guardrails for two-group unequal sample sizes so the t-test branch  can stack data correctly; include regression tests.
-- [issue #158] Add parameters that allow suppressing tabular output and selecting between plain text or formatted tables before `PrintGroupSummary()`/`PrintLinearModelSummary()` run.
 - Create `tests/testthat/test-granovagg-1w.R` verifying group summaries and F-statistic against a known dataset (e.g., `poison`).
 - Migrate every `aes_string()` use in `R/granovagg.1w.R` to tidy-eval `aes()` with `.data[[...]]` or `.data$...` lookups; verify plots render identically.
 - Replace the lone `%>%` pipeline in `GetSummary()` with the native `|>` pipe (and `dplyr::group_by()`/`summarise()` calls using explicit `.data` pronouns) to reduce dependencies on magrittr syntax.

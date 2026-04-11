@@ -63,6 +63,10 @@
 #'   'rug') on right side (wrt grand mean), default = FALSE.
 #' @param print.squares Logical; displays graphical squares for visualizing the F-statistic as a ratio
 #'   of MS-between to MS-within
+#' @param print.group.summary Logical; prints the by-group summary table when TRUE (default).
+#' @param print.model.summary Logical; prints the model/t-test summary table when TRUE (default).
+#' @param summary.table.format Character; either \code{"plain"} or \code{"formatted"} to control the style
+#'   of the printed tables.
 #' @param xlab Character; horizontal axis label, can be supplied by user, default = \code{"default_x_label"},
 #'   which leads to a generic x-axis label ("Contrast coefficients based on group means").
 #' @param ylab Character; vertical axis label, can be supplied by user, default = \code{"default_y_label"},
@@ -117,6 +121,9 @@ granovagg.1w <- function(data,
                          dg = 2,
                          resid= FALSE,
                          print.squares = TRUE,
+                         print.group.summary = TRUE,
+                         print.model.summary = TRUE,
+                         summary.table.format = c("plain", "formatted"),
                          xlab = "default_x_label",
                          ylab = "default_y_label",
                          main = "default_granova_title",
@@ -124,6 +131,7 @@ granovagg.1w <- function(data,
                          ...)
 
 {
+  summary.table.format <- match.arg(summary.table.format)
   if (is.data.frame(data)) {
     stopifnot(all(vapply(data, is.numeric, logical(1))))
     data_length <- length(unlist(data))
@@ -411,7 +419,20 @@ granovagg.1w <- function(data,
     return(summary_output)
   }
   
-  PrintGroupSummary <- function(data, digits.to.round) {
+  PrintTabularData <- function(table.data, format) {
+    if (format == "plain") {
+      return(print(table.data))
+    }
+    
+    if (is.data.frame(table.data) || is.matrix(table.data)) {
+      formatted <- format(table.data, justify = "right")
+      return(print(noquote(formatted)))
+    }
+    
+    return(print(table.data))
+  }
+  
+  PrintGroupSummary <- function(data, digits.to.round, table.format) {
     # To appease R CMD Check
     maximum.score <- NULL
     
@@ -422,7 +443,7 @@ granovagg.1w <- function(data,
       ReorderDataByColumn(cbind(groups, rounded.stats), "group.mean")
     message("\nBy-group summary statistics for your input data (ordered by group means)")
     
-    return(print(output))
+    return(PrintTabularData(output, table.format))
   }
   
   GetGroupMeanLine <- function(owp) {
@@ -1032,16 +1053,54 @@ granovagg.1w <- function(data,
     }
   }
   
-  PrintLinearModelSummary <- function(owp) {
+  PrintLinearModelSummary <- function(owp, table.format) {
     if (length(levels(owp$data$group)) == 2) {
-      PrintTtest(owp$data[, c("score", "group")])
+      PrintTtest(owp$data[, c("score", "group")], table.format)
     } else {
       message("\nBelow is a linear model summary of your input data")
-      print(owp$model.summary)
+      if (table.format == "plain") {
+        print(owp$model.summary)
+      } else {
+        PrintFormattedLinearModelSummary(owp$model.summary, table.format)
+      }
     }
   }
   
-  PrintTtest <- function(data) {
+  PrintFormattedLinearModelSummary <- function(model.summary, table.format) {
+    PrintTabularData(model.summary$coefficients, table.format)
+    cat(
+      "\nResidual standard error:",
+      signif(model.summary$sigma, 4),
+      "on",
+      model.summary$df[2],
+      "degrees of freedom\n"
+    )
+    cat(
+      "Multiple R-squared:",
+      signif(model.summary$r.squared, 4),
+      ", Adjusted R-squared:",
+      signif(model.summary$adj.r.squared, 4),
+      "\n"
+    )
+    fstat <- model.summary$fstatistic
+    f.value <- unname(fstat["value"])
+    f.numdf <- unname(fstat["numdf"])
+    f.dendf <- unname(fstat["dendf"])
+    p.value <- pf(f.value, f.numdf, f.dendf, lower.tail = FALSE)
+    cat(
+      "F-statistic:",
+      signif(f.value, 4),
+      "on",
+      f.numdf,
+      "and",
+      f.dendf,
+      "DF, p-value:",
+      signif(p.value, 4),
+      "\n"
+    )
+  }
+  
+  PrintTtest <- function(data, table.format) {
     split.data <- split(data$score, droplevels(data$group))
     if (length(split.data) != 2) {
       stop("t-test summary requires exactly two groups.")
@@ -1051,9 +1110,36 @@ granovagg.1w <- function(data,
       stop("Both groups must include at least one observation for the t-test summary.")
     }
     message("\nBelow is a t-test summary of your input data")
-    print(t.test(split.data[[1]],
-                 split.data[[2]],
-                 var.equal = TRUE))
+    ttest.result <- t.test(split.data[[1]],
+                           split.data[[2]],
+                           var.equal = TRUE)
+    if (table.format == "plain") {
+      print(ttest.result)
+    } else {
+      summary.table <- CreateTtestSummaryTable(ttest.result)
+      PrintTabularData(summary.table, table.format)
+    }
+  }
+  
+  CreateTtestSummaryTable <- function(ttest.result) {
+    estimates <- ttest.result$estimate
+    summary.table <-
+      data.frame(
+        statistic = unname(ttest.result$statistic),
+        df        = unname(ttest.result$parameter),
+        p.value   = ttest.result$p.value,
+        conf.low  = ttest.result$conf.int[1],
+        conf.high = ttest.result$conf.int[2],
+        check.names = FALSE
+      )
+    if (length(estimates) > 0) {
+      estimate.names <- names(estimates)
+      for (i in seq_along(estimates)) {
+        col.name <- paste0("mean.", make.names(estimate.names[i]))
+        summary.table[[col.name]] <- estimates[i]
+      }
+    }
+    return(summary.table)
   }
   
   # Pepare OWP object
@@ -1075,7 +1161,9 @@ granovagg.1w <- function(data,
     GetBackgroundForGroupSizesAndLabels(owp)
   owp$group.labels          <- GetGroupLabels(owp)
   owp$group.sizes           <- GetGroupSizes(owp)
-  PrintGroupSummary(owp$summary, dg)
+  if (print.group.summary) {
+    PrintGroupSummary(owp$summary, dg, summary.table.format)
+  }
   
   
   #Plot OWP object
@@ -1107,7 +1195,9 @@ granovagg.1w <- function(data,
   p <- p + PlotTitle(main)
   p <- p + RemoveSizeElementFromLegend()
   PrintOverplotWarning(owp, dg)
-  PrintLinearModelSummary(owp)
+  if (print.model.summary) {
+    PrintLinearModelSummary(owp, summary.table.format)
+  }
   
   return(p)
 }

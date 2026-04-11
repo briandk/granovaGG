@@ -13,6 +13,9 @@ granovagg.1w(
   dg = 2,
   resid = FALSE,
   print.squares = TRUE,
+  print.group.summary = TRUE,
+  print.model.summary = TRUE,
+  summary.table.format = c("plain", "formatted"),
   xlab = "default_x_label",
   ylab = "default_y_label",
   main = "default_granova_title",
@@ -48,6 +51,13 @@ the degree of jitter will default to the smallest difference between two adjacen
 
 \item{print.squares}{Logical; displays graphical squares for visualizing the F-statistic as a ratio
 of MS-between to MS-within}
+
+\item{print.group.summary}{Logical; prints the by-group summary table when TRUE (default).}
+
+\item{print.model.summary}{Logical; prints the model/t-test summary table when TRUE (default).}
+
+\item{summary.table.format}{Character; either \code{"plain"} or \code{"formatted"} to control the style
+of the printed tables.}
 
 \item{xlab}{Character; horizontal axis label, can be supplied by user, default = \code{"default_x_label"},
 which leads to a generic x-axis label ("Contrast coefficients based on group means").}

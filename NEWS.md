@@ -3,6 +3,7 @@
 -   Fixed the two-group summary branch so unequal sample sizes no longer break the t-test output, and added regression coverage for the scenario.
 -   Migrated all `aes_string()` calls in granovagg.1w to tidy-eval `aes()` usage with `.data` pronouns, reducing reliance on deprecated evaluation helpers.
 -   Corrected the y-range expansion calc to use `owp$range.expansion$vertical.range.expansion`, preventing collapsed axes.
+-   Added `print.group.summary`, `print.model.summary`, and `summary.table.format` parameters to granovagg.1w so tabular output can be suppressed or rendered with formatted tables; added regression tests for both behaviors.
 
 # granovaGG 1.4.1
 
