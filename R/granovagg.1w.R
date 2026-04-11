@@ -107,6 +107,7 @@
 #' @import RColorBrewer
 #' @import stats
 #' @import utils
+#' @importFrom rlang .data
 #' @export
 granovagg.1w <- function(data,
                          group = NULL,
@@ -729,12 +730,12 @@ granovagg.1w <- function(data,
   
   GroupMeanLine <- function(owp) {
     return(geom_segment(
-      aes_string(
-        x      = "x",
-        y      = "y",
-        xend   = "xend",
-        yend   = "yend",
-        color  = "factor('Group Mean Line')"
+      aes(
+        x      = .data$x,
+        y      = .data$y,
+        xend   = .data$xend,
+        yend   = .data$yend,
+        color  = factor("Group Mean Line")
       ),
       alpha = I(1 / 2),
       data  = owp$group.mean.line
@@ -744,9 +745,9 @@ granovagg.1w <- function(data,
   GroupMeansByContrast <- function(owp) {
     return(
       geom_point(
-        aes_string(x     = "contrast",
-                   y     = "group.mean",
-                   fill  = "factor('Group Means')"),
+        aes(x    = .data$contrast,
+            y    = .data$group.mean,
+            fill = factor("Group Means")),
         size  = I(3),
         shape = 24,
         color = "black",
@@ -759,9 +760,8 @@ granovagg.1w <- function(data,
   Residuals <- function(owp, resid) {
     if (resid == TRUE) {
       return(geom_rug(
-        aes_string(x     = "NULL",
-                   y     = "within.group.residuals",
-                   color = "factor(within.1.sd.of.the.mean.of.all.residuals)"),
+        aes(y     = .data$within.group.residuals,
+            color = factor(.data$within.1.sd.of.the.mean.of.all.residuals)),
         alpha = I(1),
         data  = owp$residuals,
         sides = "l"
@@ -781,28 +781,28 @@ granovagg.1w <- function(data,
   
   OuterSquare <- function() {
     return(geom_rect(
-      aes_string(
-        xmin   = "xmin",
-        xmax   = "xmax",
-        ymin   = "ymin",
-        ymax   = "ymax",
-        fill   = "fill",
-        color  = "NULL"
+      aes(
+        xmin = .data$xmin,
+        xmax = .data$xmax,
+        ymin = .data$ymin,
+        ymax = .data$ymax,
+        fill = .data$fill
       ),
+      color = NA,
       data  = owp$outer.square
     ))
   }
   
   InnerSquare <- function() {
     return(geom_rect(
-      aes_string(
-        xmin   = "xmin",
-        xmax   = "xmax",
-        ymin   = "ymin",
-        ymax   = "ymax",
-        fill   = "fill",
-        color  = "NULL"
+      aes(
+        xmin = .data$xmin,
+        xmax = .data$xmax,
+        ymin = .data$ymin,
+        ymax = .data$ymax,
+        fill = .data$fill
       ),
+      color = NA,
       data  = owp$inner.square,
     ))
   }
@@ -810,9 +810,9 @@ granovagg.1w <- function(data,
   SquaresText <- function(owp) {
     return(
       geom_text(
-        aes_string(x     = "x",
-                   y     = "y",
-                   label = "label"),
+        aes(x     = .data$x,
+            y     = .data$y,
+            label = .data$label),
         color = "grey20",
         size  = owp$squares.text$text.size,
         data  = owp$squares.text,
@@ -824,9 +824,9 @@ granovagg.1w <- function(data,
   WithinGroupVariation <- function(owp) {
     return(
       geom_linerange(
-        aes_string(x      = "x",
-                   ymin   = "ymin",
-                   ymax   = "ymax"),
+        aes(x    = .data$x,
+            ymin = .data$ymin,
+            ymax = .data$ymax),
         color = "grey30",
         size  = GetWithinGroupVariationSize(),
         data  = owp$variation
@@ -835,11 +835,12 @@ granovagg.1w <- function(data,
   }
   
   MaxWithinGroupVariation <- function(owp) {
+    max_ymax <- max(owp$variation$ymax)
     return(
       geom_linerange(
-        aes_string(x      = "x",
-                   ymin   = "ymin",
-                   ymax   = "max(ymax)"),
+        aes(x    = .data$x,
+            ymin = .data$ymin),
+        ymax = max_ymax,
         color = "grey",
         size  = GetWithinGroupVariationSize(),
         data  = owp$variation
@@ -853,7 +854,7 @@ granovagg.1w <- function(data,
   
   BaselineWithinGroupVariation <- function(owp) {
     return(geom_hline(
-      aes_string(yintercept = "baseline.variation"),
+      aes(yintercept = .data$baseline.variation),
       color = "white",
       size  = I(1 / 4),
       data  = owp$variation
@@ -900,11 +901,11 @@ granovagg.1w <- function(data,
   
   BackgroundForGroupSizesAndLabels <- function(owp) {
     return(geom_rect(
-      aes_string(
-        ymin  = "ymin",
-        ymax  = "ymax",
-        xmin  = "xmin",
-        xmax  = "xmax"
+      aes(
+        ymin = .data$ymin,
+        ymax = .data$ymax,
+        xmin = .data$xmin,
+        xmax = .data$xmax
       ),
       fill  = "white",
       data  = owp$label.background
@@ -914,11 +915,11 @@ granovagg.1w <- function(data,
   GroupSizes  <- function(owp) {
     return(
       geom_text(
-        aes_string(
-          x     = "x",
-          y     = "y",
-          label = "label",
-          angle = "angle"
+        aes(
+          x     = .data$x,
+          y     = .data$y,
+          label = .data$label,
+          angle = .data$angle
         ),
         size  = 2.5,
         color = "grey10",
@@ -934,11 +935,11 @@ granovagg.1w <- function(data,
     if (FALSE %in% owp$group.labels$overplotted) {
       return(
         geom_text(
-          aes_string(
-            x     = "x",
-            y     = "y",
-            label = "label",
-            angle = "angle"
+          aes(
+            x     = .data$x,
+            y     = .data$y,
+            label = .data$label,
+            angle = .data$angle
           ),
           size  = GetGroupLabelSize(),
           color = "grey50",
@@ -956,11 +957,11 @@ granovagg.1w <- function(data,
     if (TRUE %in% owp$group.labels$overplotted) {
       return(
         geom_text(
-          aes_string(
-            x     = "x",
-            y     = "y",
-            label = "label",
-            angle = "angle"
+          aes(
+            x     = .data$x,
+            y     = .data$y,
+            label = .data$label,
+            angle = .data$angle
           ),
           size  = GetGroupLabelSize(),
           color = brewer.pal(n = 8, name = "Paired")[6],
