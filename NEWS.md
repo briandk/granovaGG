@@ -7,6 +7,7 @@
 -   The ggplot returned by granovagg.1w now carries `group.summary`/`model.summary` attributes, and new regression tests verify those summaries (and the F-statistic) against the `poison` dataset.
 -   Fixed granovagg.ds so column 1 now maps to the horizontal axis (and column 2 to vertical) unless `revc = TRUE`; added regression coverage for the orientation (issue #175).
 -   granovagg.ds now checks for numeric two-column input after any reversal and validates `conf.level` lies in (0,1); added tests covering both conditions.
+-   Added `tests/testthat/test-granovagg-ds-summary.R` to snapshot the anorexia.sub summary output, ensuring reported means, confidence intervals, and t-statistic stay stable.
 
 # granovaGG 1.4.1
 

@@ -1,7 +1,6 @@
 # TODO
 
 ## granovagg.ds
-- Add `tests/testthat/test-granovagg-ds.R` that checks the printed summary matrix for `anorexia.sub` and snapshots the CI output.
 - Swap the `southwest.padding` / `northeast.padding` multipliers in `PadViewingWindow()` so each argument adjusts the intended edge of the viewing window.
 - Replace all `aes_string()` calls with tidy-eval `aes()` usage.
 - Convert the `%<>%` assignment in `GetTtest()`/`EnsureDataIsADataFrame()` to idiomatic base R (or `|>`), eliminating reliance on magrittr compound operators.
