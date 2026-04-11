@@ -1,9 +1,7 @@
 # TODO
 
 ## granovagg.1w
-- [issue #149] Add guardrails for two-group unequal sample sizes so the t-test branch  can stack data correctly; include regression tests.
 - Create `tests/testthat/test-granovagg-1w.R` verifying group summaries and F-statistic against a known dataset (e.g., `poison`).
-- Migrate every `aes_string()` use in `R/granovagg.1w.R` to tidy-eval `aes()` with `.data[[...]]` or `.data$...` lookups; verify plots render identically.
 - Replace the lone `%>%` pipeline in `GetSummary()` with the native `|>` pipe (and `dplyr::group_by()`/`summarise()` calls using explicit `.data` pronouns) to reduce dependencies on magrittr syntax.
 - [issue #175] Align the plotting orientation with the documented X/Y definitions (or vice versa) and update the help file accordingly.
 
