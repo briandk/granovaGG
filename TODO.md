@@ -1,7 +1,6 @@
 # TODO
 
 ## granovagg.contr
-- Convert `aes_string()` calls to tidy-eval `aes()`.
 - Replace all `%>%` pipelines (contrast summaries, pooled SD computation, linear-model summary formatting) with base `|>` piping and explicit helper calls.
 - [issue #67] Restore user control over jitter width by honoring the `jj` argument again (or adding a new parameter) and documenting its effect.
 - [issue #68] Allow per-contrast x-axis labels or overrides while keeping the automatic naming default.

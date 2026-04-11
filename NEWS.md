@@ -9,6 +9,7 @@
 -   Added `tests/testthat/test-granovagg-contr.R`, which exercises the `arousal` demo to ensure weighted means, effect sizes, and console summaries stay consistent.
 -   granovagg.contr now computes pooled standard deviations using the proper weighted variance formula and exposes the summary data via the returned plot list for testing.
 -   Replaced the remaining `tidyr::gather()` usage in granovagg.contr with `pivot_longer()` as part of modernizing the summary plot pipeline.
+-   Converted all `aes_string()` usage in granovagg.contr to tidy-eval `aes()` calls with `.data` pronouns.
 -   granovagg.ds now checks for numeric two-column input after any reversal and validates `conf.level` lies in (0,1); added tests covering both conditions.
 -   Added `tests/testthat/test-granovagg-ds-summary.R` to snapshot the anorexia.sub summary output, ensuring reported means, confidence intervals, and t-statistic stay stable.
 -   Removed the last magrittr `%<>%` usage in granovagg.ds by switching `GetTtest()` to a base assignment, continuing the migration toward native pipes.
