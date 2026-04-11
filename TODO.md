@@ -1,7 +1,6 @@
 # TODO
 
 ## granovagg.1w
-- Create `tests/testthat/test-granovagg-1w.R` verifying group summaries and F-statistic against a known dataset (e.g., `poison`).
 - Replace the lone `%>%` pipeline in `GetSummary()` with the native `|>` pipe (and `dplyr::group_by()`/`summarise()` calls using explicit `.data` pronouns) to reduce dependencies on magrittr syntax.
 - [issue #175] Align the plotting orientation with the documented X/Y definitions (or vice versa) and update the help file accordingly.
 

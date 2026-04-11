@@ -74,7 +74,9 @@ graphic; defaults to a customized theme created for the one-way graphic}
 \item{...}{Optional arguments to/from other functions}
 }
 \value{
-Returns a plot object of class \code{ggplot}. The function also provides printed output including by-group
+Returns a plot object of class \code{ggplot}. The returned object includes
+  \code{group.summary} and \code{model.summary} attributes that capture the computed summaries.
+  The function also provides printed output including by-group
   statistical summaries and information about groups that might be overplotted (if applicable):
      \item{group}{group names}
      \item{group means}{means for each group}
