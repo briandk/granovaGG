@@ -86,6 +86,7 @@
 #' @import stats
 #' @import utils
 #' @import assertthat
+#' @importFrom rlang .data
 #' @export
 granovagg.contr <- function(data,
                             contrasts,
@@ -266,9 +267,9 @@ granovagg.contr <- function(data,
   JitteredResponsesByContrast <- function (data) {
     return(
       geom_point(
-        aes_string(
-          x = "x.values",
-          y = "y.values"
+        aes(
+          x = .data$x.values,
+          y = .data$y.values
         ),
         data     = data,
         position = position_jitter(height = 0, width = GetDegreeOfJitter(jj))
@@ -279,9 +280,9 @@ granovagg.contr <- function(data,
   EffectsOfContrasts <- function(data) {
     return(
       geom_point(
-        aes_string(
-          x = "contrasts",
-          y = "responses"
+        aes(
+          x = .data$contrasts,
+          y = .data$responses
         ),
         data  = data,
         color = brewer.pal(8, "Set1")[2],
@@ -294,9 +295,9 @@ granovagg.contr <- function(data,
   ConnectEffectMeans <- function(data) {
     return(
       geom_line(
-        aes_string(
-          x = "contrasts",
-          y = "responses"
+        aes(
+          x = .data$contrasts,
+          y = .data$responses
         ),
         data  = data,
         color = brewer.pal(8, "Set1")[2],
@@ -395,9 +396,9 @@ granovagg.contr <- function(data,
   RawScoresByGroup <- function(data) {
     return(
       geom_point(
-        aes_string(
-          x = "as.factor(contrast_number)",
-          y = "score"
+        aes(
+          x = as.factor(.data$contrast_number),
+          y = .data$score
         ),
         data = data,
         position = position_jitter(height = 0, width = 3 * GetDegreeOfJitter(jj))
@@ -408,9 +409,9 @@ granovagg.contr <- function(data,
   MeansByGroup <- function(data) {
     return(
       geom_point(
-        aes_string(
-          x = "contrast_number",
-          y = "group.mean"
+        aes(
+          x = .data$contrast_number,
+          y = .data$group.mean
         ),
         data  = data,
         color = brewer.pal(8, "Set1")[2],
@@ -423,9 +424,9 @@ granovagg.contr <- function(data,
   ConnectGroupResponseMeans <- function(data) {
     return(
       geom_line(
-        aes_string(
-          x = "contrast_number",
-          y = "group.mean"
+        aes(
+          x = .data$contrast_number,
+          y = .data$group.mean
         ),
         data  = data,
         color = brewer.pal(8, "Set1")[2],
