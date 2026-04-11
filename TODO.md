@@ -1,10 +1,6 @@
 # TODO
 
-## granovagg.1w
-- [issue #175] Align the plotting orientation with the documented X/Y definitions (or vice versa) and update the help file accordingly.
-
 ## granovagg.ds
-- Assert that the incoming data has exactly two numeric columns after optional reversal, and that `conf.level` lies in (0,1).
 - Add `tests/testthat/test-granovagg-ds.R` that checks the printed summary matrix for `anorexia.sub` and snapshots the CI output.
 - Swap the `southwest.padding` / `northeast.padding` multipliers in `PadViewingWindow()` so each argument adjusts the intended edge of the viewing window.
 - Replace all `aes_string()` calls with tidy-eval `aes()` usage.

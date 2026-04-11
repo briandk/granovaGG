@@ -86,10 +86,23 @@ granovagg.ds <- function(data       = NULL,
                 )
 
 {
+  ValidateConfidenceLevel <- function(level) {
+    if (!is.numeric(level) ||
+        length(level) != 1 ||
+        is.na(level) ||
+        level <= 0 ||
+        level >= 1) {
+      stop("conf.level must be a single numeric value strictly between 0 and 1")
+    }
+    return(level)
+  }
+  
+  conf.level <- ValidateConfidenceLevel(conf.level)
 
   GetData <- function(data) {
     data <- CheckData(data)
     data <- ReverseXAndY(data)
+    data <- EnsureNumericColumns(data)
     data <- EnsureDataHasColumnNames(data)
     data <- EnsureDataIsADataFrame(data)
     return(data)
@@ -118,6 +131,13 @@ granovagg.ds <- function(data       = NULL,
       names(output) <- names(data)[2:1]
     }
     return(output)
+  }
+  
+  EnsureNumericColumns <- function(data) {
+    if (!all(vapply(data, is.numeric, logical(1)))) {
+      stop("granovagg.ds requires a two-column numeric matrix or data frame")
+    }
+    return(data)
   }
 
   IsDataNull <- function(data) {
