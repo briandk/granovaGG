@@ -404,19 +404,18 @@ granovagg.1w <- function(data,
   }
   
   GetSummary <- function(owp) {
-    # To appease R CMD Check
-    score <- NULL
-    contrast <- NULL
-    summary_output <- owp$data %>%
-      dplyr::group_by(group) %>%
+    summary_output <-
+      owp$data |>
+      dplyr::group_by(.data$group) |>
       dplyr::summarise(
-        group.mean         = mean(score),
-        trimmed.mean       = mean(score, trim = 0.2),
-        contrast           = unique(contrast),
-        variance           = var(score),
-        standard.deviation = sd(score),
-        maximum.score      = max(score),
-        group.size         = length(score)
+        group.mean         = mean(.data$score),
+        trimmed.mean       = mean(.data$score, trim = 0.2),
+        contrast           = unique(.data$contrast),
+        variance           = var(.data$score),
+        standard.deviation = sd(.data$score),
+        maximum.score      = max(.data$score),
+        group.size         = length(.data$score),
+        .groups            = "drop"
       )
     return(summary_output)
   }
