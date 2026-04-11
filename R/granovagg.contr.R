@@ -85,6 +85,7 @@
 #' @import ggplot2
 #' @import stats
 #' @import utils
+#' @import assertthat
 #' @export
 granovagg.contr <- function(data,
                             contrasts,
@@ -146,12 +147,22 @@ granovagg.contr <- function(data,
 
     response            <- FormatResponseData(data)
     contrasts           <- as.matrix(contrasts)
+    assert_that(!is.null(dim(contrasts)),
+                msg = "contrasts must be a matrix or two-dimensional object")
     number.of.groups    <- nrow(contrasts)
+    assert_that(number.of.groups > 0,
+                msg = "contrasts must have at least one row")
+    assert_that(length(response) %% number.of.groups == 0,
+                msg = "Number of responses must be a multiple of the number of groups")
     responses.per.group <- length(response)/number.of.groups
     group.identifiers   <- rep(1:number.of.groups, ea = responses.per.group)
     indicator.matrix    <- indic(group.identifiers)
     indicated.contrasts <- indicator.matrix %*% contrasts
     standardized.contrasts <- std.contr(indicated.contrasts)
+    apply(contrasts, 2, function(column) {
+      assert_that(abs(sum(column)) < sqrt(.Machine$double.eps),
+                  msg = "Each contrast must sum to zero")
+    })
 
     return(
         list(
@@ -500,6 +511,8 @@ granovagg.contr <- function(data,
   ctr$summary.plot.data      <- GetSummaryPlotData(ctr)
   ctr$summary.plot           <- ComposeSummaryPlot(ctr$summary.plot.data)
   ctr$output                 <- CollateOutputPlots(ctr)
+
+  PrintOutput()
 
   return(ctr$output)
 }
