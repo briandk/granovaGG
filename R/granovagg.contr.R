@@ -213,11 +213,11 @@ granovagg.contr <- function(data,
     # To appease R CMD check
     x.values <- NULL
     y.values <- NULL
-    summary_output <- data %>%
-      dplyr::group_by(x.values > 0) %>%
+    summary_output <- data |>
+      dplyr::group_by(.data$x.values > 0) |>
       dplyr::summarise(
-        contrasts = mean(x.values),
-        responses = mean(y.values)
+        contrasts = mean(.data$x.values),
+        responses = mean(.data$y.values)
       )
     return(summary_output)
     # summary_output <- data %>% dplyr
@@ -481,12 +481,13 @@ granovagg.contr <- function(data,
       return(data.frame(neg, pos, diff, stEftSze))
     }
     output <- sapply(
-      X = x, 
-      FUN = ExtractData, 
+      X = x,
+      FUN = ExtractData,
       pooled_standard_deviation = pooled.standard.deviation
-    ) %>% 
-      t() %>%  
-      as.data.frame() %>% 
+    )
+    output <- output |>
+      t() |>
+      as.data.frame() |>
       ForceRowNamesToBeContrastNumbers()
     return(output)
   }
