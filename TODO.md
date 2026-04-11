@@ -9,7 +9,6 @@
 - Swap the `southwest.padding` / `northeast.padding` multipliers in `PadViewingWindow()` so each argument adjusts the intended edge of the viewing window.
 - Replace all `aes_string()` calls with tidy-eval `aes()` usage.
 - Convert the `%<>%` assignment in `GetTtest()`/`EnsureDataIsADataFrame()` to idiomatic base R (or `|>`), eliminating reliance on magrittr compound operators.
-- [issue #175] Ensure column 1 maps to X and column 2 to Y unless `revc = TRUE`, and cross-check docs.
 - [issue #168] Resolve the “Length of logical index vector” failure by tracing where a logical vector is recycled; add a test reproducing the mpg example.
 
 ## granovagg.contr

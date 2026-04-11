@@ -5,6 +5,7 @@
 -   Corrected the y-range expansion calc to use `owp$range.expansion$vertical.range.expansion`, preventing collapsed axes.
 -   Added `print.group.summary`, `print.model.summary`, and `summary.table.format` parameters to granovagg.1w so tabular output can be suppressed or rendered with formatted tables; added regression tests for both behaviors.
 -   The ggplot returned by granovagg.1w now carries `group.summary`/`model.summary` attributes, and new regression tests verify those summaries (and the F-statistic) against the `poison` dataset.
+-   Fixed granovagg.ds so column 1 now maps to the horizontal axis (and column 2 to vertical) unless `revc = TRUE`; added regression coverage for the orientation (issue #175).
 
 # granovaGG 1.4.1
 

@@ -98,8 +98,8 @@ granovagg.ds <- function(data       = NULL,
   FormatDataForPlotting <- function(dsp) {
     return(
       data.frame(
-        x_values = dsp$data[, 2],
-        y_values = dsp$data[, 1]
+        x_values = dsp$data[, 1],
+        y_values = dsp$data[, 2]
       )
     )
   }
@@ -468,7 +468,7 @@ granovagg.ds <- function(data       = NULL,
   XMeanLine <- function(dsp) {
     return(
       geom_vline(
-        xintercept = mean(dsp$data[, 2]),
+        xintercept = mean(dsp$data[, 1]),
         color      = dsp$colors$mean.line,
         size       = dsp$params$mean.line.size,
         linetype   = "dashed",
@@ -480,7 +480,7 @@ granovagg.ds <- function(data       = NULL,
   YMeanLine <- function(dsp)  {
     return(
       geom_hline(
-        yintercept = mean(dsp$data[, 1]),
+        yintercept = mean(dsp$data[, 2]),
         color      = dsp$colors$mean.line,
         size       = dsp$params$mean.line.size,
         linetype   = "dashed",
