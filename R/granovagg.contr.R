@@ -332,11 +332,12 @@ granovagg.contr <- function(data,
                    matrix(ctr$response, ncol = ctr$number.of.groups)
                  )
     raw.data <- RenameSummaryColumnNames(raw.data)
-    raw.data <- tidyr::gather(
-      raw.data,
-      key = "contrast_number",
-      value = "score"
-    )
+    raw.data <- raw.data |>
+      tidyr::pivot_longer(
+        cols = dplyr::everything(),
+        names_to = "contrast_number",
+        values_to = "score"
+      )
     summary.data <- GetGroupSummary(raw.data)
 
     return(list(
