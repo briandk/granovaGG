@@ -3,6 +3,9 @@
     below 1 act as direct widths while retaining the historical percent-based
     behavior for larger values; the demo now includes an example showing how to
     widen the jitter window when contrast panels overplot.
+-   Audited the remaining line-based geoms in granovagg.1w/ds so they now set
+    `linewidth` instead of the deprecated `size` aesthetic, eliminating the
+    ggplot2 3.4 warnings.
 -   Dropped the unused `magrittr` dependency (and roxygen import) now that all
     pipelines rely on base syntax.
 -   Clarified dependency metadata by explicitly importing `assertthat (>= 0.2.1)`

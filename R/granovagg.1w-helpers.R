@@ -16,16 +16,16 @@ InitializeGgplot_1w <- function() {
   return(ggplot())
 }
 
-GrandMeanLine <- function(owp) {
-  return(
-    geom_hline(
-      color      = brewer.pal(n = 8, name = "Set1")[3],
-      alpha      = I(1/2),
-      size       = I(0.25),
-      yintercept = owp$stats$grand.mean
+  GrandMeanLine <- function(owp) {
+    return(
+      geom_hline(
+        color      = brewer.pal(n = 8, name = "Set1")[3],
+        alpha      = I(1/2),
+        linewidth       = I(0.25),
+        yintercept = owp$stats$grand.mean
+      )
     )
-  )
-}
+  }
 
 GrandMeanPoint <- function(owp) {
   return(
@@ -118,4 +118,3 @@ ScaleY_1w <- function(owp) {
     )
   )
 }
-

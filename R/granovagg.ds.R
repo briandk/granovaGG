@@ -414,7 +414,7 @@ granovagg.ds <- function(data       = NULL,
           color     = .data$color
         ),
         alpha    = 0.5,
-        size     = I(1),
+        linewidth = I(1),
         linetype = "dashed",
         data     = dsp$treatment.line
       )
@@ -440,7 +440,7 @@ granovagg.ds <- function(data       = NULL,
         slope     = 1,
         intercept = 0,
         alpha     = 0.75,
-        size      = 1
+        linewidth = 1
       )
     )
   }
@@ -484,7 +484,7 @@ granovagg.ds <- function(data       = NULL,
       geom_vline(
         xintercept = mean(dsp$data[, 1]),
         color      = dsp$colors$mean.line,
-        size       = dsp$params$mean.line.size,
+        linewidth  = dsp$params$mean.line.size,
         linetype   = "dashed",
         alpha      = I(1/2)
       )
@@ -496,7 +496,7 @@ granovagg.ds <- function(data       = NULL,
       geom_hline(
         yintercept = mean(dsp$data[, 2]),
         color      = dsp$colors$mean.line,
-        size       = dsp$params$mean.line.size,
+        linewidth  = dsp$params$mean.line.size,
         linetype   = "dashed",
         alpha      = I(1/2)
       )
@@ -512,7 +512,7 @@ granovagg.ds <- function(data       = NULL,
           xend = .data$x.end,
           yend = .data$y.end
         ),
-        size  = 3/4,
+        linewidth  = 3/4,
         alpha = 3/4,
         color = dsp$colors$crossbow,
         data  = dsp$crossbow
@@ -530,7 +530,7 @@ granovagg.ds <- function(data       = NULL,
           yend  = .data$y.end,
           color = .data$color
         ),
-        size = 2,
+        linewidth = 2,
         data = dsp$CIBand
       )
     )
@@ -561,7 +561,7 @@ granovagg.ds <- function(data       = NULL,
           yend = .data$y.trail.end
         ),
         data     = dsp$trails,
-        size     = 1/3,
+        linewidth     = 1/3,
         color    = "black",
         linetype = 1,
         alpha    = 1/10

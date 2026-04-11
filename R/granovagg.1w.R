@@ -849,7 +849,7 @@ granovagg.1w <- function(data,
             ymin = .data$ymin,
             ymax = .data$ymax),
         color = "grey30",
-        size  = GetWithinGroupVariationSize(),
+        linewidth  = GetWithinGroupVariationSize(),
         data  = owp$variation
       )
     )
@@ -863,7 +863,7 @@ granovagg.1w <- function(data,
             ymin = .data$ymin),
         ymax = max_ymax,
         color = "grey",
-        size  = GetWithinGroupVariationSize(),
+        linewidth  = GetWithinGroupVariationSize(),
         data  = owp$variation
       )
     )
@@ -877,7 +877,7 @@ granovagg.1w <- function(data,
     return(geom_hline(
       aes(yintercept = .data$baseline.variation),
       color = "white",
-      size  = I(1 / 4),
+      linewidth  = I(1 / 4),
       data  = owp$variation
     ))
   }
