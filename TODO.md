@@ -3,7 +3,6 @@
 ## granovagg.contr
 
 ## Cross-cutting
-- Introduce `tests/testthat/setup.R` (if needed) to load datasets and set a deterministic seed for jitter-related unit tests.
 - Ensure `DESCRIPTION` lists `testthat` (Suggests) and `assertthat` (Imports) once the above changes land.
 - Once `%>%`/`%<>%` usages are removed, drop the `magrittr` import from `DESCRIPTION`/`NAMESPACE`.
 - [issue #158] Implement optional suppression/formatting of tabular output across all exported functions with consistent parameter names.

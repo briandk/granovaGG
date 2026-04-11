@@ -3,6 +3,8 @@
     below 1 act as direct widths while retaining the historical percent-based
     behavior for larger values; the demo now includes an example showing how to
     widen the jitter window when contrast panels overplot.
+-   Added `tests/testthat/setup.R` to seed jittered geoms and preload the common
+    demo datasets so visual regression tests remain deterministic.
 -   The granovagg.contr summary plot now preserves the original group labels
     from the input data (or contrast rows), only falling back to numeric
     indices when no names exist.
