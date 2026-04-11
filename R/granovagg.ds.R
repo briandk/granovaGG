@@ -69,6 +69,7 @@
 #' @import stats
 #' @import tibble
 #' @import utils
+#' @importFrom rlang .data
 #' @export
 #' @references Pruzek, R. M., & Helmreich, J. E. (2009). Enhancing Dependent Sample Analyses with Graphics. Journal of Statistics Education, 17(1), 21.
 #' @references Wickham, H. (2009). Ggplot2: Elegant Graphics for Data Analysis. New York: Springer.
@@ -395,11 +396,11 @@ granovagg.ds <- function(data       = NULL,
   InitializeGgplot <- function(dsp) {
     return(
       ggplot(
-        aes_string(
-          x = "x_values",
-          y = "y_values"
-        ),
-        data = dsp$plotting_data
+        data = dsp$plotting_data,
+        mapping = aes(
+          x = .data$x_values,
+          y = .data$y_values
+        )
       )
     )
   }
@@ -407,10 +408,10 @@ granovagg.ds <- function(data       = NULL,
   TreatmentLine <- function(dsp) {
     return(
       geom_abline(
-        aes_string(
-          intercept = "intercept",
-          slope     = "slope",
-          color     = "color"
+        aes(
+          intercept = .data$intercept,
+          slope     = .data$slope,
+          color     = .data$color
         ),
         alpha    = 0.5,
         size     = I(1),
@@ -423,9 +424,9 @@ granovagg.ds <- function(data       = NULL,
   RawData <- function(dsp) {
     return(
       geom_point(
-        aes_string(
-          x = "x_values",
-          y = "y_values"
+        aes(
+          x = .data$x_values,
+          y = .data$y_values
         ),
         data = dsp$plotting_data,
         size = dsp$params$point.size
@@ -505,10 +506,11 @@ granovagg.ds <- function(data       = NULL,
   Crossbow <- function(dsp) {
     return(
       geom_segment(
-        aes_string(x    = "x",
-                   y    = "y",
-                   xend = "x.end",
-                   yend = "y.end"
+        aes(
+          x    = .data$x,
+          y    = .data$y,
+          xend = .data$x.end,
+          yend = .data$y.end
         ),
         size  = 3/4,
         alpha = 3/4,
@@ -521,12 +523,12 @@ granovagg.ds <- function(data       = NULL,
   CIBand <- function(dsp) {
     return(
       geom_segment(
-        aes_string(
-          x     = "x",
-          y     = "y",
-          xend  = "x.end",
-          yend  = "y.end",
-          color = "color"
+        aes(
+          x     = .data$x,
+          y     = .data$y,
+          xend  = .data$x.end,
+          yend  = .data$y.end,
+          color = .data$color
         ),
         size = 2,
         data = dsp$CIBand
@@ -537,9 +539,9 @@ granovagg.ds <- function(data       = NULL,
   Shadows <- function(dsp) {
     return(
       geom_point(
-        aes_string(
-          x = "x.shadow",
-          y = "y.shadow"
+        aes(
+          x = .data$x.shadow,
+          y = .data$y.shadow
         ),
         data  = dsp$shadow,
         size  = dsp$params$point.size,
@@ -552,11 +554,11 @@ granovagg.ds <- function(data       = NULL,
   Trails <- function(dsp) {
     return(
       geom_segment(
-        aes_string(
-          x    = "x.trail.start",
-          y    = "y.trail.start",
-          xend = "x.trail.end",
-          yend = "y.trail.end"
+        aes(
+          x    = .data$x.trail.start,
+          y    = .data$y.trail.start,
+          xend = .data$x.trail.end,
+          yend = .data$y.trail.end
         ),
         data     = dsp$trails,
         size     = 1/3,
