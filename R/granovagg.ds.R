@@ -188,7 +188,7 @@ granovagg.ds <- function(data       = NULL,
   }
 
   GetTtest <- function(data, conf.level) {
-    data %<>% EnsureDataIsADataFrame()
+    data <- EnsureDataIsADataFrame(data)
     return(t.test(data[, 1],
                   data[, 2],
                   paired     = TRUE,
