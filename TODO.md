@@ -1,7 +1,6 @@
 # TODO
 
 ## granovagg.1w
-- Replace the lone `%>%` pipeline in `GetSummary()` with the native `|>` pipe (and `dplyr::group_by()`/`summarise()` calls using explicit `.data` pronouns) to reduce dependencies on magrittr syntax.
 - [issue #175] Align the plotting orientation with the documented X/Y definitions (or vice versa) and update the help file accordingly.
 
 ## granovagg.ds
