@@ -3,6 +3,8 @@ contrasts22 <- data.frame( c(-.5,-.5,.5,.5),
   c(-.5,.5,-.5,.5), c(.5,-.5,-.5,.5) )
 names(contrasts22) <- c("Drug.A", "Drug.B", "Drug.A.B")
 granovagg.contr(arousal, contrasts = contrasts22)
+# Widen the jitter window to avoid overplotting in the contrast panels
+granovagg.contr(arousal, contrasts = contrasts22, jj = 0.2)
   
 data(rat)
 dat6 <- matrix(c(1, 1, 1, -1, -1, -1, -1, 1, 0, -1, 1, 0, 1, 1, -2, 

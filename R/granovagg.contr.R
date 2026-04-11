@@ -50,8 +50,12 @@
 #' @param plot.theme argument indicating a ggplot2 theme to apply to the
 #'   graphic; defaults to a customized theme created for the contrast graphic
 #' @param jj Numeric; controls \code{\link{jitter}} and allows you to control the
-#'   degree of jitter in the contrast plots. \code{jj} is divided by 100 and passed as the \code{width}
-#'   parameter to \code{\link[ggplot2]{position_jitter}}.
+#'   degree of jitter in the contrast plots. When \code{jj = NULL} (the default)
+#'   a width of \code{0.01} is used. Values between \code{0} and \code{1} are
+#'   treated as the jitter width directly, while values \code{\ge 1} are divided
+#'   by \code{100} for backwards compatibility with historical percent-based
+#'   inputs. The same setting drives the per-group summary plot (scaled by three
+#'   to keep those points legible).
 #' @param ... Optional arguments to/from other functions.
 #' @return a list of ggplot objects, one element per plot. That allows you to access any individual plot
 #'   or plots, then modify them as you wish (with ggplot2 commands, for example).
@@ -92,7 +96,7 @@ granovagg.contr <- function(data,
                             contrasts,
                             ylab       = "default_y_label",
                             plot.theme = "theme_granova_contr",
-                            jj = 1,
+                            jj         = NULL,
                             ...
                    )
 {
@@ -115,8 +119,18 @@ granovagg.contr <- function(data,
   }
 
   GetDegreeOfJitter <- function(jj) {
-    result <- jj / 100
-    return(result)
+    assert_that(
+      is.null(jj) || (is.numeric(jj) && length(jj) == 1 && !is.na(jj)),
+      msg = "`jj` must be NULL or a single numeric value"
+    )
+    if (is.null(jj)) {
+      return(0.01)
+    }
+    assert_that(jj >= 0, msg = "`jj` must be non-negative")
+    if (jj < 1) {
+      return(jj)
+    }
+    return(jj / 100)
   }
 
   std.contr <- function(contrasts, tolerance = sqrt(.Machine$double.eps)^0.6) {
@@ -259,7 +273,7 @@ granovagg.contr <- function(data,
         color = brewer.pal(8, "Set1")[1],
         data  = as.data.frame(data),
         alpha = 0.5,
-        size  = 0.3
+        linewidth = 0.3
       )
     )
   }
@@ -301,7 +315,8 @@ granovagg.contr <- function(data,
         ),
         data  = data,
         color = brewer.pal(8, "Set1")[2],
-        alpha = 1
+        alpha = 1,
+        linewidth = 0.5
       )
     )
   }

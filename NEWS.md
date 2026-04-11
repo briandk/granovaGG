@@ -1,4 +1,11 @@
 # granovaGG (development version)
+-   granovagg.contr once again honors the `jj` jitter argument, letting values
+    below 1 act as direct widths while retaining the historical percent-based
+    behavior for larger values; the demo now includes an example showing how to
+    widen the jitter window when contrast panels overplot.
+-   Updated the contrast plots to draw horizontal reference lines and effect
+    connectors with `linewidth` rather than the deprecated `size` aesthetic,
+    silencing the ggplot2 3.4 warnings emitted during testing.
 -   granovagg.1w now asserts numeric inputs and matching group labels up front, failing fast when arguments are malformed.
 -   Fixed the two-group summary branch so unequal sample sizes no longer break the t-test output, and added regression coverage for the scenario.
 -   Migrated all `aes_string()` calls in granovagg.1w to tidy-eval `aes()` usage with `.data` pronouns, reducing reliance on deprecated evaluation helpers.

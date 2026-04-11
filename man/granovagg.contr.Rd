@@ -9,7 +9,7 @@ granovagg.contr(
   contrasts,
   ylab = "default_y_label",
   plot.theme = "theme_granova_contr",
-  jj = 1,
+  jj = NULL,
   ...
 )
 }
@@ -26,8 +26,12 @@ groups [G]) x (number of contrasts) [generally (G x G-1)].}
 graphic; defaults to a customized theme created for the contrast graphic}
 
 \item{jj}{Numeric; controls \code{\link{jitter}} and allows you to control the
-degree of jitter in the contrast plots. \code{jj} is divided by 100 and passed as the \code{width}
-parameter to \code{\link[ggplot2]{position_jitter}}.}
+degree of jitter in the contrast plots. When \code{jj = NULL} (the default)
+a width of \code{0.01} is used. Values between \code{0} and \code{1} are
+treated as the jitter width directly, while values \code{\ge 1} are divided
+by \code{100} for backwards compatibility with historical percent-based
+inputs. The same setting drives the per-group summary plot (scaled by three
+to keep those points legible).}
 
 \item{...}{Optional arguments to/from other functions.}
 }
@@ -97,6 +101,8 @@ contrasts22 <- data.frame( c(-.5,-.5,.5,.5),
   c(-.5,.5,-.5,.5), c(.5,-.5,-.5,.5) )
 names(contrasts22) <- c("Drug.A", "Drug.B", "Drug.A.B")
 granovagg.contr(arousal, contrasts = contrasts22)
+# Widen the jitter window to avoid overplotting in the contrast panels
+granovagg.contr(arousal, contrasts = contrasts22, jj = 0.2)
   
 data(rat)
 dat6 <- matrix(c(1, 1, 1, -1, -1, -1, -1, 1, 0, -1, 1, 0, 1, 1, -2, 

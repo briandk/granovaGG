@@ -1,7 +1,6 @@
 # TODO
 
 ## granovagg.contr
-- [issue #67] Restore user control over jitter width by honoring the `jj` argument again (or adding a new parameter) and documenting its effect.
 - [issue #68] Allow per-contrast x-axis labels or overrides while keeping the automatic naming default.
 - [issue #49] Preserve original group names in the summary plot instead of renaming columns to numerals.
 
@@ -16,3 +15,4 @@
 - [issue #95] Re-introduce proper math typesetting when roxygen permits.
 - [issue #88] Write a package vignette showing ggplot customization.
 - [issue #176] Add `devtools::check_win_devel()` to CI/release scripts and run `usethis::use_dev_version(push = TRUE)` after CRAN acceptance.
+- Audit remaining `geom_line()`/`geom_hline()` usages (e.g., in granovagg.1w) to ensure they set `linewidth` instead of the deprecated `size` aesthetic before ggplot2 3.5.
