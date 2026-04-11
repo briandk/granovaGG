@@ -356,19 +356,26 @@ granovagg.contr <- function(data,
   }
 
   GetGroupSummary <- function(data) {
-    # Appease R CMD Check
-    variable <- NULL
-    value <- NULL
-    standard.deviation <- NULL
-
-    output <- data %>% 
-      dplyr::group_by(.data$contrast_number) %>% 
+    summary_data <-
+      data |>
+      dplyr::group_by(.data$contrast_number) |>
       dplyr::summarise(
         group.mean = mean(.data$score),
         standard.deviation = sd(.data$score),
-        pooled.standard.deviation = mean(standard.deviation)^0.5
+        group.size = dplyr::n(),
+        .groups = "drop"
       )
-    return(output)
+    degrees_of_freedom <- sum(summary_data$group.size - 1)
+    pooled_sd <- NA_real_
+    if (degrees_of_freedom > 0) {
+      pooled_variance <- sum(
+        (summary_data$group.size - 1) * (summary_data$standard.deviation^2),
+        na.rm = TRUE
+      ) / degrees_of_freedom
+      pooled_sd <- sqrt(pooled_variance)
+    }
+    summary_data$pooled.standard.deviation <- pooled_sd
+    return(summary_data)
   }
 
   ComposeSummaryPlot <- function(plot.data) {
@@ -513,6 +520,7 @@ granovagg.contr <- function(data,
   ctr$output                 <- CollateOutputPlots(ctr)
 
   PrintOutput()
-
-  return(ctr$output)
+  output <- ctr$output
+  attr(output, "summary.data") <- ctr$summary.plot.data$summary.data
+  return(output)
 }

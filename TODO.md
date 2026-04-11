@@ -1,7 +1,6 @@
 # TODO
 
 ## granovagg.contr
-- Recompute the pooled standard deviation in `GetGroupSummary()` using a true pooled variance formula (weighted by group sizes) instead of `mean(standard.deviation)^0.5`.
 - Replace `tidyr::gather()` with `tidyr::pivot_longer()` in the summary-plot pipeline.
 - Convert `aes_string()` calls to tidy-eval `aes()`.
 - Replace all `%>%` pipelines (contrast summaries, pooled SD computation, linear-model summary formatting) with base `|>` piping and explicit helper calls.
