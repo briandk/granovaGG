@@ -3,6 +3,9 @@
     below 1 act as direct widths while retaining the historical percent-based
     behavior for larger values; the demo now includes an example showing how to
     widen the jitter window when contrast panels overplot.
+-   Added an `xlab` override to granovagg.contr so each contrast panel can adopt
+    a custom axis label (matched either by position or column name) while
+    retaining the automatic `Contrast <name>` default for unspecified entries.
 -   Updated the contrast plots to draw horizontal reference lines and effect
     connectors with `linewidth` rather than the deprecated `size` aesthetic,
     silencing the ggplot2 3.4 warnings emitted during testing.

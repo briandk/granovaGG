@@ -47,6 +47,11 @@
 #' @param contrasts Matrix of column contrasts with dimensions (number of
 #'   groups [G]) x (number of contrasts) [generally (G x G-1)].
 #' @param ylab Character; y axis label. Defaults to a generic granova title.
+#' @param xlab Optional character vector giving replacement x axis labels for
+#'   each contrast panel. Provide a vector the same length as the number of
+#'   contrasts (matched by position) or a named vector keyed by the contrast
+#'   matrix column names. When \code{NULL}, labels default to the automatic
+#'   \code{"Contrast <name>"} strings derived from \code{contrasts}.
 #' @param plot.theme argument indicating a ggplot2 theme to apply to the
 #'   graphic; defaults to a customized theme created for the contrast graphic
 #' @param jj Numeric; controls \code{\link{jitter}} and allows you to control the
@@ -95,6 +100,7 @@
 granovagg.contr <- function(data,
                             contrasts,
                             ylab       = "default_y_label",
+                            xlab       = NULL,
                             plot.theme = "theme_granova_contr",
                             jj         = NULL,
                             ...
@@ -152,6 +158,72 @@ granovagg.contr <- function(data,
       return(standardized.contrasts)
   }
 
+  ResolveContrastLabelOverrides <- function(x.labels, contrast.matrix) {
+    if (is.null(x.labels)) {
+      return(NULL)
+    }
+    overrides <- unlist(x.labels, use.names = TRUE)
+    assert_that(
+      length(overrides) > 0,
+      msg = "`xlab` overrides must include at least one character value"
+    )
+    label.names <- names(overrides)
+    overrides <- as.character(overrides)
+    if (!is.null(label.names)) {
+      names(overrides) <- label.names
+    }
+    has.named.labels <- length(label.names) > 0 && any(nzchar(label.names))
+    if (has.named.labels) {
+      assert_that(
+        all(nzchar(label.names)),
+        msg = "Named `xlab` overrides must supply names for every element"
+      )
+      column.names <- colnames(contrast.matrix)
+      assert_that(
+        !is.null(column.names),
+        msg = "Named `xlab` overrides require column names on the contrast matrix"
+      )
+      unknown <- setdiff(label.names, column.names)
+      assert_that(
+        length(unknown) == 0,
+        msg = paste(
+          "x-axis overrides provided for unknown contrasts:",
+          paste(unknown, collapse = ", ")
+        )
+      )
+      resolved <- rep(NA_character_, ncol(contrast.matrix))
+      resolved[match(label.names, column.names)] <- overrides
+      return(resolved)
+    }
+    if (length(overrides) == 1 && ncol(contrast.matrix) > 1) {
+      overrides <- rep(overrides, ncol(contrast.matrix))
+    }
+    assert_that(
+      length(overrides) == ncol(contrast.matrix),
+      msg = sprintf(
+        "Provide exactly %d x-axis labels (got %d)",
+        ncol(contrast.matrix),
+        length(overrides)
+      )
+    )
+    return(overrides)
+  }
+
+  BuildContrastLabels <- function(contrast.matrix, x.labels) {
+    base.labels <- vapply(
+      X = seq_len(ncol(contrast.matrix)),
+      FUN = function(index) { GetContrastName(contrast.matrix, index) },
+      FUN.VALUE = character(1)
+    )
+    overrides <- ResolveContrastLabelOverrides(x.labels, contrast.matrix)
+    if (is.null(overrides)) {
+      return(base.labels)
+    }
+    replace.indices <- !is.na(overrides)
+    base.labels[replace.indices] <- overrides[replace.indices]
+    return(base.labels)
+  }
+
   indic <- function(xx) {
              mm <- matrix(0, length(xx), length(unique(xx)))
              indx <- ifelse(xx == col(mm), 1, 0)
@@ -186,7 +258,8 @@ granovagg.contr <- function(data,
           scaled.standardized.contrasts = standardized.contrasts * responses.per.group,
           number.of.contrasts           = dim(standardized.contrasts)[2],
           number.of.groups              = number.of.groups,
-          responses.per.group           = responses.per.group
+          responses.per.group           = responses.per.group,
+          contrast.labels               = BuildContrastLabels(contrasts, xlab)
         )
     )
   }
@@ -322,7 +395,7 @@ granovagg.contr <- function(data,
   }
 
   ContrastPlotTitle <- function(ctr, index) {
-    plot.title <- paste("Coefficients vs. Response\n", GetContrastName(ctr$contrast.matrix, index))
+    plot.title <- paste("Coefficients vs. Response\n", ctr$contrast.labels[[index]])
     return(
         ggtitle(plot.title)
     )
@@ -330,7 +403,7 @@ granovagg.contr <- function(data,
 
   ContrastPlotXLabel <- function(ctr, index) {
     return(
-        xlab(paste(GetContrastName(ctr$contrast.matrix, index)))
+        ggplot2::xlab(ctr$contrast.labels[[index]])
     )
   }
 
@@ -340,7 +413,7 @@ granovagg.contr <- function(data,
       result <- "Outcome (Response)"
     }
 
-    return(ylab(paste(result)))
+    return(ggplot2::ylab(paste(result)))
   }
 
   GetSummaryPlotData <- function(ctr) {

@@ -8,6 +8,7 @@ granovagg.contr(
   data,
   contrasts,
   ylab = "default_y_label",
+  xlab = NULL,
   plot.theme = "theme_granova_contr",
   jj = NULL,
   ...
@@ -21,6 +22,12 @@ matrix where each column represents a group.}
 groups [G]) x (number of contrasts) [generally (G x G-1)].}
 
 \item{ylab}{Character; y axis label. Defaults to a generic granova title.}
+
+\item{xlab}{Optional character vector giving replacement x axis labels for
+each contrast panel. Provide a vector the same length as the number of
+contrasts (matched by position) or a named vector keyed by the contrast
+matrix column names. When \code{NULL}, labels default to the automatic
+\code{"Contrast <name>"} strings derived from \code{contrasts}.}
 
 \item{plot.theme}{argument indicating a ggplot2 theme to apply to the
 graphic; defaults to a customized theme created for the contrast graphic}

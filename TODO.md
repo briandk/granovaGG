@@ -1,7 +1,6 @@
 # TODO
 
 ## granovagg.contr
-- [issue #68] Allow per-contrast x-axis labels or overrides while keeping the automatic naming default.
 - [issue #49] Preserve original group names in the summary plot instead of renaming columns to numerals.
 
 ## Cross-cutting
