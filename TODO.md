@@ -3,8 +3,6 @@
 ## granovagg.contr
 
 ## Cross-cutting
-- Ensure `DESCRIPTION` lists `testthat` (Suggests) and `assertthat` (Imports) once the above changes land.
-- Once `%>%`/`%<>%` usages are removed, drop the `magrittr` import from `DESCRIPTION`/`NAMESPACE`.
 - [issue #158] Implement optional suppression/formatting of tabular output across all exported functions with consistent parameter names.
 - [issue #70] Add formula/modeled interfaces so users can pass `y ~ group` along with a `data=` argument similar to `lm()`.
 - [issue #43] Adopt an overplot detection flow that avoids the current `owp$summary` → `owp$params` → `owp$overplot` dependency.

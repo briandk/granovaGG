@@ -88,8 +88,7 @@ Depends:
 Imports:
     dplyr,
     ggplot2 (>= 0.9.2),
-    assertthat,
-    magrittr,
+    assertthat (>= 0.2.1),
     RColorBrewer,
     rlang,
     tibble,
