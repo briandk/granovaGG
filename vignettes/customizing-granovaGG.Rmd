@@ -2,7 +2,7 @@
 title: "Customizing granovaGG Graphics with ggplot2"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Customizing granovaGG Graphics}
+  %\VignetteIndexEntry{Customizing granovaGG Graphics with ggplot2}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
