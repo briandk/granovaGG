@@ -60,7 +60,7 @@
 #' @param jj Numeric; controls \code{\link{jitter}} and allows you to control the
 #'   degree of jitter in the contrast plots. When \code{jj = NULL} (the default)
 #'   a width of \code{0.01} is used. Values between \code{0} and \code{1} are
-#'   treated as the jitter width directly, while values \code{\ge 1} are divided
+#'   treated as the jitter width directly, while values \code{>= 1} are divided
 #'   by \code{100} for backwards compatibility with historical percent-based
 #'   inputs. The same setting drives the per-group summary plot (scaled by three
 #'   to keep those points legible).
@@ -97,7 +97,7 @@
 #' @import ggplot2
 #' @import stats
 #' @import utils
-#' @import assertthat
+#' @importFrom assertthat assert_that
 #' @importFrom rlang .data
 #' @export
 granovagg.contr <- function(data,

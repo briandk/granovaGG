@@ -45,6 +45,10 @@
 -   Completed the `aes_string()` deprecation migration by converting the two remaining calls in `granovagg.1w-helpers.R` (`GrandMeanPoint` and `JitteredScoresByGroupContrast`) to tidy-eval `aes()` with `.data` pronouns (issue #147).
 -   Added a regression test confirming that granovagg.ds maps the first data column to the horizontal axis and the second to the vertical, matching the documented behavior and guarding against a historical reversal bug (issue #175).
 -   Added `print.summary` parameter to `granovagg.ds` and `granovagg.contr` so tabular output can be suppressed (e.g. inside RMarkdown chunks); defaults to `TRUE` so existing code is unaffected (issue #158).
+-   Replaced `\ge` with `>=` in the `jj` parameter documentation for `granovagg.contr`, removing an unknown Rd macro that caused R CMD check warnings.
+-   Switched `@import assertthat` to `@importFrom assertthat assert_that` to resolve a namespace conflict between `assertthat::has_name` and `tibble::has_name`.
+-   Bumped the minimum R dependency in `DESCRIPTION` from `2.14.0` to `4.1.0` to reflect the package's use of the native pipe `|>`.
+-   Added `.claude` and `TODO.md` to `.Rbuildignore` so they are excluded from the built package tarball.
 
 # granovaGG 1.4.1
 

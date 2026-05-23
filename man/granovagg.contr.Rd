@@ -11,6 +11,7 @@ granovagg.contr(
   xlab = NULL,
   plot.theme = "theme_granova_contr",
   jj = NULL,
+  print.summary = TRUE,
   ...
 )
 }
@@ -35,10 +36,14 @@ graphic; defaults to a customized theme created for the contrast graphic}
 \item{jj}{Numeric; controls \code{\link{jitter}} and allows you to control the
 degree of jitter in the contrast plots. When \code{jj = NULL} (the default)
 a width of \code{0.01} is used. Values between \code{0} and \code{1} are
-treated as the jitter width directly, while values \code{\ge 1} are divided
+treated as the jitter width directly, while values \code{>= 1} are divided
 by \code{100} for backwards compatibility with historical percent-based
 inputs. The same setting drives the per-group summary plot (scaled by three
 to keep those points legible).}
+
+\item{print.summary}{Logical; prints the linear model summary, weighted means,
+group statistics, and contrast matrix when \code{TRUE} (default). Set to
+\code{FALSE} to suppress all printed output, e.g. inside an RMarkdown chunk.}
 
 \item{...}{Optional arguments to/from other functions.}
 }
