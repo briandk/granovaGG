@@ -30,10 +30,10 @@ InitializeGgplot_1w <- function() {
 GrandMeanPoint <- function(owp) {
   return(
     geom_point(
-      aes_string(
-        x = "0",
-        y = "mean(score)",
-        color = 'factor(paste("Grand Mean"))'
+      aes(
+        x     = 0,
+        y     = mean(.data$score),
+        color = factor(paste("Grand Mean"))
       ),
       size = 2.5,
       data = owp$data
@@ -49,9 +49,9 @@ JitteredScoresByGroupContrast <- function(owp, jj) {
 
   return(
     geom_point(
-      aes_string(
-        x = "contrast",
-        y = "score"
+      aes(
+        x = .data$contrast,
+        y = .data$score
       ),
       alpha    = 1,
       size     = 2,
