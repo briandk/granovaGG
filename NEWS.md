@@ -1,4 +1,6 @@
 # granovaGG (development version)
+
+# granovaGG 1.5.0
 -   granovagg.contr once again honors the `jj` jitter argument, letting values
     below 1 act as direct widths while retaining the historical percent-based
     behavior for larger values; the demo now includes an example showing how to
