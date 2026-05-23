@@ -4,6 +4,7 @@
 # granovaGG
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 The package granovaGG is designed to produce statistical graphics driven
@@ -71,6 +72,13 @@ granovagg.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
 #> 11          4
 #> 5           4
 #> 4           4
+#> Warning: The `size` argument of `element_line()` is deprecated as of ggplot2 3.4.0.
+#> ℹ Please use the `linewidth` argument instead.
+#> ℹ The deprecated feature was likely used in the granovaGG package.
+#>   Please report the issue at <https://github.com/briandk/granovaGG/issues>.
+#> This warning is displayed once per session.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 #> 
 #> The following groups are likely to be overplotted
 #>   group group.mean contrast
@@ -107,9 +115,12 @@ granovagg.1w(poison$SurvTime, group = poison$Group, ylab = "Survival Time")
 #> Residual standard error: 0.1491 on 36 degrees of freedom
 #> Multiple R-squared:  0.7335, Adjusted R-squared:  0.6521 
 #> F-statistic:  9.01 on 11 and 36 DF,  p-value: 1.986e-07
+#> Warning in geom_point(aes(x = 0, y = mean(.data$score), color = factor(paste("Grand Mean"))), : All aesthetics have length 1, but the data has 48 rows.
+#> ℹ Please consider using `annotate()` or provide this layer with data containing
+#>   a single row.
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-2-1.png" alt="" width="100%" />
 
 ### `granovagg.ds()`
 
@@ -141,11 +152,16 @@ granovagg.ds(anorexia.sub,
 #> t (D-bar)                                  4.185
 #> df.t                                      16.000
 #> p-value (t-statistic)                      0.001
-#> Coordinate system already present. Adding new coordinate system, which will
-#> replace the existing one.
+#> Warning: Using `size` aesthetic for lines was deprecated in ggplot2 3.4.0.
+#> ℹ Please use `linewidth` instead.
+#> ℹ The deprecated feature was likely used in the granovaGG package.
+#>   Please report the issue at <https://github.com/briandk/granovaGG/issues>.
+#> This warning is displayed once per session.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" alt="" width="100%" />
 
 ### `granovagg.contr()`
 
@@ -155,31 +171,86 @@ contrasts22 <- data.frame( c(-.5,-.5,.5,.5),
   c(-.5,.5,-.5,.5), c(.5,-.5,-.5,.5) )
 names(contrasts22) <- c("Drug.A", "Drug.B", "Drug.A.B")
 granovagg.contr(arousal, contrasts = contrasts22)
+#> 
+#> Linear Model Summary
+#> 
+#> Call:
+#> lm(formula = Response ~ Contrast)
+#> 
+#> Residuals:
+#>    Min     1Q Median     3Q    Max 
+#> -5.910 -2.015 -0.075  1.885  6.290 
+#> 
+#> Coefficients:
+#>             Estimate Std. Error t value Pr(>|t|)    
+#> (Intercept)  24.0825     0.4657  51.712  < 2e-16 ***
+#> Contrast1     3.4650     0.9314   3.720 0.000676 ***
+#> Contrast2     3.9150     0.9314   4.203 0.000166 ***
+#> Contrast3     0.0750     0.9314   0.081 0.936267    
+#> ---
+#> Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+#> 
+#> Residual standard error: 2.945 on 36 degrees of freedom
+#> Multiple R-squared:  0.4668, Adjusted R-squared:  0.4223 
+#> F-statistic:  10.5 on 3 and 36 DF,  p-value: 4.173e-05
+#> 
+#> (Weighted) means, mean differences, and standardized effect size
+#>            neg  pos  diff stEftSze
+#> Contrast1 22.4 25.8  3.46     1.18
+#> Contrast2 22.1   26  3.91     1.33
+#> Contrast3   24 24.1 0.075   0.0255
+#> 
+#> Summary statistics by group
+#> # A tibble: 4 × 5
+#>   contrast_number group.mean standard.deviation group.size
+#>   <fct>                <dbl>              <dbl>      <int>
+#> 1 Placebo               20.4               2.41         10
+#> 2 Drug.A                24.3               2.81         10
+#> 3 Drug.B                23.8               2.74         10
+#> 4 Drug.A.B              27.8               3.67         10
+#> # ℹ 1 more variable: pooled.standard.deviation <dbl>
+#> 
+#> The contrasts you specified
+#>      Drug.A Drug.B Drug.A.B
+#> [1,]   -0.5   -0.5      0.5
+#> [2,]   -0.5    0.5     -0.5
+#> [3,]    0.5   -0.5     -0.5
+#> [4,]    0.5    0.5      0.5
 #> [[1]]
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-1.png" alt="" width="100%" />
 
     #> 
     #> [[2]]
 
-<img src="man/figures/README-unnamed-chunk-4-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-2.png" alt="" width="100%" />
 
     #> 
     #> [[3]]
 
-<img src="man/figures/README-unnamed-chunk-4-3.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-4-3.png" alt="" width="100%" />
 
     #> 
     #> [[4]]
+    #> Warning: Unknown or uninitialised column: `value`.
     #> Warning in mean.default(response): argument is not numeric or logical:
     #> returning NA
+    #> Warning: Removed 10 rows containing missing values or values outside the scale range
+    #> (`geom_hline()`).
 
-    #> Warning in mean.default(response): argument is not numeric or logical:
-    #> returning NA
-    #> Warning: Removed 10 rows containing missing values (`geom_hline()`).
+<img src="man/figures/README-unnamed-chunk-4-4.png" alt="" width="100%" />
 
-<img src="man/figures/README-unnamed-chunk-4-4.png" width="100%" />
+    #> 
+    #> attr(,"summary.data")
+    #> # A tibble: 4 × 5
+    #>   contrast_number group.mean standard.deviation group.size
+    #>   <fct>                <dbl>              <dbl>      <int>
+    #> 1 Placebo               20.4               2.41         10
+    #> 2 Drug.A                24.3               2.81         10
+    #> 3 Drug.B                23.8               2.74         10
+    #> 4 Drug.A.B              27.8               3.67         10
+    #> # ℹ 1 more variable: pooled.standard.deviation <dbl>
 
 ## FAQs
 
