@@ -54,6 +54,9 @@
 #'   \code{"Contrast <name>"} strings derived from \code{contrasts}.
 #' @param plot.theme argument indicating a ggplot2 theme to apply to the
 #'   graphic; defaults to a customized theme created for the contrast graphic
+#' @param print.summary Logical; prints the linear model summary, weighted means,
+#'   group statistics, and contrast matrix when \code{TRUE} (default). Set to
+#'   \code{FALSE} to suppress all printed output, e.g. inside an RMarkdown chunk.
 #' @param jj Numeric; controls \code{\link{jitter}} and allows you to control the
 #'   degree of jitter in the contrast plots. When \code{jj = NULL} (the default)
 #'   a width of \code{0.01} is used. Values between \code{0} and \code{1} are
@@ -103,6 +106,7 @@ granovagg.contr <- function(data,
                             xlab       = NULL,
                             plot.theme = "theme_granova_contr",
                             jj         = NULL,
+                            print.summary = TRUE,
                             ...
                    )
 {
@@ -639,7 +643,7 @@ granovagg.contr <- function(data,
   ctr$summary.plot           <- ComposeSummaryPlot(ctr$summary.plot.data)
   ctr$output                 <- CollateOutputPlots(ctr)
 
-  PrintOutput()
+  if (print.summary) PrintOutput()
   output <- ctr$output
   attr(output, "summary.data") <- ctr$summary.plot.data$summary.data
   return(output)

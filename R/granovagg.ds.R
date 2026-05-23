@@ -50,6 +50,8 @@
 #'   effectively moving data points to the southwest. Defaults to zero padding.
 #'   Making both southwest and northeast padding smaller moves points farther apart,
 #'   while making both larger moves data points closer together.
+#' @param print.summary Logical; prints the summary statistics table when \code{TRUE} (default).
+#'   Set to \code{FALSE} to suppress printed output, e.g. inside an RMarkdown chunk.
 #' @param ... Optional arguments to/from other functions
 #' @return Returns a plot object of class \code{ggplot}.
 #'
@@ -83,6 +85,7 @@ granovagg.ds <- function(data       = NULL,
                          plot.theme = "theme_granova_ds",
                          northeast.padding = 0,
                          southwest.padding = 0,
+                         print.summary = TRUE,
                          ...
                 )
 
@@ -387,7 +390,7 @@ granovagg.ds <- function(data       = NULL,
   }
 
   dsp <- create_data_structure_to_hold_plotting_information()
-  PrintSummary(dsp)
+  if (print.summary) PrintSummary(dsp)
 
   # Because of the way ggplot2 creates plot objects, layers can be
   # added to a plot p simply by calling "p <- p + newLayer"
