@@ -42,6 +42,8 @@
 -   `PadViewingWindow()` now applies `southwest.padding` and `northeast.padding` to the intended edges; regression tests confirm the coordinate ranges respect the user inputs.
 -   Converted every `aes_string()` call in granovagg.ds to tidy-eval `aes()` with `.data` pronouns, further modernizing the plotting code.
 -   Added a regression test using `ggplot2::mpg` to ensure granovagg.ds handles tibble inputs without triggering the historical “Length of logical index vector” error (issue #168).
+-   Completed the `aes_string()` deprecation migration by converting the two remaining calls in `granovagg.1w-helpers.R` (`GrandMeanPoint` and `JitteredScoresByGroupContrast`) to tidy-eval `aes()` with `.data` pronouns (issue #147).
+-   Added a regression test confirming that granovagg.ds maps the first data column to the horizontal axis and the second to the vertical, matching the documented behavior and guarding against a historical reversal bug (issue #175).
 
 # granovaGG 1.4.1
 
